@@ -14,18 +14,44 @@ public class FarmDriver {
         farm.addTools("Shovel", 7, 2);
     }
 
+    public void setupSeeds() {
+        farm.addSeeds("Turnip", "Root crop", 2, 1, 0, 5);
+        farm.addSeeds("Carrot", "Root crop", 3, 1, 0, 10);
+        farm.addSeeds("Potato", "Root crop", 5, 3, 1, 20);
+        farm.addSeeds("Rose", "Flower", 1, 1, 0, 5);
+        farm.addSeeds("Turnips", "Flower", 2, 2, 0, 10);
+        farm.addSeeds("Sunflower", "Flower", 3, 2, 1, 20);
+        farm.addSeeds("Mango", "Fruit tree", 10, 7, 4, 100);
+        farm.addSeeds("Apple", "Fruit tree", 10, 7, 5, 200);
+
+    }
+
     public static void main(String[] args) {
         FarmDriver app = new FarmDriver();
         
         app.setupTools();;
+        app.setupSeeds();
 
-        System.out.println(app.farm.getCoins());
-        System.out.println(app.farm.getXP());
+        System.out.println("You currently have " + app.farm.getCoins() + " objectcoins.");
+        System.out.println("You now have " + app.farm.getXP() + " experience.");
 
+        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
         app.farm.getFarm().plowTile(app.farm, app.farm.getTool("plow"));
         
-        System.out.println(app.farm.getCoins());
-        System.out.println(app.farm.getXP());
+        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+
+        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+
+        app.farm.getFarm().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
+    
+        app.farm.getFarm().plantSeed(app.farm, "turnip");
+
+        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+
+
+        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+
+        app.farm.getFarm().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
         
     }
     

@@ -32,9 +32,9 @@ public class MyFarm {
         }
         return temp;
     }
-    
-    public void buySeed(Seed seed){
 
+    public ArrayList<Seed> getSeed() {
+        return this.seed;
     }
 
     public int getCoins(){
@@ -55,6 +55,11 @@ public class MyFarm {
 
     public void advanceNextDay(){
         this.day++;
+    }
+
+    public void addSeeds(String name, String type, int harvestTime, 
+                         int waterNeed, int fertilizerNeed, int cost) {
+        this.seed.add(new Seed(name, type, harvestTime, waterNeed, fertilizerNeed, cost));
     }
 
     public void addTools(String name, int cost, double xp) {
