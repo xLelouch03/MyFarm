@@ -2,6 +2,7 @@ public class Seed {
     private String name;
     private String type;
     private int harvestTime;
+    private int dayGrowth = 0;
     private int waterNeed;
     private int fertilizerNeed;
     private int productProduced;
@@ -26,8 +27,26 @@ public class Seed {
         return type;
     }
 
+    public int getDayGrowth() {
+        return dayGrowth;
+    }
+
     public int getHarvestTime() {
         return harvestTime;
+    }
+
+    public boolean canHarvest() {
+        if(dayGrowth == harvestTime)
+            return true;
+        return false;
+    }
+
+    public void grow() {
+        dayGrowth++;
+    }
+
+    public int remainingDay() {
+        return harvestTime - dayGrowth;
     }
 
     public int getWaterNeed() {

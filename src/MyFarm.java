@@ -19,7 +19,7 @@ public class MyFarm {
         this.day = 1;
     }
 
-    public FarmLot getFarm(){
+    public FarmLot getFarmLot(){
         return farmLot;
     }
 
@@ -55,6 +55,13 @@ public class MyFarm {
 
     public void advanceNextDay(){
         this.day++;
+        System.out.println("\nDay " + this.day + " of the game");
+        this.farmLot.getSeed().grow();
+
+        if(this.farmLot.getSeed().getDayGrowth() > this.farmLot.getSeed().getHarvestTime())
+            this.farmLot.witherLot();
+        else
+            System.out.println(this.farmLot.getSeed().getName() + " growed.");
     }
 
     public void addSeeds(String name, String type, int harvestTime, 

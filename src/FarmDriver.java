@@ -29,30 +29,39 @@ public class FarmDriver {
     public static void main(String[] args) {
         FarmDriver app = new FarmDriver();
         
-        app.setupTools();;
+        app.setupTools();
         app.setupSeeds();
 
         System.out.println("You currently have " + app.farm.getCoins() + " objectcoins.");
         System.out.println("You now have " + app.farm.getXP() + " experience.");
 
-        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
-        app.farm.getFarm().plowTile(app.farm, app.farm.getTool("plow"));
+        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.getFarmLot().plowTile(app.farm, app.farm.getTool("plow"));
         
-        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
 
-        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
 
-        app.farm.getFarm().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
+        app.farm.getFarmLot().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
     
-        app.farm.getFarm().plantSeed(app.farm, "turnip");
+        app.farm.getFarmLot().plantSeed(app.farm, "turnip");
 
-        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
 
 
-        app.farm.getFarm().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
 
-        app.farm.getFarm().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
+        app.farm.getFarmLot().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
         
+        app.farm.getFarmLot().plantSeed(app.farm, "carrot");
+        System.out.println("You currently have " + app.farm.getCoins() + " objectcoins.");
+        System.out.println("You now have " + app.farm.getXP() + " experience.");
+
+        app.farm.advanceNextDay();
+        app.farm.getFarmLot().plantSeed(app.farm, "turnip");
+        //app.farm.advanceNextDay();
+        //app.farm.advanceNextDay();
+        //app.farm.getFarmLot().plantSeed(app.farm, "turnip");
     }
     
 }

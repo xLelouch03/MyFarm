@@ -5,6 +5,7 @@ public class FarmLot {
     private boolean wither;
     private Seed seed;
     private boolean harvestable;
+    public boolean occupied;
 
     public FarmLot(){
         this.plowed = false;
@@ -12,18 +13,33 @@ public class FarmLot {
         this.fertilizeCount = 0;
         this.wither = false;
         this.seed = null;
+        this.occupied = false;
     }
 
     public void plantSeed(MyFarm farm, String seedName) {
-        for(Seed s: farm.getSeed()){
-            if(s.getName().equalsIgnoreCase(seedName)) {
-                this.seed = s;
-                System.out.println(this.seed.getName() + " has been planted.");
-                int tempMoney = farm.getCoins() - s.getCost();
-                farm.updateObjectCoins(tempMoney);
-                System.out.println("You now have " + farm.getCoins() + " objectcoins");
+        if(this.wither == false) {
+            if(this.occupied == true) 
+                System.out.println("\nThis lot is already occupied.");
+            else {
+                for(Seed s: farm.getSeed()){
+                    if(s.getName().equalsIgnoreCase(seedName)) {
+                        this.seed = s;
+                        System.out.println(this.seed.getName() + " has been planted.");
+                        
+                        int tempMoney = farm.getCoins() - s.getCost();
+                        farm.updateObjectCoins(tempMoney);
+                        System.out.println("You now have " + farm.getCoins() + " objectcoins");
+                    }
+                }
+                    this.occupied = true;
             }
         }
+        else    
+            System.out.println("This lot contains withered plant.");
+    }
+
+    public Seed getSeed() {
+        return this.seed;
     }
 
     public void plowTile(MyFarm farm,  Tool plow) {
@@ -32,6 +48,7 @@ public class FarmLot {
         
         double tempXP = farm.getXP() + plow.getXP();
         farm.updateXP(tempXP);
+
         System.out.println("You now have " + farm.getXP() + " experience.");
     }
 
@@ -39,6 +56,7 @@ public class FarmLot {
         if(this.plowed != false && this.seed != null) {
             waterCount++;
             System.out.println("\nTile is now watered " + waterCount + " times.");
+
             double tempXP = farm.getXP() + waterCan.getXP();
 
             farm.updateXP(tempXP);
@@ -53,8 +71,10 @@ public class FarmLot {
         if(this.plowed != false && this.seed != null) {
             fertilizeCount++;
             System.out.println("\nTile is now fertilized " + fertilizeCount + " times.");
+            
             int tempMoney = farm.getCoins() - fertilizer.getCost();
             double tempXP = farm.getXP() + fertilizer.getXP();
+
             farm.updateObjectCoins(tempMoney);
             System.out.println("You now have " + farm.getCoins() + " objectcoins");
             farm.updateXP(tempXP);
@@ -63,5 +83,13 @@ public class FarmLot {
         else
             System.out.println("\nTile is not yet plowed or no seed has been planted");
     }
-    
+
+    public void harvestCrop() {
+        
+    }
+
+    public void witherLot() {
+        this.wither = true;
+        System.out.println(this.seed.getName() + " has withered.");
+    }
 }
