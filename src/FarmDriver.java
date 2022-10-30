@@ -19,7 +19,7 @@ public class FarmDriver {
         farm.addSeeds("Carrot", "Root crop", 3, 1, 0, 10);
         farm.addSeeds("Potato", "Root crop", 5, 3, 1, 20);
         farm.addSeeds("Rose", "Flower", 1, 1, 0, 5);
-        farm.addSeeds("Turnips", "Flower", 2, 2, 0, 10);
+        farm.addSeeds("Tulips", "Flower", 2, 2, 0, 10);
         farm.addSeeds("Sunflower", "Flower", 3, 2, 1, 20);
         farm.addSeeds("Mango", "Fruit tree", 10, 7, 4, 100);
         farm.addSeeds("Apple", "Fruit tree", 10, 7, 5, 200);
@@ -28,40 +28,38 @@ public class FarmDriver {
 
     public static void main(String[] args) {
         FarmDriver app = new FarmDriver();
-        
+
         app.setupTools();
         app.setupSeeds();
 
-        System.out.println("You currently have " + app.farm.getCoins() + " objectcoins.");
-        System.out.println("You now have " + app.farm.getXP() + " experience.");
+        app.farm.displayCoinXP();
 
-        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
-        app.farm.getFarmLot().plowTile(app.farm, app.farm.getTool("plow"));
+        app.farm.waterTile(app.farm.getTool("watering can"));
+        app.farm.plowTile(app.farm.getTool("plow"));
         
-        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.waterTile(app.farm.getTool("watering can"));
 
-        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.waterTile(app.farm.getTool("watering can"));
 
-        app.farm.getFarmLot().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
+        app.farm.fertilizeTile(app.farm.getTool("fertilizer"));
     
-        app.farm.getFarmLot().plantSeed(app.farm, "turnip");
+        app.farm.plantSeed("turnip");
 
-        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.waterTile(app.farm.getTool("watering can"));
 
 
-        app.farm.getFarmLot().waterTile(app.farm, app.farm.getTool("watering can"));
+        app.farm.waterTile(app.farm.getTool("watering can"));
 
-        app.farm.getFarmLot().fertilizeTile(app.farm, app.farm.getTool("fertilizer"));
+        app.farm.fertilizeTile(app.farm.getTool("fertilizer"));
         
-        app.farm.getFarmLot().plantSeed(app.farm, "carrot");
-        System.out.println("You currently have " + app.farm.getCoins() + " objectcoins.");
-        System.out.println("You now have " + app.farm.getXP() + " experience.");
+        //app.farm.plantSeed("carrot");
+
+        app.farm.displayCoinXP();
 
         app.farm.advanceNextDay();
-        app.farm.getFarmLot().plantSeed(app.farm, "turnip");
-        //app.farm.advanceNextDay();
-        //app.farm.advanceNextDay();
-        //app.farm.getFarmLot().plantSeed(app.farm, "turnip");
+        //app.farm.plantSeed("turnips");
+        app.farm.advanceNextDay();
+        app.farm.advanceNextDay();
+        //app.farm.plantSeed("turnip");
     }
-    
 }
