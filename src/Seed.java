@@ -5,7 +5,7 @@ public class Seed {
     private int dayGrowth = 0;
     private int waterNeed;
     private int fertilizerNeed;
-    private int productProduced;
+    private int productProduced = 0;
     private int cost;
     private int sellingPrice;
     private double experience;
@@ -61,6 +61,10 @@ public class Seed {
         return cost;
     }
 
+    public int getSellingPrice() {
+        return sellingPrice;
+    }
+    
     public int getProductProduced() {
         int min, max;
 
@@ -70,16 +74,31 @@ public class Seed {
                 min = 1;
                 max = 2;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
+                
+                if(this.name.equalsIgnoreCase("turnip"))
+                    sellingPrice = 6 * productProduced;
+                
+                if(this.name.equalsIgnoreCase("carrot")) 
+                    sellingPrice = 9 * productProduced;
+
             }
             else if(this.name.equalsIgnoreCase("potato")) {
                 min = 1;
                 max = 10;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
+                sellingPrice = 3 * productProduced;
             }
         }
         
         else if(this.type.equalsIgnoreCase("flower")) {
             productProduced = 1;
+
+            if(this.name.equalsIgnoreCase("tulips"))
+                sellingPrice = 9;
+            else if(this.name.equalsIgnoreCase("rose"))
+                sellingPrice = 5;
+            else if(this.name.equalsIgnoreCase("sunflower"))
+                sellingPrice = 19;
         }
 
         else if(this.type.equalsIgnoreCase("fruit tree")) {
@@ -87,18 +106,20 @@ public class Seed {
                 min = 5;
                 max = 15;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
+                sellingPrice = 8 * productProduced;
             }
             
             else if(this.name.equalsIgnoreCase("apple")) {
                 min = 10;
                 max = 15;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
+                sellingPrice = 5 * productProduced;
             }
         }
         return productProduced;
     }
 
-    public int getSellingPrice() {
+    /*public int getSellingPrice() {
         if(this.type.equalsIgnoreCase("root crop")) {
             if(this.name.equalsIgnoreCase("turnip")) 
                 sellingPrice = 6 * getProductProduced();
@@ -114,7 +135,7 @@ public class Seed {
             if(this.name.equalsIgnoreCase("rose")) 
                 sellingPrice = 5;
             
-            else if(this.name.equalsIgnoreCase("turnips"))
+            else if(this.name.equalsIgnoreCase("tulips"))
                 sellingPrice = 9;
             
             else if(this.name.equalsIgnoreCase("sunflower"))
@@ -130,7 +151,7 @@ public class Seed {
         }
         
         return sellingPrice;
-    }
+    }*/
 
     public double getExperienceYield() {
         if(this.name.equalsIgnoreCase("rose"))

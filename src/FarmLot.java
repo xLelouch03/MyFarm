@@ -63,8 +63,10 @@ public class FarmLot {
     }
 
     public void isHarvestable() {
-        this.harvestable = true;
-        System.out.println(this.seed.getName() + " is harvestable");
+        if(this.seed.canHarvest() == true) {
+            this.harvestable = true;
+            System.out.println(this.seed.getName() + " is harvestable");
+        }
     }
 
     public boolean getOccupied() {

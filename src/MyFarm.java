@@ -176,8 +176,35 @@ public class MyFarm {
             System.out.println("This lot does not have any seed.\n");
     }
 
+    public void harvestTile() {
+        if(this.farmLot.getSeed() != null) {
+            if(this.farmLot.getSeed().canHarvest() == true) {
+                System.out.println("The seed produced " + this.farmLot.getSeed().getProductProduced() + " " +
+                this.farmLot.getSeed().getName());
+                System.out.println("You have earned " + this.farmLot.getSeed().getSellingPrice() + " objectCoins");
+                System.out.println("You have earned " + this.farmLot.getSeed().getExperienceYield() + " experience");
+                int tempMoney = getCoins() + this.farmLot.getSeed().getSellingPrice();
+                double tempXP = getXP() + this.farmLot.getSeed().getExperienceYield();
+                updateObjectCoins(tempMoney);
+                updateXP(tempXP);
+                displayCoinXP();
+
+                resetValues();
+            }
+            else
+                System.out.println("The crop is not yet harvestable\n");
+        }
+
+        else 
+            System.out.println("There is no seed in this tile.\n");
+    }
+
     public void displayCoinXP() {
         System.out.println("\nYou have " + getCoins() + " objectcoins");
         System.out.println("You have " + getXP() + " experience.\n");
+    }
+
+    public void resetValues() {
+        this.farmLot = new FarmLot();
     }
 }

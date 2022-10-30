@@ -57,9 +57,17 @@ public class FarmDriver {
         app.farm.displayCoinXP();
 
         app.farm.advanceNextDay();
-        //app.farm.plantSeed("turnips");
+        app.farm.advanceNextDay();
+        app.farm.harvestTile();
+        
+        app.farm.plowTile(app.farm.getTool("plow"));
+        app.farm.plantSeed("carrot");
+        app.farm.waterTile(app.farm.getTool("watering can"));
+        app.farm.fertilizeTile(app.farm.getTool("fertilizer"));
         app.farm.advanceNextDay();
         app.farm.advanceNextDay();
+        app.farm.advanceNextDay();
+        app.farm.harvestTile();
         //app.farm.plantSeed("turnip");
     }
 }
