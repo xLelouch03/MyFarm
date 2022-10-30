@@ -38,15 +38,17 @@ public class FarmLot {
     }
 
     public void increaseWater() {
-        waterCount += 1;
+        if(this.seed.getWaterNeed() != waterCount)
+            waterCount += 1;
     }
 
     public int getFertilizerCount() {
-        return fertilizeCount;
+            return fertilizeCount;
     }
 
     public void increaseFertilizer() {
-        fertilizeCount += 1;
+        if(this.seed.getFertilizerNeed() != fertilizeCount)
+            fertilizeCount += 1;
     }
 
     public boolean getWitherStatus() {
@@ -62,11 +64,22 @@ public class FarmLot {
         return harvestable;
     }
 
-    public void isHarvestable() {
-        if(this.seed.canHarvest() == true) {
+    public boolean canHarvest() {
+        if(this.seed.getDayGrowth() == this.seed.getHarvestTime())
+            return true;
+        return false;
+    }
+
+    public boolean isHarvestable() {
+        if( canHarvest() == true && 
+            this.seed.getDayGrowth() == this.seed.getHarvestTime() &&
+            this.seed.getWaterNeed() -1 <= getWaterCount() &&
+            this.seed.getFertilizerNeed()-1 <= getFertilizerCount()) {
             this.harvestable = true;
             System.out.println(this.seed.getName() + " is harvestable");
+            return true;
         }
+        return false;
     }
 
     public boolean getOccupied() {

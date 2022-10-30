@@ -68,16 +68,19 @@ public class MyFarm {
         if(this.farmLot.getSeed() != null) {
             this.farmLot.getSeed().grow();
 
-            if(this.farmLot.getSeed().getDayGrowth() > this.farmLot.getSeed().getHarvestTime())
-                this.farmLot.isWithered();
+            if(this.farmLot.getSeed().getDayGrowth() > this.farmLot.getSeed().getHarvestTime()) {
+                if(this.farmLot.isHarvestable() == false)
+                    this.farmLot.isWithered();
+            }
             else
                 System.out.println(this.farmLot.getSeed().getName() + " growed.");
         }
     }
 
     public void addSeeds(String name, String type, int harvestTime, 
-                         int waterNeed, int fertilizerNeed, int cost) {
-        this.seed.add(new Seed(name, type, harvestTime, waterNeed, fertilizerNeed, cost));
+                         int waterNeed, int fertilizerNeed, int cost,
+                         int basePrice, double xp) {
+        this.seed.add(new Seed(name, type, harvestTime, waterNeed, fertilizerNeed, cost, basePrice, xp));
     }
 
     public void addTools(String name, int cost, double xp) {
@@ -131,7 +134,7 @@ public class MyFarm {
             if(waterCan.getName().equalsIgnoreCase("watering can")) {
                 if(this.farmLot.getPlowStatus() != false && this.seed != null) {
                     this.farmLot.increaseWater();
-                    System.out.println("\nTile is now watered " + this.farmLot.getWaterCount() + " times.");
+                    System.out.println("\nTile has been watered.");
     
                     double tempXP = getXP() + waterCan.getXP();
                     System.out.println("You have gained " + waterCan.getXP() + " experience.\n");
@@ -155,7 +158,7 @@ public class MyFarm {
             if(fertilizer.getName().equalsIgnoreCase("fertilizer")) {
                 if(this.farmLot.getPlowStatus() != false && this.seed != null) {
                     this.farmLot.increaseFertilizer();
-                    System.out.println("\nTile is now fertilized " + this.farmLot.getFertilizerCount() + " times.");
+                    System.out.println("\nTile is now fertilized ");
                     
                     int tempMoney = getCoins() - fertilizer.getCost();
                     double tempXP = getXP() + fertilizer.getXP();
@@ -178,14 +181,19 @@ public class MyFarm {
 
     public void harvestTile() {
         if(this.farmLot.getSeed() != null) {
-            if(this.farmLot.getSeed().canHarvest() == true) {
+            if(this.farmLot.isHarvestable() == true) {
                 System.out.println("The seed produced " + this.farmLot.getSeed().getProductProduced() + " " +
                 this.farmLot.getSeed().getName());
-                System.out.println("You have earned " + this.farmLot.getSeed().getSellingPrice() + " objectCoins");
+
+                double waterBonus = this.farmLot.getSeed().getHarvestTotal() * 0.2 * (this.farmLot.getWaterCount()-1);
+                double fertilizerBonus = this.farmLot.getSeed().getHarvestTotal() * 0.5 * this.farmLot.getFertilizerCount();
+                double finalHarvestTotal = this.farmLot.getSeed().getHarvestTotal() + waterBonus + fertilizerBonus;
+                
+                System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
                 System.out.println("You have earned " + this.farmLot.getSeed().getExperienceYield() + " experience");
-                int tempMoney = getCoins() + this.farmLot.getSeed().getSellingPrice();
+                double tempMoney = getCoins() + finalHarvestTotal;
                 double tempXP = getXP() + this.farmLot.getSeed().getExperienceYield();
-                updateObjectCoins(tempMoney);
+                updateObjectCoins((int)tempMoney);
                 updateXP(tempXP);
                 displayCoinXP();
 
