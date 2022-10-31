@@ -87,39 +87,37 @@ public class MyFarm {
         this.tool.add(new Tool(name, cost, xp));
     }
 
-    public void plowTile(Tool plow) {
+    public void plowTile(FarmLot lot, Tool plow) {
         if(plow.getName().equalsIgnoreCase("plow")) {
-            this.farmLot.isPlowed(true);
+            lot.isPlowed(true);
             System.out.println("\nTile is now plowed.");
             
             double tempXP = getXP() + plow.getXP();
             updateXP(tempXP);
             System.out.println("You have gained " + plow.getXP() + " experience.\n");
-            displayCoinXP();
         }
         else
             System.out.println("\nYou have used a wrong tool.");
 
     }
 
-    public void plantSeed(String seedName) {
-        if(this.farmLot.getPlowStatus() == true) {
-            if(this.farmLot.getWitherStatus() == false) {
-                if(this.farmLot.getOccupied() == true) 
+    public void plantSeed(FarmLot lot, String seedName) {
+        if(lot.getPlowStatus() == true) {
+            if(lot.getWitherStatus() == false) {
+                if(lot.getOccupied() == true) 
                     System.out.println("\nThis lot is already occupied.");
     
                 else {
                     for(Seed s: getSeed()){
                         if(s.getName().equalsIgnoreCase(seedName)) {
-                            this.farmLot.setSeed(s);
+                            lot.setSeed(s);
                             System.out.println(s.getName() + " has been planted.");
                             
                             int tempMoney = getCoins() - s.getCost();
                             updateObjectCoins(tempMoney);
-                            displayCoinXP();
                         }
                     }
-                        this.farmLot.isOccupied();
+                        lot.isOccupied();
                 }
             }
             else    
@@ -129,17 +127,16 @@ public class MyFarm {
             System.out.println("This lot is not yet plowed");
     }
 
-    public void waterTile(Tool waterCan) {
-        if(this.farmLot.getSeed() != null) {
+    public void waterTile(FarmLot lot, Tool waterCan) {
+        if(lot.getSeed() != null) {
             if(waterCan.getName().equalsIgnoreCase("watering can")) {
-                if(this.farmLot.getPlowStatus() != false && this.seed != null) {
-                    this.farmLot.increaseWater();
+                if(lot.getPlowStatus() != false && this.seed != null) {
+                    lot.increaseWater();
                     System.out.println("\nTile has been watered.");
     
                     double tempXP = getXP() + waterCan.getXP();
                     System.out.println("You have gained " + waterCan.getXP() + " experience.\n");
                     updateXP(tempXP);
-                    displayCoinXP();
                 }
     
                 else
@@ -153,11 +150,11 @@ public class MyFarm {
             System.out.println("This lot does not have any seed.\n");
     }
 
-    public void fertilizeTile(Tool fertilizer) {
-        if(this.farmLot.getSeed() != null) {
+    public void fertilizeTile(FarmLot lot, Tool fertilizer) {
+        if(lot.getSeed() != null) {
             if(fertilizer.getName().equalsIgnoreCase("fertilizer")) {
-                if(this.farmLot.getPlowStatus() != false && this.seed != null) {
-                    this.farmLot.increaseFertilizer();
+                if(lot.getPlowStatus() != false && this.seed != null) {
+                    lot.increaseFertilizer();
                     System.out.println("\nTile is now fertilized ");
                     
                     int tempMoney = getCoins() - fertilizer.getCost();
@@ -166,7 +163,6 @@ public class MyFarm {
                     updateObjectCoins(tempMoney);
                     updateXP(tempXP);
                     System.out.println("You have gained " + fertilizer.getXP() + " experience.\n");
-                    displayCoinXP();
                 }
                 else
                     System.out.println("\nTile is not yet plowed or no seed has been planted");
@@ -179,23 +175,22 @@ public class MyFarm {
             System.out.println("This lot does not have any seed.\n");
     }
 
-    public void harvestTile() {
-        if(this.farmLot.getSeed() != null) {
-            if(this.farmLot.isHarvestable() == true) {
-                System.out.println("The seed produced " + this.farmLot.getSeed().getProductProduced() + " " +
-                this.farmLot.getSeed().getName());
+    public void harvestTile(FarmLot lot) {
+        if(lot.getSeed() != null) {
+            if(lot.isHarvestable() == true) {
+                System.out.println("The seed produced " + lot.getSeed().getProductProduced() + " " +
+                lot.getSeed().getName());
 
-                double waterBonus = this.farmLot.getSeed().getHarvestTotal() * 0.2 * (this.farmLot.getWaterCount()-1);
-                double fertilizerBonus = this.farmLot.getSeed().getHarvestTotal() * 0.5 * this.farmLot.getFertilizerCount();
-                double finalHarvestTotal = this.farmLot.getSeed().getHarvestTotal() + waterBonus + fertilizerBonus;
+                double waterBonus = lot.getSeed().getHarvestTotal() * 0.2 * (lot.getWaterCount()-1);
+                double fertilizerBonus = lot.getSeed().getHarvestTotal() * 0.5 * lot.getFertilizerCount();
+                double finalHarvestTotal = lot.getSeed().getHarvestTotal() + waterBonus + fertilizerBonus;
                 
                 System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
-                System.out.println("You have earned " + this.farmLot.getSeed().getExperienceYield() + " experience");
+                System.out.println("You have earned " + lot.getSeed().getExperienceYield() + " experience");
                 double tempMoney = getCoins() + finalHarvestTotal;
-                double tempXP = getXP() + this.farmLot.getSeed().getExperienceYield();
+                double tempXP = getXP() + lot.getSeed().getExperienceYield();
                 updateObjectCoins((int)tempMoney);
                 updateXP(tempXP);
-                displayCoinXP();
 
                 resetValues();
             }
