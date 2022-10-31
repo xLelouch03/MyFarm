@@ -8,11 +8,14 @@ MyFarm:
 plantSeed method
     - include yung kapag wala yung seed name sa ArrayList<Seed> dapat may prompt na hindi nag eexist yung seed 
 
+-add number of lots na available (for checking if game can still run ganon)
+
 getTool method 
     - if null irereturn ng method, include a prompt na hindi nageexist yung tool 
 
 General:
     -improve nalang siguro yung mga simple feedbacks hAHA
+    -Javadoc 
 
 UML!!
 Pre-recorded presentation (DEMO HAHAHAHAH)

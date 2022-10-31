@@ -4,13 +4,6 @@ public class Farmer {
     private double experience;
     private String name;
 
-    public Farmer() {
-        this.name = null;
-        this.objectCoins = 100;
-        this.level = 0;
-        this.experience = 0;
-    }
-
     public Farmer(String name) {
         this.name = name;
         this.objectCoins = 100;
@@ -48,8 +41,9 @@ public class Farmer {
         this.experience = xp;
     } 
 
-    public void displayCoinXP() {
-        System.out.println("\nYou have " + getCoins() + " objectcoins");
+    public void displayStats() {
+        System.out.println("\nYou are level: " + getLevel());
+        System.out.println("You have " + getCoins() + " objectcoins");
         System.out.println("You have " + getXP() + " experience.\n");
     }
 

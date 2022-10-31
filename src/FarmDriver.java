@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class FarmDriver {
     private MyFarm tempFarm; 
     
@@ -29,6 +31,10 @@ public class FarmDriver {
         return tempFarm;
     }
 
+    public void clearScreen() {
+        System.out.print("\033\143");
+    }
+
     public static void main(String[] args) {
         FarmDriver app = new FarmDriver();
 
@@ -36,51 +42,112 @@ public class FarmDriver {
         app.setupTools();
 
         MyFarm farm = app.getFarm();
+        Scanner scan = new Scanner(System.in);
 
-        farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
-        farm.plantSeed(farm.getFarmLot(),"tulips");
-        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
-        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
-        farm.fertilizeTile(farm.getFarmLot(), farm.getTool("fertilizer"));
-        
-        farm.advanceNextDay();
-        farm.advanceNextDay();
-        //farm.advanceNextDay();
-        farm.harvestTile(farm.getFarmLot());
-        farm.getFarmer().displayCoinXP();
+        System.out.println("Enter \"Start\" to begin.");
+        String text = scan.next();
+        app.clearScreen();
 
-        System.out.println("You are level " + farm.getFarmer().getLevel());
+        if(text.equalsIgnoreCase("start")) {
+            System.out.print("\nEnter your name: ");
+            String name = scan.next();
+            farm.addFarmer(name);
+            app.clearScreen();
 
-        farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
-        farm.plantSeed(farm.getFarmLot(),"turnip");
-        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
-        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
-        farm.fertilizeTile(farm.getFarmLot(), farm.getTool("fertilizer"));
-             
-        farm.advanceNextDay();
-        farm.advanceNextDay();
-        //farm.advanceNextDay();
-        farm.harvestTile(farm.getFarmLot());
-        System.out.println("\nYou are level " + farm.getFarmer().getLevel());
-        farm.getFarmer().displayCoinXP();
+            System.out.println("Welcome to your farm, " + farm.getFarmer().getName() + "!");
+            System.out.println("As starters, your stats are set to its default: ");
+            farm.getFarmer().displayStats();
 
-        farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
-        farm.plantSeed(farm.getFarmLot(),"tulips");
-        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
-        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
-        farm.fertilizeTile(farm.getFarmLot(), farm.getTool("fertilizer"));
-             
-        farm.advanceNextDay();
-        farm.advanceNextDay();
-        //farm.advanceNextDay();
-        farm.harvestTile(farm.getFarmLot());
-        System.out.println("\nYou are level " + farm.getFarmer().getLevel());
-        farm.getFarmer().displayCoinXP();
+            while(farm.getFarmer().getCoins() >= 5 && farm.getFarmLot().getWitherStatus() == false) {
+                System.out.println("\nDay " + farm.getDay() + " of the game.");
+                System.out.println("\nChoose an action to do: ");
+                System.out.println("1: Plow a tile");
+                System.out.println("2: Plant a seed");
+                System.out.println("3: Water a tile");
+                System.out.println("4: Fertilize a tile");
+                System.out.println("5: Harvest a crop");
+                System.out.println("6: Advance to next day");
+                System.out.println("7: Display Stats");
+                System.out.print("Action: ");
+                int nOpt = scan.nextInt();
 
-        //farm.plantSeed(farm.getFarmLot(),"tulips");
-        //farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
-        //farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
-        //farm.fertilizeTile(farm.getFarmLot(), farm.getTool("fertilizer"));
+                switch(nOpt) {
+                    case 1:
+                        System.out.println("\nWhat tool would you like to use?");
+                        for(Tool t : farm.getAllTool())
+                            System.out.println(t.getName());
+                        System.out.print("\nTool name: ");
+                        scan.nextLine();
+                        String tool = scan.nextLine();
+                        farm.plowTile(farm.getFarmLot(), farm.getTool(tool));
+                        break;
+                    
+                    case 2:
+                        if(farm.getFarmLot().getOccupied() == false) {
+                            if(farm.getFarmLot().getPlowStatus() == true) {
+                                System.out.println("\nWhat seed would you like to plant?");
+                                for(Seed s : farm.getSeed())
+                                    System.out.println(s.getName());
+                                System.out.print("\nSeed name: ");
+                                String seed = scan.next();
+                                farm.plantSeed(farm.getFarmLot(), seed);
+                                break;
+                            }
+                            else 
+                                System.out.println("This lot is not yet plowed.");
+                        }
+                        else 
+                            System.out.println("This lot is already occupied");
+                        break;
+                        
 
+                    case 3:
+                        if( farm.getFarmLot().getPlowStatus() == true &&
+                            farm.getFarmLot().getSeed() != null) {
+                            System.out.println("\nWhat tool would you like to use?");
+                            for(Tool t : farm.getAllTool())
+                                System.out.println(t.getName());
+                            System.out.print("\nTool name: ");
+                            scan.nextLine();
+                            tool = scan.nextLine();
+                            farm.waterTile(farm.getFarmLot(), farm.getTool(tool));
+                            break;
+                        }
+                        else 
+                            System.out.println("This lot does not have any seed");
+                        break;
+
+                    case 4: 
+                        if( farm.getFarmLot().getPlowStatus() == true &&
+                            farm.getFarmLot().getSeed() != null) {
+                            System.out.println("\nWhat tool would you like to use?");
+                            for(Tool t : farm.getAllTool())
+                                System.out.println(t.getName());
+                            System.out.print("\nTool name: ");
+                            scan.nextLine();
+                            tool = scan.nextLine();
+                            farm.fertilizeTile(farm.getFarmLot(), farm.getTool(tool));
+                            break;
+                        }
+                        else 
+                            System.out.println("This lot does not have any seed");
+                        break;
+                    
+                    case 5:
+                        farm.harvestTile(farm.getFarmLot());
+                        break;
+
+                    case 6:
+                        farm.advanceNextDay();
+                        //app.clearScreen();
+                        break;
+
+                    case 7:
+                        farm.getFarmer().displayStats();
+                        break;
+
+                }
+            }
+        }
     }
 }

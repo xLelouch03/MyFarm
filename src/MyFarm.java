@@ -8,11 +8,14 @@ public class MyFarm {
     private int day;
 
     public MyFarm() {
-        this.farmer = new Farmer();
         this.farmLot = new FarmLot();
         this.seed = new ArrayList<Seed>();
         this.tool = new ArrayList<Tool>();
         this.day = 1;
+    }
+
+    public void addFarmer(String name) {
+        this.farmer = new Farmer(name);
     }
 
     public Farmer getFarmer() {
@@ -35,6 +38,10 @@ public class MyFarm {
                 temp = t;
         }
         return temp;
+    }
+
+    public ArrayList<Tool> getAllTool() {
+        return tool;
     }
 
     public int getDay() {
@@ -68,20 +75,26 @@ public class MyFarm {
     }
 
     public void plowTile(FarmLot lot, Tool plow) {
-        if(lot.getWitherStatus() == false) {
-            if(plow.getName().equalsIgnoreCase("plow")) {
-                lot.isPlowed(true);
-                System.out.println("\nTile is now plowed.");
-                
-                double tempXP = farmer.getXP() + plow.getXP();
-                farmer.updateXP(tempXP);
-                System.out.println("You have gained " + plow.getXP() + " experience.\n");
+        if(lot.getPlowStatus() == false) {
+            if(lot.getWitherStatus() == false) {
+                if(plow.getName().equalsIgnoreCase("plow")) {
+                    lot.isPlowed(true);
+                    System.out.println("\nTile is now plowed.");
+                    
+                    double tempXP = farmer.getXP() + plow.getXP();
+                    farmer.updateXP(tempXP);
+                    System.out.println("You have gained " + plow.getXP() + " experience.\n");
+                }
+                else if(plow.getName().equalsIgnoreCase("shovel"))
+                    lot.resetFarmLot();
+                else
+                    System.out.println("\nYou have used a wrong tool.");
             }
-            else
-                System.out.println("\nYou have used a wrong tool.");
+            else    
+                System.out.println("This lot contains a withered plant.");
         }
-        else    
-            System.out.println("This lot contains a withered plant.");
+        else
+            System.out.println("This lot is already plowed.");
     }
 
     public void plantSeed(FarmLot lot, String seedName) {
