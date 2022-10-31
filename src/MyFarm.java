@@ -174,6 +174,8 @@ public class MyFarm {
                     double fertilizerBonus = lot.getSeed().getHarvestTotal() * 0.5 * lot.getFertilizerCount();
                     double finalHarvestTotal = lot.getSeed().getHarvestTotal() + waterBonus + fertilizerBonus;
                     
+                    if(lot.getSeed().getType().equals("Flower"))
+                        finalHarvestTotal *= 1.1;
                     System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
                     System.out.println("You have earned " + lot.getSeed().getExperienceYield() + " experience");
                     double tempMoney = farmer.getCoins() + finalHarvestTotal;

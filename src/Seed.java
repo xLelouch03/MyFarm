@@ -8,7 +8,7 @@ public class Seed {
     private int productProduced = 0;
     private int cost;
     private int basePrice;
-    private int sellingPrice;
+    private int harvestTotal;
     private double xp;
 
     public Seed(String name, String type, int harvestTime, int waterNeed, int fertilizerNeed, int cost, int basePrice, double xp) {
@@ -59,7 +59,7 @@ public class Seed {
     }
 
     public int getHarvestTotal() {
-        return sellingPrice;
+        return harvestTotal;
     }
     
     //to revise
@@ -74,16 +74,16 @@ public class Seed {
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
                 
                 if(this.name.equalsIgnoreCase("turnip"))
-                    sellingPrice = basePrice * productProduced;
+                    harvestTotal = basePrice * productProduced;
                 
                 if(this.name.equalsIgnoreCase("carrot")) 
-                    sellingPrice = basePrice * productProduced;
+                    harvestTotal = basePrice * productProduced;
 
             }
             else if(this.name.equalsIgnoreCase("potato")) {
                 max = 10;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
-                sellingPrice = basePrice * productProduced;
+                harvestTotal = basePrice * productProduced;
             }
         }
         
@@ -91,11 +91,11 @@ public class Seed {
             productProduced = 1;
 
             if(this.name.equalsIgnoreCase("tulips"))
-                sellingPrice = basePrice;
+                harvestTotal = basePrice;
             else if(this.name.equalsIgnoreCase("rose"))
-                sellingPrice = basePrice;
+                harvestTotal = basePrice;
             else if(this.name.equalsIgnoreCase("sunflower"))
-                sellingPrice = basePrice;
+                harvestTotal = basePrice;
         }
 
         else if(this.type.equalsIgnoreCase("fruit tree")) {
@@ -103,13 +103,13 @@ public class Seed {
             if(this.name.equalsIgnoreCase("mango")) {
                 min = 5;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
-                sellingPrice = basePrice * productProduced;
+                harvestTotal = basePrice * productProduced;
             }
             
             else if(this.name.equalsIgnoreCase("apple")) {
                 min = 10;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
-                sellingPrice = basePrice * productProduced;
+                harvestTotal = basePrice * productProduced;
             }
         }
         return productProduced;
