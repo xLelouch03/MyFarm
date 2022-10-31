@@ -43,7 +43,7 @@ public class FarmLot {
     }
 
     public int getFertilizerCount() {
-            return fertilizeCount;
+        return fertilizeCount;
     }
 
     public void increaseFertilizer() {
@@ -88,5 +88,10 @@ public class FarmLot {
 
     public void isOccupied() {
         this.occupied = true;
+    }
+
+    public void resetFarmLot() {
+        waterCount = 0;
+        fertilizeCount = 0;
     }
 }

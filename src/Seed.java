@@ -115,8 +115,12 @@ public class Seed {
         return productProduced;
     }
 
-
     public double getExperienceYield() {
         return this.xp;
+    }
+
+    public void resetSeed() {
+        dayGrowth = 0;
+        productProduced = 0;
     }
 }

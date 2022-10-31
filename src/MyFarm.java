@@ -1,22 +1,22 @@
 import java.util.ArrayList;
 
 public class MyFarm {
+    private Farmer farmer;
     private FarmLot farmLot;
     private ArrayList<Seed> seed;
     private ArrayList<Tool> tool;
-    private int objectCoins;
-    private int level;
-    private double experience;
     private int day;
 
     public MyFarm() {
+        this.farmer = new Farmer();
         this.farmLot = new FarmLot();
         this.seed = new ArrayList<Seed>();
         this.tool = new ArrayList<Tool>();
-        this.objectCoins = 100;
-        this.level = 0;
-        this.experience = 0;
         this.day = 1;
+    }
+
+    public Farmer getFarmer() {
+        return farmer;
     }
 
     public FarmLot getFarmLot(){
@@ -35,26 +35,6 @@ public class MyFarm {
                 temp = t;
         }
         return temp;
-    }
-
-    public int getCoins() {
-        return objectCoins;
-    }
-
-    public void updateObjectCoins(int coin){
-        this.objectCoins = coin;
-    }
-
-    public int getLevel() {
-        return level;
-    } 
-
-    public double getXP() {
-        return experience;
-    }
-
-    public void updateXP(double xp) {
-        this.experience = xp;
     }
 
     public int getDay() {
@@ -93,8 +73,8 @@ public class MyFarm {
                 lot.isPlowed(true);
                 System.out.println("\nTile is now plowed.");
                 
-                double tempXP = getXP() + plow.getXP();
-                updateXP(tempXP);
+                double tempXP = farmer.getXP() + plow.getXP();
+                farmer.updateXP(tempXP);
                 System.out.println("You have gained " + plow.getXP() + " experience.\n");
             }
             else
@@ -116,8 +96,8 @@ public class MyFarm {
                             lot.setSeed(s);
                             System.out.println(s.getName() + " has been planted.");
                                 
-                            int tempMoney = getCoins() - s.getCost();
-                            updateObjectCoins(tempMoney);
+                            int tempMoney = farmer.getCoins() - s.getCost();
+                            farmer.updateObjectCoins(tempMoney);
                         }
                     }
                             lot.isOccupied();
@@ -128,7 +108,6 @@ public class MyFarm {
         }
         else    
             System.out.println("This lot contains a withered plant.");
-
     }
 
     public void waterTile(FarmLot lot, Tool waterCan) {
@@ -139,22 +118,19 @@ public class MyFarm {
                         lot.increaseWater();
                         System.out.println("\nTile has been watered.");
         
-                        double tempXP = getXP() + waterCan.getXP();
+                        double tempXP = farmer.getXP() + waterCan.getXP();
                         System.out.println("You have gained " + waterCan.getXP() + " experience.\n");
-                        updateXP(tempXP);
+                        farmer.updateXP(tempXP);
                     }
-        
                     else
                         System.out.println("\nTile is not yet plowed or no seed has been planted");
                 }
                 else
                     System.out.println("\nYou have used a wrong tool.");
             }
-    
             else
                 System.out.println("This lot does not have any seed.\n");
         }
-
         else 
             System.out.println("This lot contains a withered plant");
     }
@@ -167,11 +143,11 @@ public class MyFarm {
                         lot.increaseFertilizer();
                         System.out.println("\nTile is now fertilized ");
                         
-                        int tempMoney = getCoins() - fertilizer.getCost();
-                        double tempXP = getXP() + fertilizer.getXP();
+                        int tempMoney = farmer.getCoins() - fertilizer.getCost();
+                        double tempXP = farmer.getXP() + fertilizer.getXP();
     
-                        updateObjectCoins(tempMoney);
-                        updateXP(tempXP);
+                        farmer.updateObjectCoins(tempMoney);
+                        farmer.updateXP(tempXP);
                         System.out.println("You have gained " + fertilizer.getXP() + " experience.\n");
                     }
                     else
@@ -180,11 +156,9 @@ public class MyFarm {
                 else
                     System.out.println("\nYou have used a wrong tool.");
             }
-    
             else
                 System.out.println("This lot does not have any seed.\n");
         }
-
         else 
             System.out.println("This lot contains a withered plant");
     }
@@ -202,27 +176,23 @@ public class MyFarm {
                     
                     System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
                     System.out.println("You have earned " + lot.getSeed().getExperienceYield() + " experience");
-                    double tempMoney = getCoins() + finalHarvestTotal;
-                    double tempXP = getXP() + lot.getSeed().getExperienceYield();
-                    updateObjectCoins((int)tempMoney);
-                    updateXP(tempXP);
-    
+                    double tempMoney = farmer.getCoins() + finalHarvestTotal;
+                    double tempXP = 99+ farmer.getXP() + lot.getSeed().getExperienceYield();
+                    farmer.updateObjectCoins((int)tempMoney);
+                    farmer.updateXP(tempXP);
+                    
+                    lot.getSeed().resetSeed();
+                    this.farmLot.resetFarmLot();
                     resetValues();
                 }
                 else
                     System.out.println("The crop is not yet harvestable\n");
             }
-    
             else 
                 System.out.println("There is no seed in this tile.\n");
         }
         else 
             System.out.println("This lot contains a withered plant");
-    }
-
-    public void displayCoinXP() {
-        System.out.println("\nYou have " + getCoins() + " objectcoins");
-        System.out.println("You have " + getXP() + " experience.\n");
     }
 
     public void resetValues() {
