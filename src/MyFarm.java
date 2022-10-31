@@ -183,7 +183,6 @@ public class MyFarm {
                     
                     lot.getSeed().resetSeed();
                     this.farmLot.resetFarmLot();
-                    resetValues();
                 }
                 else
                     System.out.println("The crop is not yet harvestable\n");
@@ -193,9 +192,5 @@ public class MyFarm {
         }
         else 
             System.out.println("This lot contains a withered plant");
-    }
-
-    public void resetValues() {
-        this.farmLot = new FarmLot();
     }
 }

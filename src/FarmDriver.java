@@ -52,18 +52,31 @@ public class FarmDriver {
         System.out.println("You are level " + farm.getFarmer().getLevel());
 
         farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
+        farm.plantSeed(farm.getFarmLot(),"turnip");
+        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
+        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
+        farm.fertilizeTile(farm.getFarmLot(), farm.getTool("fertilizer"));
+             
+        farm.advanceNextDay();
+        farm.advanceNextDay();
+        //farm.advanceNextDay();
+        farm.harvestTile(farm.getFarmLot());
+        System.out.println("\nYou are level " + farm.getFarmer().getLevel());
+        farm.getFarmer().displayCoinXP();
+
+        farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
         farm.plantSeed(farm.getFarmLot(),"tulips");
         farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
         farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
         farm.fertilizeTile(farm.getFarmLot(), farm.getTool("fertilizer"));
-        System.out.println(farm.getFarmLot().getSeed().getDayGrowth());
-        System.out.println(farm.getFarmLot().getWaterCount());
-        System.out.println(farm.getFarmLot().getFertilizerCount());        
+             
+        farm.advanceNextDay();
+        farm.advanceNextDay();
         //farm.advanceNextDay();
-        //farm.advanceNextDay();
-        //farm.advanceNextDay();
-        //farm.harvestTile(farm.getFarmLot());
-        //System.out.println("You are level " + farm.getFarmer().getLevel());
+        farm.harvestTile(farm.getFarmLot());
+        System.out.println("\nYou are level " + farm.getFarmer().getLevel());
+        farm.getFarmer().displayCoinXP();
+
         //farm.plantSeed(farm.getFarmLot(),"tulips");
         //farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
         //farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));

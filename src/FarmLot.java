@@ -91,7 +91,12 @@ public class FarmLot {
     }
 
     public void resetFarmLot() {
-        waterCount = 0;
-        fertilizeCount = 0;
+        this.plowed = false;
+        this.waterCount = 0;
+        this.fertilizeCount = 0;
+        this.wither = false;
+        this.harvestable = false;
+        this.seed = null;
+        this.occupied = false;
     }
 }
