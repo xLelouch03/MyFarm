@@ -88,118 +88,136 @@ public class MyFarm {
     }
 
     public void plowTile(FarmLot lot, Tool plow) {
-        if(plow.getName().equalsIgnoreCase("plow")) {
-            lot.isPlowed(true);
-            System.out.println("\nTile is now plowed.");
-            
-            double tempXP = getXP() + plow.getXP();
-            updateXP(tempXP);
-            System.out.println("You have gained " + plow.getXP() + " experience.\n");
+        if(lot.getWitherStatus() == false) {
+            if(plow.getName().equalsIgnoreCase("plow")) {
+                lot.isPlowed(true);
+                System.out.println("\nTile is now plowed.");
+                
+                double tempXP = getXP() + plow.getXP();
+                updateXP(tempXP);
+                System.out.println("You have gained " + plow.getXP() + " experience.\n");
+            }
+            else
+                System.out.println("\nYou have used a wrong tool.");
         }
-        else
-            System.out.println("\nYou have used a wrong tool.");
-
+        else    
+            System.out.println("This lot contains a withered plant.");
     }
 
     public void plantSeed(FarmLot lot, String seedName) {
-        if(lot.getPlowStatus() == true) {
-            if(lot.getWitherStatus() == false) {
+        if(lot.getWitherStatus() == false) {
+            if(lot.getPlowStatus() == true) {
                 if(lot.getOccupied() == true) 
                     System.out.println("\nThis lot is already occupied.");
-    
+        
                 else {
                     for(Seed s: getSeed()){
                         if(s.getName().equalsIgnoreCase(seedName)) {
                             lot.setSeed(s);
                             System.out.println(s.getName() + " has been planted.");
-                            
+                                
                             int tempMoney = getCoins() - s.getCost();
                             updateObjectCoins(tempMoney);
                         }
                     }
-                        lot.isOccupied();
+                            lot.isOccupied();
                 }
             }
-            else    
-                System.out.println("This lot contains withered plant.");
+            else
+                System.out.println("This lot is not yet plowed");
         }
-        else
-            System.out.println("This lot is not yet plowed");
+        else    
+            System.out.println("This lot contains a withered plant.");
+
     }
 
     public void waterTile(FarmLot lot, Tool waterCan) {
-        if(lot.getSeed() != null) {
-            if(waterCan.getName().equalsIgnoreCase("watering can")) {
-                if(lot.getPlowStatus() != false && this.seed != null) {
-                    lot.increaseWater();
-                    System.out.println("\nTile has been watered.");
-    
-                    double tempXP = getXP() + waterCan.getXP();
-                    System.out.println("You have gained " + waterCan.getXP() + " experience.\n");
-                    updateXP(tempXP);
-                }
-    
-                else
-                    System.out.println("\nTile is not yet plowed or no seed has been planted");
-            }
-            else
-                System.out.println("\nYou have used a wrong tool.");
-        }
-
-        else
-            System.out.println("This lot does not have any seed.\n");
-    }
-
-    public void fertilizeTile(FarmLot lot, Tool fertilizer) {
-        if(lot.getSeed() != null) {
-            if(fertilizer.getName().equalsIgnoreCase("fertilizer")) {
-                if(lot.getPlowStatus() != false && this.seed != null) {
-                    lot.increaseFertilizer();
-                    System.out.println("\nTile is now fertilized ");
-                    
-                    int tempMoney = getCoins() - fertilizer.getCost();
-                    double tempXP = getXP() + fertilizer.getXP();
-
-                    updateObjectCoins(tempMoney);
-                    updateXP(tempXP);
-                    System.out.println("You have gained " + fertilizer.getXP() + " experience.\n");
+        if(lot.getWitherStatus() == false) {
+            if(lot.getSeed() != null) {
+                if(waterCan.getName().equalsIgnoreCase("watering can")) {
+                    if(lot.getPlowStatus() != false && this.seed != null) {
+                        lot.increaseWater();
+                        System.out.println("\nTile has been watered.");
+        
+                        double tempXP = getXP() + waterCan.getXP();
+                        System.out.println("You have gained " + waterCan.getXP() + " experience.\n");
+                        updateXP(tempXP);
+                    }
+        
+                    else
+                        System.out.println("\nTile is not yet plowed or no seed has been planted");
                 }
                 else
-                    System.out.println("\nTile is not yet plowed or no seed has been planted");
+                    System.out.println("\nYou have used a wrong tool.");
             }
+    
             else
-                System.out.println("\nYou have used a wrong tool.");
-        }
-
-        else
-            System.out.println("This lot does not have any seed.\n");
-    }
-
-    public void harvestTile(FarmLot lot) {
-        if(lot.getSeed() != null) {
-            if(lot.isHarvestable() == true) {
-                System.out.println("The seed produced " + lot.getSeed().getProductProduced() + " " +
-                lot.getSeed().getName());
-
-                double waterBonus = lot.getSeed().getHarvestTotal() * 0.2 * (lot.getWaterCount()-1);
-                double fertilizerBonus = lot.getSeed().getHarvestTotal() * 0.5 * lot.getFertilizerCount();
-                double finalHarvestTotal = lot.getSeed().getHarvestTotal() + waterBonus + fertilizerBonus;
-                
-                System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
-                System.out.println("You have earned " + lot.getSeed().getExperienceYield() + " experience");
-                double tempMoney = getCoins() + finalHarvestTotal;
-                double tempXP = getXP() + lot.getSeed().getExperienceYield();
-                updateObjectCoins((int)tempMoney);
-                updateXP(tempXP);
-
-                resetValues();
-            }
-            else
-                System.out.println("The crop is not yet harvestable\n");
+                System.out.println("This lot does not have any seed.\n");
         }
 
         else 
-            System.out.println("There is no seed in this tile.\n");
+            System.out.println("This lot contains a withered plant");
+    }
+
+    public void fertilizeTile(FarmLot lot, Tool fertilizer) {
+        if(lot.getWitherStatus() == false) {
+            if(lot.getSeed() != null) {
+                if(fertilizer.getName().equalsIgnoreCase("fertilizer")) {
+                    if(lot.getPlowStatus() != false && this.seed != null) {
+                        lot.increaseFertilizer();
+                        System.out.println("\nTile is now fertilized ");
+                        
+                        int tempMoney = getCoins() - fertilizer.getCost();
+                        double tempXP = getXP() + fertilizer.getXP();
+    
+                        updateObjectCoins(tempMoney);
+                        updateXP(tempXP);
+                        System.out.println("You have gained " + fertilizer.getXP() + " experience.\n");
+                    }
+                    else
+                        System.out.println("\nTile is not yet plowed or no seed has been planted");
+                }
+                else
+                    System.out.println("\nYou have used a wrong tool.");
+            }
+    
+            else
+                System.out.println("This lot does not have any seed.\n");
+        }
+
+        else 
+            System.out.println("This lot contains a withered plant");
+    }
+
+    public void harvestTile(FarmLot lot) {
+        if(lot.getWitherStatus() == false) {
+            if(lot.getSeed() != null) {
+                if(lot.isHarvestable() == true) {
+                    System.out.println("The seed produced " + lot.getSeed().getProductProduced() + " " +
+                    lot.getSeed().getName());
+    
+                    double waterBonus = lot.getSeed().getHarvestTotal() * 0.2 * (lot.getWaterCount()-1);
+                    double fertilizerBonus = lot.getSeed().getHarvestTotal() * 0.5 * lot.getFertilizerCount();
+                    double finalHarvestTotal = lot.getSeed().getHarvestTotal() + waterBonus + fertilizerBonus;
+                    
+                    System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
+                    System.out.println("You have earned " + lot.getSeed().getExperienceYield() + " experience");
+                    double tempMoney = getCoins() + finalHarvestTotal;
+                    double tempXP = getXP() + lot.getSeed().getExperienceYield();
+                    updateObjectCoins((int)tempMoney);
+                    updateXP(tempXP);
+    
+                    resetValues();
+                }
+                else
+                    System.out.println("The crop is not yet harvestable\n");
+            }
+    
+            else 
+                System.out.println("There is no seed in this tile.\n");
+        }
+        else 
+            System.out.println("This lot contains a withered plant");
     }
 
     public void displayCoinXP() {

@@ -45,7 +45,12 @@ public class FarmDriver {
         
         farm.advanceNextDay();
         farm.advanceNextDay();
+        farm.advanceNextDay();
         farm.harvestTile(farm.getFarmLot());
-        //farm.advanceNextDay();
+        farm.plantSeed(farm.getFarmLot(),"tulips");
+        farm.plowTile(farm.getFarmLot(), farm.getTool("plow"));
+        farm.waterTile(farm.getFarmLot(), farm.getTool("watering can"));
+        farm.fertilizeTile(farm.getFarmLot(), farm.getTool("fertilizer"));
+
     }
 }
