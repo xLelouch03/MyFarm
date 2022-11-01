@@ -1,5 +1,18 @@
 Driver:
 Implement a way na continuous yung game until mareach yung requirements to end the game (no planted crop AND cant buy/plant seed bc less than 5 objectcoins, tile has withered plant) (DONE)
+- modify yung options, 
+    1: Use a tool 
+        (display all available tools) + Another switch statement
+        1. Plow (if selected, execute plowTile)
+        2. Watering Can (if selected, execute waterTile)
+        3. Fertilizer (if selected, execute fertilizeTile)
+        4. Pickaxe (if selected, do nothing prompt nalang na there is no rock on a tile)
+        5. Shovel (if selected, see description below sa functionn ng shovel)
+    2: Plant a seed
+    3: Harvest a crop
+    4: Advance to next day
+    5: Display Stats
+
 
 Farmer:
 Hindi ko pa nattry na iimplement yung mag enter ng name si user tapos ayun yung iinitialize sa MyFarm HAHA (DONE)
