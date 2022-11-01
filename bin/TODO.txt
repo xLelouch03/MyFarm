@@ -16,6 +16,10 @@ getTool method
 FarmLot:
     -canHarvest() and isHarvestable() = duplicate lang HAHAHAH, 
     -can remove yung canHarvest() method
+    -isHarvestable() 
+        -add yung condition for fruit tree na this.seed.getWaterNeed() == getWaterCount() &&
+            this.seed.getFertilizerNeed() == getFertilizerCount()) para maging harvestable yung crop (yung current conditions kasi ay included bonus limits eh ung fruit tree wala namang bonus)
+
 
 Shovel 
     - hindi pa nauupdate about its function like what if ginamit for plowing, watering, fertilizing
