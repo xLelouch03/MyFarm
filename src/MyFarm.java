@@ -6,18 +6,21 @@ public class MyFarm {
     private ArrayList<Seed> seed;
     private ArrayList<Tool> tool;
     private int day;
+    private int availableSpace;
 
     public MyFarm() {
         this.farmLot = new FarmLot();
+        this.availableSpace = 1;
         this.seed = new ArrayList<Seed>();
         this.tool = new ArrayList<Tool>();
         this.day = 1;
+        this.farmer = null;
     }
-
+  
     public void addFarmer(String name) {
         this.farmer = new Farmer(name);
     }
-
+  
     public Farmer getFarmer() {
         return farmer;
     }
@@ -26,18 +29,27 @@ public class MyFarm {
         return this.farmLot;
     }
 
+    public int getSpace() {
+      return availableSpace;
+    }
+
+    public void updateSpace(int num) {
+      availableSpace = num;
+    }
+  
     public ArrayList<Seed> getSeed() {
         return this.seed;
     }
 
     public Tool getTool(String name){
         Tool temp = null;
-
+        
         for(Tool t : tool){
             if(t.getName().equalsIgnoreCase(name))
                 temp = t;
         }
-        return temp;
+        
+      return temp;
     }
 
     public ArrayList<Tool> getAllTool() {
@@ -50,8 +62,7 @@ public class MyFarm {
 
     public void advanceNextDay(){
         this.day++;
-        System.out.println("\nDay " + this.day + " of the game");
-
+        
         if(this.farmLot.getSeed() != null) {
             this.farmLot.getSeed().grow();
 
@@ -59,6 +70,8 @@ public class MyFarm {
                 if(this.farmLot.isHarvestable() == false)
                     this.farmLot.isWithered();
             }
+            else if (this.farmLot.isHarvestable() == true)
+                System.out.println(this.farmLot.getSeed().getName() + " is now harvestable");
             else
                 System.out.println(this.farmLot.getSeed().getName() + " growed.");
         }
@@ -74,7 +87,8 @@ public class MyFarm {
         this.tool.add(new Tool(name, cost, xp));
     }
 
-    public void plowTile(FarmLot lot, Tool plow) {
+    public void usePlow(FarmLot lot, Tool plow) {
+      if(plow != null) {
         if(lot.getPlowStatus() == false) {
             if(lot.getWitherStatus() == false) {
                 if(plow.getName().equalsIgnoreCase("plow")) {
@@ -85,8 +99,6 @@ public class MyFarm {
                     farmer.updateXP(tempXP);
                     System.out.println("You have gained " + plow.getXP() + " experience.\n");
                 }
-                else if(plow.getName().equalsIgnoreCase("shovel"))
-                    lot.resetFarmLot();
                 else
                     System.out.println("\nYou have used a wrong tool.");
             }
@@ -95,35 +107,53 @@ public class MyFarm {
         }
         else
             System.out.println("This lot is already plowed.");
+      }
+      else
+        System.out.println("Tool does not exist.");
+        
     }
 
     public void plantSeed(FarmLot lot, String seedName) {
-        if(lot.getWitherStatus() == false) {
-            if(lot.getPlowStatus() == true) {
-                if(lot.getOccupied() == true) 
-                    System.out.println("\nThis lot is already occupied.");
-        
-                else {
-                    for(Seed s: getSeed()){
-                        if(s.getName().equalsIgnoreCase(seedName)) {
-                            lot.setSeed(s);
-                            System.out.println(s.getName() + " has been planted.");
-                                
-                            int tempMoney = farmer.getCoins() - s.getCost();
-                            farmer.updateObjectCoins(tempMoney);
-                        }
-                    }
-                            lot.isOccupied();
+      boolean result = false;
+      boolean found = false;
+      if(lot.getWitherStatus() == false) {
+        if(lot.getPlowStatus() == true) {
+          if(lot.getOccupied() == true) 
+            System.out.println("\nThis lot is already occupied.");
+          else {
+            for(Seed s: getSeed()){
+              if(s.getName().equalsIgnoreCase(seedName)) {
+                found = true;
+                if(farmer.getCoins() >= s.getCost()){
+                  lot.setSeed(s);
+                  result = true;
+                  System.out.println(s.getName() + " has been planted.");
+                                   
+                  farmer.updateObjectCoins(farmer.getCoins() - s.getCost());
                 }
+                else
+                  System.out.println("You do not have enough objectcoins");
+              }
             }
-            else
-                System.out.println("This lot is not yet plowed");
+          
+            if(result == true){
+              lot.isOccupied();
+              updateSpace(availableSpace - 1);
+            }
+            if(found == false)
+              System.out.println("Seed does not exist.");         
+          }
         }
-        else    
-            System.out.println("This lot contains a withered plant.");
+        else
+          System.out.println("This lot is not yet plowed");
+      }
+      else    
+        System.out.println("This lot contains a withered plant.");
+   
     }
 
-    public void waterTile(FarmLot lot, Tool waterCan) {
+    public void useWaterCan(FarmLot lot, Tool waterCan) {
+      if(waterCan != null) {
         if(lot.getWitherStatus() == false) {
             if(lot.getSeed() != null) {
                 if(waterCan.getName().equalsIgnoreCase("watering can")) {
@@ -131,9 +161,11 @@ public class MyFarm {
                         lot.increaseWater();
                         System.out.println("\nTile has been watered.");
         
-                        double tempXP = farmer.getXP() + waterCan.getXP();
                         System.out.println("You have gained " + waterCan.getXP() + " experience.\n");
-                        farmer.updateXP(tempXP);
+                        farmer.updateXP(farmer.getXP() + waterCan.getXP());
+                        if(lot.isHarvestable() == true){
+                            System.out.println(this.farmLot.getSeed().getName() + " is ready to harvest!");
+                        }
                     }
                     else
                         System.out.println("\nTile is not yet plowed or no seed has been planted");
@@ -146,34 +178,83 @@ public class MyFarm {
         }
         else 
             System.out.println("This lot contains a withered plant");
+      }
+      else
+        System.out.println("Tool does not exist.");
     }
 
-    public void fertilizeTile(FarmLot lot, Tool fertilizer) {
+    public void useFertilizer(FarmLot lot, Tool fertilizer) {
+      if(farmer.getCoins() >= fertilizer.getCost()){
         if(lot.getWitherStatus() == false) {
-            if(lot.getSeed() != null) {
-                if(fertilizer.getName().equalsIgnoreCase("fertilizer")) {
-                    if(lot.getPlowStatus() != false && this.seed != null) {
-                        lot.increaseFertilizer();
-                        System.out.println("\nTile is now fertilized ");
-                        
-                        int tempMoney = farmer.getCoins() - fertilizer.getCost();
-                        double tempXP = farmer.getXP() + fertilizer.getXP();
-    
-                        farmer.updateObjectCoins(tempMoney);
-                        farmer.updateXP(tempXP);
-                        System.out.println("You have gained " + fertilizer.getXP() + " experience.\n");
+              if(lot.getSeed() != null) {
+                  if(fertilizer.getName().equalsIgnoreCase("fertilizer")) {
+                      if(lot.getPlowStatus() != false && this.seed != null) {
+                          lot.increaseFertilizer();
+                          System.out.println("\nTile is now fertilized ");
+                            
+                          farmer.updateObjectCoins(farmer.getCoins() - fertilizer.getCost());
+                          farmer.updateXP(farmer.getXP() + fertilizer.getXP());
+                          System.out.println("You have gained " + fertilizer.getXP() + " experience.\n");
+                          if(lot.isHarvestable() == true){
+                              System.out.println(this.farmLot.getSeed().getName() + " is ready to harvest!");
+                          }
+                      }
+                      else
+                          System.out.println("\nTile is not yet plowed or no seed has been planted");
+                  }
+                  else
+                      System.out.println("\nYou have used a wrong tool.");
+              }
+              else
+                  System.out.println("This lot does not have any seed.\n");
+          }
+          else 
+              System.out.println("This lot contains a withered plant");
+      }
+      else
+        System.out.println("You do not have enough coins to use the fertilizer!");
+      }
+  
+    public void usePickaxe(FarmLot lot, Tool pickaxe){
+      System.out.println("There is no rock on this tile.\n");
+    }
+  
+    public void useShovel(FarmLot lot, Tool shovel) {
+      if(farmer.getCoins() >= shovel.getCost()){
+        if(shovel.getName().equalsIgnoreCase("shovel")) {
+            if(lot.getWitherStatus() == false) {
+                if(lot.getPlowStatus() != false) {
+                    if(shovel.getName().equalsIgnoreCase("shovel")) {
+                        if(lot.getSeed() != null) {
+                            lot.getSeed().resetSeed();
+                            lot.setSeed(null);
+                            System.out.println("Plant has been removed.");
+                        }
+                    lot.isPlowed(false);
+                    lot.resetFarmLot();
+                    updateSpace(availableSpace + 1);
+                    System.out.println("Tile has reverted back to being unplowed");       
                     }
-                    else
-                        System.out.println("\nTile is not yet plowed or no seed has been planted");
                 }
                 else
-                    System.out.println("\nYou have used a wrong tool.");
+                    System.out.println("Nothing happened but... \n");
             }
-            else
-                System.out.println("This lot does not have any seed.\n");
+            else {
+                lot.getSeed().resetSeed();
+                lot.setSeed(null);
+                lot.resetFarmLot();
+                updateSpace(availableSpace + 1);
+                System.out.println("Withered plant has been removed.");
+                System.out.println("Tile is now unplowed.");
+            }
         }
-        else 
-            System.out.println("This lot contains a withered plant");
+        farmer.updateObjectCoins(farmer.getCoins() - shovel.getCost());
+        farmer.updateXP(farmer.getXP() + shovel.getXP());
+        System.out.println("You have used " + shovel.getCost() + " objectcoins.");
+        System.out.println("You gained " + shovel.getXP() + " experience.");
+    }
+    else
+        System.out.println("You do not have enough coins to use the shovel!");
     }
 
     public void harvestTile(FarmLot lot) {
@@ -191,13 +272,12 @@ public class MyFarm {
                         finalHarvestTotal *= 1.1;
                     System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
                     System.out.println("You have earned " + lot.getSeed().getExperienceYield() + " experience");
-                    double tempMoney = farmer.getCoins() + finalHarvestTotal;
-                    double tempXP = 99+ farmer.getXP() + lot.getSeed().getExperienceYield();
-                    farmer.updateObjectCoins((int)tempMoney);
-                    farmer.updateXP(tempXP);
+                    farmer.updateObjectCoins(farmer.getCoins() + finalHarvestTotal);
+                    farmer.updateXP(farmer.getXP() + lot.getSeed().getExperienceYield());
                     
                     lot.getSeed().resetSeed();
                     this.farmLot.resetFarmLot();
+                    updateSpace(availableSpace + 1);
                 }
                 else
                     System.out.println("The crop is not yet harvestable\n");

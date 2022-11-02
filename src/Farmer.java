@@ -1,5 +1,5 @@
 public class Farmer {
-    private int objectCoins;
+    private double objectCoins;
     private int level;
     private double experience;
     private String name;
@@ -15,11 +15,11 @@ public class Farmer {
         return name;
     }
 
-    public int getCoins() {
+    public double getCoins() {
         return objectCoins;
     }
 
-    public void updateObjectCoins(int coin){
+    public void updateObjectCoins(double coin){
         this.objectCoins = coin;
     }
 
