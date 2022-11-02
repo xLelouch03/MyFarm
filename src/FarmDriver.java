@@ -169,13 +169,15 @@ public class FarmDriver {
                     if(opt2.equalsIgnoreCase("no")){
 
                         // reset stats
-                        farm.getFarmLot().resetFarmLot();
                         farm.getFarmLot().getSeed().resetSeed();
+                        farm.getFarmLot().resetFarmLot();
 
                     }
                     else if(opt2.equalsIgnoreCase("yes"))
                         
                         // reset stats
+                        farm.getFarmLot().getSeed().resetSeed();
+                        farm.getFarmLot().resetFarmLot();
 
                         // clear screen
                         app.clearScreen();
