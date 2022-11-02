@@ -166,10 +166,17 @@ public class FarmDriver {
                     System.out.println("Enter [Yes] or [No]");
                     opt2 = scan.next();
                     if(opt2.equalsIgnoreCase("no")){
+
+                        // reset stats
                         farm.getFarmLot().resetFarmLot();
                         farm.getFarmLot().getSeed().resetSeed();
+
                     }
                     else if(opt2.equalsIgnoreCase("yes"))
+                        
+                        // reset stats
+
+                        // clear screen
                         app.clearScreen();
               }
             }

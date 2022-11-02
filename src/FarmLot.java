@@ -64,12 +64,12 @@ public class FarmLot {
       return harvestable;
     }
     
-    public boolean isHarvestable() {
+    public boolean isHarvestable() { // plant becomes harvestable even if not all conditions are satisfied
       if (this.seed.getDayGrowth() == this.seed.getHarvestTime() &&
           this.seed.getWaterNeed() - 1 <= getWaterCount() &&
           this.seed.getFertilizerNeed() - 1 <= getFertilizerCount()) {
         this.harvestable = true;
-        System.out.println("\n" + this.seed.getName() + " is harvestable");
+        // System.out.println("\n" + this.seed.getName() + " is harvestable");
       }
       return harvestable;
     }
