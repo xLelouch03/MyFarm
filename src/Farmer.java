@@ -75,4 +75,10 @@ public class Farmer {
         System.out.println("You have " + getXP() + " experience.\n");
     }
 
+    public void resetFarmer(){
+        this.objectCoins = 100;
+        this.level = 0;
+        this.experience = 0;
+    }
+
 }

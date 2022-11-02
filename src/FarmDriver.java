@@ -171,19 +171,19 @@ public class FarmDriver {
                         // reset stats
                         farm.getFarmLot().getSeed().resetSeed();
                         farm.getFarmLot().resetFarmLot();
+                        farm.getFarmer().resetFarmer();
 
                     }
                     else if(opt2.equalsIgnoreCase("yes"))
 
-                        // clear screen
-                        app.clearScreen();
-                        
                         // reset stats
                         farm.getFarmLot().getSeed().resetSeed();
                         farm.getFarmLot().resetFarmLot();
-
+                        farm.getFarmer().resetFarmer();
+                        
                         // clear screen
                         app.clearScreen();
+
               }
             }
           }

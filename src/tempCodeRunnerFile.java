@@ -1,2 +1,1 @@
-
-                        farm.getFarmLot().getSeed().resetSeed();
+resetSeed

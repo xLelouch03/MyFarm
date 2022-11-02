@@ -94,5 +94,6 @@ public class FarmLot {
       this.seed = null;
       this.occupied = false;
     }
+    
   }
   
