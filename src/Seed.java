@@ -22,42 +22,88 @@ public class Seed {
         this.xp = xp;
     }
 
+    
+    /** 
+     * Get the name of the seed
+     * @return String name   Name of the seed
+     */
     public String getName() {
         return name;
     }
 
+    
+    /** 
+     * Get the crop type
+     * @return String type   Name of the crop
+     */
     public String getType() {
         return type;
     }
 
+    
+    /** 
+     * Get the number of days the crop has been growing
+     * @return int dayGrowth   Growth time in days
+     */
     public int getDayGrowth() {
         return dayGrowth;
     }
 
+    
+    /** 
+     * Get the number of days the crop needs to be ready for harvest
+     * @return int harvestTime   Harvest time in days
+     */
     public int getHarvestTime() {
         return harvestTime;
     }
 
+    /* Increments the dayGrowth */
     public void grow() {
         dayGrowth++;
     }
 
+    
+    /** 
+     * Get the number of times the crop needs to be watered to be ready for harvest
+     * @return int waterNeed   Number of times the crop needs to watered to be ready for harvest
+     */
     public int getWaterNeed() {
         return waterNeed;
     }
 
+    
+    /** 
+     * Get the number of times the crop needs to fertilized to be ready for harvest
+     * @return int fertilizerNeed   Number of times the crop needs to fertilized to be ready for harvest
+     */
     public int getFertilizerNeed() {
         return fertilizerNeed;
     }
 
+    
+    /** 
+     * Get cost of the seed
+     * @return int cost   Get cost of the seed
+     */
     public int getCost() {
         return cost;
     }
 
+    
+    /** 
+     * 
+     * @return int
+     */
     public int getHarvestTotal() {
         return harvestTotal;
     }
     
+    
+    /** 
+     * Get the number of profucts produced by the seed
+     * @return int productProduced   Number of profucts produced by the seed
+     */
     //to revise
     public int getProductProduced() {
         int min, max;
@@ -111,10 +157,16 @@ public class Seed {
         return productProduced;
     }
 
+    
+    /** 
+     * Get the XP yielded by harvesting the product
+     * @return double this.xp   Get the XP yielded by harvesting the product
+     */
     public double getExperienceYield() {
         return this.xp;
     }
 
+    /* Reset the seed statistics back to 0 */
     public void resetSeed() {
         dayGrowth = 0;
         productProduced = 0;

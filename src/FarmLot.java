@@ -68,8 +68,8 @@ public class FarmLot {
       if (this.seed.getDayGrowth() == this.seed.getHarvestTime() &&
           this.seed.getWaterNeed() - 1 <= getWaterCount() &&
           this.seed.getFertilizerNeed() - 1 <= getFertilizerCount()) {
-        this.harvestable = true;
-        // System.out.println("\n" + this.seed.getName() + " is harvestable");
+          this.harvestable = true;
+          // System.out.println("\n" + this.seed.getName() + " is harvestable");
       }
       return harvestable;
     }

@@ -17,30 +17,62 @@ public class MyFarm {
         this.farmer = null;
     }
   
+    
+    /** 
+     * Add a farmer/player to the game
+     * @param name   Name to be assigned to the farmer
+     */
     public void addFarmer(String name) {
         this.farmer = new Farmer(name);
     }
   
+    
+    /** 
+     * 
+     * @return Farmer
+     */
     public Farmer getFarmer() {
         return farmer;
     }
 
+    
+    /** 
+     * 
+     * @return FarmLot
+     */
     public FarmLot getFarmLot(){
         return this.farmLot;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getSpace() {
       return availableSpace;
     }
 
+    
+    /** 
+     * @param num
+     */
     public void updateSpace(int num) {
       availableSpace = num;
     }
   
+    
+    /** 
+     * @return ArrayList<Seed>
+     */
     public ArrayList<Seed> getSeed() {
         return this.seed;
     }
 
+    
+    /** 
+     * @param name
+     * @return Tool
+     */
     public Tool getTool(String name){
         Tool temp = null;
         
@@ -52,10 +84,18 @@ public class MyFarm {
       return temp;
     }
 
+    
+    /** 
+     * @return ArrayList<Tool>
+     */
     public ArrayList<Tool> getAllTool() {
         return tool;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getDay() {
         return day;
     }
@@ -78,16 +118,38 @@ public class MyFarm {
         }
     }
 
+    
+    /** 
+     * @param name
+     * @param type
+     * @param harvestTime
+     * @param waterNeed
+     * @param fertilizerNeed
+     * @param cost
+     * @param basePrice
+     * @param xp
+     */
     public void addSeeds(String name, String type, int harvestTime, 
                          int waterNeed, int fertilizerNeed, int cost,
                          int basePrice, double xp) {
         this.seed.add(new Seed(name, type, harvestTime, waterNeed, fertilizerNeed, cost, basePrice, xp));
     }
 
+    
+    /** 
+     * @param name
+     * @param cost
+     * @param xp
+     */
     public void addTools(String name, int cost, double xp) {
         this.tool.add(new Tool(name, cost, xp));
     }
 
+    
+    /** 
+     * @param lot
+     * @param plow
+     */
     public void usePlow(FarmLot lot, Tool plow) {
       if(plow != null) {
         if(lot.getPlowStatus() == false) {
@@ -114,6 +176,11 @@ public class MyFarm {
         
     }
 
+    
+    /** 
+     * @param lot
+     * @param seedName
+     */
     public void plantSeed(FarmLot lot, String seedName) {
       boolean result = false;
       boolean found = false;
@@ -153,6 +220,11 @@ public class MyFarm {
    
     }
 
+    
+    /** 
+     * @param lot
+     * @param waterCan
+     */
     public void useWaterCan(FarmLot lot, Tool waterCan) {
       if(waterCan != null) {
         if(lot.getWitherStatus() == false) {
@@ -184,6 +256,11 @@ public class MyFarm {
         System.out.println("Tool does not exist.");
     }
 
+    
+    /** 
+     * @param lot
+     * @param fertilizer
+     */
     public void useFertilizer(FarmLot lot, Tool fertilizer) {
       if(farmer.getCoins() >= fertilizer.getCost()){
         if(lot.getWitherStatus() == false) {
@@ -216,10 +293,20 @@ public class MyFarm {
         System.out.println("You do not have enough coins to use the fertilizer!");
       }
   
+    
+    /** 
+     * @param lot
+     * @param pickaxe
+     */
     public void usePickaxe(FarmLot lot, Tool pickaxe){
       System.out.println("There is no rock on this tile.\n");
     }
   
+    
+    /** 
+     * @param lot
+     * @param shovel
+     */
     public void useShovel(FarmLot lot, Tool shovel) {
       if(farmer.getCoins() >= shovel.getCost()){
         if(shovel.getName().equalsIgnoreCase("shovel")) {
@@ -258,6 +345,10 @@ public class MyFarm {
         System.out.println("You do not have enough coins to use the shovel!");
     }
 
+    
+    /** 
+     * @param lot
+     */
     public void harvestTile(FarmLot lot) {
         if(lot.getWitherStatus() == false) {
             if(lot.getSeed() != null) {
