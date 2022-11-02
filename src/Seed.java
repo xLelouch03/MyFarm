@@ -42,10 +42,6 @@ public class Seed {
         dayGrowth++;
     }
 
-    public int remainingDay() {
-        return harvestTime - dayGrowth;
-    }
-
     public int getWaterNeed() {
         return waterNeed;
     }
