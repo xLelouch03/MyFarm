@@ -162,7 +162,7 @@ public class FarmDriver {
                     System.out.println("1) You no longer have any active crops");
                     System.out.println("2) You can no longer buy any seeds");
                     System.out.println("3) All your tiles contain withered plant");
-                    System.out.println("Do you want to play again?");
+                    System.out.println("\nDo you want to play again?");
                     System.out.println("Enter [Yes] or [No]");
                     opt2 = scan.next();
                     if(opt2.equalsIgnoreCase("no")){

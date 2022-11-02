@@ -71,7 +71,7 @@ public class MyFarm {
                     this.farmLot.isWithered();
             }
             else if (this.farmLot.isHarvestable() == true)
-                System.out.println(this.farmLot.getSeed().getName() + " is now harvestable");
+                System.out.println("Good job!");
             else
                 System.out.println(this.farmLot.getSeed().getName() + " growed.");
         }

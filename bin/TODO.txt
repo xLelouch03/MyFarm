@@ -1,5 +1,4 @@
 Driver:
-<<<<<<< Updated upstream
 Implement a way na continuous yung game until mareach yung requirements to end the game (no planted crop AND cant buy/plant seed bc less than 5 objectcoins, tile has withered plant) (DONE)
 - modify yung options, 
     1: Use a tool 
@@ -17,12 +16,6 @@ Implement a way na continuous yung game until mareach yung requirements to end t
 
 Farmer:
 Hindi ko pa nattry na iimplement yung mag enter ng name si user tapos ayun yung iinitialize sa MyFarm HAHA (DONE)
-=======
-Implement a way na continuous yung game until mareach yung requirements to end the game (no planted crop AND cant buy/plant seed bc less than 5 objectcoins, tile has withered plant)
-
-Farmer:
-Hindi ko pa nattry na iimplement yung mag enter ng name si user tapos ayun yung iinitialize sa MyFarm HAHA
->>>>>>> Stashed changes
 
 MyFarm:
 plantSeed method
@@ -33,7 +26,6 @@ plantSeed method
 getTool method 
     - if null irereturn ng method, include a prompt na hindi nageexist yung tool 
 
-<<<<<<< Updated upstream
 FarmLot:
     -canHarvest() and isHarvestable() = duplicate lang HAHAHAH, 
     -can remove yung canHarvest() method
@@ -50,10 +42,6 @@ Shovel
 General:
     -improve nalang siguro yung mga simple feedbacks 
     -add option sa interface para icheck kung harvestable na ba yung mga crops or not
-=======
-General:
-    -improve nalang siguro yung mga simple feedbacks hAHA
->>>>>>> Stashed changes
     -Javadoc 
 
 UML!!
