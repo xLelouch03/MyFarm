@@ -158,7 +158,7 @@ public class FarmDriver {
                   }
               if(farm.getFarmer().getCoins() < 5 ||
                        farm.getFarmLot().getWitherStatus() == true) {
-                    System.out.println("You have reached the end of the game.");
+                    System.out.println("\nYou have reached the end of the game.");
                     System.out.println("Some of the reasons include: ");
                     System.out.println("1) You no longer have any active crops");
                     System.out.println("2) You can no longer buy any seeds");
@@ -174,6 +174,9 @@ public class FarmDriver {
 
                     }
                     else if(opt2.equalsIgnoreCase("yes"))
+
+                        // clear screen
+                        app.clearScreen();
                         
                         // reset stats
                         farm.getFarmLot().getSeed().resetSeed();

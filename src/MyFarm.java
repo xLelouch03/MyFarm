@@ -109,7 +109,6 @@ public class MyFarm {
             if(this.farmLot.getSeed().getDayGrowth() > this.farmLot.getSeed().getHarvestTime()) {
                 if(this.farmLot.isHarvestable() == false)
                     this.farmLot.isWithered();
-                    // TODO: doesnt get withered if watered before last day
             }
             else if (this.farmLot.isHarvestable() == true)
                 System.out.println("\n" + (this.farmLot.getSeed().getName() + " is harvestable"));

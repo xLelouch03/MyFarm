@@ -71,6 +71,9 @@ public class FarmLot {
           this.harvestable = true;
           // System.out.println("\n" + this.seed.getName() + " is harvestable");
       }
+      else {
+        this.harvestable = false;
+      }
       return harvestable;
     }
   
