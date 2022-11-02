@@ -8,6 +8,7 @@ public class FarmDriver {
         tempFarm = new MyFarm();
     }
 
+    /* Adds and defines the tools in the tool array list */
     public void setupTools() {
         tempFarm.addTools("Plow", 0, 0.5);
         tempFarm.addTools("Watering Can", 0, 0.5);
@@ -16,6 +17,7 @@ public class FarmDriver {
         tempFarm.addTools("Shovel", 7, 2);
     }
 
+    /* Adds and defines the seeds in the seed array list */
     public void setupSeeds() {
         tempFarm.addSeeds("Turnip", "Root crop", 2, 2, 1, 90,6,5);
         tempFarm.addSeeds("Carrot", "Root crop", 3, 2, 1, 10,9,7.5);
@@ -28,14 +30,25 @@ public class FarmDriver {
 
     }
 
+    
+    /** 
+     * Creates a farm tile
+     * @return MyFarm tempFarm   Creates a farm tile
+     */
     public MyFarm getFarm() {
         return tempFarm;
     }
 
+    /* Clears the screen */
     public void clearScreen() {
         System.out.print("\033\143");
     }
 
+    
+    /** 
+     * Main class to stitch the whole program together
+     * @param args
+     */
     public static void main(String[] args) {
         FarmDriver app = new FarmDriver();
 
@@ -180,7 +193,7 @@ public class FarmDriver {
                         farm.getFarmLot().getSeed().resetSeed();
                         farm.getFarmLot().resetFarmLot();
                         farm.getFarmer().resetFarmer();
-                        
+
                         // clear screen
                         app.clearScreen();
 

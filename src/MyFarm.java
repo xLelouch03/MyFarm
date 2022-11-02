@@ -119,14 +119,15 @@ public class MyFarm {
 
     
     /** 
-     * @param name
-     * @param type
-     * @param harvestTime
-     * @param waterNeed
-     * @param fertilizerNeed
-     * @param cost
-     * @param basePrice
-     * @param xp
+     * Defines and adds a seed to the seed array list
+     * @param name   Name of the seed
+     * @param type   Type of seed
+     * @param harvestTime   Time needed for the seed to be ready for harvest
+     * @param waterNeed   Amount of water needed for the seed to be ready for harvest
+     * @param fertilizerNeed   Amount of fertilizer needed for the seed to be ready for harvest
+     * @param cost   Cost for each seed
+     * @param basePrice   Base price for each crop produced
+     * @param xp   Experience yielded for each crop harvested
      */
     public void addSeeds(String name, String type, int harvestTime, 
                          int waterNeed, int fertilizerNeed, int cost,
@@ -136,9 +137,10 @@ public class MyFarm {
 
     
     /** 
-     * @param name
-     * @param cost
-     * @param xp
+     * Defines and adds a tool to the tool array list
+     * @param name   Name of the tool
+     * @param cost   Cost of the tool
+     * @param xp     Experience yielded for each use of the tool
      */
     public void addTools(String name, int cost, double xp) {
         this.tool.add(new Tool(name, cost, xp));
@@ -146,6 +148,7 @@ public class MyFarm {
 
     
     /** 
+     * To plow the tile
      * @param lot
      * @param plow
      */
@@ -177,6 +180,7 @@ public class MyFarm {
 
     
     /** 
+     * To plant a seed on the tile
      * @param lot
      * @param seedName
      */
@@ -221,6 +225,7 @@ public class MyFarm {
 
     
     /** 
+     * To water the crop on the tile
      * @param lot
      * @param waterCan
      */
@@ -257,6 +262,7 @@ public class MyFarm {
 
     
     /** 
+     * To Fertilize the crop on the tile
      * @param lot
      * @param fertilizer
      */
@@ -294,6 +300,7 @@ public class MyFarm {
   
     
     /** 
+     * To use the pickaxe used to remove rocks on the tile
      * @param lot
      * @param pickaxe
      */
@@ -303,6 +310,7 @@ public class MyFarm {
   
     
     /** 
+     * To use the shovel used to remove seeds or crops on the tile
      * @param lot
      * @param shovel
      */
@@ -346,6 +354,7 @@ public class MyFarm {
 
     
     /** 
+     * To harvest the crop on the tile
      * @param lot
      */
     public void harvestTile(FarmLot lot) {
