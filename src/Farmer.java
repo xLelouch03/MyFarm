@@ -72,7 +72,7 @@ public class Farmer {
     public void displayStats() {
         System.out.println("\nFarmer Name: " + getName());
         System.out.println("You are level: " + getLevel());
-        System.out.println("You have " + getCoins() + " objectcoins");
+        System.out.println("You have " + (float) getCoins() + " objectcoins");
         System.out.println("You have " + getXP() + " experience.\n");
     }
 

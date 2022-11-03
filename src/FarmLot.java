@@ -55,8 +55,8 @@ public class FarmLot {
       return this.wither;
     }
   
-    public void isWithered() {
-      this.wither = true;
+    public void isWithered(boolean withered) {
+      this.wither = withered;
       System.out.println(this.seed.getName() + " has withered.");
     }
   

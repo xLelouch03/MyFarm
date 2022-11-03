@@ -74,9 +74,9 @@ public class FarmDriver {
                 System.out.println("Welcome to your farm, " + farm.getFarmer().getName() + "!");
                 System.out.println("As starters, your stats are set to its default: ");
                 farm.getFarmer().displayStats();
-    
+                System.out.println("\nDay " + farm.getDay() + " of the game.");
+                
                 while(farm.isRunning()) {
-                    System.out.println("\nDay " + farm.getDay() + " of the game.");
                     System.out.println("\nChoose an action to do: ");
                     System.out.println("1: Use a tool");
                     System.out.println("2: Plant a seed");
@@ -163,7 +163,7 @@ public class FarmDriver {
       
                         case 4: // 4: Advance to next day
                             farm.advanceNextDay();
-                            app.clearScreen();
+                            //app.clearScreen();
                         break;
       
                         case 5: // 5: Display stats

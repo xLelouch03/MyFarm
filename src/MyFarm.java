@@ -93,18 +93,28 @@ public class MyFarm {
 
     public void advanceNextDay(){
         this.day++;
-        
+        System.out.println("\nDay " + this.day + " of the game.");
         if(this.farmLot.getSeed() != null) {
             this.farmLot.getSeed().grow();
 
             if(this.farmLot.getSeed().getDayGrowth() > this.farmLot.getSeed().getHarvestTime()) {
-                if(this.farmLot.isHarvestable() == false)
-                    this.farmLot.isWithered();
+                if(this.farmLot.isHarvestable() == false) {
+                    System.out.println("Because you did not harvest the " + this.farmLot.getSeed().getName() + " ,");
+                    this.farmLot.isWithered(true);
+                }
             }
-            else if (this.farmLot.isHarvestable() == true)
-                System.out.println("\n" + (this.farmLot.getSeed().getName() + " is harvestable"));
+            else if(this.farmLot.getSeed().getDayGrowth() == this.farmLot.getSeed().getHarvestTime()) {
+                if(this.farmLot.isHarvestable() == false) {
+                    System.out.println(this.farmLot.getSeed().getName() + " growed but did not get taken care of properly.");
+                    this.farmLot.isWithered(true);
+                }
+                else 
+                    System.out.println("\n" + (this.farmLot.getSeed().getName() + " is harvestable"));
+            }
+            //else if (this.farmLot.isHarvestable() == true)
+                //System.out.println("\n" + (this.farmLot.getSeed().getName() + " is harvestable"));
             else
-                System.out.println(this.farmLot.getSeed().getName() + " growed.");
+                System.out.println("\n" + this.farmLot.getSeed().getName() + " growed.");
         }
     }
 
