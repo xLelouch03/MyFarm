@@ -70,12 +70,14 @@ public class Farmer {
 
     /* Display the game statistics/summary */
     public void displayStats() {
-        System.out.println("\nYou are level: " + getLevel());
+        System.out.println("\nFarmer Name: " + getName());
+        System.out.println("You are level: " + getLevel());
         System.out.println("You have " + getCoins() + " objectcoins");
         System.out.println("You have " + getXP() + " experience.\n");
     }
 
     public void resetFarmer(){
+        this.name = null;
         this.objectCoins = 100;
         this.level = 0;
         this.experience = 0;
