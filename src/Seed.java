@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Seed {
     private String name;
     private String type;
