@@ -6,7 +6,8 @@ public class Farmer {
     private String name;
 
     /**
-     * The Farmer object where the player statistics are stored
+     * The Farmer object where the player statistics such as name, 
+     * object coins, level, and experience are stored
      * @param name Name of the player to be used for the farmer
      */
     public Farmer(String name) {
@@ -77,6 +78,7 @@ public class Farmer {
         System.out.println("You have " + getXP() + " experience.");
     }
 
+    /* Resets the farmer/player statistics */
     public void resetFarmer(){
         this.name = null;
         this.objectCoins = 100;

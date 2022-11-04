@@ -30,8 +30,8 @@ public class MyFarm {
   
     
     /** 
-     * 
-     * @return Farmer
+     * Creates a farmer object
+     * @return Farmer   The farmer object
      */
     public Farmer getFarmer() {
         return farmer;
@@ -39,15 +39,16 @@ public class MyFarm {
 
     
     /** 
-     * 
-     * @return FarmLot
+     * Creates a farm lot object / a tile on the farm
+     * @return FarmLot   The farm lot object / a tile on the farm
      */
     public FarmLot getFarmLot(){
         return this.farmLot;
     }
     
     /** 
-     * @return ArrayList<Seed>
+     * Get a seed and its data from an array list
+     * @return ArrayList<Seed>   The seed and its data from the array list
      */
     public ArrayList<Seed> getSeed() {
         return this.seed;
@@ -55,8 +56,9 @@ public class MyFarm {
 
     
     /** 
-     * @param name
-     * @return Tool
+     * Creates a tool object
+     * @param name   The name of the tool to be created and data accessed
+     * @return Tool   The tool object
      */
     public Tool getTool(String name){
         Tool temp = null;
@@ -69,19 +71,23 @@ public class MyFarm {
       return temp;
     }
 
+    /* Clear the seed data */
     public void removeSeed() {
         this.seed.removeAll(this.seed);
 
             
     }
 
+
+    /* Clear the tool data */
     public void removeTool() {
         this.tool.removeAll(this.tool);
 
     }
     
     /** 
-     * @return ArrayList<Tool>
+     * Get all the content of the tool array list
+     * @return ArrayList<Tool>   The tool content of the tool array list
      */
     public ArrayList<Tool> getAllTool() {
         return tool;
@@ -89,12 +95,14 @@ public class MyFarm {
 
     
     /** 
-     * @return int
+     * Get the day the game is currently on
+     * @return int   The day count of the game
      */
     public int getDay() {
         return day;
     }
 
+    /* Directs the game to the next day, checks if the crop has grown, is harvestable, or is withered */
     public void advanceNextDay(){
         this.day++;
         System.out.println("\nDay " + this.day + " of the game.");
@@ -122,6 +130,10 @@ public class MyFarm {
         }
     }
 
+    /*
+     * Check if the game is still ongoing
+     * @return boolean    The game status
+     */
     public boolean isRunning() {
         if((farmer.getCoins() < 5 && this.farmLot.getSeed() == null) || this.farmLot.getWitherStatus() == true)
             return false;
@@ -160,8 +172,8 @@ public class MyFarm {
     
     /** 
      * To plow the tile
-     * @param lot
-     * @param plow
+     * @param lot   The tile to be plowed
+     * @param plow   The plow tool used to plow the tile
      */
     public void usePlow(FarmLot lot, Tool plow) {
         if(plow != null) {
@@ -199,8 +211,8 @@ public class MyFarm {
     
     /** 
      * To plant a seed on the tile
-     * @param lot
-     * @param seedName
+     * @param lot   The tile to be planted on
+     * @param seedName   The name of the seed to be planted
      */
     public void plantSeed(FarmLot lot, String seedName) {
         boolean result = false;
@@ -242,8 +254,8 @@ public class MyFarm {
 
     /** 
      * To water the crop on the tile
-     * @param lot
-     * @param waterCan
+     * @param lot   The tile to be watered
+     * @param waterCan    The water can tool to be used to water the tile
      */
     public void useWaterCan(FarmLot lot, Tool waterCan) {
       if(waterCan != null) {
@@ -287,8 +299,8 @@ public class MyFarm {
     
     /** 
      * To Fertilize the crop on the tile
-     * @param lot
-     * @param fertilizer
+     * @param lot   The tile to be fertilized
+     * @param fertilizer   The fertilizer tool to be used to fertilize the tile
      */
     public void useFertilizer(FarmLot lot, Tool fertilizer) {
         if(farmer.getCoins() >= fertilizer.getCost()){
@@ -324,8 +336,8 @@ public class MyFarm {
     
     /** 
      * To use the pickaxe used to remove rocks on the tile
-     * @param lot
-     * @param pickaxe
+     * @param lot   The tile to be accessed by the pickaxe tool
+     * @param pickaxe   The pickaxe tool to be used on the tile
      */
     public void usePickaxe(FarmLot lot, Tool pickaxe){
         System.out.println("There is no rock on this tile.\n");
@@ -334,8 +346,8 @@ public class MyFarm {
     
     /** 
      * To use the shovel used to remove seeds or crops on the tile
-     * @param lot
-     * @param shovel
+     * @param lot   The tile to be shoveled
+     * @param shovel   The shovel tool to be used on the tile
      */
     public void useShovel(FarmLot lot, Tool shovel) {
         if(farmer.getCoins() >= shovel.getCost()){
@@ -386,7 +398,7 @@ public class MyFarm {
     
     /** 
      * To harvest the crop on the tile
-     * @param lot
+     * @param lot   The tile whose crop/s are to be harvested
      */
     public void harvestTile(FarmLot lot) {
         if(lot.getWitherStatus() == false) {
@@ -426,6 +438,7 @@ public class MyFarm {
             System.out.println("This lot contains a withered plant");
     }
 
+    /* Resets the data of the tile */
     public void resetFarm() {
         this.farmLot.resetFarmLot();
         removeSeed();

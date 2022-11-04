@@ -122,7 +122,6 @@ public class Seed {
     /** 
      * Get the number of products produced by the seed as well as computing for the
      * harvest total.
-     * 
      * @return the number of product produced
      */
     public int getProductProduced() {
