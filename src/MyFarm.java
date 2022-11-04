@@ -167,9 +167,16 @@ public class MyFarm {
                         lot.isPlowed(true);
                         System.out.println("\nTile is now plowed.");
                     
+                        double currXP = farmer.getXP();
                         double tempXP = farmer.getXP() + plow.getXP();
+
                         farmer.updateXP(tempXP);
                         System.out.println("You have gained " + plow.getXP() + " experience.\n");
+
+                        if(tempXP > currXP){
+                            farmer.getLevel();
+                        }
+
                     }
                     else
                         System.out.println("\nYou have used a wrong tool.");
@@ -243,8 +250,16 @@ public class MyFarm {
                         lot.increaseWater();
                         System.out.println("\nTile has been watered.");
         
+                        double currXP = farmer.getXP();
+                        double tempXP = farmer.getXP() + waterCan.getXP();
+
                         System.out.println("You have gained " + waterCan.getXP() + " experience.\n");
-                        farmer.updateXP(farmer.getXP() + waterCan.getXP());
+                        farmer.updateXP(tempXP);
+
+                        if(tempXP > currXP){
+                            farmer.getLevel();
+                        }
+
                         if(lot.isHarvestable() == true){
                             System.out.println(this.farmLot.getSeed().getName() + " is ready to harvest!");
                         }
@@ -348,10 +363,18 @@ public class MyFarm {
                 }
             }
         
+            double currXP = farmer.getXP();
+            double tempXP = farmer.getXP() + shovel.getXP();
+
             farmer.updateObjectCoins(farmer.getCoins() - shovel.getCost());
-            farmer.updateXP(farmer.getXP() + shovel.getXP());
+            farmer.updateXP(tempXP);
             System.out.println("You have used " + shovel.getCost() + " objectcoins.");
             System.out.println("You gained " + shovel.getXP() + " experience.");
+
+            if(tempXP > currXP){
+                farmer.getLevel();
+            }
+
         }
         else
             System.out.println("You do not have enough coins to use the shovel!");
@@ -372,13 +395,20 @@ public class MyFarm {
                     double waterBonus = lot.getSeed().getHarvestTotal() * 0.2 * (lot.getWaterCount()-1);
                     double fertilizerBonus = lot.getSeed().getHarvestTotal() * 0.5 * lot.getFertilizerCount();
                     double finalHarvestTotal = lot.getSeed().getHarvestTotal() + waterBonus + fertilizerBonus;
+
+                    double currXP = farmer.getXP();
+                    double tempXP = farmer.getXP() + lot.getSeed().getExperienceYield();
                     
                     if(lot.getSeed().getType().equals("Flower"))
                         finalHarvestTotal *= 1.1;
                     System.out.println("You have earned " + finalHarvestTotal + " objectCoins");
                     System.out.println("You have earned " + lot.getSeed().getExperienceYield() + " experience");
                     farmer.updateObjectCoins(farmer.getCoins() + finalHarvestTotal);
-                    farmer.updateXP(farmer.getXP() + lot.getSeed().getExperienceYield());
+                    farmer.updateXP(tempXP);
+
+                    if(tempXP > currXP){
+                        farmer.getLevel();
+                    }
                     
                     lot.getSeed().resetSeed();
                     this.farmLot.resetFarmLot();

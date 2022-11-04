@@ -47,7 +47,7 @@ public class Farmer {
         level = (int) getXP() / 100;
 
         if(tempLevel < level)
-            System.out.println("You have leveled up!");
+            System.out.println("\nYou have leveled up!\n");
 
         return level;
     } 
