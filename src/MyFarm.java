@@ -171,7 +171,7 @@ public class MyFarm {
                         double tempXP = farmer.getXP() + plow.getXP();
 
                         farmer.updateXP(tempXP);
-                        System.out.println("You have gained " + plow.getXP() + " experience.\n");
+                        System.out.println("You have gained " + plow.getXP() + " experience.");
 
                         if(tempXP > currXP){
                             farmer.getLevel();
@@ -213,7 +213,7 @@ public class MyFarm {
                                 lot.setSeed(s);
                                 result = true;
                                 System.out.println(s.getName() + " has been planted.");
-                                   
+                                System.out.println("You have used " + s.getCost() + " objectcoins.");
                                 farmer.updateObjectCoins(farmer.getCoins() - s.getCost());
                             }
                         else
@@ -374,7 +374,6 @@ public class MyFarm {
             if(tempXP > currXP){
                 farmer.getLevel();
             }
-
         }
         else
             System.out.println("You do not have enough coins to use the shovel!");

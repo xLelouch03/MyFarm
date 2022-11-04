@@ -83,6 +83,7 @@ public class FarmDriver {
                     System.out.println("3: Harvest a crop");
                     System.out.println("4: Advance to next day");
                     System.out.println("5: Display stats");
+                    System.out.println("6: Display Tile Information");
                     System.out.print("\nAction: ");
                     int nOpt = scan.nextInt();
                   
@@ -169,7 +170,11 @@ public class FarmDriver {
                         case 5: // 5: Display stats
                             farm.getFarmer().displayStats();
                         break;
-      
+                        
+                        case 6: 
+                            farm.getFarmLot().displayTileInfo();
+                        break;
+                        
                         default:
                             System.out.println("Please choose an option from the list!");                      
                     }
