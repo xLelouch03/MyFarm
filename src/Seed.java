@@ -1,3 +1,6 @@
+/**
+ * This class contains the information and methods about seeds
+ */
 public class Seed {
     private String name;
     private String type;
@@ -11,6 +14,19 @@ public class Seed {
     private int harvestTotal;
     private double xp;
 
+    /**
+     * Constructs the seed with the given name, type, harvest time, 
+     * number of water and fertilizer needs, cost, base price, and experience
+     * 
+     * @param name the name of the seed
+     * @param type the type of the seed
+     * @param harvestTime the number of days it needs to grow
+     * @param waterNeed the number of times it needs to be watered
+     * @param fertilizerNeed the number of times it needs to be fertilized
+     * @param cost the cost of the seed
+     * @param basePrice the base selling price of the seed 
+     * @param xp the experience gained after harvesting the seed
+     */
     public Seed(String name, String type, int harvestTime, int waterNeed, int fertilizerNeed, int cost, int basePrice, double xp) {
         this.name = name;
         this.type = type;
@@ -24,8 +40,8 @@ public class Seed {
 
     
     /** 
-     * Get the name of the seed
-     * @return String name   Name of the seed
+     * Gets the name of the seed
+     * @return the name of the seed
      */
     public String getName() {
         return name;
@@ -33,8 +49,8 @@ public class Seed {
 
     
     /** 
-     * Get the crop type
-     * @return String type   Name of the crop
+     * Gets the crop type
+     * @return the type of the crop
      */
     public String getType() {
         return type;
@@ -42,8 +58,8 @@ public class Seed {
 
     
     /** 
-     * Get the number of days the crop has been growing
-     * @return int dayGrowth   Growth time in days
+     * Gets the number of days the crop has been growing
+     * @return the number of days the crop growed
      */
     public int getDayGrowth() {
         return dayGrowth;
@@ -51,22 +67,24 @@ public class Seed {
 
     
     /** 
-     * Get the number of days the crop needs to be ready for harvest
-     * @return int harvestTime   Harvest time in days
+     * Gets the number of days the crop needs to grow to be ready for harvest
+     * @return the harvest time
      */
     public int getHarvestTime() {
         return harvestTime;
     }
 
-    /* Increments the dayGrowth */
+    /**
+     *  Increments the number of days the seed has growed
+     */
     public void grow() {
         dayGrowth++;
     }
 
     
     /** 
-     * Get the number of times the crop needs to be watered to be ready for harvest
-     * @return int waterNeed   Number of times the crop needs to watered to be ready for harvest
+     * Gets the number of times the crop needs to be watered to be ready for harvest
+     * @return the number of times the crop needs to watered
      */
     public int getWaterNeed() {
         return waterNeed;
@@ -74,8 +92,8 @@ public class Seed {
 
     
     /** 
-     * Get the number of times the crop needs to fertilized to be ready for harvest
-     * @return int fertilizerNeed   Number of times the crop needs to fertilized to be ready for harvest
+     * Gets the number of times the crop needs to fertilized to be ready for harvest
+     * @return the number of times the crop needs to fertilized
      */
     public int getFertilizerNeed() {
         return fertilizerNeed;
@@ -83,8 +101,8 @@ public class Seed {
 
     
     /** 
-     * Get cost of the seed
-     * @return int cost   Get cost of the seed
+     * Gets the cost of the seed
+     * @return the cost of the seed
      */
     public int getCost() {
         return cost;
@@ -92,8 +110,9 @@ public class Seed {
 
     
     /** 
+     * Gets the computed harvest total from the seed
      * 
-     * @return int
+     * @return the harvest total
      */
     public int getHarvestTotal() {
         return harvestTotal;
@@ -101,10 +120,11 @@ public class Seed {
     
     
     /** 
-     * Get the number of profucts produced by the seed
-     * @return int productProduced   Number of profucts produced by the seed
+     * Get the number of products produced by the seed as well as computing for the
+     * harvest total.
+     * 
+     * @return the number of product produced
      */
-    //to revise
     public int getProductProduced() {
         int min, max;
 
@@ -114,30 +134,19 @@ public class Seed {
                 this.name.equalsIgnoreCase("carrot")) {
                 max = 2;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
-                
-                if(this.name.equalsIgnoreCase("turnip"))
-                    harvestTotal = basePrice * productProduced;
-                
-                if(this.name.equalsIgnoreCase("carrot")) 
-                    harvestTotal = basePrice * productProduced;
-
             }
+            
             else if(this.name.equalsIgnoreCase("potato")) {
                 max = 10;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
-                harvestTotal = basePrice * productProduced;
             }
+
+            harvestTotal = basePrice * productProduced;
         }
         
         else if(this.type.equalsIgnoreCase("flower")) {
             productProduced = 1;
-
-            if(this.name.equalsIgnoreCase("tulips"))
-                harvestTotal = basePrice;
-            else if(this.name.equalsIgnoreCase("rose"))
-                harvestTotal = basePrice;
-            else if(this.name.equalsIgnoreCase("sunflower"))
-                harvestTotal = basePrice;
+            harvestTotal = basePrice;
         }
 
         else if(this.type.equalsIgnoreCase("fruit tree")) {
@@ -145,15 +154,15 @@ public class Seed {
             if(this.name.equalsIgnoreCase("mango")) {
                 min = 5;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
-                harvestTotal = basePrice * productProduced;
             }
             
             else if(this.name.equalsIgnoreCase("apple")) {
                 min = 10;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
-                harvestTotal = basePrice * productProduced;
             }
+            harvestTotal = basePrice * productProduced;
         }
+
         return productProduced;
     }
 
@@ -166,7 +175,9 @@ public class Seed {
         return this.xp;
     }
 
-    /* Reset the seed statistics back to 0 */
+    /**
+     * Resets the number of days a seed growed and the number of product produced
+     */
     public void resetSeed() {
         dayGrowth = 0;
         productProduced = 0;

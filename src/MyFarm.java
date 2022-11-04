@@ -7,6 +7,10 @@ public class MyFarm {
     private ArrayList<Tool> tool;
     private int day;
 
+    /**
+     * Constructs a farm by creating a farmlot, arraylist of seeds and tools,
+     * setting the day to 1 and a farmer.
+     */
     public MyFarm() {
         this.farmLot = new FarmLot();
         this.seed = new ArrayList<Seed>();
