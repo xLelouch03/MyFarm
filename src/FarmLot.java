@@ -69,7 +69,7 @@ public class FarmLot {
   
     /* Increments the water count for the tile */
     public void increaseWater() {
-        if (this.seed.getWaterNeed() != waterCount)
+        // if (this.seed.getWaterNeed() != waterCount)
             waterCount += 1;
     }
   
@@ -84,7 +84,7 @@ public class FarmLot {
   
     /* Increments the fertilizer count for the tile */
     public void increaseFertilizer() {
-        if (this.seed.getFertilizerNeed() != fertilizeCount)
+        // if (this.seed.getFertilizerNeed() != fertilizeCount)
           fertilizeCount += 1;
     }
   
