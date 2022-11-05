@@ -37,11 +37,10 @@ public class FarmDriver {
         tempFarm.addSeeds("Rose", "Flower", 1, 2, 1, 5,5,2.5);
         tempFarm.addSeeds("Tulips", "Flower", 2, 3, 1, 10,9,5);
         tempFarm.addSeeds("Sunflower", "Flower", 3, 3, 2, 20,19,7.5);
-        tempFarm.addSeeds("Mango", "Fruit tree", 10, 7, 4, 100,8,25);
-        tempFarm.addSeeds("Apple", "Fruit tree", 10, 7, 5, 200,5,25);
+        tempFarm.addSeeds("Mango", "Fruit tree", 10, 7, 4, 10,8,25);
+        tempFarm.addSeeds("Apple", "Fruit tree", 10, 7, 5, 20,5,25);
 
     }
-
     
     /** 
      * Returns the farm object

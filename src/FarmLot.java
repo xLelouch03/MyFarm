@@ -1,3 +1,6 @@
+/**
+ * This class contains the constructor and methods in managing a farm lot
+ */
 public class FarmLot {
     private boolean plowed;
     private int waterCount;
@@ -22,106 +25,101 @@ public class FarmLot {
         this.occupied = false;
     }
   
-    
     /** 
-     * Get the seed data
-     * @return Seed   The seed data
+     * Gets the seed planted in the farmlot
+     * @return the object seed
      */
     public Seed getSeed() {
         return this.seed;
     }
-  
     
     /** 
-     * Set the seed data
-     * @param temp   The seed data
+     * Sets the seed to the farmlot
+     * @param temp seed object passed to the method
      */
     public void setSeed(Seed temp) {
         this.seed = temp;
     }
-  
     
     /** 
-     * Get the plow status of the tile
-     * @return boolean   The plow status of the tile
+     * Gets the plow status of the tile
+     * @return the plow status of the tile
      */
     public boolean getPlowStatus() {
         return this.plowed;
     }
-  
     
     /** 
      * Sets the plow status of the tile
-     * @param opt   The plow status of the tile
+     * @param opt a boolean value passed to the method
      */
     public void isPlowed(boolean opt) {
         this.plowed = opt;
     }
-  
     
     /** 
-     * Get the water count of the tile / how many times the tile has been watered
-     * @return int   The water count of the tile / how many times the tile has been watered
+     * Gets the water count of the tile / how many times the tile has been watered
+     * @return the water count of the tile / how many times the tile has been watered
      */
     public int getWaterCount() {
         return waterCount;
     }
   
-    /* Increments the water count for the tile */
+    /**
+     *  Increments the water count for the tile
+     */
     public void increaseWater() {
         // if (this.seed.getWaterNeed() != waterCount)
             waterCount += 1;
     }
-  
     
     /** 
-     * Get the fertillizer count of the tile / how many times the tile has been fertilized
-     * @return int   The fertilizer count of the tile / how many times the tile has been fertilized
+     * Gets the fertillizer count of the tile / how many times the tile has been fertilized
+     * @return the fertilizer count of the tile / how many times the tile has been fertilized
      */
     public int getFertilizerCount() {
         return fertilizeCount;
     }
   
-    /* Increments the fertilizer count for the tile */
+    /**
+     *  Increments the fertilizer count for the tile
+     */
     public void increaseFertilizer() {
         // if (this.seed.getFertilizerNeed() != fertilizeCount)
           fertilizeCount += 1;
     }
-  
     
     /** 
-     * Get the wither status of the the crop on the tile
-     * @return boolean   The wither status of the crop on the tile
+     * Gets the wither status of the the crop on the tile
+     * @return the wither status of the crop on the tile
      */
     public boolean getWitherStatus() {
         return this.wither;
     }
-  
     
     /** 
-     * Check if the crop on the tile is withered
-     * @param withered   THe wither status of the the crop on the tile
+     * Sets a boolean value if the crop on the tile is withered
+     * @param withered a boolean value passed to the method
      */
     public void isWithered(boolean withered) {
         this.wither = withered;
         System.out.println(this.seed.getName() + " has withered.");
     }
-  
     
     /** 
-     * Get the harvest status of the crop on the tile
-     * @return boolean   The harvest status of the crop on the tile
+     * Gets the harvest status of the crop on the tile
+     * @return the harvest status of the crop on the tile
      */
     public boolean getHarvestStatus() {
         return harvestable;
     }
     
-    
     /** 
-     * Check if the crop on the tile is harvestable
-     * @return boolean   The harvest status of the crop on the tile
+     * Checks if the crop on the tile is harvestable
+     * @return the harvest status of the crop on the tile
      */
     public boolean isHarvestable() { 
+        //Checks if the crop meets the minimum requirements to be harvested
         if (this.seed.getDayGrowth() == this.seed.getHarvestTime() &&
             this.seed.getWaterNeed() - 1 <= getWaterCount() &&
             this.seed.getFertilizerNeed() - 1 <= getFertilizerCount()) {
@@ -132,22 +130,25 @@ public class FarmLot {
         }
         return harvestable;
     }
-  
     
     /** 
-     * Checks the occupation status of the tile
-     * @return boolean   The occupation status of the tile
+     * Gets the status of the tile whether occupied or not
+     * @return the occupation status of the tile
      */
     public boolean getOccupied() {
         return occupied;
     }
   
-    /* Checks if the tile already has a crop planted on it/is already occupied */
+    /**
+     *  Checks if the tile already has a crop planted on it/is already occupied 
+     */
     public void isOccupied() {
         this.occupied = true;
     }
     
-    /* Displays the information of the tile */
+    /**
+     *  Displays the information of the tile 
+     */
     public void displayTileInfo()  {
         System.out.println("\n[Tile Information]");
         System.out.print("Plow Status:");
@@ -173,7 +174,9 @@ public class FarmLot {
         
     }
 
-    /* Resets the Farm Lot/Tile statistics */
+    /**
+     *  Resets the Farm Lot/Tile  
+     */
     public void resetFarmLot() {
         this.plowed = false;
         this.waterCount = 0;

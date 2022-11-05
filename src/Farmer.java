@@ -1,3 +1,6 @@
+/**
+ * This class contains the constructor and methods about the farmer
+ */
 public class Farmer {
 
     private double objectCoins;

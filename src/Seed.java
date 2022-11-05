@@ -37,7 +37,6 @@ public class Seed {
         this.basePrice = basePrice;
         this.xp = xp;
     }
-
     
     /** 
      * Gets the name of the seed
@@ -46,7 +45,6 @@ public class Seed {
     public String getName() {
         return name;
     }
-
     
     /** 
      * Gets the crop type
@@ -55,7 +53,6 @@ public class Seed {
     public String getType() {
         return type;
     }
-
     
     /** 
      * Gets the number of days the crop has been growing
@@ -64,7 +61,6 @@ public class Seed {
     public int getDayGrowth() {
         return dayGrowth;
     }
-
     
     /** 
      * Gets the number of days the crop needs to grow to be ready for harvest
@@ -80,7 +76,6 @@ public class Seed {
     public void grow() {
         dayGrowth++;
     }
-
     
     /** 
      * Gets the number of times the crop needs to be watered to be ready for harvest
@@ -90,7 +85,6 @@ public class Seed {
         return waterNeed;
     }
 
-    
     /** 
      * Gets the number of times the crop needs to fertilized to be ready for harvest
      * @return the number of times the crop needs to fertilized
@@ -99,7 +93,6 @@ public class Seed {
         return fertilizerNeed;
     }
 
-    
     /** 
      * Gets the cost of the seed
      * @return the cost of the seed
@@ -107,7 +100,6 @@ public class Seed {
     public int getCost() {
         return cost;
     }
-
     
     /** 
      * Gets the computed harvest total from the seed
@@ -118,9 +110,8 @@ public class Seed {
         return harvestTotal;
     }
     
-    
     /** 
-     * Get the number of products produced by the seed as well as computing for the
+     * Gets the number of products produced by the seed as well as computing for the
      * harvest total.
      * @return the number of product produced
      */
@@ -139,15 +130,11 @@ public class Seed {
                 max = 10;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
             }
-
-            harvestTotal = basePrice * productProduced;
         }
         
-        else if(this.type.equalsIgnoreCase("flower")) {
+        else if(this.type.equalsIgnoreCase("flower")) 
             productProduced = 1;
-            harvestTotal = basePrice;
-        }
-
+        
         else if(this.type.equalsIgnoreCase("fruit tree")) {
             max = 15;
             if(this.name.equalsIgnoreCase("mango")) {
@@ -159,16 +146,16 @@ public class Seed {
                 min = 10;
                 productProduced = (int) Math.floor(Math.random()*(max-min+1)+min);
             }
-            harvestTotal = basePrice * productProduced;
         }
+
+        harvestTotal = basePrice * productProduced;
 
         return productProduced;
     }
-
-    
+ 
     /** 
      * Get the XP yielded by harvesting the product
-     * @return double this.xp   Get the XP yielded by harvesting the product
+     * @return the XP yielded by harvesting the product
      */
     public double getExperienceYield() {
         return this.xp;
