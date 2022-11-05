@@ -440,6 +440,7 @@ public class MyFarm {
                     if(this.farmLot.getSeed().getType().equals("Flower"))
                         finalHarvestTotal *= 1.1;
 
+                    System.out.println("\n[Harvest Details]");
                     System.out.println("You have earned " + (float) finalHarvestTotal + " objectCoins");
                     System.out.println("You have earned " + this.farmLot.getSeed().getExperienceYield() + " experience");
                     farmer.updateObjectCoins(farmer.getCoins() + finalHarvestTotal);
