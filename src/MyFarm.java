@@ -425,6 +425,7 @@ public class MyFarm {
         if(this.farmLot.getWitherStatus() == false) {
             if(this.farmLot.getSeed() != null) {
                 if(this.farmLot.isHarvestable() == true) {
+                    System.out.println("\n[Harvest Details]");
                     System.out.println("The seed produced " + this.farmLot.getSeed().getProductProduced() + " " +
                     this.farmLot.getSeed().getName());
                     
@@ -440,7 +441,6 @@ public class MyFarm {
                     if(this.farmLot.getSeed().getType().equals("Flower"))
                         finalHarvestTotal *= 1.1;
 
-                    System.out.println("\n[Harvest Details]");
                     System.out.println("You have earned " + (float) finalHarvestTotal + " objectCoins");
                     System.out.println("You have earned " + this.farmLot.getSeed().getExperienceYield() + " experience");
                     farmer.updateObjectCoins(farmer.getCoins() + finalHarvestTotal);

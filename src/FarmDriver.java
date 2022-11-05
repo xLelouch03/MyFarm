@@ -180,6 +180,7 @@ public class FarmDriver {
                         break;
       
                         case 4: // 4: Advance to next day
+                            System.out.println("You have advanced to the next day...");
                             farm.advanceNextDay();
                         break;
       
