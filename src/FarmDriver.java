@@ -117,7 +117,7 @@ public class FarmDriver {
                             switch(tool.toLowerCase()) { 
                                 case "plow":
                                     if(farm.getFarmLot().getPlowStatus() == false)
-                                        farm.usePlow(farm.getFarmLot(), farm.getTool(tool));
+                                        farm.usePlow(farm.getTool(tool));
                                     else
                                         System.out.println("This lot is already plowed.");
                                 break;
@@ -125,7 +125,7 @@ public class FarmDriver {
                                 case "watering can":
                                     if( farm.getFarmLot().getPlowStatus() == true &&
                                         farm.getFarmLot().getSeed() != null) {
-                                        farm.useWaterCan(farm.getFarmLot(), farm.getTool(tool));
+                                        farm.useWaterCan(farm.getTool(tool));
                                     }
                                     else 
                                         System.out.println("This lot does not have any seed");
@@ -134,18 +134,18 @@ public class FarmDriver {
                                 case "fertilizer":
                                     if( farm.getFarmLot().getPlowStatus() == true &&
                                         farm.getFarmLot().getSeed() != null) {
-                                        farm.useFertilizer(farm.getFarmLot(), farm.getTool(tool));
+                                        farm.useFertilizer(farm.getTool(tool));
                                     }
                                     else 
                                         System.out.println("This lot does not have any seed");
                                 break; 
                               
                                 case "pickaxe":
-                                    farm.usePickaxe(farm.getFarmLot(), farm.getTool(tool)); 
+                                    farm.usePickaxe(farm.getTool(tool)); 
                                 break;
                                   
                                 case "shovel":
-                                    farm.useShovel(farm.getFarmLot(), farm.getTool(tool));
+                                    farm.useShovel(farm.getTool(tool));
                                 break;
       
                                 default:
@@ -164,7 +164,7 @@ public class FarmDriver {
                                     
                                     System.out.print("\nSeed name: ");
                                     String seed = scan.next();
-                                    farm.plantSeed(farm.getFarmLot(), seed); //setting a seed object to the farmlot
+                                    farm.plantSeed(seed); //setting a seed object to the farmlot
                               
                                 }
                             else 
@@ -176,7 +176,7 @@ public class FarmDriver {
                         break;
                         
                         case 3: // 3: Harvest a crop
-                            farm.harvestTile(farm.getFarmLot());
+                            farm.harvestTile();
                         break;
       
                         case 4: // 4: Advance to next day
