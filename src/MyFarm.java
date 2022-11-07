@@ -205,7 +205,7 @@ public class MyFarm {
 
     /** 
      * To plow the tile
-     * @param lot   The index of the tile to plow
+     * @param lot   the tile to plow
      * @param plow   The tool object used to plow the tile
      */
     public void usePlow(FarmLot lot, Tool plow) {
@@ -247,7 +247,7 @@ public class MyFarm {
     
     /** 
      * To plant a seed on the tile
-     * @param lot   The index of the tile to plant on
+     * @param lot   the tile where to plant a seed
      * @param seedName   The name of the seed to be planted
      */
     public void plantSeed(FarmLot lot, String seedName) {
@@ -297,7 +297,7 @@ public class MyFarm {
 
     /** 
      * To water the crop on the tile
-     * @param lot   The index of the tile to water
+     * @param lot   the tile where to water
      * @param waterCan    The tool object to be used to water the tile
      */
     public void useWaterCan(FarmLot lot, Tool waterCan) {
@@ -343,7 +343,7 @@ public class MyFarm {
     
     /** 
      * To Fertilize the crop on the tile
-     * @param lot   The index of the tile to fertilize
+     * @param lot   the tile where to put fertilizer
      * @param fertilizer   The tool object to be used to fertilize the tile
      */
     public void useFertilizer(FarmLot lot, Tool fertilizer) {
@@ -381,7 +381,7 @@ public class MyFarm {
     
     /** 
      * To use the pickaxe to remove rocks on the tile
-     * @param lot   The index of the tile to use the pickaxe on
+     * @param lot   the tile to remove a rock
      * @param pickaxe   The tool object to be used on the tile
      */
     public void usePickaxe(FarmLot lot, Tool pickaxe){
@@ -390,7 +390,7 @@ public class MyFarm {
     
     /** 
      * To use the shovel used to remove seeds or crops on the tile
-     * @param lot   The index of the tile to use the shovel on
+     * @param lot   the tile where to use shovel
      * @param shovel   The tool object to be used on the tile
      */
     public void useShovel(FarmLot lot, Tool shovel) {
@@ -446,7 +446,7 @@ public class MyFarm {
     
     /** 
      * To harvest the crop on the tile
-     * @param lot   The index of the tile of the crop to harvest
+     * @param lot   the tile to harvest a plant
      */
     public void harvestTile(FarmLot lot) {
         if(lot.getWitherStatus() == false) {
@@ -492,7 +492,7 @@ public class MyFarm {
 
     /**
      *  Displays the information of atile 
-     * @param lot   The index of the tile to get and display the information for
+     * @param lot   the tile to display information
      */
     public void displayTileInfo(FarmLot lot)  {
         System.out.println("\n[Tile Information]");
