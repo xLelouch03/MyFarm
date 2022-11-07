@@ -147,34 +147,6 @@ public class FarmLot {
     }
     
     /**
-     *  Displays the information of the tile 
-     */
-    public void displayTileInfo()  {
-        System.out.println("\n[Tile Information]");
-        System.out.print("Plow Status:");
-        if(getPlowStatus() == true) {
-            System.out.println(" Plowed");
-            if(getOccupied() == false)
-                System.out.println("No seed is planted here.");
-        
-            else {
-                System.out.println("Seed planted: " + this.seed.getName());
-                System.out.println("Water count: " + getWaterCount());
-                System.out.println("Fertilizer count: " + getFertilizerCount());
-                System.out.println("Days growed: " + this.seed.getDayGrowth());
-                System.out.print("Harvestable:" );
-                if(isHarvestable() == true)
-                    System.out.println(" Yes");
-                else 
-                    System.out.println(" No");
-            }
-        }
-        else 
-            System.out.println(" Unplowed");
-        
-    }
-
-    /**
      *  Resets the Farm Lot/Tile  
      */
     public void resetFarmLot() {
