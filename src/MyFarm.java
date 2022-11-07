@@ -281,7 +281,7 @@ public class MyFarm {
                     }
                     //if seed was planted successfully
                     if(result == true)
-                    lot.isOccupied();
+                        lot.isOccupied();
                     //if seed name does not exist in the seed arraylist
                     if(found == false)
                         System.out.println("Seed does not exist.");         

@@ -41,6 +41,9 @@ public class FarmDriver {
         tempFarm.addSeeds("Apple", "Fruit tree", 10, 7, 5, 20,5,25);
     }
     
+    /**
+     * Prepares the farm land with 50 tiles in total
+     */
     public void prepareTiles() {
         for(int i = 0; i < 50; i++)
             tempFarm.addTile();
