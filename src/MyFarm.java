@@ -44,7 +44,10 @@ public class MyFarm {
      * Adds a farmLot to the farm
      */
     public void addTile() {
-        this.farmLot.add(new FarmLot());
+        if(this.farmLot.size() <= 50)
+            this.farmLot.add(new FarmLot());
+        else 
+            System.out.println("Farm is already full.");
     }
 
     /** 
