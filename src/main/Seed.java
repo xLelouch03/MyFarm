@@ -3,7 +3,7 @@ package main;
 /**
  * This class contains the information and methods about seeds
  */
-public class Seed {
+public abstract class Seed {
     private String name;
     private String type;
     private int harvestTime;

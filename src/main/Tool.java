@@ -2,7 +2,7 @@ package main;
 /**
  * This class contains the information and methods about tools
  */
-public class Tool {
+public abstract class Tool {
     private String name;
     private int toolCost;
     private double experience;

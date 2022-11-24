@@ -1,0 +1,13 @@
+-Implement FarmerType and its benefits
+
+-GUI
+
+-Plant seed
+    -the fruit tree crop has a special planting condition. 
+    Aside from needing enough money to buy the seed and having the tile plowed, 
+    there should be no tiles next to the selected tile with any objects. 
+    This means fruit trees should be planted away at least one (1) tile away 
+    from occupied tiles – check immediate sides and diagonals. 
+
+-Implement rocks thru file input
+    -update Pickaxe method to remove rocks
