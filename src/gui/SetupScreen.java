@@ -16,8 +16,10 @@ public class SetupScreen {
     private Main player;
     private JFrame setupFrame;
 
-    public SetupScreen() {
+    public SetupScreen(Main player) {
+        this.player = player;
         initialize();
+        setupFrame.setVisible(true);
     }
 
     public void initialize() {
@@ -56,8 +58,6 @@ public class SetupScreen {
         startButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		startButton.setBounds(215, 170, 160, 45);
 		setupFrame.getContentPane().add(startButton);
-
-        setupFrame.setVisible(true);
     }
 
     public void close() {
@@ -65,6 +65,7 @@ public class SetupScreen {
     }
 
     public static void main(String[] args) {
-        SetupScreen setup = new SetupScreen();
+        Main player = new Main();
+        SetupScreen setup = new SetupScreen(player);
     }
 }
