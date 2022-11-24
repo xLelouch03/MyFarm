@@ -11,3 +11,6 @@
 
 -Implement rocks thru file input
     -update Pickaxe method to remove rocks
+
+
+Bugs:

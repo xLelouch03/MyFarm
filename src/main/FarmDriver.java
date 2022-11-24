@@ -136,38 +136,41 @@ public class FarmDriver {
                             scan.nextLine();
                             String tool = scan.nextLine();
                           
+                            System.out.println("Which tile do you want to use the tool?: ");
+                            int tileNum = scan.nextInt();
+
                             switch(tool.toLowerCase()) { 
                                 case "plow":
-                                    if(farm.getFarmLot(0).getPlowStatus() == false)
-                                        farm.usePlow(farm.getFarmLot(0), farm.getTool(tool));
+                                    if(farm.getFarmLot(tileNum).getPlowStatus() == false)
+                                        farm.usePlow(farm.getFarmLot(tileNum), farm.getTool(tool));
                                     else
                                         System.out.println("This lot is already plowed.");
                                 break;
                               
                                 case "watering can":
-                                    if( farm.getFarmLot(0).getPlowStatus() == true &&
-                                        farm.getFarmLot(0).getSeed() != null) {
-                                        farm.useWaterCan(farm.getFarmLot(0), farm.getTool(tool));
+                                    if( farm.getFarmLot(tileNum).getPlowStatus() == true &&
+                                        farm.getFarmLot(tileNum).getSeed() != null) {
+                                        farm.useWaterCan(farm.getFarmLot(tileNum), farm.getTool(tool));
                                     }
                                     else 
                                         System.out.println("This lot does not have any seed");
                                 break;
                               
                                 case "fertilizer":
-                                    if( farm.getFarmLot(0).getPlowStatus() == true &&
-                                        farm.getFarmLot(0).getSeed() != null) {
-                                        farm.useFertilizer(farm.getFarmLot(0), farm.getTool(tool));
+                                    if( farm.getFarmLot(tileNum).getPlowStatus() == true &&
+                                        farm.getFarmLot(tileNum).getSeed() != null) {
+                                        farm.useFertilizer(farm.getFarmLot(tileNum), farm.getTool(tool));
                                     }
                                     else 
                                         System.out.println("This lot does not have any seed");
                                 break; 
                               
                                 case "pickaxe":
-                                    farm.usePickaxe(farm.getFarmLot(0), farm.getTool(tool)); 
+                                    farm.usePickaxe(farm.getFarmLot(tileNum), farm.getTool(tool)); 
                                 break;
                                   
                                 case "shovel":
-                                    farm.useShovel(farm.getFarmLot(0), farm.getTool(tool));
+                                    farm.useShovel(farm.getFarmLot(tileNum), farm.getTool(tool));
                                 break;
       
                                 default:
@@ -178,15 +181,17 @@ public class FarmDriver {
                         break; 
                       
                         case 2: // 2: Plant a seed
-                            if(farm.getFarmLot(0).getOccupied() == false) {
-                                if(farm.getFarmLot(0).getPlowStatus() == true) {
+                            System.out.println("Which tile do you want to plant a seed?: ");
+                            tileNum = scan.nextInt();
+                            if(farm.getFarmLot(tileNum).getOccupied() == false) {
+                                if(farm.getFarmLot(tileNum).getPlowStatus() == true) {
                                     System.out.println("\nWhat seed would you like to plant?");
                                     for(Seed s : farm.getSeed())
                                         System.out.println(s.getName()); //displaying all available seeds
                                     
                                     System.out.print("\nSeed name: ");
                                     String seed = scan.next();
-                                    farm.plantSeed(farm.getFarmLot(0), seed); //setting a seed object to the farmlot
+                                    farm.plantSeed(farm.getFarmLot(tileNum), seed); //setting a seed object to the farmlot
                               
                                 }
                             else 
@@ -198,7 +203,9 @@ public class FarmDriver {
                         break;
                         
                         case 3: // 3: Harvest a crop
-                            farm.harvestTile(farm.getFarmLot(0));
+                            System.out.println("Which tile do you want to harvest?: ");
+                            tileNum = scan.nextInt();
+                            farm.harvestTile(farm.getFarmLot(tileNum));
                         break;
       
                         case 4: // 4: Advance to next day
@@ -211,7 +218,9 @@ public class FarmDriver {
                         break;
                         
                         case 6: // 6: Display tile information
-                            farm.displayTileInfo(farm.getFarmLot(0));
+                            System.out.println("Which tile do you want to harvest?: ");
+                            tileNum = scan.nextInt();
+                            farm.displayTileInfo(farm.getFarmLot(tileNum));
                         break;
                         
                         default:

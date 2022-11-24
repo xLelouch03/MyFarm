@@ -124,27 +124,28 @@ public class MyFarm {
 
         for(FarmLot f : this.farmLot) {
             if(f.getSeed() != null) {
-                f.getSeed().grow();
-    
-                //Checks if crop reached more than the number of days 
-                if(f.getSeed().getDayGrowth() > f.getSeed().getHarvestTime()) {
-                    System.out.println("Because you did not harvest the " + f.getSeed().getName() + ",");
-                    f.isWithered(true);
-                }
-                //checks if crop reach the harvest time and meet the minimum requirements to be harvested
-                else if(f.getSeed().getDayGrowth() == f.getSeed().getHarvestTime()) {
-                    //if crop did not meet the minimum requirements
-                    if(f.isHarvestable() == false) {
-                        System.out.println(f.getSeed().getName() + " growed but did not get taken care of properly.");
+                if(f.getWitherStatus() == false) {
+                    f.getSeed().grow();
+                    //Checks if crop reached more than the number of days 
+                    if(f.getSeed().getDayGrowth() > f.getSeed().getHarvestTime()) {
+                        System.out.println("Because you did not harvest the " + f.getSeed().getName() + ",");
                         f.isWithered(true);
                     }
-                    //crop meets the minimum requirements
-                    else 
-                        System.out.println("\n" + (f.getSeed().getName() + " is harvestable"));
+                    //checks if crop reach the harvest time and meet the minimum requirements to be harvested
+                    else if(f.getSeed().getDayGrowth() == f.getSeed().getHarvestTime()) {
+                        //if crop did not meet the minimum requirements
+                        if(f.isHarvestable() == false) {
+                            System.out.println(f.getSeed().getName() + " growed but did not get taken care of properly.");
+                            f.isWithered(true);
+                        }
+                        //crop meets the minimum requirements
+                        else 
+                            System.out.println("\n" + (f.getSeed().getName() + " is harvestable"));
+                    }
+                    //crop grows
+                    else
+                        System.out.println("\n" + f.getSeed().getName() + " growed.");
                 }
-                //crop grows
-                else
-                    System.out.println("\n" + f.getSeed().getName() + " growed.");
             }
         }
     }
@@ -154,21 +155,21 @@ public class MyFarm {
      * @return the game status
      */
     public boolean isRunning() {
-        int count1 = 0;
-        int count2 = 0;
+        int occupiedTile = 0;
+        int witherCount = 0;
 
         //checks how many tiles contain seed
         for(FarmLot f: this.farmLot)
             if(f.getSeed() != null)
-                count1++;
+                occupiedTile++;
 
         //checks how many tiles contain withered plant
         for(FarmLot f: this.farmLot)
             if(f.getWitherStatus() == true)
-                count2++;
+                witherCount++;
 
         //checks if farmer can no longer buy a seed with no active crop OR the farm tiles contain withered plant
-        if((farmer.getCoins() < 5 && count1 == 0) || count2 == 1)
+        if((farmer.getCoins() < 5 && occupiedTile == 0) || witherCount == 50)
             return false;
         
         return true;
@@ -276,7 +277,7 @@ public class MyFarm {
                             found = true;
                             //checks if farmer has enough objectcoins to buy the seed
                             if(farmer.getCoins() >= s.getCost()){
-                                lot.setSeed(s);
+                                lot.setSeed(new Seed(s));
                                 result = true;
                                 System.out.println(s.getName() + " has been planted.");
                                 System.out.println("You have used " + s.getCost() + " objectcoins.");
@@ -515,6 +516,11 @@ public class MyFarm {
                 System.out.println("Days growed: " + lot.getSeed().getDayGrowth());
                 System.out.print("Harvestable:" );
                 if(lot.isHarvestable() == true)
+                    System.out.println(" Yes");
+                else 
+                    System.out.println(" No");
+                System.out.print("Has a withered plant: ");
+                if(lot.getWitherStatus() == true)
                     System.out.println(" Yes");
                 else 
                     System.out.println(" No");

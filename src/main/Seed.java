@@ -3,7 +3,7 @@ package main;
 /**
  * This class contains the information and methods about seeds
  */
-public abstract class Seed {
+public class Seed {
     private String name;
     private String type;
     private int harvestTime;
@@ -40,6 +40,17 @@ public abstract class Seed {
         this.xp = xp;
     }
     
+    public Seed(Seed seed) {
+        name = seed.getName();
+        type = seed.getType();
+        harvestTime = seed.getHarvestTime();
+        waterNeed = seed.getWaterNeed();
+        fertilizerNeed = seed.getFertilizerNeed();
+        cost = seed.getCost();
+        basePrice = seed.getBasePrice();
+        xp = seed.getXP();
+    }
+
     /** 
      * Gets the name of the seed
      * @return the name of the seed
@@ -93,6 +104,14 @@ public abstract class Seed {
      */
     public int getFertilizerNeed() {
         return fertilizerNeed;
+    }
+
+    public int getBasePrice() {
+        return basePrice;
+    }
+
+    public double getXP() {
+        return xp;
     }
 
     /** 
