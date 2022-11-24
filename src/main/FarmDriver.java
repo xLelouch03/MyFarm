@@ -6,12 +6,6 @@
 package main;
 import java.util.Scanner;
 
-import tools.Fertilizer;
-import tools.Pickaxe;
-import tools.Plow;
-import tools.Shovel;
-import tools.WateringCan;
-
 public class FarmDriver {
     private MyFarm tempFarm; 
     
@@ -26,24 +20,11 @@ public class FarmDriver {
      * Setting up the tools by adding them to the farm
      */
     public void setupTools() {
-        Plow plow = new Plow();
-        WateringCan wateringcan = new WateringCan();
-        Fertilizer fertilizer = new Fertilizer();
-        Pickaxe pickaxe = new Pickaxe();
-        Shovel shovel = new Shovel();
-
-        tempFarm.addTools(plow);
-        tempFarm.addTools(wateringcan);
-        tempFarm.addTools(fertilizer);
-        tempFarm.addTools(pickaxe);
-        tempFarm.addTools(shovel);
-        
-
-        /*tempFarm.addTools("Plow", 0, 0.5);
+        tempFarm.addTools("Plow", 0, 0.5);
         tempFarm.addTools("Watering Can", 0, 0.5);
         tempFarm.addTools("Fertilizer", 10, 4);
         tempFarm.addTools("Pickaxe", 50, 15);
-        tempFarm.addTools("Shovel", 7, 2);*/
+        tempFarm.addTools("Shovel", 7, 2);
     }
 
     /**  
