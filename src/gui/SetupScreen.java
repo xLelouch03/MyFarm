@@ -54,7 +54,7 @@ public class SetupScreen {
 		startButton.setBounds(215, 125, 160, 45);
 		setupFrame.getContentPane().add(startButton);
 
-        JLabel 
+        JLabel authorLabel = new JLabel();
         setupFrame.setVisible(true);
     }
 
