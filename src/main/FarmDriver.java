@@ -6,6 +6,20 @@
 package main;
 import java.util.Scanner;
 
+import seeds.Apple;
+import seeds.Carrot;
+import seeds.Mango;
+import seeds.Potato;
+import seeds.Rose;
+import seeds.Sunflower;
+import seeds.Tulips;
+import seeds.Turnip;
+import tools.Fertilizer;
+import tools.Pickaxe;
+import tools.Plow;
+import tools.Shovel;
+import tools.WateringCan;
+
 public class FarmDriver {
     private MyFarm tempFarm; 
     
@@ -20,25 +34,25 @@ public class FarmDriver {
      * Setting up the tools by adding them to the farm
      */
     public void setupTools() {
-        tempFarm.addTools("Plow", 0, 0.5);
-        tempFarm.addTools("Watering Can", 0, 0.5);
-        tempFarm.addTools("Fertilizer", 10, 4);
-        tempFarm.addTools("Pickaxe", 50, 15);
-        tempFarm.addTools("Shovel", 7, 2);
+        tempFarm.addTools(new Plow());
+        tempFarm.addTools(new WateringCan());
+        tempFarm.addTools(new Fertilizer());
+        tempFarm.addTools(new Pickaxe());
+        tempFarm.addTools(new Shovel());
     }
 
     /**  
      * Adds and defines the seeds in the seed array list
      */
     public void setupSeeds() {
-        tempFarm.addSeeds("Turnip", "Root crop", 2, 2, 1, 5,6,5);
-        tempFarm.addSeeds("Carrot", "Root crop", 3, 2, 1, 10,9,7.5);
-        tempFarm.addSeeds("Potato", "Root crop", 5, 4, 2, 20,3,12.5);
-        tempFarm.addSeeds("Rose", "Flower", 1, 2, 1, 5,5,2.5);
-        tempFarm.addSeeds("Tulips", "Flower", 2, 3, 1, 10,9,5);
-        tempFarm.addSeeds("Sunflower", "Flower", 3, 3, 2, 20,19,7.5);
-        tempFarm.addSeeds("Mango", "Fruit tree", 10, 7, 4, 10,8,25);
-        tempFarm.addSeeds("Apple", "Fruit tree", 10, 7, 5, 20,5,25);
+        tempFarm.addSeeds(new Turnip());
+        tempFarm.addSeeds(new Carrot());
+        tempFarm.addSeeds(new Potato());
+        tempFarm.addSeeds(new Rose());
+        tempFarm.addSeeds(new Tulips());
+        tempFarm.addSeeds(new Sunflower());
+        tempFarm.addSeeds(new Mango());
+        tempFarm.addSeeds(new Apple());
     }
     
     /**

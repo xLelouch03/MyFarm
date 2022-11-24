@@ -186,12 +186,14 @@ public class MyFarm {
      * @param basePrice   base price for selling harvested crop
      * @param xp   experience yielded after harvesting
      */
-    public void addSeeds(String name, String type, int harvestTime, 
-                         int waterNeed, int fertilizerNeed, int cost,
-                         int basePrice, double xp) {
-        this.seed.add(new Seed(name, type, harvestTime, waterNeed, fertilizerNeed, cost, basePrice, xp));
+    //public void addSeeds(String name, String type, int harvestTime, 
+                         //int waterNeed, int fertilizerNeed, int cost,
+                        // int basePrice, double xp) {
+        //this.seed.add(new Seed(name, type, harvestTime, waterNeed, fertilizerNeed, cost, basePrice, xp));
+   // }
+    public void addSeeds(Seed seed) {
+        this.seed.add(seed);
     }
-
     
     /** 
      * Defines and adds a tool to the tool array list
@@ -200,13 +202,13 @@ public class MyFarm {
      * @param cost   Cost of the tool
      * @param xp     Experience yielded for each use of the tool
      */
-    public void addTools(String name, int cost, double xp) {
-        this.tool.add(new Tool(name, cost, xp));
-    }
-
-    //public void addTools(Tool tool) {
-        //this.tool.add(tool);
+    //public void addTools(String name, int cost, double xp) {
+    //    this.tool.add(new Tool(name, cost, xp));
     //}
+
+    public void addTools(Tool tool) {
+        this.tool.add(tool);
+    }
     /** 
      * To plow the tile
      * @param lot   the tile to plow
