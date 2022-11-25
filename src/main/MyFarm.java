@@ -59,6 +59,10 @@ public class MyFarm {
     public FarmLot getFarmLot(int index){
         return this.farmLot.get(index);
     }
+
+    public ArrayList<FarmLot> getAllFarmLot() {
+        return this.farmLot;
+    }
     
     /** 
      * Gets the whole seed arraylist

@@ -1,21 +1,28 @@
 package gui;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 
+import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import main.Main;
+import main.MyFarm;
 
 public class MainScreen {
     private JFrame mainFrame;
-    private Main player;
-
-    public MainScreen(Main player) {
-        this.player = player;
+    private MyFarm farm;
+	private JButton[] tileButtons;
+    public MainScreen(MyFarm farm) {
+        this.farm = farm;
 		initialize();
 		mainFrame.setVisible(true);
     }
@@ -26,7 +33,13 @@ public class MainScreen {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 
-        JPanel topPanel = new JPanel();
+		initTopPanel();
+		initLeftPanel();
+		initRightPanel();
+    }
+
+	public void initTopPanel() {
+		JPanel topPanel = new JPanel();
         topPanel.setBounds(10,11,1500,80);
         topPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		mainFrame.getContentPane().add(topPanel);
@@ -38,12 +51,12 @@ public class MainScreen {
 		titleLabel.setBounds(10, 11, 185, 24);
 		topPanel.add(titleLabel);
 
-        JLabel levelLabel = new JLabel("Farmer Level: "); //insert farmer.getLevel();
+        JLabel levelLabel = new JLabel("Farmer Level: ");//+ farm.getFarmer().getLevel()); //insert farmer.getLevel();
 		levelLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		levelLabel.setBounds(380, 11, 347, 24);
 		topPanel.add(levelLabel);
 
-        JLabel expLabel = new JLabel("Farmer XP: "); //insert farmer.getType();
+        JLabel expLabel = new JLabel("Farmer XP: "); //+ farm.getFarmer().getXP()); //insert farmer.getType();
 		expLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		expLabel.setBounds(750, 11, 347, 24);
 		topPanel.add(expLabel);
@@ -58,31 +71,104 @@ public class MainScreen {
 		availableSpaceLabel.setBounds(10, 43, 237, 24);
 		topPanel.add(availableSpaceLabel);
 
-        JLabel farmerNameLabel = new JLabel("Farmer Name: " ); //insert farmer.getName();
+        JLabel farmerNameLabel = new JLabel("Farmer Name: " ); //+ farm.getFarmer().getName()); //insert farmer.getName();
 		farmerNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		farmerNameLabel.setBounds(380, 43, 347, 24);
 		topPanel.add(farmerNameLabel);
         
-        JLabel objectCoinLabel = new JLabel("Objectcoins: " ); //insert farmer.getCoins();
+        JLabel objectCoinLabel = new JLabel("Objectcoins: "); // + farm.getFarmer().getCoins()); //insert farmer.getCoins();
 		objectCoinLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		objectCoinLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		objectCoinLabel.setBounds(630, 43, 347, 24);
 		topPanel.add(objectCoinLabel);
 
-        JLabel dayLabel = new JLabel("Day: "); //insert farm.getDay();
+        JLabel dayLabel = new JLabel("Day: " + farm.getDay()); //insert farm.getDay();
 		dayLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		dayLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dayLabel.setBounds(1080, 43, 185, 24);
 		topPanel.add(dayLabel);
-    }
+	}
 
+	public void initLeftPanel() {
+		JPanel leftPanel = new JPanel();
+        leftPanel.setBounds(10,100,350,670);
+        leftPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		mainFrame.getContentPane().add(leftPanel);
+		leftPanel.setLayout(null);
+
+		JButton nextDayButton = new JButton("Advance to Next Day");
+		nextDayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                farm.advanceNextDay();
+            }
+        });
+
+		nextDayButton.setBounds(35, 11, 268, 50);
+		leftPanel.add(nextDayButton);
+		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
+		JButton plantButton = new JButton("Plant a Seed");
+		plantButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //farm.plantSeed(null, null);;
+            }
+        });
+		plantButton.setBounds(35, 90, 268, 50);
+		leftPanel.add(plantButton);
+		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
+		JButton toolButton = new JButton("Use a Tool");
+		toolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //farm.plantSeed(null, null);;
+            }
+        });
+		toolButton.setBounds(35, 175, 268, 50);
+		leftPanel.add(toolButton);
+		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
+		JButton harvestButton = new JButton("Harvest a crop");
+		harvestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //farm.plantSeed(null, null);;
+            }
+        });
+		harvestButton.setBounds(35, 255, 268, 50);
+		leftPanel.add(harvestButton);
+		harvestButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
+	}
+
+	public void initRightPanel() {
+		JPanel rightPanel = new JPanel();
+        rightPanel.setBounds(375,100,1135,670);
+        rightPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		mainFrame.getContentPane().add(rightPanel);
+		rightPanel.setLayout(null);
+
+		//rightPanel.setLayout(new GridLayout(10,5));
+		
+		tileButtons = new JButton[farm.getAllFarmLot().size()];
+
+		for(int i = 0; i < tileButtons.length; i++) {
+			tileButtons[i] = new JButton((Icon) farm.getFarmLot(i));
+			tileButtons[i].setBounds(i+100, i+200, 300, 100);
+			rightPanel.add(tileButtons[i]);
+		}
+
+
+	}
     public void closeFrame() {
         mainFrame.dispose();
     }
 
 
     public static void main(String[] args) {
-        Main player = new Main();
-        MainScreen main = new MainScreen(player);
+        MyFarm farm = new MyFarm();
+        MainScreen main = new MainScreen(farm);
     }
 }
