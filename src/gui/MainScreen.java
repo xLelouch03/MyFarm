@@ -3,8 +3,10 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-
+import java.awt.Image;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,17 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 import main.Main;
-import main.MyFarm;
 
 public class MainScreen {
     private JFrame mainFrame;
-    private MyFarm farm;
-	private JButton[] tileButtons;
-    public MainScreen(MyFarm farm) {
-        this.farm = farm;
+    private Main player;
+	private JButton[][] tileButtons;
+
+    public MainScreen(Main player) {
+        this.player = player;
 		initialize();
 		mainFrame.setVisible(true);
     }
@@ -51,12 +54,12 @@ public class MainScreen {
 		titleLabel.setBounds(10, 11, 185, 24);
 		topPanel.add(titleLabel);
 
-        JLabel levelLabel = new JLabel("Farmer Level: ");//+ farm.getFarmer().getLevel()); //insert farmer.getLevel();
+        JLabel levelLabel = new JLabel("Farmer Name: "+ player.getFarmerName()); //insert farmer.getLevel();
 		levelLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		levelLabel.setBounds(380, 11, 347, 24);
 		topPanel.add(levelLabel);
 
-        JLabel expLabel = new JLabel("Farmer XP: "); //+ farm.getFarmer().getXP()); //insert farmer.getType();
+        JLabel expLabel = new JLabel("Farmer XP: " + player.getFarmerXP()); //insert farmer.getType();
 		expLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		expLabel.setBounds(750, 11, 347, 24);
 		topPanel.add(expLabel);
@@ -66,23 +69,23 @@ public class MainScreen {
 		typeLabel.setBounds(1150, 11, 347, 24);
 		topPanel.add(typeLabel);
 
-        JLabel availableSpaceLabel = new JLabel("Number of available tiles: " );//insert farm.getSpace() *to be implemented pa
+        JLabel availableSpaceLabel = new JLabel("Number of available tiles: " + player.getFarmSpace());//insert farm.getSpace() *to be implemented pa
 		availableSpaceLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		availableSpaceLabel.setBounds(10, 43, 237, 24);
 		topPanel.add(availableSpaceLabel);
 
-        JLabel farmerNameLabel = new JLabel("Farmer Name: " ); //+ farm.getFarmer().getName()); //insert farmer.getName();
+        JLabel farmerNameLabel = new JLabel("Farmer Level: " + player.getFarmerLevel()); //insert farmer.getName();
 		farmerNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		farmerNameLabel.setBounds(380, 43, 347, 24);
 		topPanel.add(farmerNameLabel);
         
-        JLabel objectCoinLabel = new JLabel("Objectcoins: "); // + farm.getFarmer().getCoins()); //insert farmer.getCoins();
+        JLabel objectCoinLabel = new JLabel("Objectcoins: "+ player.getFarmerCoins());
 		objectCoinLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		objectCoinLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		objectCoinLabel.setBounds(630, 43, 347, 24);
 		topPanel.add(objectCoinLabel);
 
-        JLabel dayLabel = new JLabel("Day: " + farm.getDay()); //insert farm.getDay();
+        JLabel dayLabel = new JLabel("Day: " + player.getDayCount()); 
 		dayLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		dayLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dayLabel.setBounds(1080, 43, 185, 24);
@@ -100,7 +103,7 @@ public class MainScreen {
 		nextDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                farm.advanceNextDay();
+                //farm.advanceNextDay();
             }
         });
 
@@ -147,28 +150,26 @@ public class MainScreen {
 		JPanel rightPanel = new JPanel();
         rightPanel.setBounds(375,100,1135,670);
         rightPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+
+		rightPanel.setLayout(new GridLayout(10,5));
 		mainFrame.getContentPane().add(rightPanel);
-		rightPanel.setLayout(null);
 
-		//rightPanel.setLayout(new GridLayout(10,5));
-		
-		tileButtons = new JButton[farm.getAllFarmLot().size()];
+		tileButtons = new JButton[10][5];
+		Icon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\farmlot.jpeg");
 
-		for(int i = 0; i < tileButtons.length; i++) {
-			tileButtons[i] = new JButton((Icon) farm.getFarmLot(i));
-			tileButtons[i].setBounds(i+100, i+200, 300, 100);
-			rightPanel.add(tileButtons[i]);
+		int count = 1;
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 5; j++) {
+				tileButtons[i][j] = new JButton("FarmLot #" + count);
+				tileButtons[i][j].setBounds(i+100, i+200, 250, 100);
+				tileButtons[i][j].setIcon(icon);
+				rightPanel.add(tileButtons[i][j]);
+				count++;
+			}
 		}
-
-
 	}
+	
     public void closeFrame() {
         mainFrame.dispose();
-    }
-
-
-    public static void main(String[] args) {
-        MyFarm farm = new MyFarm();
-        MainScreen main = new MainScreen(farm);
     }
 }

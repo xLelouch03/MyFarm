@@ -12,5 +12,10 @@
 -Implement rocks thru file input
     -update Pickaxe method to remove rocks
 
+Main.java
+-add advanceNextDay method
+-add plantSeed, usePlow, useShovel, usePickaxe, useFertilizer, useWateringCan methods
+-add harvestTile method
+
 
 Bugs:

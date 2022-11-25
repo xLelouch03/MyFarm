@@ -6,3 +6,7 @@ otherwise plagiarized the work of other students and/or persons.
  Bianca Mari Cuales, DLSU ID# 12189219
  Hans Martin Rejano, DLSU ID# 12107884
 *********************************************************************************************************/
+
+References:
+https://js13kgames.com/entries/dewdrop-farm for farmlot.jpg 
+https://www.istockphoto.com/vector/vector-illustration-of-beautiful-summer-fields-landscape-with-a-dawn-green-hills-gm1030314978-276048994 for farm.jpg

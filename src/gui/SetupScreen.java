@@ -51,7 +51,7 @@ public class SetupScreen {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-                //player.setupGame(farmerNameTextField.getText());
+                player.setupGame(farmerNameTextField.getText());
 			}
 		});
 
@@ -64,8 +64,8 @@ public class SetupScreen {
         setupFrame.dispose();
     }
 
-    public static void main(String[] args) {
+/*public static void main(String[] args) {
         Main player = new Main();
         SetupScreen setup = new SetupScreen(player);
-    }
+    }*/
 }
