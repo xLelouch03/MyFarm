@@ -41,6 +41,12 @@ public class SetupScreen {
 		farmerNameLabel.setBounds(35, 90, 575, 44);
 		setupFrame.getContentPane().add(farmerNameLabel);
 
+        JLabel warningLabel = new JLabel("hello");
+        warningLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        warningLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        warningLabel.setBounds(40, 135, 500, 27);
+		setupFrame.getContentPane().add(warningLabel);
+
         JTextField farmerNameTextField = new JTextField();
 		farmerNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		farmerNameTextField.setBounds(235, 95, 300, 39);

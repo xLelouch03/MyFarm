@@ -3,9 +3,6 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 import main.Main;
@@ -155,16 +151,11 @@ public class MainScreen {
 		mainFrame.getContentPane().add(rightPanel);
 
 		tileButtons = new JButton[10][5];
-		Icon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\farmlot.jpeg");
 
-		int count = 1;
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 5; j++) {
-				tileButtons[i][j] = new JButton("FarmLot #" + count);
-				tileButtons[i][j].setBounds(i+100, i+200, 250, 100);
-				tileButtons[i][j].setIcon(icon);
+				tileButtons[i][j] = new JButton(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farmlot.jpg"));
 				rightPanel.add(tileButtons[i][j]);
-				count++;
 			}
 		}
 	}
