@@ -116,15 +116,19 @@ public class MyFarm {
      * @return the day count of the game
      */
     public int getDay() {
-        return day;
+        return this.day;
+    }
+
+    public void advanceDay() {
+        this.day++;
     }
 
     /**
      * Directs the game to the next day, checks if the crop has grown, is harvestable, or is withered 
      */
     public void advanceNextDay(){
-        this.day++;
-        System.out.println("\nDay " + this.day + " of the game.");
+        advanceDay();
+        //System.out.println("\nDay " + this.day + " of the game.");
 
         for(FarmLot f : this.farmLot) {
             if(f.getSeed() != null) {

@@ -19,6 +19,7 @@ public class MainScreen {
     private JFrame mainFrame;
     private Main player;
 	private JButton[][] tileButtons;
+	private JLabel dayLabel;
 
     public MainScreen(Main player) {
         this.player = player;
@@ -81,7 +82,7 @@ public class MainScreen {
 		objectCoinLabel.setBounds(630, 43, 347, 24);
 		topPanel.add(objectCoinLabel);
 
-        JLabel dayLabel = new JLabel("Day: " + player.getDayCount()); 
+        dayLabel = new JLabel("Day: " + player.getDayCount()); 
 		dayLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		dayLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dayLabel.setBounds(1080, 43, 185, 24);
@@ -99,10 +100,10 @@ public class MainScreen {
 		nextDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //farm.advanceNextDay();
+                player.nextDay();
+				dayLabel.setText("Day: " + player.getDayCount());
             }
         });
-
 		nextDayButton.setBounds(35, 11, 268, 50);
 		leftPanel.add(nextDayButton);
 		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -122,7 +123,7 @@ public class MainScreen {
 		toolButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //farm.plantSeed(null, null);;
+                
             }
         });
 		toolButton.setBounds(35, 175, 268, 50);
@@ -133,7 +134,7 @@ public class MainScreen {
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //farm.plantSeed(null, null);;
+                
             }
         });
 		harvestButton.setBounds(35, 255, 268, 50);

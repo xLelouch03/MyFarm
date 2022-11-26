@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 public class SetupScreen {
     private Main player;
     private JFrame setupFrame;
+    private JLabel warningLabel;
 
     public SetupScreen(Main player) {
         this.player = player;
@@ -41,10 +42,11 @@ public class SetupScreen {
 		farmerNameLabel.setBounds(35, 90, 575, 44);
 		setupFrame.getContentPane().add(farmerNameLabel);
 
-        JLabel warningLabel = new JLabel("hello");
-        warningLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        warningLabel = new JLabel();
+        warningLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        warningLabel.setForeground(Color.RED);
         warningLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        warningLabel.setBounds(40, 135, 500, 27);
+        warningLabel.setBounds(35, 135, 500, 27);
 		setupFrame.getContentPane().add(warningLabel);
 
         JTextField farmerNameTextField = new JTextField();
@@ -68,6 +70,13 @@ public class SetupScreen {
 
     public void close() {
         setupFrame.dispose();
+    }
+
+    public void warningText(String warningMessage) {
+        if(warningMessage == "")
+            warningLabel.setText("");
+        else
+            warningLabel.setText(warningMessage + " Please enter a name to proceed.");
     }
 
 /*public static void main(String[] args) {

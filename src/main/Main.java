@@ -23,10 +23,14 @@ public class Main {
     private SetupScreen setup;
 
     public void setupGame(String farmerName) {
-        farm = new MyFarm();
-        farm.addFarmer(farmerName);
+        if(farmerName.length() == 0) 
+            setup.warningText("You have not entered a name.");
+        else {
+            farm = new MyFarm();
+            farm.addFarmer(farmerName);
 
-        closeSetupScreen(setup);
+            closeSetupScreen(setup);
+        }
     }
 
     public void openSetupScreen() {
@@ -107,6 +111,11 @@ public class Main {
     public int getFarmerLevel() {
         return farm.getFarmer().getLevel();
     }
+
+    public void nextDay() {
+        farm.advanceDay();
+    }
+
     public static void main(String[] args) {
         Main game = new Main();
         game.openSetupScreen();
