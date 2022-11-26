@@ -1,7 +1,5 @@
 -Implement FarmerType and its benefits
 
--GUI
-
 -Plant seed
     -the fruit tree crop has a special planting condition. 
     Aside from needing enough money to buy the seed and having the tile plowed, 
@@ -13,9 +11,14 @@
     -update Pickaxe method to remove rocks
 
 Main.java
--add advanceNextDay method
+-add advanceNextDay method (needs updates nagawa ko palang mag increase ng day count)
 -add plantSeed, usePlow, useShovel, usePickaxe, useFertilizer, useWateringCan methods
 -add harvestTile method
 
+GUI
+-Codes for actionlisteners of buttons for methods above^^
+-Seeds
+-Tools
+-Rocks 
 
 Bugs:
