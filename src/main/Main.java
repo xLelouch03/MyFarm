@@ -120,7 +120,7 @@ public class Main {
     }
 
     public void nextDay() {
-        farm.advanceDay();
+        farm.advanceNextDay();
     }
 
     public static void main(String[] args) {
