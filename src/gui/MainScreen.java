@@ -16,9 +16,13 @@ import java.awt.event.ActionEvent;
 
 import main.Main;
 
-public class MainScreen {
+public class MainScreen{
     private JFrame mainFrame;
     private Main player;
+	private JButton nextDayButton;
+	private JButton harvesButton;
+	private JButton plantButton;
+	private JButton toolButton;
 	private JButton[] tileButtons;
 	private JLabel dayLabel;
 	private int tileNum = 0;
@@ -99,6 +103,7 @@ public class MainScreen {
 		leftPanel.setLayout(null);
 
 		JButton nextDayButton = new JButton("Advance to Next Day");
+		//nextDayButton.addActionListener(this);
 		nextDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,10 +116,11 @@ public class MainScreen {
 		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		JButton plantButton = new JButton("Plant a Seed");
+		//plantButton.addActionListener(this);
 		plantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //farm.plantSeed(null, null);;
+                JOptionPane.showInputDialog("Enter a seed: ");
             }
         });
 		plantButton.setBounds(35, 90, 268, 50);
@@ -122,17 +128,19 @@ public class MainScreen {
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		JButton toolButton = new JButton("Use a Tool");
-		toolButton.addActionListener(new ActionListener() {
+		//toolButton.addActionListener(this);
+		/*toolButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
             }
-        });
+        });*/
 		toolButton.setBounds(35, 175, 268, 50);
 		leftPanel.add(toolButton);
 		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		JButton harvestButton = new JButton("Harvest a crop");
+		//harvestButton.addActionListener(this);
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -160,6 +168,7 @@ public class MainScreen {
 		for(i = 0; i < 50; i++) {
 			int num = i;
 			tileButtons[i] = new JButton(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farmlot.jpg"));
+			//tileButtons[i].addActionListener(this);
 			tileButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
