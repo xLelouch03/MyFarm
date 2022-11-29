@@ -12,6 +12,7 @@ public class MyFarm {
     private ArrayList<Seed> seed;
     private ArrayList<Tool> tool;
     private int day;
+    protected FarmLot tileButtons;
 
     /**
      * Constructs a farm by creating a farmlot, arraylist of seeds and tools,

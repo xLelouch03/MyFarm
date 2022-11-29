@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -18,8 +19,9 @@ import main.Main;
 public class MainScreen {
     private JFrame mainFrame;
     private Main player;
-	private JButton[][] tileButtons;
+	private JButton[] tileButtons;
 	private JLabel dayLabel;
+	private int tileNum = 0;
 
     public MainScreen(Main player) {
         this.player = player;
@@ -134,7 +136,8 @@ public class MainScreen {
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+				JOptionPane.showMessageDialog(leftPanel, tileNum);
+                player.getFarm().harvestTile(player.getFarm().getFarmLot(tileNum));
             }
         });
 		harvestButton.setBounds(35, 255, 268, 50);
@@ -144,6 +147,7 @@ public class MainScreen {
 	}
 
 	public void initRightPanel() {
+		int i;
 		JPanel rightPanel = new JPanel();
         rightPanel.setBounds(375,100,1135,670);
         rightPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -151,14 +155,32 @@ public class MainScreen {
 		rightPanel.setLayout(new GridLayout(10,5));
 		mainFrame.getContentPane().add(rightPanel);
 
-		tileButtons = new JButton[10][5];
+		tileButtons = new JButton[50];
 
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 5; j++) {
-				tileButtons[i][j] = new JButton(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farmlot.jpg"));
-				rightPanel.add(tileButtons[i][j]);
-			}
+		for(i = 0; i < 50; i++) {
+			int num = i;
+			tileButtons[i] = new JButton(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farmlot.jpg"));
+			tileButtons[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					player.getTile(num);
+					tileNum = num;
+					if(player.getTile(num).getSeed() != null) {
+						JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + "Information" + "/n" +
+					"Plow Status: " + player.getTile(num).getPlowStatus() + "\nSeed Planted: " + player.getTile(num).getSeed().getName() +
+					"\nWater Count: " + player.getTile(num).getWaterCount() + "\nFertilizer Count: " + player.getTile(num).getFertilizerCount() +
+					"\nDays Growed: " + player.getTile(num).getSeed().getDayGrowth() + "\nHarvestable: " + player.getTile(num).isHarvestable() +
+					"\nHas a withered plant: " + player.getTile(num).getWitherStatus());
+					}
+					else {
+						JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + " Information" + "\nPlow Status: " + player.getTile(num).getPlowStatus());
+					}
+				}
+			});
+			rightPanel.add(tileButtons[i]);
+			
 		}
+
 	}
 	
     public void closeFrame() {

@@ -28,6 +28,9 @@ public class Main {
         else {
             farm = new MyFarm();
             farm.addFarmer(farmerName);
+            setupSeeds();
+            setupTools();
+            prepareTiles();
 
             closeSetupScreen(setup);
         }
@@ -78,6 +81,10 @@ public class Main {
     public void prepareTiles() {
         for(int i = 0; i < 50; i++)
             farm.addTile();
+    }
+
+    public MyFarm getFarm() {
+        return this.farm;
     }
 
     public ArrayList<FarmLot> getFarmLots() {
