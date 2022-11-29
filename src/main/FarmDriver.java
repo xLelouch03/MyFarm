@@ -191,7 +191,7 @@ public class FarmDriver {
                                     
                                     System.out.print("\nSeed name: ");
                                     String seed = scan.next();
-                                    farm.plantSeed(farm.getFarmLot(tileNum), seed); //setting a seed object to the farmlot
+                                    //farm.plantSeed(farm.getFarmLot(tileNum), seed); //setting a seed object to the farmlot
                               
                                 }
                             else 

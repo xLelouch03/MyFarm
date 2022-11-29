@@ -123,6 +123,31 @@ public class Main {
         farm.advanceNextDay();
     }
 
+    public String[] getSeedNames() {
+        String[] seedName = new String[farm.getSeed().size()];
+        seedName[0] = "Turnip";
+        seedName[1] = "Carrot";
+        seedName[2] = "Potato";
+        seedName[3] = "Rose";
+        seedName[4] = "Tulips";
+        seedName[5] = "Sunflower";
+        seedName[6] = "Mango";
+        seedName[7] = "Apple";
+
+        return seedName;
+    }
+
+    public String[] getToolNames() {
+        String[] toolName = new String[farm.getAllTool().size()];
+        toolName[0] = "Plow";
+        toolName[1] = "Watering can";
+        toolName[2] = "Fertilizer";
+        toolName[3] = "Pickaxe";
+        toolName[4] = "Shovel";
+
+        return toolName;
+    }
+
     public static void main(String[] args) {
         Main game = new Main();
         game.openSetupScreen();

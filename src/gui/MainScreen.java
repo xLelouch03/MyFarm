@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import main.Main;
+import main.Seed;
 
 public class MainScreen{
     private JFrame mainFrame;
@@ -126,9 +127,10 @@ public class MainScreen{
 		plantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String plantName;
-				plantName = JOptionPane.showInputDialog("Enter a seed: ");
-				player.getFarm().plantSeed(player.getTile(tileNum), plantName);
+				Object plant = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
+				String plantName = (String) plant;
+				player.getFarm().plantSeed(player.getTile(tileNum),plantName);
+				objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
             }
         });
 		plantButton.setBounds(35, 90, 268, 50);
@@ -140,8 +142,9 @@ public class MainScreen{
 		toolButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String toolName;
-				toolName = JOptionPane.showInputDialog("What tool do you want to use?");
+				Object tool = JOptionPane.showInputDialog(null, "Choose a tool", "Tool Selection", JOptionPane.QUESTION_MESSAGE,null, player.getToolNames(), "Plow");
+                String toolName = (String) tool;
+				//toolName = JOptionPane.showInputDialog("What tool do you want to use?");
 				if(toolName.equalsIgnoreCase("plow")) {
 					player.getFarm().usePlow(player.getTile(tileNum), player.getFarm().getTool(toolName));
 				}
@@ -198,8 +201,7 @@ public class MainScreen{
 						player.getTile(num);
 						tileNum = num;
 						if(player.getTile(num).getSeed() != null) {
-							JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + "Information" + "/n" +
-						"Plow Status: " + player.getTile(num).getPlowStatus() + "\nSeed Planted: " + player.getTile(num).getSeed().getName() +
+							JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + " Information" + "\nPlow Status: " + player.getTile(num).getPlowStatus() + "\nSeed Planted: " + player.getTile(num).getSeed().getName() +
 						"\nWater Count: " + player.getTile(num).getWaterCount() + "\nFertilizer Count: " + player.getTile(num).getFertilizerCount() +
 						"\nDays Growed: " + player.getTile(num).getSeed().getDayGrowth() + "\nHarvestable: " + player.getTile(num).isHarvestable() +
 						"\nHas a withered plant: " + player.getTile(num).getWitherStatus());
