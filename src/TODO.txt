@@ -3,6 +3,8 @@
     -include its benefits
 -Implement availableSpace in MyFarm like (include totalSpace as initial number of availableSpace tapos mag ssubtract lang kada magtatanim)
 
+// Q: Can he skip farmer types (ex: distinguished farmer without being a registered farmer)
+
 -Plant seed
     -the fruit tree crop has a special planting condition. 
     Aside from needing enough money to buy the seed and having the tile plowed, 

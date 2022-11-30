@@ -85,7 +85,7 @@ public class Farmer {
 
     public void registerFarmerType(String farmerType){
 
-        switch(farmerType){
+        switch(farmerType){ 
 
             case "Registered Farmer":
                 if (this.getLevel() <= 5 && this.getCoins() <= 200){
