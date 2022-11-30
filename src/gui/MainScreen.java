@@ -122,6 +122,31 @@ public class MainScreen{
             @Override
             public void actionPerformed(ActionEvent e) {
 				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
+				
+				/*
+				// switch statemnt
+				switch(crop){ //
+					case "Turnip":
+
+					// display info
+
+					String cropName = (String) crop;
+					player.selectSeed(cropName, tileNum);
+					setFarmStatus();
+
+					break;
+
+					case "Name":
+
+					//
+
+					break;
+
+				}
+				
+				*/
+
+
 				String cropName = (String) crop;
 				player.selectSeed(cropName, tileNum);
 				setFarmStatus();
@@ -130,6 +155,12 @@ public class MainScreen{
 		plantButton.setBounds(35, 90, 268, 50);
 		leftPanel.add(plantButton);
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
+		// TODO: "View All Seeds"
+			// Plant name lists (dropdown) [/]
+				// Whichever is chosen (^), show seed info (growth reqs, etc.)
+				// switch statement --> print info based on cropName
+					// Whichever is chosen (^), show "plant" option below seed info
 
 		//replace with View All Tools
 		JButton toolButton = new JButton("Use a Tool");
@@ -157,6 +188,7 @@ public class MainScreen{
 		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		//remove
+		/*
 		JButton harvestButton = new JButton("Harvest a crop");
 		harvestButton.addActionListener(new ActionListener() {
             @Override
@@ -168,6 +200,7 @@ public class MainScreen{
 		harvestButton.setBounds(35, 255, 268, 50);
 		leftPanel.add(harvestButton);
 		harvestButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		*/
 
 	}
 

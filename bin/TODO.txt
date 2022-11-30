@@ -24,7 +24,7 @@ GUI
 MainScreen.java
 -replace Plant a Seed -> View All Seeds (Kumbaga ididisplay mga information per seed)
 -replace Use a Tool -> View ALl Tools (same as above)
--remove harvest a crop button
+[/] -remove harvest a crop button
 
 View All Seeds button
     -popup a new frame tapos nakalagay don mga image and seedname tapos kapag clinick ung seed, mag appear ung information

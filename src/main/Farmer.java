@@ -8,6 +8,7 @@ public class Farmer {
     private int level;
     private double experience;
     private String name;
+    private String type;
 
     /**
      * The Farmer object where the player statistics such as name, 
@@ -19,6 +20,7 @@ public class Farmer {
         this.objectCoins = 100;
         this.level = 0;
         this.experience = 0;
+        this.type = "Farmer";
     }
 
     /**
@@ -35,6 +37,10 @@ public class Farmer {
      */
     public double getCoins() {
         return objectCoins;
+    }
+
+    public String getType() {
+        return type;
     }
 
     /** Update the number of objectCoins */
@@ -73,10 +79,47 @@ public class Farmer {
         this.experience = xp;
     } 
 
+    /**
+     * Allow farmer to register to higher farmerTypes 
+     */
+
+    public void registerFarmerType(String farmerType){
+
+        switch(farmerType){
+
+            case "Registered Farmer":
+                if (this.getLevel() <= 5 && this.getCoins() <= 200){
+                    this.type = "Registered Farmer";
+                    this.objectCoins = this.getCoins() - 200;
+                } 
+                break;
+            
+            case "Distinguished Farmer":
+                if (this.getLevel() <= 10 && this.getCoins() <= 300){
+                    this.type = "Registered Farmer";
+                    this.objectCoins = this.getCoins() - 300;
+                } 
+                break;
+
+            case "Legendary Farmer":
+                if (this.getLevel() <= 15 && this.getCoins() <= 400){
+                    this.type = "Registered Farmer";
+                    this.objectCoins = this.getCoins() - 400;
+                } 
+                break;
+
+            default:
+                this.type = this.getType();
+
+        }
+
+    }
+
     /* Display the game statistics/summary */
     public void displayStats() {
         System.out.println("\n[DISPLAYING FARMER INFORMATION]");
         System.out.println("Farmer Name: " + getName());
+        System.out.println("Farmer Type: " + getType());
         System.out.println("You are level: " + getLevel());
         System.out.println("You have " + (float) getCoins() + " objectcoins");
         System.out.println("You have " + getXP() + " experience.");
