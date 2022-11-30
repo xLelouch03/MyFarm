@@ -19,10 +19,6 @@ import main.Main;
 public class MainScreen{
     private JFrame mainFrame;
     private Main player;
-	private JButton nextDayButton;
-	private JButton harvesButton;
-	private JButton plantButton;
-	private JButton toolButton;
 	private JButton[][] tileButtons;
 	private JLabel expLabel;
 	private JLabel dayLabel;
@@ -40,9 +36,9 @@ public class MainScreen{
     }
 
     public void initialize() {
-        mainFrame = new JFrame("My Farm - Main Screen");
-        mainFrame.setBounds(0, 0, 1540, 823);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame = new JFrame("My Farm - Main Screen"); //instantiates a frame
+        mainFrame.setBounds(0, 0, 1540, 823); 
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		mainFrame.getContentPane().setLayout(null);
 
 		initTopPanel();
@@ -109,20 +105,19 @@ public class MainScreen{
 		leftPanel.setLayout(null);
 
 		JButton nextDayButton = new JButton("Advance to Next Day");
-		//nextDayButton.addActionListener(this);
 		nextDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.nextDay();
-				dayLabel.setText("Day: " + player.getDayCount());
+				dayLabel.setText("Day: " + player.getDayCount()); //changes what is displayed on the mainFrame
             }
         });
 		nextDayButton.setBounds(35, 11, 268, 50);
 		leftPanel.add(nextDayButton);
 		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
+		//replace with View All Seeds
 		JButton plantButton = new JButton("Plant a Seed");
-		//plantButton.addActionListener(this);
 		plantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,8 +131,8 @@ public class MainScreen{
 		leftPanel.add(plantButton);
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
+		//replace with View All Tools
 		JButton toolButton = new JButton("Use a Tool");
-		//toolButton.addActionListener(this);
 		toolButton.addActionListener(new ActionListener() { 
             @Override 
             public void actionPerformed(ActionEvent e) {
@@ -161,8 +156,8 @@ public class MainScreen{
 		leftPanel.add(toolButton);
 		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
+		//remove
 		JButton harvestButton = new JButton("Harvest a crop");
-		//harvestButton.addActionListener(this);
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -214,28 +209,34 @@ public class MainScreen{
 		}
 	}
 	
+	//updates what is being displayed on the mainFrame Farm Status top panel
 	public void setFarmStatus() {
 		expLabel.setText("Farmer XP: " + player.getFarmerXP());
 		levelLabel.setText("Farmer Level: " + player.getFarmerLevel());
 		objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
 	}
 
+	//closes the frame
     public void closeFrame() {
         mainFrame.dispose();
     }
 
+	//returns this instance of MainScreen
 	public MainScreen getMain() {
 		return this;
 	}
 
+	//returns the exp label
 	public JLabel getExpLabel() {
 		return expLabel;
 	}
 
+	//returns the level label
 	public JLabel getLevelLabel() {
 		return levelLabel;
 	}
 
+	//returns the objectcoin label
 	public JLabel getCoinLabel() {
 		return objectCoinLabel;
 	}

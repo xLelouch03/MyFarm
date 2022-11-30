@@ -79,8 +79,4 @@ public class SetupScreen {
             warningLabel.setText(warningMessage + " Please enter a name to proceed.");
     }
 
-/*public static void main(String[] args) {
-        Main player = new Main();
-        SetupScreen setup = new SetupScreen(player);
-    }*/
 }

@@ -1,5 +1,6 @@
 -Implement FarmerType and its benefits
     -create a method in farmer.java to allow a farmer to register to higher farmertypes + include its benefits
+-Implement availableSpace in MyFarm like (include totalSpace as initial number of availableSpace tapos mag ssubtract lang kada magtatanim)
 
 -Plant seed
     -the fruit tree crop has a special planting condition. 
@@ -30,7 +31,7 @@ View All Seeds button
 
 View All Tools button
     -popup a new frame tapos nakalagay image and toolname tapos kapag clinick ung tool, mag appear ung information about its
-    
+
 TileScreen.java
 -Displaying tile information (follow lang yung flow from MyFarm displayTileInfo method) (gamit siguro JOptionPane.showMessageDialog etc)
 
