@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import main.Main;
-import main.Seed;
 
 public class MainScreen{
     private JFrame mainFrame;
@@ -127,10 +126,10 @@ public class MainScreen{
 		plantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-				Object plant = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
-				String plantName = (String) plant;
-				player.getFarm().plantSeed(player.getTile(tileNum),plantName);
-				objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
+				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
+				String cropName = (String) crop;
+				player.selectSeed(cropName, tileNum);
+				setFarmStatus();
             }
         });
 		plantButton.setBounds(35, 90, 268, 50);
@@ -139,23 +138,23 @@ public class MainScreen{
 
 		JButton toolButton = new JButton("Use a Tool");
 		//toolButton.addActionListener(this);
-		toolButton.addActionListener(new ActionListener() {
-            @Override
+		toolButton.addActionListener(new ActionListener() { 
+            @Override 
             public void actionPerformed(ActionEvent e) {
 				Object tool = JOptionPane.showInputDialog(null, "Choose a tool", "Tool Selection", JOptionPane.QUESTION_MESSAGE,null, player.getToolNames(), "Plow");
                 String toolName = (String) tool;
+
+				player.useTool(toolName, tileNum);
 				//toolName = JOptionPane.showInputDialog("What tool do you want to use?");
-				if(toolName.equalsIgnoreCase("plow")) {
+				/*if(toolName.equalsIgnoreCase("plow")) {
 					player.getFarm().usePlow(player.getTile(tileNum), player.getFarm().getTool(toolName));
 				}
 				else if(toolName.equalsIgnoreCase("watering can"))
 					player.getFarm().useWaterCan(player.getTile(tileNum), player.getFarm().getTool(toolName));
 				else if(toolName.equalsIgnoreCase("fertilizer"))
-					player.getFarm().useFertilizer(player.getTile(tileNum), player.getFarm().getTool(toolName));
+					player.getFarm().useFertilizer(player.getTile(tileNum), player.getFarm().getTool(toolName));*/
 				
-				expLabel.setText("Farmer XP: " + player.getFarmerXP());
-				levelLabel.setText("Farmer Level: " + player.getFarmerLevel());
-				objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
+				setFarmStatus();
             }
         });
 		toolButton.setBounds(35, 175, 268, 50);
@@ -167,11 +166,8 @@ public class MainScreen{
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-				//JOptionPane.showMessageDialog(leftPanel, tileNum);
                 player.getFarm().harvestTile(player.getFarm().getFarmLot(tileNum));
-				expLabel.setText("Farmer XP: " + player.getFarmerXP());
-				levelLabel.setText("Farmer Level: " + player.getFarmerLevel());
-				objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
+				setFarmStatus();
             }
         });
 		harvestButton.setBounds(35, 255, 268, 50);
@@ -198,7 +194,8 @@ public class MainScreen{
 				tileButtons[i][j].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						player.getTile(num);
+						new TileScreen(getMain(),player, num);
+						/*player.getTile(num);
 						tileNum = num;
 						if(player.getTile(num).getSeed() != null) {
 							JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + " Information" + "\nPlow Status: " + player.getTile(num).getPlowStatus() + "\nSeed Planted: " + player.getTile(num).getSeed().getName() +
@@ -208,7 +205,7 @@ public class MainScreen{
 						}
 						else {
 							JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + " Information" + "\nPlow Status: " + player.getTile(num).getPlowStatus());
-						}
+						}*/
 					}
 				});
 				rightPanel.add(tileButtons[i][j]);
@@ -217,7 +214,29 @@ public class MainScreen{
 		}
 	}
 	
+	public void setFarmStatus() {
+		expLabel.setText("Farmer XP: " + player.getFarmerXP());
+		levelLabel.setText("Farmer Level: " + player.getFarmerLevel());
+		objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
+	}
+
     public void closeFrame() {
         mainFrame.dispose();
     }
+
+	public MainScreen getMain() {
+		return this;
+	}
+
+	public JLabel getExpLabel() {
+		return expLabel;
+	}
+
+	public JLabel getLevelLabel() {
+		return levelLabel;
+	}
+
+	public JLabel getCoinLabel() {
+		return objectCoinLabel;
+	}
 }

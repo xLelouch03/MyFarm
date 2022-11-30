@@ -21,6 +21,7 @@ import tools.WateringCan;
 public class Main {
     private MyFarm farm;
     private SetupScreen setup;
+    private MainScreen main;
 
     public void setupGame(String farmerName) {
         if(farmerName.length() == 0) 
@@ -146,6 +147,23 @@ public class Main {
         toolName[4] = "Shovel";
 
         return toolName;
+    }
+
+    public void selectSeed(String crop, int index) {
+        farm.plantSeed(getTile(index),crop);
+    }
+
+    public void useTool(String toolName, int index) {
+        if(toolName.equalsIgnoreCase("plow")) 
+            farm.usePlow(getTile(index), farm.getTool(toolName));
+        else if(toolName.equalsIgnoreCase("watering can"))
+            farm.useWaterCan(getTile(index), farm.getTool(toolName));
+        else if(toolName.equalsIgnoreCase("fertilizer"))
+            farm.useFertilizer(getTile(index), farm.getTool(toolName));
+    }
+
+    public void harvestCrop(int index) {
+
     }
 
     public static void main(String[] args) {

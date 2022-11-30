@@ -1,4 +1,5 @@
 -Implement FarmerType and its benefits
+    -create a method in farmer.java to allow a farmer to register to higher farmertypes + include its benefits
 
 -Plant seed
     -the fruit tree crop has a special planting condition. 
@@ -11,14 +12,29 @@
     -update Pickaxe method to remove rocks
 
 Main.java
--add advanceNextDay method (needs updates nagawa ko palang mag increase ng day count)
--add plantSeed, usePlow, useShovel, usePickaxe, useFertilizer, useWateringCan methods
--add harvestTile method
+
 
 GUI
 -Codes for actionlisteners of buttons for methods above^^
 -Seeds
 -Tools
 -Rocks 
+
+MainScreen.java
+-replace Plant a Seed -> View All Seeds (Kumbaga ididisplay mga information per seed)
+-replace Use a Tool -> View ALl Tools (same as above)
+-remove harvest a crop button
+
+View All Seeds button
+    -popup a new frame tapos nakalagay don mga image and seedname tapos kapag clinick ung seed, mag appear ung information
+
+View All Tools button
+    -popup a new frame tapos nakalagay image and toolname tapos kapag clinick ung tool, mag appear ung information about its
+    
+TileScreen.java
+-Displaying tile information (follow lang yung flow from MyFarm displayTileInfo method) (gamit siguro JOptionPane.showMessageDialog etc)
+
+Feedbacks per action - wala pa ko nilalagay HAHA
+
 
 Bugs:
