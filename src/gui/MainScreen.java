@@ -122,34 +122,10 @@ public class MainScreen{
 		plantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-				//Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
-				
-				/*
-				// switch statemnt
-				switch(crop){ //
-					case "Turnip":
+				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
 
-					// display info
-
-					String cropName = (String) crop;
-					player.selectSeed(cropName, tileNum);
-					setFarmStatus();
-
-					break;
-
-					case "Name":
-
-					//
-
-					break;
-
-				}
-				
-				*/
-
-
-				//String cropName = (String) crop;
-				//player.selectSeed(cropName, tileNum);
+				String cropName = (String) crop;
+				player.selectSeed(cropName, tileNum);
 				setFarmStatus();
             }
         });
@@ -159,9 +135,47 @@ public class MainScreen{
 
 		// TODO: "View All Seeds"
 			// Plant name lists (dropdown) [/]
-				// Whichever is chosen (^), show seed info (growth reqs, etc.)
-				// switch statement --> print info based on cropName
-					// Whichever is chosen (^), show "plant" option below seed info
+				// Show "see seed info" and "plant" buttons
+					// do action based on button selected
+					// see seed info = show a pop up w the seed info
+
+		JButton seedInfoButton = new JButton("Seed Info");
+		seedInfoButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e){
+
+				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
+				String cropName = (String) crop;
+
+				switch (cropName) {
+					
+					case "Turnip":
+						// create pop up window with details
+						break;
+					
+					case "Rose":
+						//
+						break;
+						
+				}
+			}
+
+		});
+		plantButton.setBounds(10, 40, 268, 50);
+		leftPanel.add(seedInfoButton);
+		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
+		JButton plantSeedButton = new JButton("Plant Seed");
+		seedInfoButton.addActionListener(new ActionListener() {
+
+			//
+
+		});
+		plantButton.setBounds(10, 40, 268, 50);
+		leftPanel.add(plantSeedButton);
+		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
 
 		//replace with View All Tools
 		JButton toolButton = new JButton("View all Tools");
