@@ -25,7 +25,7 @@ public class SetupScreen {
 
     public void initialize() {
         setupFrame = new JFrame("My Farm - Farming Simulation Game");
-        setupFrame.setBounds(100, 100, 600, 280);
+        setupFrame.setBounds(500, 100, 600, 280);
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setupFrame.setContentPane(new JLabel(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farm.jpg")));
 		setupFrame.getContentPane().setLayout(null);

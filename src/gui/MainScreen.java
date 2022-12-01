@@ -118,11 +118,11 @@ public class MainScreen{
 		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		//replace with View All Seeds
-		JButton plantButton = new JButton("Plant a Seed");
+		JButton plantButton = new JButton("View all Seeds");
 		plantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
+				//Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
 				
 				/*
 				// switch statemnt
@@ -148,8 +148,8 @@ public class MainScreen{
 				*/
 
 
-				String cropName = (String) crop;
-				player.selectSeed(cropName, tileNum);
+				//String cropName = (String) crop;
+				//player.selectSeed(cropName, tileNum);
 				setFarmStatus();
             }
         });
@@ -164,14 +164,14 @@ public class MainScreen{
 					// Whichever is chosen (^), show "plant" option below seed info
 
 		//replace with View All Tools
-		JButton toolButton = new JButton("Use a Tool");
+		JButton toolButton = new JButton("View all Tools");
 		toolButton.addActionListener(new ActionListener() { 
             @Override 
             public void actionPerformed(ActionEvent e) {
-				Object tool = JOptionPane.showInputDialog(null, "Choose a tool", "Tool Selection", JOptionPane.QUESTION_MESSAGE,null, player.getToolNames(), "Plow");
-                String toolName = (String) tool;
+				//Object tool = JOptionPane.showInputDialog(null, "Choose a tool", "Tool Selection", JOptionPane.QUESTION_MESSAGE,null, player.getToolNames(), "Plow");
+                //string toolName = (String) tool;
 
-				player.useTool(toolName, tileNum);
+				//player.useTool(toolName, tileNum);
 				//toolName = JOptionPane.showInputDialog("What tool do you want to use?");
 				/*if(toolName.equalsIgnoreCase("plow")) {
 					player.getFarm().usePlow(player.getTile(tileNum), player.getFarm().getTool(toolName));
@@ -206,7 +206,7 @@ public class MainScreen{
 	}
 
 	public void initRightPanel() {
-		int i,j,k;
+		int i,j;
 		JPanel rightPanel = new JPanel();
         rightPanel.setBounds(375,100,1135,670);
         rightPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -273,5 +273,9 @@ public class MainScreen{
 	//returns the objectcoin label
 	public JLabel getCoinLabel() {
 		return objectCoinLabel;
+	}
+
+	public void displayPlow() {
+		
 	}
 }
