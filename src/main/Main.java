@@ -1,27 +1,14 @@
 package main;
 
-import gui.SetupScreen;
-import gui.MainScreen;
+import gui.*;
 import java.util.ArrayList;
 
-import seeds.Apple;
-import seeds.Carrot;
-import seeds.Mango;
-import seeds.Potato;
-import seeds.Rose;
-import seeds.Sunflower;
-import seeds.Tulips;
-import seeds.Turnip;
-import tools.Fertilizer;
-import tools.Pickaxe;
-import tools.Plow;
-import tools.Shovel;
-import tools.WateringCan;
+import seeds.*;
+import tools.*;
 
 public class Main {
     private MyFarm farm;
     private SetupScreen setup;
-    private MainScreen main;
 
     public void setupGame(String farmerName) {
         if(farmerName.length() == 0) 
