@@ -1,6 +1,9 @@
--Implement FarmerType and its benefits
-    -create a method in farmer.java to allow a farmer to register to higher farmertypes + include its benefits
+-Implement FarmerType [/] and its benefits
+    [/] -create a method in farmer.java to allow a farmer to register to higher farmertypes
+    -include its benefits
 -Implement availableSpace in MyFarm like (include totalSpace as initial number of availableSpace tapos mag ssubtract lang kada magtatanim)
+
+// Q: Can he skip farmer types (ex: distinguished farmer without being a registered farmer)
 
 -Plant seed
     -the fruit tree crop has a special planting condition. 
@@ -20,6 +23,7 @@ GUI
 -Seeds
 -Tools
 -Rocks 
+-registerFarmerType
 
 MainScreen.java
 -replace Plant a Seed -> View All Seeds (Kumbaga ididisplay mga information per seed)
