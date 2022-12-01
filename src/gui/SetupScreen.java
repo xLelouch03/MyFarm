@@ -1,12 +1,12 @@
 package gui;
-import main.Main;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import main.Main;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

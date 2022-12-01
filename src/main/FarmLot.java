@@ -1,4 +1,5 @@
 package main;
+
 /**
  * This class contains the constructor and methods in managing a farm lot
  */

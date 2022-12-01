@@ -1,6 +1,6 @@
 package seeds;
 
-import  main.Seed;
+import main.Seed;
 
 public class Turnip extends Seed {
     public Turnip() {

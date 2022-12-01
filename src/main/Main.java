@@ -1,10 +1,9 @@
 package main;
 
-import gui.*;
 import java.util.ArrayList;
-
 import seeds.*;
 import tools.*;
+import gui.*;
 
 public class Main {
     private MyFarm farm;
@@ -107,6 +106,10 @@ public class Main {
         return farm.getFarmer().getLevel();
     }
 
+    public String getFarmerType() {
+        return farm.getFarmer().getType();
+    }
+
     public void nextDay() {
         farm.advanceNextDay();
     }
@@ -155,7 +158,7 @@ public class Main {
 
     public static void main(String[] args) {
         Main game = new Main();
-        
+
         game.openSetupScreen();
     }
 }

@@ -11,10 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 import main.Main;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainScreen{
     private JFrame mainFrame;
@@ -69,7 +70,7 @@ public class MainScreen{
 		expLabel.setBounds(750, 11, 347, 24);
 		topPanel.add(expLabel);
 
-		typeLabel = new JLabel("Farmer Type: "); //insert farmer.getXP();
+		typeLabel = new JLabel("Farmer Type: " + player.getFarmerType()); //insert farmer.getXP();
 		typeLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		typeLabel.setBounds(1150, 11, 347, 24);
 		topPanel.add(typeLabel);

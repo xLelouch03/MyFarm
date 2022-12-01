@@ -31,7 +31,7 @@ public class TileScreen {
 
     public void initialize() {
         tileFrame = new JFrame("FarmLot #" + (index+1) + " Screen");
-        tileFrame.setBounds(0, 0, 500, 400);
+        tileFrame.setBounds(680, 280, 500, 400);
 		tileFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tileFrame.getContentPane().setLayout(null);
 
@@ -45,11 +45,11 @@ public class TileScreen {
 		welcomeLabel.setBounds(40, 5, 575, 44);
 		tileFrame.getContentPane().add(welcomeLabel);
 
-        JPanel leftPanel = new JPanel();
-        leftPanel.setBounds(40,45,400,300);
-        leftPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tileFrame.getContentPane().add(leftPanel);
-		leftPanel.setLayout(null);
+        JPanel tilePanel = new JPanel();
+        tilePanel.setBounds(40,45,400,300);
+        tilePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tileFrame.getContentPane().add(tilePanel);
+		tilePanel.setLayout(null);
 
         JButton plantButton = new JButton("Plant a Seed");
 		plantButton.addActionListener(new ActionListener() {
@@ -61,8 +61,8 @@ public class TileScreen {
 				setFarmStatus();
             }
         });
-		plantButton.setBounds(50, 30, 268, 50);
-		leftPanel.add(plantButton);
+		plantButton.setBounds(60, 10, 268, 50);
+		tilePanel.add(plantButton);
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		JButton toolButton = new JButton("Use a Tool");
@@ -85,8 +85,8 @@ public class TileScreen {
 				setFarmStatus();
             }
         });
-		toolButton.setBounds(50, 95, 268, 50);
-		leftPanel.add(toolButton);
+		toolButton.setBounds(60, 75, 268, 50);
+		tilePanel.add(toolButton);
 		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		JButton harvestButton = new JButton("Harvest a crop");
@@ -97,8 +97,8 @@ public class TileScreen {
 				setFarmStatus();
             }
         });
-		harvestButton.setBounds(50, 160, 268, 50);
-		leftPanel.add(harvestButton);
+		harvestButton.setBounds(60, 140, 268, 50);
+		tilePanel.add(harvestButton);
 		harvestButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
         JButton tileInfoButton = new JButton("Display Tile Information");
@@ -108,10 +108,20 @@ public class TileScreen {
                 
             }
         });
-        tileInfoButton.setBounds(50, 225, 268, 50);
-        leftPanel.add(tileInfoButton);
+        tileInfoButton.setBounds(60, 205, 268, 50);
+        tilePanel.add(tileInfoButton);
 		tileInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tileFrame.dispose();
+            }
+        });
+        closeButton.setBounds(160, 265, 75,30);
+        tilePanel.add(closeButton);
+        closeButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
 	}
 
     public void setFarmStatus() {

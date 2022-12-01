@@ -1,6 +1,6 @@
 package seeds;
 
-import  main.Seed;
+import main.Seed;
 
 public class Sunflower extends Seed  {
     public Sunflower() {

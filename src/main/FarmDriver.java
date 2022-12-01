@@ -6,6 +6,9 @@
 package main;
 import java.util.Scanner;
 
+import main.MyFarm;
+import main.Seed;
+
 import seeds.Apple;
 import seeds.Carrot;
 import seeds.Mango;
@@ -129,8 +132,8 @@ public class FarmDriver {
                     switch(nOpt) {
                         case 1: // 1: Use a tool
                             System.out.println("\nWhat tool would you like to use?");
-                            for(Tool t : farm.getAllTool())
-                                System.out.println(t.getName()); //displaying all available tools
+                            //for(Tool t : farm.getAllTool())
+                              //  System.out.println(t.getName()); //displaying all available tools
                             
                             System.out.print("\nTool name: ");
                             scan.nextLine();
