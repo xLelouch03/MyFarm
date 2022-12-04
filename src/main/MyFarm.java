@@ -228,40 +228,46 @@ public class MyFarm {
      * @param plow   The tool object used to plow the tile
      */
     public void usePlow(FarmLot lot, Tool plow) {
-        //checks if tool object exists
-        if(plow != null) {
-            //checks if tile is not yet plowed
-            if(lot.getPlowStatus() == false) {
-                //checks if tile contains a withered plant
-                if(lot.getWitherStatus() == false) {
-                    //checks if the tool object passed contains a name "plow"
-                    if(plow.getName().equalsIgnoreCase("plow")) {
-                        lot.isPlowed(true);
-                        System.out.println("\nTile is now plowed.");
-                    
-                        double currXP = farmer.getXP();
-                        double tempXP = farmer.getXP() + plow.getXP();
-
-                        farmer.updateXP(tempXP);
-                        System.out.println("You have gained " + plow.getXP() + " experience.");
+        
+        //checks if there is a rock on the tile
+        if(lot.getRockedStatus() == false){
+            //checks if tool object exists
+            if(plow != null) {
+                //checks if tile is not yet plowed
+                if(lot.getPlowStatus() == false) {
+                    //checks if tile contains a withered plant
+                    if(lot.getWitherStatus() == false) {
+                        //checks if the tool object passed contains a name "plow"
+                        if(plow.getName().equalsIgnoreCase("plow")) {
+                            lot.isPlowed(true);
+                            System.out.println("\nTile is now plowed.");
                         
-                        //checks if the farmer levels up
-                        if(tempXP > currXP){
-                            farmer.getLevel();
-                        }
+                            double currXP = farmer.getXP();
+                            double tempXP = farmer.getXP() + plow.getXP();
 
+                            farmer.updateXP(tempXP);
+                            System.out.println("You have gained " + plow.getXP() + " experience.");
+                            
+                            //checks if the farmer levels up
+                            if(tempXP > currXP){
+                                farmer.getLevel();
+                            }
+
+                        }
+                        else
+                            System.out.println("\nYou have used a wrong tool.");
                     }
-                    else
-                        System.out.println("\nYou have used a wrong tool.");
+                    else    
+                        System.out.println("This lot contains a withered plant.");
                 }
-                else    
-                    System.out.println("This lot contains a withered plant.");
+                else
+                    System.out.println("This lot is already plowed.");
             }
             else
-                System.out.println("This lot is already plowed.");
+                System.out.println("Tool does not exist.");
         }
         else
-            System.out.println("Tool does not exist.");
+        System.out.println("There is a rock on the lot!");
     }
     
     /** 
@@ -411,69 +417,92 @@ public class MyFarm {
      */
     public void usePickaxe(FarmLot lot, Tool pickaxe){
 
-        if(farmer.getCoins() >= pickaxe.getCost()){
-            // 
-            
-        }
-        else
-            System.out.println("You do not have enough coins to use the pickaxe!");
+        // check if there are rocks on the tile
+        if(lot.getRockedStatus() == true){
+            // check if you have enough object coins
+            if(farmer.getCoins() >= pickaxe.getCost()){
+                // remove rock
+                lot.resetFarmLot();
+                // update player stats
+                double currXP = farmer.getXP();
+                double tempXP = farmer.getXP() + pickaxe.getXP();
+
+                farmer.updateObjectCoins(farmer.getCoins() - pickaxe.getCost());
+                farmer.updateXP(tempXP);
+                System.out.println("You have used " + pickaxe.getCost() + " objectcoins.");
+                System.out.println("You gained " + pickaxe.getXP() + " experience.");
+
+                if(tempXP > currXP){
+                    farmer.getLevel();
+                }
+                
+            }
+            else
+                System.out.println("You do not have enough coins to use the pickaxe!");
+        } else
+            System.out.println("There is no rock on this tile.\n");
+
     }
-        // System.out.println("There is no rock on this tile.\n");
-    
+
     /** 
      * To use the shovel used to remove seeds or crops on the tile
      * @param lot   the tile where to use shovel
      * @param shovel   The tool object to be used on the tile
      */
     public void useShovel(FarmLot lot, Tool shovel) {
+
         if(farmer.getCoins() >= shovel.getCost()){
-            if(shovel.getName().equalsIgnoreCase("shovel")) {
-                if(lot.getWitherStatus() == false) {
-                    if(lot.getPlowStatus() != false) {
-                        if(shovel.getName().equalsIgnoreCase("shovel")) {
-                            //if there is a seed on the tile
-                            if(lot.getSeed() != null) {
-                                //removes the seed from the tile
-                                lot.getSeed().resetSeed();
-                                lot.setSeed(null);
-                                System.out.println("Plant has been removed.");
+            if(lot.getRockedStatus() == false){
+                if(shovel.getName().equalsIgnoreCase("shovel")) {
+                    if(lot.getWitherStatus() == false) {
+                        if(lot.getPlowStatus() != false) {
+                            if(shovel.getName().equalsIgnoreCase("shovel")) {
+                                //if there is a seed on the tile
+                                if(lot.getSeed() != null) {
+                                    //removes the seed from the tile
+                                    lot.getSeed().resetSeed();
+                                    lot.setSeed(null);
+                                    System.out.println("Plant has been removed.");
+                                }
+                                //reverts the farmLot to its default
+                                lot.isPlowed(false);
+                                lot.resetFarmLot();
+                        
+                                System.out.println("Tile has reverted back to being unplowed");       
                             }
-                            //reverts the farmLot to its default
-                            lot.isPlowed(false);
-                            lot.resetFarmLot();
-                    
-                            System.out.println("Tile has reverted back to being unplowed");       
                         }
+                        //if shovel is used on unplowed tile
+                        else
+                            System.out.println("Nothing happened but... \n");
                     }
-                    //if shovel is used on unplowed tile
-                    else
-                        System.out.println("Nothing happened but... \n");
+                    //if tile contains a withered plant
+                    else {
+                        //removes the seed and resets the farmlot to its default
+                        lot.getSeed().resetSeed();
+                        lot.setSeed(null);
+                        lot.resetFarmLot();
+                        System.out.println("Withered plant has been removed.");
+                        System.out.println("Tile is now unplowed.");
+                    }
                 }
-                //if tile contains a withered plant
-                else {
-                    //removes the seed and resets the farmlot to its default
-                    lot.getSeed().resetSeed();
-                    lot.setSeed(null);
-                    lot.resetFarmLot();
-                    System.out.println("Withered plant has been removed.");
-                    System.out.println("Tile is now unplowed.");
+            
+                double currXP = farmer.getXP();
+                double tempXP = farmer.getXP() + shovel.getXP();
+
+                farmer.updateObjectCoins(farmer.getCoins() - shovel.getCost());
+                farmer.updateXP(tempXP);
+                System.out.println("You have used " + shovel.getCost() + " objectcoins.");
+                System.out.println("You gained " + shovel.getXP() + " experience.");
+
+                if(tempXP > currXP){
+                    farmer.getLevel();
                 }
             }
-        
-            double currXP = farmer.getXP();
-            double tempXP = farmer.getXP() + shovel.getXP();
-
-            farmer.updateObjectCoins(farmer.getCoins() - shovel.getCost());
-            farmer.updateXP(tempXP);
-            System.out.println("You have used " + shovel.getCost() + " objectcoins.");
-            System.out.println("You gained " + shovel.getXP() + " experience.");
-
-            if(tempXP > currXP){
-                farmer.getLevel();
-            }
+            else
+                System.out.println("You do not have enough coins to use the shovel!");
         }
         else
-            System.out.println("You do not have enough coins to use the shovel!");
+            System.out.println("There is a rock on the lot!");
     }
     
     /** 

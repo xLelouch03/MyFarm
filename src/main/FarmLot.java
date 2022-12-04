@@ -156,6 +156,7 @@ public class FarmLot {
 
     public void isRocked() {
         this.rocked = true;
+        this.occupied = true;
     }
     
     /**
@@ -169,6 +170,7 @@ public class FarmLot {
         this.harvestable = false;
         this.seed = null;
         this.occupied = false;
+        this.rocked = false;
     }
     
   }
