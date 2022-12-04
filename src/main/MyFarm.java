@@ -90,6 +90,9 @@ public class MyFarm {
       return temp;
     }
 
+    //TODO getToolInfo -- switch statement
+    
+
     /**
      *  Clears the seed arraylist 
      */
@@ -407,8 +410,15 @@ public class MyFarm {
      * @param pickaxe   The tool object to be used on the tile
      */
     public void usePickaxe(FarmLot lot, Tool pickaxe){
-        System.out.println("There is no rock on this tile.\n");
+
+        if(farmer.getCoins() >= pickaxe.getCost()){
+            // 
+            
+        }
+        else
+            System.out.println("You do not have enough coins to use the pickaxe!");
     }
+        // System.out.println("There is no rock on this tile.\n");
     
     /** 
      * To use the shovel used to remove seeds or crops on the tile

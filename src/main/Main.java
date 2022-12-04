@@ -139,6 +139,11 @@ public class Main {
         return toolName;
     }
 
+    public void getSeedInfo(String crop){
+        
+
+    }
+
     public void selectSeed(String crop, int index) {
         farm.plantSeed(getTile(index),crop);
     }

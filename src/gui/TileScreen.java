@@ -106,8 +106,7 @@ public class TileScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                // ?!?!
-                Object info = JOptionPane.showMessageDialog(null, player.farm.displayTileInfo);
+                JOptionPane.showMessageDialog(null, player.farm.displayTileInfo);
                 
             }
         });

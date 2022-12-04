@@ -13,6 +13,7 @@
     from occupied tiles – check immediate sides and diagonals. 
 
 -Implement rocks thru file input
+    [/]-implement boolean function for rock
     -update Pickaxe method to remove rocks
 
 Main.java

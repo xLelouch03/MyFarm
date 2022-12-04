@@ -10,6 +10,7 @@ public class FarmLot {
     private boolean wither;
     private boolean harvestable;
     private boolean occupied;
+    private boolean rocked;
     private Seed seed;
   
     /**
@@ -25,6 +26,7 @@ public class FarmLot {
         this.harvestable = false;
         this.seed = null;
         this.occupied = false;
+        this.rocked = false;
     }
   
     /** 
@@ -146,6 +148,14 @@ public class FarmLot {
      */
     public void isOccupied() {
         this.occupied = true;
+    }
+
+    public boolean getRockedStatus() {
+        return rocked;
+    }
+
+    public void isRocked() {
+        this.rocked = true;
     }
     
     /**
