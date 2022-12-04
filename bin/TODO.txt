@@ -16,9 +16,10 @@
     [/]-implement boolean function for rock
     [/]-update Pickaxe method to remove rocks
     [/]-update plow and shovel to check if the lot is rocked
-    [/]-if theres a rock then is it also occupied? currently yes
     -implement rocks thru file input
 
+    // Q: if theres a rock then is it also occupied? currently yes
+        
 Main.java
 
 
