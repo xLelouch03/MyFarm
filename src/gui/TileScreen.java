@@ -105,6 +105,9 @@ public class TileScreen {
         tileInfoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                // ?!?!
+                Object info = JOptionPane.showMessageDialog(null, player.farm.displayTileInfo);
                 
             }
         });

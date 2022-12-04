@@ -127,6 +127,7 @@ public class MainScreen{
 				String cropName = (String) crop;
 				player.selectSeed(cropName, tileNum);
 				setFarmStatus();
+
             }
         });
 		plantButton.setBounds(35, 90, 268, 50);
@@ -157,8 +158,11 @@ public class MainScreen{
 					case "Rose":
 						//
 						break;
+
+					// ++
 						
 				}
+
 			}
 
 		});

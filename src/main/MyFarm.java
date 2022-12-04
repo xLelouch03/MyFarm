@@ -285,6 +285,12 @@ public class MyFarm {
                         if(s.getName().equalsIgnoreCase(seedName)) {
                             found = true;
                             //checks if farmer has enough objectcoins to buy the seed
+
+                            // if seedType == fruit tree
+                                // check if the tiles beside the selected tile is occupied
+                                // then proceed to if statement in "else"
+                            // else:
+
                             if(farmer.getCoins() >= s.getCost()){
                                 lot.setSeed(new Seed(s));
                                 result = true;
