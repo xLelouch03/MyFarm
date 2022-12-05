@@ -125,6 +125,24 @@ public class MainScreen{
 				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
 
 				String cropName = (String) crop;
+
+				// show seedinfo
+				switch (cropName) {
+					
+					case "Turnip":
+						// displays text under the selection
+						JTextField 
+						
+						break;
+					
+					case "Rose":
+						//
+						break;
+
+					// ++
+						
+				}
+
 				player.selectSeed(cropName, tileNum);
 				setFarmStatus();
 
@@ -140,6 +158,7 @@ public class MainScreen{
 					// do action based on button selected
 					// see seed info = show a pop up w the seed info
 
+		/* 
 		JButton seedInfoButton = new JButton("Seed Info");
 		seedInfoButton.addActionListener(new ActionListener() {
 
@@ -169,6 +188,8 @@ public class MainScreen{
 		plantButton.setBounds(10, 40, 268, 50);
 		leftPanel.add(seedInfoButton);
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		*/
+
 
 		JButton plantSeedButton = new JButton("Plant Seed");
 		seedInfoButton.addActionListener(new ActionListener() {
