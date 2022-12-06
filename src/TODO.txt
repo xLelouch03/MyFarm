@@ -4,6 +4,7 @@
 -Implement availableSpace in MyFarm like (include totalSpace as initial number of availableSpace tapos mag ssubtract lang kada magtatanim)
 
 // Q: Can he skip farmer types (ex: distinguished farmer without being a registered farmer)
+    A: No, dapat mag register muna sa prior farmer type.
 
 -Plant seed
     -the fruit tree crop has a special planting condition. 
@@ -19,6 +20,7 @@
     -implement rocks thru file input
 
     // Q: if theres a rock then is it also occupied? currently yes
+        A: yes, if may rock automatic occupied
         
 Main.java
 
@@ -44,7 +46,12 @@ View All Tools button
 TileScreen.java
 -Displaying tile information (follow lang yung flow from MyFarm displayTileInfo method) (gamit siguro JOptionPane.showMessageDialog etc)
 
-Feedbacks per action - wala pa ko nilalagay HAHA
+Feedbacks per action 
+    MISSING/TO FIX:
+        -Shovel Feedbacks
+        -Harvest details
+        -Advance to next day
+
 
 
 Bugs:

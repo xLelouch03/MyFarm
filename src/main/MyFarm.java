@@ -12,13 +12,13 @@ public class MyFarm {
     private ArrayList<Seed> seed;
     private ArrayList<Tool> tool;
     private int day;
-    protected FarmLot tileButtons;
 
     /**
      * Constructs a farm by creating a farmlot, arraylist of seeds and tools,
      * setting the day to 1 and a farmer.
      */
     public MyFarm() {
+        //this.farmLot = new ArrayList<FarmLot>();
         this.farmLot = new ArrayList<FarmLot>();
         this.seed = new ArrayList<Seed>();
         this.tool = new ArrayList<Tool>();
@@ -239,7 +239,7 @@ public class MyFarm {
                     if(lot.getWitherStatus() == false) {
                         //checks if the tool object passed contains a name "plow"
                         if(plow.getName().equalsIgnoreCase("plow")) {
-                            lot.isPlowed(true);
+                            //lot.isPlowed(true);
                             System.out.println("\nTile is now plowed.");
                         
                             double currXP = farmer.getXP();
@@ -302,6 +302,7 @@ public class MyFarm {
 
                             if(farmer.getCoins() >= s.getCost()){
                                 lot.setSeed(new Seed(s));
+                                //lot.isOccupied(true);
                                 result = true;
                                 System.out.println(s.getName() + " has been planted.");
                                 System.out.println("You have used " + s.getCost() + " objectcoins.");
@@ -313,7 +314,7 @@ public class MyFarm {
                     }
                     //if seed was planted successfully
                     if(result == true)
-                        lot.isOccupied();
+                        lot.isOccupied(true);
                     //if seed name does not exist in the seed arraylist
                     if(found == false)
                         System.out.println("Seed does not exist.");         
@@ -422,7 +423,7 @@ public class MyFarm {
             // check if you have enough object coins
             if(farmer.getCoins() >= pickaxe.getCost()){
                 // remove rock
-                lot.resetFarmLot();
+                //lot.isRocked(false);
                 // update player stats
                 double currXP = farmer.getXP();
                 double tempXP = farmer.getXP() + pickaxe.getXP();
@@ -452,57 +453,53 @@ public class MyFarm {
     public void useShovel(FarmLot lot, Tool shovel) {
 
         if(farmer.getCoins() >= shovel.getCost()){
-            if(lot.getRockedStatus() == false){
-                if(shovel.getName().equalsIgnoreCase("shovel")) {
-                    if(lot.getWitherStatus() == false) {
-                        if(lot.getPlowStatus() != false) {
-                            if(shovel.getName().equalsIgnoreCase("shovel")) {
-                                //if there is a seed on the tile
-                                if(lot.getSeed() != null) {
-                                    //removes the seed from the tile
-                                    lot.getSeed().resetSeed();
-                                    lot.setSeed(null);
-                                    System.out.println("Plant has been removed.");
-                                }
-                                //reverts the farmLot to its default
-                                lot.isPlowed(false);
-                                lot.resetFarmLot();
-                        
-                                System.out.println("Tile has reverted back to being unplowed");       
+            if(shovel.getName().equalsIgnoreCase("shovel")) {
+                if(lot.getWitherStatus() == false) {
+                    if(lot.getPlowStatus() != false) {
+                        if(shovel.getName().equalsIgnoreCase("shovel")) {
+                            //if there is a seed on the tile
+                            if(lot.getSeed() != null) {
+                                //removes the seed from the tile
+                                lot.getSeed().resetSeed();
+                                lot.setSeed(null);
+                                System.out.println("Plant has been removed.");
                             }
+                            //reverts the farmLot to its default
+                            lot.isPlowed(false);
+                            lot.resetFarmLot();
+                        
+                            System.out.println("Tile has reverted back to being unplowed");       
                         }
-                        //if shovel is used on unplowed tile
-                        else
-                            System.out.println("Nothing happened but... \n");
                     }
-                    //if tile contains a withered plant
-                    else {
-                        //removes the seed and resets the farmlot to its default
-                        lot.getSeed().resetSeed();
-                        lot.setSeed(null);
-                        lot.resetFarmLot();
-                        System.out.println("Withered plant has been removed.");
-                        System.out.println("Tile is now unplowed.");
-                    }
+                    //if shovel is used on unplowed tile
+                    else
+                        System.out.println("Nothing happened but... \n");
                 }
-            
-                double currXP = farmer.getXP();
-                double tempXP = farmer.getXP() + shovel.getXP();
-
-                farmer.updateObjectCoins(farmer.getCoins() - shovel.getCost());
-                farmer.updateXP(tempXP);
-                System.out.println("You have used " + shovel.getCost() + " objectcoins.");
-                System.out.println("You gained " + shovel.getXP() + " experience.");
-
-                if(tempXP > currXP){
-                    farmer.getLevel();
+                //if tile contains a withered plant
+                else {
+                    //removes the seed and resets the farmlot to its default
+                    lot.getSeed().resetSeed();
+                    lot.setSeed(null);
+                    lot.resetFarmLot();
+                    System.out.println("Withered plant has been removed.");
+                    System.out.println("Tile is now unplowed.");
                 }
             }
-            else
-                System.out.println("You do not have enough coins to use the shovel!");
+            
+            double currXP = farmer.getXP();
+            double tempXP = farmer.getXP() + shovel.getXP();
+
+            farmer.updateObjectCoins(farmer.getCoins() - shovel.getCost());
+            farmer.updateXP(tempXP);
+            System.out.println("You have used " + shovel.getCost() + " objectcoins.");
+            System.out.println("You gained " + shovel.getXP() + " experience.");
+
+            if(tempXP > currXP){
+                farmer.getLevel();
+            }     
         }
         else
-            System.out.println("There is a rock on the lot!");
+            System.out.println("You do not have enough coins to use the shovel!");
     }
     
     /** 
@@ -514,7 +511,8 @@ public class MyFarm {
             if(lot.getSeed() != null) {
                 if(lot.isHarvestable() == true) {
                     System.out.println("\n[Harvest Details]");
-                    System.out.println("The seed produced " + lot.getSeed().getProductProduced() + " " +
+                    int numProduced = lot.getSeed().getProductProduced();
+                    System.out.println("The seed produced " + numProduced + " " +
                     lot.getSeed().getName());
                     
                     //computes for the total objectcoins to be gained after harvesting
@@ -537,9 +535,8 @@ public class MyFarm {
                     if(tempXP > currXP){
                         farmer.getLevel();
                     }
-                    //after harvesting, remove the seed and reset the farmlot
+
                     lot.getSeed().resetSeed();
-                    lot.resetFarmLot();
                 }
                 else
                     System.out.println("The crop is not yet harvestable\n");

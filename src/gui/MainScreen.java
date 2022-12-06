@@ -150,10 +150,6 @@ public class MainScreen{
 					// ++
 						
 				}
-
-				player.selectSeed(cropName, tileNum);
-				setFarmStatus();
-
             }
         });
 		plantButton.setBounds(35, 90, 268, 50);
@@ -320,9 +316,5 @@ public class MainScreen{
 	//returns the objectcoin label
 	public JLabel getCoinLabel() {
 		return objectCoinLabel;
-	}
-
-	public void displayPlow() {
-		
 	}
 }

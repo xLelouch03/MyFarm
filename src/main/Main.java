@@ -110,6 +110,10 @@ public class Main {
         return farm.getFarmer().getType();
     }
 
+    public boolean getOccupied(int index) {
+        return farm.getFarmLot(index).getOccupied();
+    }
+
     public void nextDay() {
         farm.advanceNextDay();
     }
@@ -144,10 +148,6 @@ public class Main {
 
     }
 
-    public void selectSeed(String crop, int index) {
-        farm.plantSeed(getTile(index),crop);
-    }
-
     public void useTool(String toolName, int index) {
         if(toolName.equalsIgnoreCase("plow")) 
             farm.usePlow(getTile(index), farm.getTool(toolName));
@@ -155,6 +155,10 @@ public class Main {
             farm.useWaterCan(getTile(index), farm.getTool(toolName));
         else if(toolName.equalsIgnoreCase("fertilizer"))
             farm.useFertilizer(getTile(index), farm.getTool(toolName));
+        else if(toolName.equalsIgnoreCase("pickaxe"))
+            farm.usePickaxe(getTile(index), farm.getTool(toolName));
+        else if(toolName.equalsIgnoreCase("shovel"))
+            farm.useShovel(getTile(index), farm.getTool(toolName)); 
     }
 
     public void harvestCrop(int index) {

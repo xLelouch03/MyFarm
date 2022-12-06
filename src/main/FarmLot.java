@@ -140,23 +140,23 @@ public class FarmLot {
      * @return the occupation status of the tile
      */
     public boolean getOccupied() {
-        return occupied;
+        return this.occupied;
     }
   
     /**
      *  Checks if the tile already has a crop planted on it/is already occupied 
      */
-    public void isOccupied() {
-        this.occupied = true;
+    public void isOccupied(boolean occ) {
+        this.occupied = occ;
     }
 
     public boolean getRockedStatus() {
-        return rocked;
+        return this.rocked;
     }
 
-    public void isRocked() {
-        this.rocked = true;
-        this.occupied = true;
+    public void isRocked(boolean rock) {
+        this.rocked = rock;
+        this.occupied = rock;
     }
     
     /**
