@@ -26,7 +26,7 @@ public class FarmLot {
         this.harvestable = false;
         this.seed = null;
         this.occupied = false;
-        this.rocked = true;
+        this.rocked = false;
     }
   
     /** 
