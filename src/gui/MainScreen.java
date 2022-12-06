@@ -78,7 +78,7 @@ public class MainScreen{
 		typeLabel.setBounds(1150, 11, 347, 24);
 		topPanel.add(typeLabel);
 
-        availableSpaceLabel = new JLabel("Number of available tiles: " + player.getFarmSpace());//insert farm.getSpace() *to be implemented pa
+        availableSpaceLabel = new JLabel("Number of available tiles: " + player.getFarm().getAvailableSpace());//insert farm.getSpace() *to be implemented pa
 		availableSpaceLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		availableSpaceLabel.setBounds(10, 43, 237, 24);
 		topPanel.add(availableSpaceLabel);
@@ -303,6 +303,9 @@ public class MainScreen{
 		return this;
 	}
 
+	public JLabel getAvailSpace() {
+		return availableSpaceLabel;
+	}
 	//returns the exp label
 	public JLabel getExpLabel() {
 		return expLabel;

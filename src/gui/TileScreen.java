@@ -234,9 +234,22 @@ public class TileScreen {
     }
 
     public void setFarmStatus() { 
+        mainFrame.getAvailSpace().setText("Number of available tiles: " + player.getFarm().getAvailableSpace());
 		mainFrame.getExpLabel().setText("Farmer XP: " + player.getFarmerXP());
 		mainFrame.getLevelLabel().setText("Farmer Level: " + player.getFarmerLevel());
 		mainFrame.getCoinLabel().setText("Objectcoins: "+ player.getFarmerCoins());
+
+        if(!player.getFarm().isRunning()) {
+            if(JOptionPane.showConfirmDialog(tileFrame, "Do you want to play again?") == 1) {
+                tileFrame.dispose();
+                mainFrame.closeFrame();
+            }
+            else {
+                tileFrame.dispose();
+                mainFrame.closeFrame();
+                player.openSetupScreen();
+            }
+        } 
 	}
 
     

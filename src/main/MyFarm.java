@@ -12,6 +12,8 @@ public class MyFarm {
     private ArrayList<Seed> seed;
     private ArrayList<Tool> tool;
     private int day;
+    private int totalSpace;
+    //private int availableSpace;
 
     /**
      * Constructs a farm by creating a farmlot, arraylist of seeds and tools,
@@ -24,6 +26,8 @@ public class MyFarm {
         this.tool = new ArrayList<Tool>();
         this.day = 1;
         this.farmer = null;
+        this.totalSpace = 50;
+        //this.availableSpace = 50;
     }
     
     /** 
@@ -127,6 +131,19 @@ public class MyFarm {
         this.day++;
     }
 
+    public int getTotalSpace() {
+        return this.totalSpace;
+    }
+
+    public int getAvailableSpace() {
+        int occupiedTile = 0;
+
+        for(FarmLot f: this.farmLot)
+            if(f.getSeed() != null)
+                occupiedTile++;
+        return totalSpace - occupiedTile;
+    }
+
     /**
      * Directs the game to the next day, checks if the crop has grown, is harvestable, or is withered 
      */
@@ -167,13 +184,8 @@ public class MyFarm {
      * @return the game status
      */
     public boolean isRunning() {
-        int occupiedTile = 0;
         int witherCount = 0;
 
-        //checks how many tiles contain seed
-        for(FarmLot f: this.farmLot)
-            if(f.getSeed() != null)
-                occupiedTile++;
 
         //checks how many tiles contain withered plant
         for(FarmLot f: this.farmLot)
@@ -181,7 +193,7 @@ public class MyFarm {
                 witherCount++;
 
         //checks if farmer can no longer buy a seed with no active crop OR the farm tiles contain withered plant
-        if((farmer.getCoins() < 5 && occupiedTile == 0) || witherCount == 50)
+        if((farmer.getCoins() < 5 && getAvailableSpace() == 50) || witherCount == 50)
             return false;
         
         return true;
