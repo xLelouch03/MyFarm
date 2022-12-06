@@ -3,6 +3,9 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+// import java.awt.event.*;
+// import java.awt.*;
+import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,7 +31,7 @@ public class MainScreen{
 	private JLabel availableSpaceLabel;
 	private JLabel farmerNameLabel;
 	private JLabel objectCoinLabel;
-	private int tileNum = 0;
+	private int tileNum = 0;			
 
     public MainScreen(Main player) {
         this.player = player;
@@ -126,12 +129,17 @@ public class MainScreen{
 
 				String cropName = (String) crop;
 
+				// input JPanel then put Jtext in JPanel
+				JTextField seedName, cropType, harvestTime, waterNeeds, fertilizerNeeds, productProduced, seedCost, baseSellPrice, xpYield;  	
+
 				// show seedinfo
 				switch (cropName) {
-					
+
 					case "Turnip":
 						// displays text under the selection
-						JTextField 
+							// 9 Rows
+						seedName = new JTextField("Turnip");
+						cropType = new JTextField("Root Crop");
 						
 						break;
 					
@@ -190,7 +198,7 @@ public class MainScreen{
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		*/
 
-
+		/*
 		JButton plantSeedButton = new JButton("Plant Seed");
 		seedInfoButton.addActionListener(new ActionListener() {
 
@@ -200,7 +208,7 @@ public class MainScreen{
 		plantButton.setBounds(10, 40, 268, 50);
 		leftPanel.add(plantSeedButton);
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-
+		*/
 
 		//replace with View All Tools
 		JButton toolButton = new JButton("View all Tools");
