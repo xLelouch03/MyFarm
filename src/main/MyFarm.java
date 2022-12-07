@@ -377,6 +377,15 @@ public class MyFarm {
         System.out.println("There is a rock on the lot!");
     }
     
+    /**
+     * Creates and returns an arraylist of farmlots that are adjacent to
+     * a specified farmlot
+     * Reference: https://www.geeksforgeeks.org/find-all-adjacent-elements-of-given-element-in-a-2d-array-or-matrix/
+     * @param farmLot the array of farmlots
+     * @param row the row index of the specified farm lot
+     * @param col the column index of the specified farm lot
+     * @return the arraylist of occupied farm lots
+     */
     public ArrayList<FarmLot> getAdjacent(FarmLot[][] farmLot, int row, int col) {
         int n = farmLot.length;
         int m = farmLot[0].length;
@@ -401,6 +410,12 @@ public class MyFarm {
         return lot;
     }
 
+    /**
+     * Gets the number of adjacent tiles that are occupied
+     * @param row the row index of the specified farm lot
+     * @param col the column index of the specified farm lot
+     * @return the adjacent count
+     */
     public int getAdjacentCount(int row, int col) {
         ArrayList<FarmLot> adjacentLots = getAdjacent(farmLot, row, col);
         int adjacentCount = 0;
