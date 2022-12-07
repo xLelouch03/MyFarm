@@ -30,8 +30,7 @@ public class MainScreen{
 	private JLabel typeLabel;
 	private JLabel availableSpaceLabel;
 	private JLabel farmerNameLabel;
-	private JLabel objectCoinLabel;
-	//private int row, col;			
+	private JLabel objectCoinLabel;		
 
     public MainScreen(Main player) {
         this.player = player;
@@ -122,8 +121,8 @@ public class MainScreen{
 		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		//replace with View All Seeds
-		JButton plantButton = new JButton("View all Seeds");
-		plantButton.addActionListener(new ActionListener() {
+		JButton viewPlantButton = new JButton("View all Seeds");
+		viewPlantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
@@ -153,9 +152,9 @@ public class MainScreen{
 				}
             }
         });
-		plantButton.setBounds(35, 90, 268, 50);
-		leftPanel.add(plantButton);
-		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		viewPlantButton.setBounds(35, 90, 268, 50);
+		leftPanel.add(viewPlantButton);
+		viewPlantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		// TODO: "View All Seeds"
 			// Plant name lists (dropdown) [/]
@@ -208,8 +207,8 @@ public class MainScreen{
 		*/
 
 		//replace with View All Tools
-		JButton toolButton = new JButton("View all Tools");
-		toolButton.addActionListener(new ActionListener() { 
+		JButton viewToolButton = new JButton("View all Tools");
+		viewToolButton.addActionListener(new ActionListener() { 
             @Override 
             public void actionPerformed(ActionEvent e) {
 				//Object tool = JOptionPane.showInputDialog(null, "Choose a tool", "Tool Selection", JOptionPane.QUESTION_MESSAGE,null, player.getToolNames(), "Plow");
@@ -228,41 +227,22 @@ public class MainScreen{
 				setFarmStatus();
             }
         });
-		toolButton.setBounds(35, 175, 268, 50);
-		leftPanel.add(toolButton);
-		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		viewToolButton.setBounds(35, 175, 268, 50);
+		leftPanel.add(viewToolButton);
+		viewToolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		JButton registerButton = new JButton("Register Farmer");
 		registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 				Object type = JOptionPane.showInputDialog(null, "Register Farmer", "Farmer Type Selection", 
-					JOptionPane.QUESTION_MESSAGE,null, player.getTypes(), "Registered Farmer");
+				JOptionPane.QUESTION_MESSAGE,null, player.getTypes(), "Registered Farmer");
 
 				String farmerType = (String) type;
 
-				if(	(player.getFarm().getFarmer().getLevel() < 5 && farmerType.equals("Registered Farmer")) || 
-					(player.getFarm().getFarmer().getLevel() < 10 && farmerType.equals("Distinguished Farmer")) ||
-					(player.getFarm().getFarmer().getLevel() < 15 && farmerType.equals("Legendary Farmer"))) {
-					JOptionPane.showMessageDialog(mainFrame, "You have not reached the minimum level to register.");
-				}
-				else if((player.getFarm().getFarmer().getLevel() >= 5 && player.getFarmerCoins() < 200 && farmerType.equals("Registered Farmer")) || 
-						(player.getFarm().getFarmer().getLevel() >= 10 && player.getFarmerCoins() < 300 && farmerType.equals("Distinguished Farmer")) ||
-						(player.getFarm().getFarmer().getLevel() >= 15 && player.getFarmerCoins() < 400 && farmerType.equals("Legendary Farmer"))) {
-					JOptionPane.showMessageDialog(mainFrame, "You have not reached the minimum objectCoins to register.");
-				}
-
-				else if(farmerType.equals("Distinguished Farmer") && !player.getFarm().getFarmer().getType().equals("Registered Farmer")) {
-					JOptionPane.showMessageDialog(mainFrame, "You must register as Registered Farmer first.");
-				}
-
-				else if(farmerType.equals("Legendary Farmer") && !player.getFarm().getFarmer().getType().equals("Distinguished Farmer")) {
-					JOptionPane.showMessageDialog(mainFrame, "You must register as Distinguished Farmer first.");
-				}
-				else {
-					player.getFarm().registerFarmer(farmerType);
-					setFarmStatus();
-				}
+				JOptionPane.showMessageDialog(mainFrame,  player.getFarm().registerFarmer(farmerType));
+				setFarmStatus();
+				
             }
         });
 		registerButton.setBounds(35, 255, 268, 50);
@@ -292,17 +272,6 @@ public class MainScreen{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						new TileScreen(getMain(),player, row, col, num);
-						/*player.getTile(num);
-						tileNum = num;
-						if(player.getTile(num).getSeed() != null) {
-							JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + " Information" + "\nPlow Status: " + player.getTile(num).getPlowStatus() + "\nSeed Planted: " + player.getTile(num).getSeed().getName() +
-						"\nWater Count: " + player.getTile(num).getWaterCount() + "\nFertilizer Count: " + player.getTile(num).getFertilizerCount() +
-						"\nDays Growed: " + player.getTile(num).getSeed().getDayGrowth() + "\nHarvestable: " + player.getTile(num).isHarvestable() +
-						"\nHas a withered plant: " + player.getTile(num).getWitherStatus());
-						}
-						else {
-							JOptionPane.showMessageDialog(rightPanel, "FarmLot#" + (num+1) + " Information" + "\nPlow Status: " + player.getTile(num).getPlowStatus());
-						}*/
 					}
 				});
 				rightPanel.add(tileButtons[i][j]);

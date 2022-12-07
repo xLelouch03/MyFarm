@@ -44,14 +44,19 @@ View All Seeds button
 View All Tools button
     -popup a new frame tapos nakalagay image and toolname tapos kapag clinick ung tool, mag appear ung information about its
 
+
+
 TileScreen.java
--Displaying tile information (follow lang yung flow from MyFarm displayTileInfo method) (gamit siguro JOptionPane.showMessageDialog etc)
+[/]-Displaying tile information 
+
+
+
 
 Feedbacks per action 
     MISSING/TO FIX:
-        -Shovel Feedbacks
-        -Harvest details
         -Advance to next day
+
+
 
 
 
