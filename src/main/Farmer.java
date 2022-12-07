@@ -17,7 +17,7 @@ public class Farmer {
      */
     public Farmer(String name) {
         this.name = name;
-        this.objectCoins = 100;
+        this.objectCoins = 500;
         this.level = 0;
         this.experience = 0;
         this.type = "Farmer";

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class MyFarm {
     private Farmer farmer;
-    private ArrayList<FarmLot> farmLot;
+    private FarmLot[][] farmLot;
     private ArrayList<Seed> seed;
     private ArrayList<Tool> tool;
     private int day;
@@ -21,8 +21,7 @@ public class MyFarm {
      * setting the day to 1 and a farmer.
      */
     public MyFarm() {
-        //this.farmLot = new ArrayList<FarmLot>();
-        this.farmLot = new ArrayList<FarmLot>();
+        this.farmLot = new FarmLot[10][5];
         this.seed = new ArrayList<Seed>();
         this.tool = new ArrayList<Tool>();
         this.day = 1;
@@ -89,11 +88,8 @@ public class MyFarm {
     /**
      * Adds a farmLot to the farm
      */
-    public void addTile() {
-        if(this.farmLot.size() <= 50)
-            this.farmLot.add(new FarmLot());
-        else 
-            System.out.println("Farm is already full.");
+    public void addTile(int row, int col) {
+        this.farmLot[row][col] = new FarmLot();
     }
 
     /** 
@@ -101,11 +97,15 @@ public class MyFarm {
      * @param index the index of the tile/farmLot
      * @return the farm lot object / a tile on the farm
      */
-    public FarmLot getFarmLot(int index){
-        return this.farmLot.get(index);
+    public FarmLot getFarmLot(int row, int col){
+        return this.farmLot[row][col];
     }
 
-    public ArrayList<FarmLot> getAllFarmLot() {
+    /*public ArrayList<FarmLot> getAllFarmLot() {
+        return this.farmLot;
+    }*/
+
+    public FarmLot[][] getAllFarmLot(){
         return this.farmLot;
     }
     
@@ -113,7 +113,7 @@ public class MyFarm {
      * Gets the whole seed arraylist
      * @return the seed arraylist
      */
-    public ArrayList<Seed> getSeed() {
+    public ArrayList<Seed> getAllSeed() {
         return this.seed;
     }
     
@@ -136,6 +136,16 @@ public class MyFarm {
 
     //TODO getToolInfo -- switch statement
     
+    public Seed getSeed(String seedName) {
+        Seed temp = null;
+
+        for(Seed s: seed) {
+            if(s.getName().equals(seedName))   
+                temp = s;
+        }
+
+        return temp;
+    }
 
     /**
      *  Clears the seed arraylist 
@@ -178,9 +188,16 @@ public class MyFarm {
     public int getAvailableSpace() {
         int occupiedTile = 0;
 
-        for(FarmLot f: this.farmLot)
+        /*for(FarmLot f: this.farmLot)
             if(f.getSeed() != null)
-                occupiedTile++;
+                occupiedTile++;*/
+
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
+                if(this.farmLot[i][j].getSeed() != null)
+                    occupiedTile++;
+            }
+        }
         return totalSpace - occupiedTile;
     }
 
@@ -189,9 +206,39 @@ public class MyFarm {
      */
     public void advanceNextDay(){
         advanceDay();
-        //System.out.println("\nDay " + this.day + " of the game.");
+        
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
+                if(this.farmLot[i][j].getSeed() != null) {
+                    if(this.farmLot[i][j].getWitherStatus() == false) {
+                        this.farmLot[i][j].getSeed().grow();
+                        //Checks if crop reached more than the number of days 
+                        if(this.farmLot[i][j].getSeed().getDayGrowth() > this.farmLot[i][j].getSeed().getHarvestTime()) {
+                            System.out.println("Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + ",");
+                            this.farmLot[i][j].isWithered(true);
+                        }
+                        //checks if crop reach the harvest time and meet the minimum requirements to be harvested
+                        else if(this.farmLot[i][j].getSeed().getDayGrowth() == this.farmLot[i][j].getSeed().getHarvestTime()) {
+                            //if crop did not meet the minimum requirements
+                            if(this.farmLot[i][j].isHarvestable() == false) {
+                                System.out.println(this.farmLot[i][j].getSeed().getName() + " growed but did not get taken care of properly.");
+                                this.farmLot[i][j].isWithered(true);
+                            }
+                            //crop meets the minimum requirements
+                            else 
+                                System.out.println("\n" + (this.farmLot[i][j].getSeed().getName() + " is harvestable"));
+                        }
+                        //crop grows
+                        else
+                            System.out.println("\n" + this.farmLot[i][j].getSeed().getName() + " growed.");
+                    }
+                }
 
-        for(FarmLot f : this.farmLot) {
+
+            }
+        }
+
+        /*for(FarmLot f : this.farmLot) {
             if(f.getSeed() != null) {
                 if(f.getWitherStatus() == false) {
                     f.getSeed().grow();
@@ -216,7 +263,7 @@ public class MyFarm {
                         System.out.println("\n" + f.getSeed().getName() + " growed.");
                 }
             }
-        }
+        }*/
     }
 
     public int getWitherCount() {
@@ -229,11 +276,16 @@ public class MyFarm {
     public boolean isRunning() {
         witherCount = 49;
 
-
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
+                if(this.farmLot[i][j].getWitherStatus() == true)
+                    witherCount++;
+            }
+        }
         //checks how many tiles contain withered plant
-        for(FarmLot f: this.farmLot)
+        /*for(FarmLot f: this.farmLot)
             if(f.getWitherStatus() == true)
-                witherCount++;
+                witherCount++;*/
 
         //checks if farmer can no longer buy a seed with no active crop OR the farm tiles contain withered plant
         if((farmer.getCoins() < 5 && getAvailableSpace() == 50) || witherCount == 50)
@@ -283,7 +335,7 @@ public class MyFarm {
      * @param plow   The tool object used to plow the tile
      */
     public void usePlow(FarmLot lot, Tool plow) {
-        
+        System.out.println(farmLot.length);
         //checks if there is a rock on the tile
         if(lot.getRockedStatus() == false){
             //checks if tool object exists
@@ -325,6 +377,42 @@ public class MyFarm {
         System.out.println("There is a rock on the lot!");
     }
     
+    public ArrayList<FarmLot> getAdjacent(FarmLot[][] farmLot, int row, int col) {
+        int n = farmLot.length;
+        int m = farmLot[0].length;
+
+        ArrayList<FarmLot> lot = new ArrayList<FarmLot>();
+
+        for (int dx = (row > 0 ? -1 : 0); dx <= (row < n ? 1 : 0);
+         ++dx) {
+ 
+        // Deviation of the column that
+        // gets adjusted according to
+        // the provided position
+        for (int dy = (col > 0 ? -1 : 0);
+            dy <= (col < m ? 1 : 0); ++dy) {
+            if (dx != 0 || dy != 0) {
+            lot.add(farmLot[row + dx][col + dy]);
+            }
+        }
+        }
+    
+        // Returning the vector array
+        return lot;
+    }
+
+    public int getAdjacentCount(int row, int col) {
+        ArrayList<FarmLot> adjacentLots = getAdjacent(farmLot, row, col);
+        int adjacentCount = 0;
+
+        for(int i = 0; i < adjacentLots.size(); i++) {
+            if( adjacentLots.get(i).getOccupied() == true ||
+                adjacentLots.get(i).getRockedStatus() == true)
+                adjacentCount++;
+        }
+        return adjacentCount;
+    }
+
     /** 
      * To plant a seed on the tile
      * @param lot   the tile where to plant a seed
@@ -345,7 +433,7 @@ public class MyFarm {
                 //if no seed
                 else {
                     //checks if the name of seed passes exists
-                    for(Seed s: getSeed()){
+                    for(Seed s: getAllSeed()){
                         //if found
                         if(s.getName().equalsIgnoreCase(seedName)) {
                             found = true;
@@ -355,8 +443,9 @@ public class MyFarm {
                                 // check if the tiles beside the selected tile is occupied
                                 // then proceed to if statement in "else"
                             // else:
-
+                            
                             if(farmer.getCoins() >= s.getCost()){
+                                
                                 lot.setSeed(new Seed(s));
                                 cost = s.getCost();
                                 result = true;
@@ -364,6 +453,7 @@ public class MyFarm {
 
                                 System.out.println("You have used " + cost + " objectcoins.");
                                 farmer.updateObjectCoins(farmer.getCoins() - cost);
+
                             }
                             else
                                 System.out.println("You do not have enough objectcoins");
@@ -644,8 +734,13 @@ public class MyFarm {
      *  Resets the data of the tile 
      */
     public void resetFarm() {
-        for(FarmLot f: this.farmLot)
-            f.resetFarmLot();
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
+                this.farmLot[i][j].resetFarmLot();
+            }
+        }
+        //for(FarmLot f: this.farmLot)
+            //f.resetFarmLot();
         removeSeed();
         removeTool();
         this.day = 1;

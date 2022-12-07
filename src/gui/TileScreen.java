@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
@@ -13,25 +14,29 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import main.FarmLot;
 import main.Main;
+import main.Seed;
 
 public class TileScreen {
     private MainScreen mainFrame;
     private Main player;
     private JFrame tileFrame;
-    private int index;
+    private int row, col, num;
     private String toolName;
 
-    public TileScreen(MainScreen frame, Main player, int index) {
+    public TileScreen(MainScreen frame, Main player, int row, int col, int num) {
         this.mainFrame = frame;
         this.player = player;
-        this.index = index;
+        this.row = row;
+        this.col = col;
+        this.num = num;
         initialize();
 		tileFrame.setVisible(true);
     }
 
     public void initialize() {
-        tileFrame = new JFrame("FarmLot #" + (index+1) + " Screen");
+        tileFrame = new JFrame("FarmLot #" + (num+1) + " Screen");
         tileFrame.setBounds(680, 280, 500, 400);
 		tileFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tileFrame.getContentPane().setLayout(null);
@@ -56,17 +61,37 @@ public class TileScreen {
 		plantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(player.getTile(index).getPlowStatus() == true) {
-                    if(player.getTile(index).getOccupied() == false) {
+                if(player.getTile(row, col).getPlowStatus() == true) {
+                    if(player.getTile(row, col).getOccupied() == false) {
                         Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
                         String cropName = (String) crop;
-                        player.getFarm().plantSeed(player.getTile(index), cropName);
-                        int cost = player.getTile(index).getSeed().getCost();
 
-                        JOptionPane.showMessageDialog(tileFrame, player.getTile(index).getSeed().getName() +
-                            " has been planted.\n You lost " + cost +
-                            " objectCoins");
-                        setFarmStatus();
+                        Seed seed = player.getFarm().getSeed(cropName);
+                        if(seed.getType().equals("Fruit tree")) {
+                            if(player.getFarm().getAdjacentCount(row, col) != 0) {
+                                JOptionPane.showMessageDialog(tileFrame, "You can't plant " + 
+                                player.getFarm().getSeed(cropName).getName() + " because adjacent tiles are occupied");
+                            }
+                            else {
+                                player.getFarm().plantSeed(player.getTile(row, col), cropName);
+                                int cost = player.getTile(row, col).getSeed().getCost();
+                                
+                                JOptionPane.showMessageDialog(tileFrame, player.getTile(row, col).getSeed().getName() +
+                                    " has been planted.\n You lost " + cost +
+                                    " objectCoins");
+                                setFarmStatus();
+                            }
+
+                        }
+                        else {
+                            player.getFarm().plantSeed(player.getTile(row, col), cropName);
+                            int cost = player.getTile(row, col).getSeed().getCost();
+                            
+                            JOptionPane.showMessageDialog(tileFrame, player.getTile(row, col).getSeed().getName() +
+                                " has been planted.\n You lost " + cost +
+                                " objectCoins");
+                            setFarmStatus();
+                        }
                     }
                     else {
                         JOptionPane.showMessageDialog(tileFrame, "This tile already contains a plant!");
@@ -87,7 +112,7 @@ public class TileScreen {
 				Object tool = JOptionPane.showInputDialog(null, "Choose a tool", "Tool Selection", JOptionPane.QUESTION_MESSAGE,null, player.getToolNames(), "Plow");
                 toolName = (String) tool;
 
-				player.useTool(toolName, index);
+				player.useTool(toolName, row, col);
                 toolFeedBack();
                    
 				//toolName = JOptionPane.showInputDialog("What tool do you want to use?");
@@ -110,17 +135,17 @@ public class TileScreen {
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if( player.getTile(index).getOccupied() == true) {
-                    if(player.getTile(index).getHarvestStatus() == true) {
-                        player.getFarm().harvestTile(player.getFarm().getFarmLot(index));
-                        JOptionPane.showMessageDialog(tileFrame, player.getTile(index).getSeed().getName() + 
+                if( player.getTile(row, col).getOccupied() == true) {
+                    if(player.getTile(row, col).getHarvestStatus() == true) {
+                        player.getFarm().harvestTile(player.getFarm().getFarmLot(row, col));
+                        JOptionPane.showMessageDialog(tileFrame, player.getTile(row, col).getSeed().getName() + 
                         " has been harvested!\n");
                         //after harvesting, remove the seed and reset the farmlot
                         //player.getTile(index).getSeed().resetSeed();
-                        player.getTile(index).resetFarmLot();
+                        player.getTile(row, col).resetFarmLot();
                     }
                     else {
-                        JOptionPane.showMessageDialog(tileFrame, player.getTile(index).getSeed().getName() +
+                        JOptionPane.showMessageDialog(tileFrame, player.getTile(row, col).getSeed().getName() +
                             " is not yet harvestable.");
                     }
                 }
@@ -170,14 +195,14 @@ public class TileScreen {
     
     public void toolFeedBack() {
         if(toolName.equals("Pickaxe")) {
-            if(player.getTile(index).getRockedStatus() == true){
-                player.getTile(index).isRocked(false);
+            if(player.getTile(row, col).getRockedStatus() == true){
+                player.getTile(row, col).isRocked(false);
                 delay();
                 JOptionPane.showMessageDialog(tileFrame, "You have removed the rock on this tile!" + 
                     "\nYou lost " + player.getFarm().getTool(toolName).getCost() + " objectCoins!" + 
                     "\nYou have earned: " + player.getFarm().getTool(toolName).getXP() + " experience!");
             }
-            else if(player.getTile(index).getRockedStatus() == false)
+            else if(player.getTile(row, col).getRockedStatus() == false)
                 JOptionPane.showMessageDialog(tileFrame, "This tile does not have a rock");
         }
 
@@ -189,25 +214,25 @@ public class TileScreen {
 
         else if (!toolName.equals("Pickaxe") &&
                  !toolName.equals("Shovel")) {
-            if(player.getTile(index).getRockedStatus() == false) {
+            if(player.getTile(row, col).getRockedStatus() == false) {
                 if(toolName.equals("Plow")) {
-                    if(player.getTile(index).getPlowStatus() == false) {
-                        player.getTile(index).isPlowed(true);
+                    if(player.getTile(row, col).getPlowStatus() == false) {
+                        player.getTile(row, col).isPlowed(true);
                         delay();
                         JOptionPane.showMessageDialog(tileFrame, "You have plowed this tile." + 
                         "\nYou have earned: " + player.getFarm().getTool(toolName).getXP() + " experience!");
                     }
-                    else if(player.getTile(index).getPlowStatus() == true){
-                        if(player.getTile(index).getWitherStatus() == true) 
+                    else if(player.getTile(row, col).getPlowStatus() == true){
+                        if(player.getTile(row, col).getWitherStatus() == true) 
                             JOptionPane.showMessageDialog(tileFrame, "This tile contains a withered plant!");
                         else 
                             JOptionPane.showMessageDialog(tileFrame, "You have already plowed this tile!");
                     }
                 } 
                 
-                else if(player.getTile(index).getPlowStatus() == true) {
-                    if(player.getTile(index).getOccupied() == true) {
-                        if(player.getTile(index).getWitherStatus() == false) {
+                else if(player.getTile(row, col).getPlowStatus() == true) {
+                    if(player.getTile(row, col).getOccupied() == true) {
+                        if(player.getTile(row, col).getWitherStatus() == false) {
                             if(toolName.equals("Watering can")) {
                                 delay();
                                 JOptionPane.showMessageDialog(tileFrame, "You have watered this tile!" + 

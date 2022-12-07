@@ -1,12 +1,13 @@
 -Implement FarmerType [/] and its benefits
     [/] -create a method in farmer.java to allow a farmer to register to higher farmertypes
-    -include its benefits
--Implement availableSpace in MyFarm like (include totalSpace as initial number of availableSpace tapos mag ssubtract lang kada magtatanim)
+    -MISSING Benefits:
+        =increase Water and fertilizer bonus limits
+[/]-Implement availableSpace in MyFarm like (include totalSpace as initial number of availableSpace tapos mag ssubtract lang kada magtatanim)
 
-// Q: Can he skip farmer types (ex: distinguished farmer without being a registered farmer)
+[/]// Q: Can he skip farmer types (ex: distinguished farmer without being a registered farmer)
     A: No, dapat mag register muna sa prior farmer type.
 
--Plant seed
+[/]-Plant seed (DONE NAAA)
     -the fruit tree crop has a special planting condition. 
     Aside from needing enough money to buy the seed and having the tile plowed, 
     there should be no tiles next to the selected tile with any objects. 
@@ -26,7 +27,7 @@ Main.java
 
 
 GUI
--Codes for actionlisteners of buttons for methods above^^
+[/]-Codes for actionlisteners of buttons for methods above^^
 -Seeds
 -Tools
 -Rocks 

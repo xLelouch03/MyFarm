@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import seeds.*;
 import tools.*;
 import gui.*;
@@ -66,20 +65,26 @@ public class Main {
      * Prepares the farm land with 50 tiles in total
      */
     public void prepareTiles() {
-        for(int i = 0; i < 50; i++)
-            farm.addTile();
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
+                farm.addTile(i,j);
+            }
+        }
     }
 
     public MyFarm getFarm() {
         return this.farm;
     }
 
-    public ArrayList<FarmLot> getFarmLots() {
+    public FarmLot[][] getFarmLots() {
         return farm.getAllFarmLot();
     }
+    //public ArrayList<FarmLot> getFarmLots() {
+        //return farm.getAllFarmLot();
+    //}
 
-    public FarmLot getTile(int index) {
-        return farm.getFarmLot(index);
+    public FarmLot getTile(int row, int col) {
+        return farm.getFarmLot(row, col);
     }
 
     public int getFarmSpace() {
@@ -110,8 +115,8 @@ public class Main {
         return farm.getFarmer().getType();
     }
 
-    public boolean getOccupied(int index) {
-        return farm.getFarmLot(index).getOccupied();
+    public boolean getOccupied(int row, int col) {
+        return farm.getFarmLot(row,col).getOccupied();
     }
 
     public void nextDay() {
@@ -119,7 +124,7 @@ public class Main {
     }
 
     public String[] getSeedNames() {
-        String[] seedName = new String[farm.getSeed().size()];
+        String[] seedName = new String[farm.getAllSeed().size()];
         seedName[0] = "Turnip";
         seedName[1] = "Carrot";
         seedName[2] = "Potato";
@@ -151,22 +156,23 @@ public class Main {
 
         return type;
     }
+
     public void getSeedInfo(String crop){
         
 
     }
 
-    public void useTool(String toolName, int index) {
+    public void useTool(String toolName, int row, int col) {
         if(toolName.equalsIgnoreCase("plow")) 
-            farm.usePlow(getTile(index), farm.getTool(toolName));
+            farm.usePlow(getTile(row, col), farm.getTool(toolName));
         else if(toolName.equalsIgnoreCase("watering can"))
-            farm.useWaterCan(getTile(index), farm.getTool(toolName));
+            farm.useWaterCan(getTile(row, col), farm.getTool(toolName));
         else if(toolName.equalsIgnoreCase("fertilizer"))
-            farm.useFertilizer(getTile(index), farm.getTool(toolName));
+            farm.useFertilizer(getTile(row, col), farm.getTool(toolName));
         else if(toolName.equalsIgnoreCase("pickaxe"))
-            farm.usePickaxe(getTile(index), farm.getTool(toolName));
+            farm.usePickaxe(getTile(row, col), farm.getTool(toolName));
         else if(toolName.equalsIgnoreCase("shovel"))
-            farm.useShovel(getTile(index), farm.getTool(toolName)); 
+            farm.useShovel(getTile(row, col), farm.getTool(toolName)); 
     }
 
     public void harvestCrop(int index) {

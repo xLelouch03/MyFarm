@@ -31,7 +31,7 @@ public class MainScreen{
 	private JLabel availableSpaceLabel;
 	private JLabel farmerNameLabel;
 	private JLabel objectCoinLabel;
-	private int tileNum = 0;			
+	//private int row, col;			
 
     public MainScreen(Main player) {
         this.player = player;
@@ -280,17 +280,18 @@ public class MainScreen{
 
 		rightPanel.setLayout(new GridLayout(10,5));
 		mainFrame.getContentPane().add(rightPanel);
-
+		int tileNum = 0;
 		tileButtons = new JButton[10][5];
-		int index = 0;
 		for(i = 0; i < 10; i++) {
 			for(j = 0; j < 5; j++) {
-				int num = index;
+				int row = i;
+				int col = j;
+				int num = tileNum;
 				tileButtons[i][j] = new JButton(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farmlot.jpg"));
 				tileButtons[i][j].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new TileScreen(getMain(),player, num);
+						new TileScreen(getMain(),player, row, col, num);
 						/*player.getTile(num);
 						tileNum = num;
 						if(player.getTile(num).getSeed() != null) {
@@ -305,7 +306,7 @@ public class MainScreen{
 					}
 				});
 				rightPanel.add(tileButtons[i][j]);
-				index++;
+				tileNum++;
 			}
 		}
 	}
