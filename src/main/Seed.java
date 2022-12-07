@@ -110,6 +110,10 @@ public class Seed {
         return basePrice;
     }
 
+    public void setBasePrice(int bonusEarning) {
+        basePrice += bonusEarning;
+    }
+
     public double getXP() {
         return xp;
     }
@@ -122,6 +126,9 @@ public class Seed {
         return cost;
     }
     
+    public void setCost(int reduction) {
+        cost -= reduction;
+    }
     /** 
      * Gets the computed harvest total from the seed
      * 

@@ -114,6 +114,7 @@ public class MainScreen{
             public void actionPerformed(ActionEvent e) {
                 player.nextDay();
 				dayLabel.setText("Day: " + player.getDayCount()); //changes what is displayed on the mainFrame
+				setFarmStatus();
             }
         });
 		nextDayButton.setBounds(35, 11, 268, 50);
@@ -231,20 +232,43 @@ public class MainScreen{
 		leftPanel.add(toolButton);
 		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-		//remove
-		/*
-		JButton harvestButton = new JButton("Harvest a crop");
-		harvestButton.addActionListener(new ActionListener() {
+		JButton registerButton = new JButton("Register Farmer");
+		registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.getFarm().harvestTile(player.getFarm().getFarmLot(tileNum));
-				setFarmStatus();
+				Object type = JOptionPane.showInputDialog(null, "Register Farmer", "Farmer Type Selection", 
+					JOptionPane.QUESTION_MESSAGE,null, player.getTypes(), "Registered Farmer");
+
+				String farmerType = (String) type;
+
+				if(	(player.getFarm().getFarmer().getLevel() < 5 && farmerType.equals("Registered Farmer")) || 
+					(player.getFarm().getFarmer().getLevel() < 10 && farmerType.equals("Distinguished Farmer")) ||
+					(player.getFarm().getFarmer().getLevel() < 15 && farmerType.equals("Legendary Farmer"))) {
+					JOptionPane.showMessageDialog(mainFrame, "You have not reached the minimum level to register.");
+				}
+				else if((player.getFarm().getFarmer().getLevel() >= 5 && player.getFarmerCoins() < 200 && farmerType.equals("Registered Farmer")) || 
+						(player.getFarm().getFarmer().getLevel() >= 10 && player.getFarmerCoins() < 300 && farmerType.equals("Distinguished Farmer")) ||
+						(player.getFarm().getFarmer().getLevel() >= 15 && player.getFarmerCoins() < 400 && farmerType.equals("Legendary Farmer"))) {
+					JOptionPane.showMessageDialog(mainFrame, "You have not reached the minimum objectCoins to register.");
+				}
+
+				else if(farmerType.equals("Distinguished Farmer") && !player.getFarm().getFarmer().getType().equals("Registered Farmer")) {
+					JOptionPane.showMessageDialog(mainFrame, "You must register as Registered Farmer first.");
+				}
+
+				else if(farmerType.equals("Legendary Farmer") && !player.getFarm().getFarmer().getType().equals("Distinguished Farmer")) {
+					JOptionPane.showMessageDialog(mainFrame, "You must register as Distinguished Farmer first.");
+				}
+				else {
+					player.getFarm().registerFarmer(farmerType);
+					setFarmStatus();
+				}
             }
         });
-		harvestButton.setBounds(35, 255, 268, 50);
-		leftPanel.add(harvestButton);
-		harvestButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		*/
+		registerButton.setBounds(35, 255, 268, 50);
+		leftPanel.add(registerButton);
+		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
 
 	}
 
@@ -286,11 +310,42 @@ public class MainScreen{
 		}
 	}
 	
+	public void checkLevel() {
+        int tempLevel = player.getFarmerLevel();
+        int level = player.getFarmerLevel(); 
+        level = (int) player.getFarmerXP() / 100;
+
+        if(tempLevel < level)
+            JOptionPane.showMessageDialog(mainFrame, "You have leveled up!");
+    }
+
 	//updates what is being displayed on the mainFrame Farm Status top panel
 	public void setFarmStatus() {
+		checkLevel();
+		typeLabel.setText("Farmer Type: " + player.getFarmerType());
 		expLabel.setText("Farmer XP: " + player.getFarmerXP());
 		levelLabel.setText("Farmer Level: " + player.getFarmerLevel());
 		objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
+
+		if(!player.getFarm().isRunning()) {
+			if(player.getFarm().getWitherCount() == 50) {
+				JOptionPane.showMessageDialog(mainFrame, "All of your tiles contain a withered plant");
+			}
+
+			else if(player.getFarm().getAvailableSpace() == 50 && player.getFarmerCoins() < 5){
+				JOptionPane.showMessageDialog(mainFrame, "You don't have enough objectCoins to buy a seed" +
+				"\nYou also don't have any active crops");
+			}
+
+            if(JOptionPane.showConfirmDialog(mainFrame, "Do you want to play again?", 
+				"Game has ended", JOptionPane.YES_NO_OPTION) == 1) {
+                closeFrame();
+            }
+            else {
+                closeFrame();
+                player.openSetupScreen();
+            }
+        } 
 	}
 
 	//closes the frame

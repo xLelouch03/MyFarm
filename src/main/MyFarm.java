@@ -13,6 +13,7 @@ public class MyFarm {
     private ArrayList<Tool> tool;
     private int day;
     private int totalSpace;
+    private int witherCount;
     //private int availableSpace;
 
     /**
@@ -45,6 +46,45 @@ public class MyFarm {
     public Farmer getFarmer() {
         return farmer;
     }
+
+    public void registerFarmer(String farmerType) {
+        switch(farmerType){ 
+
+            case "Registered Farmer":
+                if (farmer.getLevel() >= 5 && farmer.getCoins() >= 200){
+                    farmer.setFarmerType(farmerType); 
+                    farmer.updateObjectCoins(farmer.getCoins() - 200);
+                    for(Seed s: seed) {
+                        s.setBasePrice(1);
+                        s.setCost(1);
+                    }
+                } 
+                break;
+            
+            case "Distinguished Farmer":
+                if (farmer.getLevel() >= 10 && farmer.getCoins() >= 300){
+                    farmer.setFarmerType(farmerType); 
+                    farmer.updateObjectCoins(farmer.getCoins() - 300);
+                    for(Seed s: seed) {
+                        s.setBasePrice(2);
+                        s.setCost(2);
+                    }
+                } 
+                break;
+
+            case "Legendary Farmer":
+                if (farmer.getLevel() >= 15 && farmer.getCoins() >= 400){
+                    farmer.setFarmerType(farmerType); 
+                    farmer.updateObjectCoins(farmer.getCoins() - 400);
+                    for(Seed s: seed) {
+                        s.setBasePrice(4);
+                        s.setCost(3);
+                    }
+                } 
+                break;
+
+        }
+    } 
     
     /**
      * Adds a farmLot to the farm
@@ -179,12 +219,15 @@ public class MyFarm {
         }
     }
 
+    public int getWitherCount() {
+        return this.witherCount;
+    }
     /*
      * Checks if the game is still running
      * @return the game status
      */
     public boolean isRunning() {
-        int witherCount = 0;
+        witherCount = 49;
 
 
         //checks how many tiles contain withered plant
@@ -290,6 +333,7 @@ public class MyFarm {
     public void plantSeed(FarmLot lot, String seedName) {
         boolean result = false;
         boolean found = false;
+        int cost;
 
         //checks if tile contains a withered plant
         if(lot.getWitherStatus() == false) {
@@ -314,11 +358,12 @@ public class MyFarm {
 
                             if(farmer.getCoins() >= s.getCost()){
                                 lot.setSeed(new Seed(s));
-                                //lot.isOccupied(true);
+                                cost = s.getCost();
                                 result = true;
                                 System.out.println(s.getName() + " has been planted.");
-                                System.out.println("You have used " + s.getCost() + " objectcoins.");
-                                farmer.updateObjectCoins(farmer.getCoins() - s.getCost());
+
+                                System.out.println("You have used " + cost + " objectcoins.");
+                                farmer.updateObjectCoins(farmer.getCoins() - cost);
                             }
                             else
                                 System.out.println("You do not have enough objectcoins");
@@ -524,6 +569,7 @@ public class MyFarm {
                 if(lot.isHarvestable() == true) {
                     System.out.println("\n[Harvest Details]");
                     int numProduced = lot.getSeed().getProductProduced();
+
                     System.out.println("The seed produced " + numProduced + " " +
                     lot.getSeed().getName());
                     

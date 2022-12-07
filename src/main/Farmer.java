@@ -54,14 +54,18 @@ public class Farmer {
      * @return int level    Get level number
      */
     public int getLevel() {
-        int tempLevel = level;
+        /*int tempLevel = level;
         level = (int) getXP() / 100;
 
         if(tempLevel < level)
-            System.out.println("\nYou have leveled up!\n");
+            System.out.println("\nYou have leveled up!\n");*/
 
         return level;
     } 
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     /** 
      * Get XP count 
@@ -83,35 +87,35 @@ public class Farmer {
      * Allow farmer to register to higher farmerTypes 
      */
 
-    public void registerFarmerType(String farmerType){
-
-        switch(farmerType){ 
+    public void setFarmerType(String farmerType){
+        this.type = farmerType;
+        /*switch(farmerType){ 
 
             case "Registered Farmer":
                 if (this.getLevel() <= 5 && this.getCoins() <= 200){
                     this.type = "Registered Farmer";
-                    this.objectCoins = this.getCoins() - 200;
+                    this.objectCoins -= - 200;
                 } 
                 break;
             
             case "Distinguished Farmer":
                 if (this.getLevel() <= 10 && this.getCoins() <= 300){
                     this.type = "Registered Farmer";
-                    this.objectCoins = this.getCoins() - 300;
+                    this.objectCoins -= 300;
                 } 
                 break;
 
             case "Legendary Farmer":
                 if (this.getLevel() <= 15 && this.getCoins() <= 400){
                     this.type = "Registered Farmer";
-                    this.objectCoins = this.getCoins() - 400;
+                    this.objectCoins -= 400;
                 } 
                 break;
 
             default:
                 this.type = this.getType();
 
-        }
+        }*/
 
     }
 

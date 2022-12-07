@@ -61,9 +61,10 @@ public class TileScreen {
                         Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
                         String cropName = (String) crop;
                         player.getFarm().plantSeed(player.getTile(index), cropName);
-    
+                        int cost = player.getTile(index).getSeed().getCost();
+
                         JOptionPane.showMessageDialog(tileFrame, player.getTile(index).getSeed().getName() +
-                            " has been planted.\n You lost " + player.getTile(index).getSeed().getCost() +
+                            " has been planted.\n You lost " + cost +
                             " objectCoins");
                         setFarmStatus();
                     }
@@ -233,16 +234,37 @@ public class TileScreen {
         }
     }
 
+    public void checkLevel() {
+        int tempLevel = player.getFarmerLevel();
+        int level = (int) player.getFarmerXP() / 100;
+        player.getFarm().getFarmer().setLevel(level);
+
+        if(tempLevel < level)
+            JOptionPane.showMessageDialog(tileFrame, "You have leveled up!");
+    }
+
     public void setFarmStatus() { 
+        checkLevel();
         mainFrame.getAvailSpace().setText("Number of available tiles: " + player.getFarm().getAvailableSpace());
 		mainFrame.getExpLabel().setText("Farmer XP: " + player.getFarmerXP());
 		mainFrame.getLevelLabel().setText("Farmer Level: " + player.getFarmerLevel());
 		mainFrame.getCoinLabel().setText("Objectcoins: "+ player.getFarmerCoins());
 
+        
         if(!player.getFarm().isRunning()) {
-            if(JOptionPane.showConfirmDialog(tileFrame, "Do you want to play again?") == 1) {
-                tileFrame.dispose();
-                mainFrame.closeFrame();
+			if(player.getFarm().getWitherCount() == 50) {
+				JOptionPane.showMessageDialog(tileFrame, "All of your tiles contain a withered plant");
+			}
+
+			else if(player.getFarm().getAvailableSpace() == 50 && player.getFarmerCoins() < 5){
+				JOptionPane.showMessageDialog(tileFrame, "You don't have enough objectCoins to buy a seed" +
+				"\nYou also don't have any active crops");
+			}
+
+            if(JOptionPane.showConfirmDialog(tileFrame, "Do you want to play again?", 
+				"Game has ended", JOptionPane.YES_NO_OPTION) == 1) {
+                    tileFrame.dispose();
+                    mainFrame.closeFrame();
             }
             else {
                 tileFrame.dispose();
@@ -250,6 +272,7 @@ public class TileScreen {
                 player.openSetupScreen();
             }
         } 
+
 	}
 
     

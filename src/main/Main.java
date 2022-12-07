@@ -143,6 +143,14 @@ public class Main {
         return toolName;
     }
 
+    public String[] getTypes() {
+        String[] type = new String[3];
+        type[0] = "Registered Farmer";
+        type[1] = "Distinguished Farmer";
+        type[2] = "Legendary Farmer";
+
+        return type;
+    }
     public void getSeedInfo(String crop){
         
 
