@@ -3,6 +3,8 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
+
 // import java.awt.event.*;
 // import java.awt.*;
 import javax.swing.*;
@@ -245,8 +247,19 @@ public class MainScreen{
 				int row = i;
 				int col = j;
 				int num = tileNum;
-				tileButtons[i][j] = new JButton(""+(num+1));
-				tileButtons[i][j].setBackground(new Color(255,222,173));
+				
+				if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true) {
+					ImageIcon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile with rock.png");
+					tileButtons[i][j] = new JButton(""+(num+1), icon);
+					tileButtons[i][j].setVerticalTextPosition(JButton.TOP);
+    				tileButtons[i][j].setHorizontalTextPosition(JButton.CENTER);
+					tileButtons[i][j].setBorderPainted(true);
+					//tileButtons[i][j].setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile with rock.png"));
+				}
+				else {
+					tileButtons[i][j] = new JButton(""+(num+1));
+					tileButtons[i][j].setBackground(new Color(255,222,173));
+				}
 				tileButtons[i][j].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

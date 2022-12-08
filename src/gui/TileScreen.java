@@ -137,23 +137,35 @@ public class TileScreen {
     public void useTool() {
         delay();
         if(toolName.equals("Pickaxe")) {
+            if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true)
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
+
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePickaxe(player.getFarm().getFarmLot(row, col), 
-                                                        player.getFarm().getTool(toolName)));
+            player.getFarm().getTool(toolName)));
+             
         }
 
         else if(toolName.equals("Shovel")) {
+            if(player.getFarm().getFarmLot(row, col).getSeed() != null)
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().useShovel(player.getFarm().getFarmLot(row, col), 
                                                         player.getFarm().getTool(toolName)));
         }
 
         else if(toolName.equals("Plow")){
-            mainFrame.getTileButton(row, col).setBackground(new Color(139,69,19));
+            //mainFrame.getTileButton(row, col).setBackground(new Color(139,69,19));
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePlow(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
-            //mainFrame.getTileButton(row, col).setBackground(new Color(139,69,19));
+            if(player.getFarm().getFarmLot(row, col).getRockedStatus() == false && 
+                player.getFarm().getFarmLot(row, col).getOccupied() == false)
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\plowedTile.png"));
+
         }
 
         else if(toolName.equals("Watering can")) {
+            if(player.getFarm().getFarmLot(row, col).getSeed() != null)
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\wateredTile.png"));
+
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().useWaterCan(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
         }
