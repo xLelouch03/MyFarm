@@ -26,7 +26,7 @@ public class MainScreen{
     private JFrame mainFrame;
     private Main player;
 	private JButton[][] tileButtons;
-	private TileScreen[][] tileScreenArray;
+	private TileScreen tileScreenOpened;
 	private JLabel nextDayLabel;
 	private JLabel expLabel;
 	private JLabel dayLabel;
@@ -119,6 +119,7 @@ public class MainScreen{
             public void actionPerformed(ActionEvent e) {
                 //player.nextDay();
 				nextDayLabel.setText(player.getFarm().advanceNextDay());
+				
 				dayLabel.setText("Day: " + player.getFarm().getDay()); //changes what is displayed on the mainFrame
 				//nextDayLabel.setText(player.getFarm().advanceNextDay());
 				setFarmStatus();
@@ -183,10 +184,10 @@ public class MainScreen{
 		rightPanel.setLayout(new GridLayout(5,10));
 		mainFrame.getContentPane().add(rightPanel);
 		int tileNum = 0;
-		tileButtons = new JButton[10][5];
-		tileScreenArray = new TileScreen[10][5];
-		for(i = 0; i < 10; i++) {
-			for(j = 0; j < 5; j++) {
+		tileButtons = new JButton[5][10];
+
+		for(i = 0; i < 5; i++) {
+			for(j = 0; j < 10; j++) {
 				int row = i;
 				int col = j;
 				int num = tileNum;
@@ -194,11 +195,6 @@ public class MainScreen{
 				if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true) {
 					ImageIcon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile with rock.png");
 					tileButtons[i][j] = new JButton(icon);
-					tileButtons[i][j].setText(""+(num+1));
-					//tileButtons[i][j].setVerticalTextPosition(JButton.TOP);
-    				//tileButtons[i][j].setHorizontalTextPosition(JButton.CENTER);
-					tileButtons[i][j].setBorderPainted(true);
-					//tileButtons[i][j].setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile with rock.png"));
 				}
 				else {
 					tileButtons[i][j] = new JButton(""+(num+1));
@@ -207,7 +203,7 @@ public class MainScreen{
 				tileButtons[i][j].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						tileScreenArray[row][col] = new TileScreen(getMain(), player, row, col, num);
+						tileScreenOpened = new TileScreen(getMain(), player, row, col, num);
 						rowIndex = row;
 						colIndex = col;
 					}
@@ -229,13 +225,18 @@ public class MainScreen{
 		nextDayLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		nextDayLabel.setBounds(10, 50, 347, 240);
 		lowerLeftPanel.add(nextDayLabel);
+		JScrollPane nextDayScroll = new JScrollPane(nextDayLabel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		nextDayScroll.setBounds(5, 5, 340, 330);
+		lowerLeftPanel.add(nextDayScroll);
+
+
 	}
 	public JButton getTileButton(int row, int col) {
 		return tileButtons[row][col];
 	}
 
 	public void closeTileScreen(int rowIndex, int colIndex) {
-		tileScreenArray[rowIndex][colIndex].closeTileFrame();		
+		tileScreenOpened.closeTileFrame();		
 	}
 
 	public void mainSetEnabled(boolean b) {
@@ -246,7 +247,6 @@ public class MainScreen{
         int tempLevel = player.getFarm().getFarmer().getLevel();
         
 		player.getFarm().getFarmer().setLevel((int)player.getFarm().getFarmer().getXP() / 100); 
-        //level = (int) player.getFarm().getFarmer().getXP() / 100;
 
         if(tempLevel < player.getFarm().getFarmer().getLevel())
             JOptionPane.showMessageDialog(mainFrame, "You have leveled up!");
@@ -260,6 +260,14 @@ public class MainScreen{
 		levelLabel.setText("Farmer Level: " + player.getFarm().getFarmer().getLevel());
 		objectCoinLabel.setText("Objectcoins: "+ player.getFarm().getFarmer().getCoins());
 		availableSpaceLabel.setText("Number of available tiles: " + player.getFarm().getAvailableSpace());
+
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 10; j++) {
+				if(player.getFarm().getFarmLot(i, j).getWitherStatus() == true) {
+					tileButtons[i][j].setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\withered tile.png"));
+				}
+			}
+		}
 
 		if(!player.getFarm().isRunning()) {
 			JOptionPane.showMessageDialog(mainFrame, player.getFarm().gameEnded());
