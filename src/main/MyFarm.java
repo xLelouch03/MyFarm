@@ -78,7 +78,7 @@ public class MyFarm {
                             s.setBasePrice(1);
                             s.setCost(1);
                         }
-                        registerPrompt += "You are now a " + farmerType + "\nBonuses:\n" +
+                        registerPrompt += "You have used 200 objectCoins to register\n" + "You are now a " + farmerType + "\nBonuses:\n" +
                                             "Seed cost is reduced with 1 objectCoin\n" + 
                                             "1 bonus earnings per produce";
                     } 
@@ -92,7 +92,7 @@ public class MyFarm {
                             s.setBasePrice(2);
                             s.setCost(2);
                         }
-                        registerPrompt += "You are now a " + farmerType + "\nBonuses:\n" +
+                        registerPrompt += "You have used 300 objectCoins to register\n" + "You are now a " + farmerType + "\nBonuses:\n" +
                                             "Seed cost is reduced with 2 objectCoins\n" + 
                                             "2 bonus earnings per produce";
                     } 
@@ -106,7 +106,7 @@ public class MyFarm {
                             s.setBasePrice(4);
                             s.setCost(3);
                         }
-                        registerPrompt += "You are now a " + farmerType + "\nBonuses:\n" +
+                        registerPrompt += "You have used 400 objectCoins to register\n" + "You are now a " + farmerType + "\nBonuses:\n" +
                                             "Seed cost is reduced with 4 objectCoins\n" + 
                                             "3 bonus earnings per produce";
                     } 
@@ -277,7 +277,7 @@ public class MyFarm {
      * @return the game status
      */
     public boolean isRunning() {
-        witherCount = 0;
+        witherCount = 49;
 
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 5; j++) {
@@ -293,6 +293,22 @@ public class MyFarm {
         return true;
     }
     
+    public String gameEnded() {
+        String gameEndedPrompt = "";
+
+        if(!isRunning()) {
+            if(getWitherCount() == 50) {
+                gameEndedPrompt += "All of your tiles contain a withered plant";
+            }
+    
+            else if(getAvailableSpace() == 50 && farmer.getCoins() < 5){
+                gameEndedPrompt += "You don't have enough objectCoins to buy a seed" +
+                "\nYou also don't have any active crops";
+            }
+        }
+
+        return gameEndedPrompt;
+    }
     /** 
      * Defines and adds a seed to the seed array list
      * 
@@ -576,6 +592,8 @@ public class MyFarm {
                         fertilizerPrompt += "\nTile is now fertilized ";
                         farmer.updateObjectCoins(farmer.getCoins() - fertilizer.getCost());
                         farmer.updateXP(farmer.getXP() + fertilizer.getXP());
+
+                        fertilizerPrompt += "\nYou have used " + fertilizer.getCost() + " objectCoins";
                         fertilizerPrompt += "\nYou have gained " + fertilizer.getXP() + " experience.\n";
                             //System.out.println("You have gained " + fertilizer.getXP() + " experience.\n");
 
@@ -671,7 +689,7 @@ public class MyFarm {
                     //if shovel is used on unplowed tile
                     else
                         shovelPrompt += "Nothing happened but... \n";
-                        System.out.println("Nothing happened but... \n");
+                        //System.out.println("Nothing happened but... \n");
                 }
                 //if tile contains a withered plant
                 else {

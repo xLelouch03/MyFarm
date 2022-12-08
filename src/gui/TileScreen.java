@@ -3,7 +3,6 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
@@ -14,9 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import main.FarmLot;
 import main.Main;
-import main.Seed;
 
 public class TileScreen {
     private MainScreen mainFrame;
@@ -65,7 +62,8 @@ public class TileScreen {
                 String cropName = (String) crop;
 
                 JOptionPane.showMessageDialog(tileFrame, player.getFarm().plantSeed(cropName, row, col));
-                setFarmStatus();
+                mainFrame.setFarmStatus();
+                checkGameCondition();
             }
         });
 		plantButton.setBounds(60, 75, 268, 50);
@@ -80,8 +78,8 @@ public class TileScreen {
                 toolName = (String) tool;
 
                 useTool();
-				
-				setFarmStatus();
+				mainFrame.setFarmStatus();
+                checkGameCondition();
             }
         });
 		toolButton.setBounds(60, 10, 268, 50);
@@ -92,8 +90,9 @@ public class TileScreen {
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(tileFrame, player.getFarm().harvestTile(player.getTile(row, col)));
-				setFarmStatus();
+                JOptionPane.showMessageDialog(tileFrame, player.getFarm().harvestTile(player.getFarm().getFarmLot(row, col)));
+				mainFrame.setFarmStatus();
+                checkGameCondition();
             }
         });
 		harvestButton.setBounds(60, 140, 268, 50);
@@ -104,7 +103,7 @@ public class TileScreen {
         tileInfoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(tileFrame, player.getFarm().displayTileInfo(player.getTile(row, col)));
+                JOptionPane.showMessageDialog(tileFrame, player.getFarm().displayTileInfo(player.getFarm().getFarmLot(row, col)));
             }
         });
         tileInfoButton.setBounds(60, 205, 268, 50);
@@ -135,57 +134,43 @@ public class TileScreen {
     public void useTool() {
         delay();
         if(toolName.equals("Pickaxe")) {
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePickaxe(player.getTile(row, col), 
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePickaxe(player.getFarm().getFarmLot(row, col), 
                                                         player.getFarm().getTool(toolName)));
         }
 
         else if(toolName.equals("Shovel")) {
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useShovel(player.getTile(row, col), 
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useShovel(player.getFarm().getFarmLot(row, col), 
                                                         player.getFarm().getTool(toolName)));
         }
 
         else if(toolName.equals("Plow")){
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePlow(player.getTile(row, col), 
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePlow(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
         }
 
         else if(toolName.equals("Watering can")) {
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useWaterCan(player.getTile(row, col), 
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useWaterCan(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
         }
 
         else if(toolName.equals("Fertilizer")) {
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useFertilizer(player.getTile(row, col), 
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useFertilizer(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
         }
     }
 
     public void checkLevel() {
-        int tempLevel = player.getFarmerLevel();
-        int level = (int) player.getFarmerXP() / 100;
-        player.getFarm().getFarmer().setLevel(level);
+        int tempLevel = player.getFarm().getFarmer().getLevel();
+        //int level = (int) player.getFarm().getFarmer().getLevel() / 100;
+        player.getFarm().getFarmer().setLevel((int) player.getFarm().getFarmer().getLevel() / 100);
 
-        if(tempLevel < level)
+        if(tempLevel < player.getFarm().getFarmer().getLevel())
             JOptionPane.showMessageDialog(tileFrame, "You have leveled up!");
     }
 
-    public void setFarmStatus() { 
-        checkLevel();
-        mainFrame.getAvailSpace().setText("Number of available tiles: " + player.getFarm().getAvailableSpace());
-		mainFrame.getExpLabel().setText("Farmer XP: " + player.getFarmerXP());
-		mainFrame.getLevelLabel().setText("Farmer Level: " + player.getFarmerLevel());
-		mainFrame.getCoinLabel().setText("Objectcoins: "+ player.getFarmerCoins());
-
-        
+    public void checkGameCondition() {      
         if(!player.getFarm().isRunning()) {
-			if(player.getFarm().getWitherCount() == 50) {
-				JOptionPane.showMessageDialog(tileFrame, "All of your tiles contain a withered plant");
-			}
-
-			else if(player.getFarm().getAvailableSpace() == 50 && player.getFarmerCoins() < 5){
-				JOptionPane.showMessageDialog(tileFrame, "You don't have enough objectCoins to buy a seed" +
-				"\nYou also don't have any active crops");
-			}
+			JOptionPane.showMessageDialog(tileFrame, player.getFarm().gameEnded());
 
             if(JOptionPane.showConfirmDialog(tileFrame, "Do you want to play again?", 
 				"Game has ended", JOptionPane.YES_NO_OPTION) == 1) {
@@ -198,8 +183,5 @@ public class TileScreen {
                 player.openSetupScreen();
             }
         } 
-
-	}
-
-    
+	}    
 }

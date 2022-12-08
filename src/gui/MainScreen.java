@@ -62,17 +62,17 @@ public class MainScreen{
 		titleLabel.setBounds(10, 11, 185, 24);
 		topPanel.add(titleLabel);
 
-        farmerNameLabel = new JLabel("Farmer Name: "+ player.getFarmerName()); //insert farmer.getLevel();
+        farmerNameLabel = new JLabel("Farmer Name: "+ player.getFarm().getFarmer().getName()); //insert farmer.getLevel();
 		farmerNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		farmerNameLabel.setBounds(380, 11, 347, 24);
 		topPanel.add(farmerNameLabel);
 
-        expLabel = new JLabel("Farmer XP: " + player.getFarmerXP()); //insert farmer.getType();
+        expLabel = new JLabel("Farmer XP: " + player.getFarm().getFarmer().getXP()); //insert farmer.getType();
 		expLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		expLabel.setBounds(750, 11, 347, 24);
 		topPanel.add(expLabel);
 
-		typeLabel = new JLabel("Farmer Type: " + player.getFarmerType()); //insert farmer.getXP();
+		typeLabel = new JLabel("Farmer Type: " + player.getFarm().getFarmer().getType()); //insert farmer.getXP();
 		typeLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		typeLabel.setBounds(1150, 11, 347, 24);
 		topPanel.add(typeLabel);
@@ -82,18 +82,18 @@ public class MainScreen{
 		availableSpaceLabel.setBounds(10, 43, 237, 24);
 		topPanel.add(availableSpaceLabel);
 
-        levelLabel = new JLabel("Farmer Level: " + player.getFarmerLevel()); //insert farmer.getName();
+        levelLabel = new JLabel("Farmer Level: " + player.getFarm().getFarmer().getLevel()); 
 		levelLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		levelLabel.setBounds(380, 43, 347, 24);
 		topPanel.add(levelLabel);
         
-        objectCoinLabel = new JLabel("Objectcoins: "+ player.getFarmerCoins());
+        objectCoinLabel = new JLabel("Objectcoins: "+ player.getFarm().getFarmer().getCoins());
 		objectCoinLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		objectCoinLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		objectCoinLabel.setBounds(630, 43, 347, 24);
 		topPanel.add(objectCoinLabel);
 
-        dayLabel = new JLabel("Day: " + player.getDayCount()); 
+        dayLabel = new JLabel("Day: " + player.getFarm().getDay()); 
 		dayLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		dayLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dayLabel.setBounds(1080, 43, 185, 24);
@@ -112,7 +112,7 @@ public class MainScreen{
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.nextDay();
-				dayLabel.setText("Day: " + player.getDayCount()); //changes what is displayed on the mainFrame
+				dayLabel.setText("Day: " + player.getFarm().getDay()); //changes what is displayed on the mainFrame
 				setFarmStatus();
             }
         });
@@ -242,14 +242,11 @@ public class MainScreen{
 
 				JOptionPane.showMessageDialog(mainFrame,  player.getFarm().registerFarmer(farmerType));
 				setFarmStatus();
-				
             }
         });
 		registerButton.setBounds(35, 255, 268, 50);
 		leftPanel.add(registerButton);
 		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		
-
 	}
 
 	public void initRightPanel() {
@@ -281,35 +278,29 @@ public class MainScreen{
 	}
 	
 	public void checkLevel() {
-        int tempLevel = player.getFarmerLevel();
-        int level = player.getFarmerLevel(); 
-        level = (int) player.getFarmerXP() / 100;
+        int tempLevel = player.getFarm().getFarmer().getLevel();
+        
+		player.getFarm().getFarmer().setLevel((int)player.getFarm().getFarmer().getXP() / 100); 
+        //level = (int) player.getFarm().getFarmer().getXP() / 100;
 
-        if(tempLevel < level)
+        if(tempLevel < player.getFarm().getFarmer().getLevel())
             JOptionPane.showMessageDialog(mainFrame, "You have leveled up!");
     }
 
 	//updates what is being displayed on the mainFrame Farm Status top panel
 	public void setFarmStatus() {
 		checkLevel();
-		typeLabel.setText("Farmer Type: " + player.getFarmerType());
-		expLabel.setText("Farmer XP: " + player.getFarmerXP());
-		levelLabel.setText("Farmer Level: " + player.getFarmerLevel());
-		objectCoinLabel.setText("Objectcoins: "+ player.getFarmerCoins());
+		typeLabel.setText("Farmer Type: " + player.getFarm().getFarmer().getType());
+		expLabel.setText("Farmer XP: " + player.getFarm().getFarmer().getXP());
+		levelLabel.setText("Farmer Level: " + player.getFarm().getFarmer().getLevel());
+		objectCoinLabel.setText("Objectcoins: "+ player.getFarm().getFarmer().getCoins());
 
 		if(!player.getFarm().isRunning()) {
-			if(player.getFarm().getWitherCount() == 50) {
-				JOptionPane.showMessageDialog(mainFrame, "All of your tiles contain a withered plant");
-			}
-
-			else if(player.getFarm().getAvailableSpace() == 50 && player.getFarmerCoins() < 5){
-				JOptionPane.showMessageDialog(mainFrame, "You don't have enough objectCoins to buy a seed" +
-				"\nYou also don't have any active crops");
-			}
-
+			JOptionPane.showMessageDialog(mainFrame, player.getFarm().gameEnded());
             if(JOptionPane.showConfirmDialog(mainFrame, "Do you want to play again?", 
 				"Game has ended", JOptionPane.YES_NO_OPTION) == 1) {
                 closeFrame();
+				
             }
             else {
                 closeFrame();

@@ -76,49 +76,6 @@ public class Main {
         return this.farm;
     }
 
-    public FarmLot[][] getFarmLots() {
-        return farm.getAllFarmLot();
-    }
-    //public ArrayList<FarmLot> getFarmLots() {
-        //return farm.getAllFarmLot();
-    //}
-
-    public FarmLot getTile(int row, int col) {
-        return farm.getFarmLot(row, col);
-    }
-
-    public int getFarmSpace() {
-        return 50;
-    }
-
-    public int getDayCount() {
-        return farm.getDay();
-    }
-
-    public String getFarmerName() {
-        return farm.getFarmer().getName();
-    }
-
-    public double getFarmerXP() {
-        return farm.getFarmer().getXP();
-    }
-
-    public double getFarmerCoins() {
-        return farm.getFarmer().getCoins();
-    }
-
-    public int getFarmerLevel() {
-        return farm.getFarmer().getLevel();
-    }
-
-    public String getFarmerType() {
-        return farm.getFarmer().getType();
-    }
-
-    public boolean getOccupied(int row, int col) {
-        return farm.getFarmLot(row,col).getOccupied();
-    }
-
     public void nextDay() {
         farm.advanceNextDay();
     }
@@ -159,23 +116,6 @@ public class Main {
 
     public void getSeedInfo(String crop){
         
-
-    }
-
-    public void useTool(String toolName, int row, int col) {
-        if(toolName.equalsIgnoreCase("plow")) 
-            farm.usePlow(getTile(row, col), farm.getTool(toolName));
-        else if(toolName.equalsIgnoreCase("watering can"))
-            farm.useWaterCan(getTile(row, col), farm.getTool(toolName));
-        else if(toolName.equalsIgnoreCase("fertilizer"))
-            farm.useFertilizer(getTile(row, col), farm.getTool(toolName));
-        else if(toolName.equalsIgnoreCase("pickaxe"))
-            farm.usePickaxe(getTile(row, col), farm.getTool(toolName));
-        else if(toolName.equalsIgnoreCase("shovel"))
-            farm.useShovel(getTile(row, col), farm.getTool(toolName)); 
-    }
-
-    public void harvestCrop(int index) {
 
     }
 

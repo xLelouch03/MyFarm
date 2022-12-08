@@ -3,6 +3,6 @@ import main.Tool;
 
 public class Shovel extends Tool {
     public Shovel() {
-        super("Shovel", 7, 2);
+        super("Shovel", 99, 2);
     }
 }
