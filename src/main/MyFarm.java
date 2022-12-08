@@ -14,14 +14,13 @@ public class MyFarm {
     private int day;
     private int totalSpace;
     private int witherCount;
-    //private int availableSpace;
 
     /**
      * Constructs a farm by creating a farmlot, arraylist of seeds and tools,
      * setting the day to 1 and a farmer.
      */
     public MyFarm() {
-        this.farmLot = new FarmLot[10][5];
+        this.farmLot = new FarmLot[5][10];
         this.seed = new ArrayList<Seed>();
         this.tool = new ArrayList<Tool>();
         this.day = 1;
@@ -232,8 +231,8 @@ public class MyFarm {
             if(f.getSeed() != null)
                 occupiedTile++;*/
 
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 5; j++) {
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 10; j++) {
                 if(this.farmLot[i][j].getSeed() != null)
                     occupiedTile++;
             }
@@ -249,23 +248,23 @@ public class MyFarm {
         advanceDay();
         
         nextDayPrompt += "<html>You advanced to the next day...<br>";
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 5; j++) {
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 10; j++) {
                 if(this.farmLot[i][j].getSeed() != null) {
                     if(this.farmLot[i][j].getWitherStatus() == false) {
                         this.farmLot[i][j].getSeed().grow();
                         //Checks if crop reached more than the number of days 
                         if(this.farmLot[i][j].getSeed().getDayGrowth() > this.farmLot[i][j].getSeed().getHarvestTime()) {
-                            nextDayPrompt += "<br>Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + " in FarmLot (" + i + "," + j + "),";
+                            nextDayPrompt += "<br>Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + " <br>in FarmLot (" + i + "," + j + "), ";
                             //System.out.println("Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + ",");
-                            this.farmLot[i][j].isWithered(true);
+                            nextDayPrompt += this.farmLot[i][j].isWithered(true);
                         }
                         //checks if crop reach the harvest time and meet the minimum requirements to be harvested
                         else if(this.farmLot[i][j].getSeed().getDayGrowth() == this.farmLot[i][j].getSeed().getHarvestTime()) {
                             //if crop did not meet the minimum requirements
                             if(this.farmLot[i][j].isHarvestable() == false) {
                                 nextDayPrompt += "<br>" + this.farmLot[i][j].getSeed().getName() + " in FarmLot (" + i + "," + j + 
-                                    ") growed but did not get taken care of properly. ";
+                                    ") growed but did not get <br>taken care of properly. ";
                                 //System.out.println(this.farmLot[i][j].getSeed().getName() + " growed but did not get taken care of properly.");
                                 nextDayPrompt += this.farmLot[i][j].isWithered(true);
                             }
@@ -293,10 +292,10 @@ public class MyFarm {
      * @return the game status
      */
     public boolean isRunning() {
-        witherCount = 48;
+        witherCount = 0;
 
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 5; j++) {
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 10; j++) {
                 if(this.farmLot[i][j].getWitherStatus() == true)
                     witherCount++;
             }
@@ -854,8 +853,8 @@ public class MyFarm {
      *  Resets the data of the tile 
      */
     public void resetFarm() {
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 5; j++) {
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 10; j++) {
                 this.farmLot[i][j].resetFarmLot();
             }
         }

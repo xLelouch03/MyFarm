@@ -31,7 +31,7 @@ GUI
 -Seeds
 -Tools
 -Rocks 
--registerFarmerType
+[/]-registerFarmerType
 
 MainScreen.java
 -replace Plant a Seed -> View All Seeds (Kumbaga ididisplay mga information per seed)
@@ -51,8 +51,9 @@ TileScreen.java
 
 Feedbacks per action 
     MISSING/TO FIX:
-        -Advance to next day
+        [/]-Advance to next day
 
 Bugs:.
--Whenever game ends and multiple tilescreen is opened, only the last tilescreen opened will be closed.
+[/]-Whenever game ends and multiple tilescreen is opened, only the last tilescreen opened will be closed.
+    -Fixed by disabling mainscreen whenever a tilescreen is opened to avoid multiple opened tilescreen at once.
 [/]-Register Farmer can register multiple times lol

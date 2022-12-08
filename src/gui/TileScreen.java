@@ -39,7 +39,7 @@ public class TileScreen {
         tileFrame.setContentPane(new JLabel(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farm lot pic.jpg")));
 		tileFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tileFrame.getContentPane().setLayout(null);
-
+        mainFrame.mainSetEnabled(false);
         initPanel();
     }
 
@@ -117,6 +117,7 @@ public class TileScreen {
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mainFrame.mainSetEnabled(true);
                 tileFrame.dispose();
             }
         });
