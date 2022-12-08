@@ -235,7 +235,7 @@ public class MainScreen{
         rightPanel.setBounds(375,100,1135,670);
         rightPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 
-		rightPanel.setLayout(new GridLayout(10,5));
+		rightPanel.setLayout(new GridLayout(5,10));
 		mainFrame.getContentPane().add(rightPanel);
 		int tileNum = 0;
 		tileButtons = new JButton[10][5];
@@ -245,7 +245,8 @@ public class MainScreen{
 				int row = i;
 				int col = j;
 				int num = tileNum;
-				tileButtons[i][j] = new JButton(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farmlot.jpg"));
+				tileButtons[i][j] = new JButton(""+(num+1));
+				tileButtons[i][j].setBackground(new Color(255,222,173));
 				tileButtons[i][j].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -258,7 +259,10 @@ public class MainScreen{
 				tileNum++;
 			}
 		}
-		//enableMainScreen();
+	}
+
+	public JButton getTileButton(int row, int col) {
+		return tileButtons[row][col];
 	}
 
 	public void closeTileScreen(int rowIndex, int colIndex) {

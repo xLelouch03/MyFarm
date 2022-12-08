@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,6 +36,7 @@ public class TileScreen {
     public void initialize() {
         tileFrame = new JFrame("FarmLot #" + (num+1) + " Screen");
         tileFrame.setBounds(680, 280, 500, 400);
+        tileFrame.setContentPane(new JLabel(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farm lot pic.jpg")));
 		tileFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tileFrame.getContentPane().setLayout(null);
 
@@ -42,17 +44,18 @@ public class TileScreen {
     }
 
     public void initPanel() {
-        JLabel welcomeLabel = new JLabel("Choose an action to perform on this tile");
-        welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		welcomeLabel.setBounds(40, 5, 575, 44);
-		tileFrame.getContentPane().add(welcomeLabel);
-
         JPanel tilePanel = new JPanel();
-        tilePanel.setBounds(40,45,400,300);
+        tilePanel.setBounds(40,15,400,330);
         tilePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+        tilePanel.setBackground(new Color(255,228,196));
 		tileFrame.getContentPane().add(tilePanel);
 		tilePanel.setLayout(null);
+
+        JLabel welcomeLabel = new JLabel("Choose an action to perform on this tile");
+        welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		welcomeLabel.setBounds(40, 15, 575, 44);
+		tilePanel.add(welcomeLabel);
 
         JButton plantButton = new JButton("Plant a Seed");
 		plantButton.addActionListener(new ActionListener() {
@@ -66,7 +69,7 @@ public class TileScreen {
                 checkGameCondition();
             }
         });
-		plantButton.setBounds(60, 75, 268, 50);
+		plantButton.setBounds(60, 120, 268, 50);
 		tilePanel.add(plantButton);
 		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
@@ -82,7 +85,7 @@ public class TileScreen {
                 checkGameCondition();
             }
         });
-		toolButton.setBounds(60, 10, 268, 50);
+		toolButton.setBounds(60, 65, 268, 50);
 		tilePanel.add(toolButton);
 		toolButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
@@ -95,7 +98,7 @@ public class TileScreen {
                 checkGameCondition();
             }
         });
-		harvestButton.setBounds(60, 140, 268, 50);
+		harvestButton.setBounds(60, 175, 268, 50);
 		tilePanel.add(harvestButton);
 		harvestButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
@@ -106,7 +109,7 @@ public class TileScreen {
                 JOptionPane.showMessageDialog(tileFrame, player.getFarm().displayTileInfo(player.getFarm().getFarmLot(row, col)));
             }
         });
-        tileInfoButton.setBounds(60, 205, 268, 50);
+        tileInfoButton.setBounds(60, 230, 268, 50);
         tilePanel.add(tileInfoButton);
 		tileInfoButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
@@ -117,7 +120,7 @@ public class TileScreen {
                 tileFrame.dispose();
             }
         });
-        closeButton.setBounds(160, 265, 75,30);
+        closeButton.setBounds(160, 285, 75,30);
         tilePanel.add(closeButton);
         closeButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
 	}
@@ -144,8 +147,10 @@ public class TileScreen {
         }
 
         else if(toolName.equals("Plow")){
+            mainFrame.getTileButton(row, col).setBackground(new Color(139,69,19));
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePlow(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
+            //mainFrame.getTileButton(row, col).setBackground(new Color(139,69,19));
         }
 
         else if(toolName.equals("Watering can")) {
