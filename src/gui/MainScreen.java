@@ -127,31 +127,9 @@ public class MainScreen{
 		viewPlantButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
 
-				String cropName = (String) crop;
-
-				// input JPanel then put Jtext in JPanel
-				JTextField seedName, cropType, harvestTime, waterNeeds, fertilizerNeeds, productProduced, seedCost, baseSellPrice, xpYield;  	
-
-				// show seedinfo
-				switch (cropName) {
-
-					case "Turnip":
-						// displays text under the selection
-							// 9 Rows
-						seedName = new JTextField("Turnip");
-						cropType = new JTextField("Root Crop");
-						
-						break;
-					
-					case "Rose":
-						//
-						break;
-
-					// ++
-						
-				}
+				SeedInfoScreen seedInfo = new SeedInfoScreen();
+				
             }
         });
 		viewPlantButton.setBounds(35, 90, 268, 50);
