@@ -13,12 +13,13 @@ public class SeedInfoScreen extends JFrame{
     //private Main player;
     private JFrame frame;
 
-    public void initSeedInfoScreen(){
+    public SeedInfoScreen() {
         initialize();
     }
 
     public void initialize(){
-        frame.setTitle("Seed Encyclopedia");
+        frame = new JFrame("Seed Encyclopedia");
+        //frame.setTitle("Seed Encyclopedia");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 400);
         frame.setLocationRelativeTo(null);
