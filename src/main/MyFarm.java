@@ -71,7 +71,10 @@ public class MyFarm {
         else {
             switch(farmerType){ 
                 case "Registered Farmer":
-                    if (farmer.getLevel() >= 5 && farmer.getCoins() >= 200){
+                    if(farmer.getType().equals(farmerType)) {
+                        registerPrompt += "You have already registered as " + farmerType;
+                    }
+                    else if (farmer.getLevel() >= 5 && farmer.getCoins() >= 200){
                         farmer.setFarmerType(farmerType); 
                         farmer.updateObjectCoins(farmer.getCoins() - 200);
                         for(Seed s: seed) {
@@ -85,7 +88,10 @@ public class MyFarm {
                     break;
                 
                 case "Distinguished Farmer":
-                    if (farmer.getLevel() >= 10 && farmer.getCoins() >= 300){
+                    if(farmer.getType().equals(farmerType)) {
+                        registerPrompt += "You have already registered as " + farmerType;
+                    }
+                    else if (farmer.getLevel() >= 10 && farmer.getCoins() >= 300){
                         farmer.setFarmerType(farmerType); 
                         farmer.updateObjectCoins(farmer.getCoins() - 300);
                         for(Seed s: seed) {
@@ -99,7 +105,10 @@ public class MyFarm {
                     break;
     
                 case "Legendary Farmer":
-                    if (farmer.getLevel() >= 15 && farmer.getCoins() >= 400){
+                    if(farmer.getType().equals(farmerType)) {
+                        registerPrompt += "You have already registered as " + farmerType;
+                    }
+                    else if (farmer.getLevel() >= 15 && farmer.getCoins() >= 400){
                         farmer.setFarmerType(farmerType); 
                         farmer.updateObjectCoins(farmer.getCoins() - 400);
                         for(Seed s: seed) {
@@ -277,7 +286,7 @@ public class MyFarm {
      * @return the game status
      */
     public boolean isRunning() {
-        witherCount = 49;
+        witherCount = 48;
 
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 5; j++) {

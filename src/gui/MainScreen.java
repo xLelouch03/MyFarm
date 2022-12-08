@@ -24,13 +24,15 @@ public class MainScreen{
     private JFrame mainFrame;
     private Main player;
 	private JButton[][] tileButtons;
+	private TileScreen[][] tileScreenArray;
 	private JLabel expLabel;
 	private JLabel dayLabel;
 	private JLabel levelLabel;
 	private JLabel typeLabel;
 	private JLabel availableSpaceLabel;
 	private JLabel farmerNameLabel;
-	private JLabel objectCoinLabel;		
+	private JLabel objectCoinLabel;	
+	private int rowIndex, colIndex;	
 
     public MainScreen(Main player) {
         this.player = player;
@@ -259,6 +261,7 @@ public class MainScreen{
 		mainFrame.getContentPane().add(rightPanel);
 		int tileNum = 0;
 		tileButtons = new JButton[10][5];
+		tileScreenArray = new TileScreen[10][5];
 		for(i = 0; i < 10; i++) {
 			for(j = 0; j < 5; j++) {
 				int row = i;
@@ -268,13 +271,24 @@ public class MainScreen{
 				tileButtons[i][j].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new TileScreen(getMain(),player, row, col, num);
+						tileScreenArray[row][col] = new TileScreen(getMain(), player, row, col, num);
+						rowIndex = row;
+						colIndex = col;
 					}
 				});
 				rightPanel.add(tileButtons[i][j]);
 				tileNum++;
 			}
 		}
+		//enableMainScreen();
+	}
+
+	public void closeTileScreen(int rowIndex, int colIndex) {
+		tileScreenArray[rowIndex][colIndex].closeTileFrame();		
+	}
+
+	public void mainSetEnabled(boolean b) {
+		mainFrame.setEnabled(b);
 	}
 	
 	public void checkLevel() {
@@ -294,15 +308,18 @@ public class MainScreen{
 		expLabel.setText("Farmer XP: " + player.getFarm().getFarmer().getXP());
 		levelLabel.setText("Farmer Level: " + player.getFarm().getFarmer().getLevel());
 		objectCoinLabel.setText("Objectcoins: "+ player.getFarm().getFarmer().getCoins());
+		availableSpaceLabel.setText("Number of available tiles: " + player.getFarm().getAvailableSpace());
 
 		if(!player.getFarm().isRunning()) {
 			JOptionPane.showMessageDialog(mainFrame, player.getFarm().gameEnded());
             if(JOptionPane.showConfirmDialog(mainFrame, "Do you want to play again?", 
 				"Game has ended", JOptionPane.YES_NO_OPTION) == 1) {
+				closeTileScreen(rowIndex, colIndex);
                 closeFrame();
 				
             }
             else {
+				closeTileScreen(rowIndex,colIndex);
                 closeFrame();
                 player.openSetupScreen();
             }

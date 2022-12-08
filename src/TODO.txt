@@ -58,6 +58,6 @@ Feedbacks per action
 
 
 
-
-
-Bugs:
+Bugs:.
+-Whenever game ends and multiple tilescreen is opened, only the last tilescreen opened will be closed.
+[/]-Register Farmer can register multiple times lol

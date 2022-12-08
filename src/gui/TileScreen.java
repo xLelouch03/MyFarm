@@ -168,6 +168,10 @@ public class TileScreen {
             JOptionPane.showMessageDialog(tileFrame, "You have leveled up!");
     }
 
+    public void closeTileFrame() {
+        tileFrame.dispose();
+    }
+
     public void checkGameCondition() {      
         if(!player.getFarm().isRunning()) {
 			JOptionPane.showMessageDialog(tileFrame, player.getFarm().gameEnded());
