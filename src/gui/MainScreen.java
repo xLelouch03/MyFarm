@@ -142,75 +142,14 @@ public class MainScreen{
 		leftPanel.add(viewPlantButton);
 		viewPlantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-		// TODO: "View All Seeds"
-			// Plant name lists (dropdown) [/]
-				// Show "see seed info" and "plant" buttons
-					// do action based on button selected
-					// see seed info = show a pop up w the seed info
-
-		/* 
-		JButton seedInfoButton = new JButton("Seed Info");
-		seedInfoButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e){
-
-				Object crop = JOptionPane.showInputDialog(null, "Choose a seed", "Seed Selection", JOptionPane.QUESTION_MESSAGE,null, player.getSeedNames(), "Turnip");
-				String cropName = (String) crop;
-
-				switch (cropName) {
-					
-					case "Turnip":
-						// create pop up window with details
-						break;
-					
-					case "Rose":
-						//
-						break;
-
-					// ++
-						
-				}
-
-			}
-
-		});
-		plantButton.setBounds(10, 40, 268, 50);
-		leftPanel.add(seedInfoButton);
-		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		*/
-
-		/*
-		JButton plantSeedButton = new JButton("Plant Seed");
-		seedInfoButton.addActionListener(new ActionListener() {
-
-			//
-
-		});
-		plantButton.setBounds(10, 40, 268, 50);
-		leftPanel.add(plantSeedButton);
-		plantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		*/
-
 		//replace with View All Tools
 		JButton viewToolButton = new JButton("View all Tools");
 		viewToolButton.addActionListener(new ActionListener() { 
             @Override 
             public void actionPerformed(ActionEvent e) {
-				//Object tool = JOptionPane.showInputDialog(null, "Choose a tool", "Tool Selection", JOptionPane.QUESTION_MESSAGE,null, player.getToolNames(), "Plow");
-                //string toolName = (String) tool;
-
-				//player.useTool(toolName, tileNum);
-				//toolName = JOptionPane.showInputDialog("What tool do you want to use?");
-				/*if(toolName.equalsIgnoreCase("plow")) {
-					player.getFarm().usePlow(player.getTile(tileNum), player.getFarm().getTool(toolName));
-				}
-				else if(toolName.equalsIgnoreCase("watering can"))
-					player.getFarm().useWaterCan(player.getTile(tileNum), player.getFarm().getTool(toolName));
-				else if(toolName.equalsIgnoreCase("fertilizer"))
-					player.getFarm().useFertilizer(player.getTile(tileNum), player.getFarm().getTool(toolName));*/
 				
-				setFarmStatus();
+				ToolInfoScreen toolInfo = new ToolInfoScreen();
+				
             }
         });
 		viewToolButton.setBounds(35, 175, 268, 50);
