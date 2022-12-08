@@ -11,10 +11,19 @@ import java.awt.*;
 public class SeedInfoScreen extends JFrame {
 
     private JFrame frame;
-    private JPanel panel;
-    private JLabel label;
+    private JPanel bottomPanel;
+    private JPanel topPanel;
+    private JPanel midPanel;
     private JButton backButton;
     private JButton nextButton;
+    private JLabel seedNameLabel;
+    private JLabel cropTypeLabel;
+    private JLabel waterNeedsLabel;
+    private JLabel fertilizerNeedsLabel;
+    private JLabel productsProducedLabel;
+    private JLabel seedCostLabel;
+    private JLabel baseSellingPriceLabel;
+    private JLabel xpYieldLabel;
 
     public SeedInfoScreen() {
         initialize();
@@ -32,9 +41,8 @@ public class SeedInfoScreen extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        // panel = new JPanel();
-        // panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        // frame.add(panel, BorderLayout.CENTER);
+        bottomPanel = new JPanel(); // panel for the buttons
+        frame.add(bottomPanel, BorderLayout.CENTER);
 
         backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
@@ -49,7 +57,7 @@ public class SeedInfoScreen extends JFrame {
 
             }
         });
-        frame.add(backButton, BorderLayout.WEST); // Back Button
+        bottomPanel.add(backButton, BorderLayout.WEST); // Back Button
 
         nextButton = new JButton("Next");
         nextButton.addActionListener(new ActionListener() {
@@ -66,18 +74,48 @@ public class SeedInfoScreen extends JFrame {
 
             }
         });
-        frame.add(nextButton, BorderLayout.EAST); // Back Button
+        bottomPanel.add(nextButton, BorderLayout.EAST); // Back Button
 
-        // Displaying the text 
+        // Displaying the text/info
 
-        label = new JLabel("Text Here");
-        panel.add(label);
+        topPanel = new JPanel();
+        frame.add(topPanel, BorderLayout.CENTER);
+        midPanel = new JPanel();
+        frame.add(midPanel, BorderLayout.CENTER);
 
         switch(index){
             case 0:
-                // add JLabels
-                //frame.add()
+
+                // seedNameLabel, cropTypeLabel, waterNeedsLabel, fertilizerNeedsLabel, productsProducedLabel,
+                // seedCostLabel, baseSellingPriceLabel, xpYieldLabel
+
+                seedNameLabel = new JLabel("Turnip");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Root crop");
+                midPanel.add(cropTypeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 1(2)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 0(1)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 1-2");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 5");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 6");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 5");
+                midPanel.add(xpYieldLabel);
+            
                 break;
+
             default: 
                 index = 0;
         }
