@@ -153,12 +153,12 @@ public class TileScreen {
         }
 
         else if(toolName.equals("Plow")){
-            //mainFrame.getTileButton(row, col).setBackground(new Color(139,69,19));
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePlow(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
             if(player.getFarm().getFarmLot(row, col).getRockedStatus() == false && 
-                player.getFarm().getFarmLot(row, col).getOccupied() == false)
-                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\plowedTile.png"));
+                player.getFarm().getFarmLot(row, col).getOccupied() == false) {
+                    mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\plowedTile.png"));
+                }
 
         }
 
@@ -178,7 +178,6 @@ public class TileScreen {
 
     public void checkLevel() {
         int tempLevel = player.getFarm().getFarmer().getLevel();
-        //int level = (int) player.getFarm().getFarmer().getLevel() / 100;
         player.getFarm().getFarmer().setLevel((int) player.getFarm().getFarmer().getLevel() / 100);
 
         if(tempLevel < player.getFarm().getFarmer().getLevel())

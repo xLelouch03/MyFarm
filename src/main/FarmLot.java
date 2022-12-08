@@ -105,9 +105,9 @@ public class FarmLot {
      * Sets a boolean value if the crop on the tile is withered
      * @param withered a boolean value passed to the method
      */
-    public void isWithered(boolean withered) {
+    public String isWithered(boolean withered) {
         this.wither = withered;
-        System.out.println(this.seed.getName() + " has withered.");
+        return this.seed.getName() + " has withered.";
     }
     
     /** 

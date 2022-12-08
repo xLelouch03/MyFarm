@@ -49,14 +49,9 @@ View All Tools button
 TileScreen.java
 [/]-Displaying tile information 
 
-
-
-
 Feedbacks per action 
     MISSING/TO FIX:
         -Advance to next day
-
-
 
 Bugs:.
 -Whenever game ends and multiple tilescreen is opened, only the last tilescreen opened will be closed.

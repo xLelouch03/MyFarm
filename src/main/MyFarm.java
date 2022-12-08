@@ -244,9 +244,11 @@ public class MyFarm {
     /**
      * Directs the game to the next day, checks if the crop has grown, is harvestable, or is withered 
      */
-    public void advanceNextDay(){
+    public String advanceNextDay(){
+        String nextDayPrompt = "";
         advanceDay();
         
+        nextDayPrompt += "<html>You advanced to the next day...<br>";
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 5; j++) {
                 if(this.farmLot[i][j].getSeed() != null) {
@@ -254,28 +256,33 @@ public class MyFarm {
                         this.farmLot[i][j].getSeed().grow();
                         //Checks if crop reached more than the number of days 
                         if(this.farmLot[i][j].getSeed().getDayGrowth() > this.farmLot[i][j].getSeed().getHarvestTime()) {
-                            System.out.println("Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + ",");
+                            nextDayPrompt += "<br>Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + " in FarmLot (" + i + "," + j + "),";
+                            //System.out.println("Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + ",");
                             this.farmLot[i][j].isWithered(true);
                         }
                         //checks if crop reach the harvest time and meet the minimum requirements to be harvested
                         else if(this.farmLot[i][j].getSeed().getDayGrowth() == this.farmLot[i][j].getSeed().getHarvestTime()) {
                             //if crop did not meet the minimum requirements
                             if(this.farmLot[i][j].isHarvestable() == false) {
-                                System.out.println(this.farmLot[i][j].getSeed().getName() + " growed but did not get taken care of properly.");
-                                this.farmLot[i][j].isWithered(true);
+                                nextDayPrompt += "<br>" + this.farmLot[i][j].getSeed().getName() + " in FarmLot (" + i + "," + j + 
+                                    ") growed but did not get taken care of properly. ";
+                                //System.out.println(this.farmLot[i][j].getSeed().getName() + " growed but did not get taken care of properly.");
+                                nextDayPrompt += this.farmLot[i][j].isWithered(true);
                             }
                             //crop meets the minimum requirements
                             else 
-                                System.out.println("\n" + (this.farmLot[i][j].getSeed().getName() + " is harvestable"));
+                                nextDayPrompt += "<br>" + this.farmLot[i][j].getSeed().getName() + " in FarmLot (" + i + "," + j + ") is harvestable";
+                                //System.out.println("\n" + (this.farmLot[i][j].getSeed().getName() + " is harvestable"));
                         }
                         //crop grows
                         else
-                            System.out.println("\n" + this.farmLot[i][j].getSeed().getName() + " growed.");
+                            nextDayPrompt += "<br>" + this.farmLot[i][j].getSeed().getName() + " in FarmLot (" + i + "," + j +  ") growed.";
+                            //System.out.println("\n" + this.farmLot[i][j].getSeed().getName() + " growed.");
                     }
                 }
             }
         }
-
+        return nextDayPrompt += "</html>";
     }
 
     public int getWitherCount() {

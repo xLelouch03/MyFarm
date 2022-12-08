@@ -27,6 +27,7 @@ public class MainScreen{
     private Main player;
 	private JButton[][] tileButtons;
 	private TileScreen[][] tileScreenArray;
+	private JLabel nextDayLabel;
 	private JLabel expLabel;
 	private JLabel dayLabel;
 	private JLabel levelLabel;
@@ -49,7 +50,8 @@ public class MainScreen{
 		mainFrame.getContentPane().setLayout(null);
 
 		initTopPanel();
-		initLeftPanel();
+		initUpperLeftPanel();
+		initLowerLeftPanel();
 		initRightPanel();
     }
 
@@ -104,9 +106,9 @@ public class MainScreen{
 		topPanel.add(dayLabel);
 	}
 
-	public void initLeftPanel() {
+	public void initUpperLeftPanel() {
 		JPanel leftPanel = new JPanel();
-        leftPanel.setBounds(10,100,350,670);
+        leftPanel.setBounds(10,100,350,320);
         leftPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		mainFrame.getContentPane().add(leftPanel);
 		leftPanel.setLayout(null);
@@ -115,8 +117,10 @@ public class MainScreen{
 		nextDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.nextDay();
+                //player.nextDay();
+				nextDayLabel.setText(player.getFarm().advanceNextDay());
 				dayLabel.setText("Day: " + player.getFarm().getDay()); //changes what is displayed on the mainFrame
+				//nextDayLabel.setText(player.getFarm().advanceNextDay());
 				setFarmStatus();
             }
         });
@@ -250,9 +254,10 @@ public class MainScreen{
 				
 				if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true) {
 					ImageIcon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile with rock.png");
-					tileButtons[i][j] = new JButton(""+(num+1), icon);
-					tileButtons[i][j].setVerticalTextPosition(JButton.TOP);
-    				tileButtons[i][j].setHorizontalTextPosition(JButton.CENTER);
+					tileButtons[i][j] = new JButton(icon);
+					tileButtons[i][j].setText(""+(num+1));
+					//tileButtons[i][j].setVerticalTextPosition(JButton.TOP);
+    				//tileButtons[i][j].setHorizontalTextPosition(JButton.CENTER);
 					tileButtons[i][j].setBorderPainted(true);
 					//tileButtons[i][j].setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile with rock.png"));
 				}
@@ -274,6 +279,18 @@ public class MainScreen{
 		}
 	}
 
+	public void initLowerLeftPanel() {
+		JPanel lowerLeftPanel = new JPanel();
+        lowerLeftPanel.setBounds(10,430,350,340);
+        lowerLeftPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		mainFrame.getContentPane().add(lowerLeftPanel);
+		lowerLeftPanel.setLayout(null);
+
+		nextDayLabel = new JLabel();
+		nextDayLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		nextDayLabel.setBounds(10, 50, 347, 240);
+		lowerLeftPanel.add(nextDayLabel);
+	}
 	public JButton getTileButton(int row, int col) {
 		return tileButtons[row][col];
 	}
