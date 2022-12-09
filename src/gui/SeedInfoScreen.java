@@ -1,5 +1,4 @@
 package gui;
-import main.Main;
 
 import javax.swing.*;
 import javax.swing.JButton;
@@ -7,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SeedInfoScreen extends JFrame {
 
@@ -17,6 +19,7 @@ public class SeedInfoScreen extends JFrame {
     private JButton backButton;
     private JButton nextButton;
     private JLabel seedNameLabel;
+    private JLabel harvestTimeLabel;
     private JLabel cropTypeLabel;
     private JLabel waterNeedsLabel;
     private JLabel fertilizerNeedsLabel;
@@ -32,7 +35,6 @@ public class SeedInfoScreen extends JFrame {
     public void initialize(){
 
         int index = 0;
-        int temp;
 
         frame = new JFrame("Seed Encyclopedia");
         frame.setLayout(new BorderLayout(10, 5));
@@ -84,17 +86,18 @@ public class SeedInfoScreen extends JFrame {
         frame.add(midPanel, BorderLayout.CENTER);
 
         switch(index){
-            case 0:
 
-                // seedNameLabel, cropTypeLabel, waterNeedsLabel, fertilizerNeedsLabel, productsProducedLabel,
-                // seedCostLabel, baseSellingPriceLabel, xpYieldLabel
+            case 0:
 
                 seedNameLabel = new JLabel("Turnip");
                 seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
                 topPanel.add(seedNameLabel, BorderLayout.CENTER);
 
-                cropTypeLabel = new JLabel("Crop Type: Root crop");
+                cropTypeLabel = new JLabel("Crop Type: Root crop\n");
                 midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 2 Days\n");
+                midPanel.add(harvestTimeLabel);
 
                 waterNeedsLabel = new JLabel("Water Needs: 1(2)");
                 midPanel.add(waterNeedsLabel);
@@ -115,9 +118,231 @@ public class SeedInfoScreen extends JFrame {
                 midPanel.add(xpYieldLabel);
             
                 break;
+            
+            case 1:
 
-            default: 
-                index = 0;
+                seedNameLabel = new JLabel("Carrot");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Root crop");
+                midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 3 Days");
+                midPanel.add(harvestTimeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 1(2)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 0(1)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 1-2");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 10");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 9");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 7.5");
+                midPanel.add(xpYieldLabel);
+            
+                break;
+
+            case 2:
+
+                seedNameLabel = new JLabel("Potato");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Root crop");
+                midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 5 Days");
+                midPanel.add(harvestTimeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 3(4)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 1(2)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 1-10");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 20");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 3");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 12.5");
+                midPanel.add(xpYieldLabel);
+            
+                break;
+
+            case 3:
+
+                seedNameLabel = new JLabel("Rose");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Flower");
+                midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 1 Days");
+                midPanel.add(harvestTimeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 1(2)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 0(1)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 1");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 5");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 5");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 2.5");
+                midPanel.add(xpYieldLabel);
+            
+                break;
+
+            case 4:
+
+                seedNameLabel = new JLabel("Tulips");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Flower");
+                midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 2 Days");
+                midPanel.add(harvestTimeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 2(3)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 0(1)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 1");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 10");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 9");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 5");
+                midPanel.add(xpYieldLabel);
+            
+                break;
+
+            case 5:
+
+                seedNameLabel = new JLabel("Sunflower");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Flower");
+                midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 3 Days");
+                midPanel.add(harvestTimeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 2(3)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 1(2)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 1");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 20");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 19");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 7.5");
+                midPanel.add(xpYieldLabel);
+            
+                break;
+
+            case 6: 
+
+                seedNameLabel = new JLabel("Mango");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Fruit Tree");
+                midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 10 Days");
+                midPanel.add(harvestTimeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 7(7)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 4(4)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 5-15");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 100");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 8");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 25");
+                midPanel.add(xpYieldLabel);
+            
+                break;
+
+            case 7:
+
+                seedNameLabel = new JLabel("Apple");
+                seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+
+                cropTypeLabel = new JLabel("Crop Type: Fruit Tree");
+                midPanel.add(cropTypeLabel);
+
+                harvestTimeLabel = new JLabel("Harvest Time: 10 Days");
+                midPanel.add(harvestTimeLabel);
+
+                waterNeedsLabel = new JLabel("Water Needs: 7(7)");
+                midPanel.add(waterNeedsLabel);
+
+                fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 5(5)");
+                midPanel.add(fertilizerNeedsLabel);
+
+                productsProducedLabel = new JLabel("Products Produced: 10-15");
+                midPanel.add(productsProducedLabel);
+
+                seedCostLabel = new JLabel("Seed Cost: 200");
+                midPanel.add(seedCostLabel);
+
+                baseSellingPriceLabel = new JLabel("Base Selling Price: 5");
+                midPanel.add(baseSellingPriceLabel);
+
+                xpYieldLabel = new JLabel("Experience Yield: 25");
+                midPanel.add(xpYieldLabel);
+            
+                break;
+
         }
         
     }
