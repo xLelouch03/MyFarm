@@ -4,13 +4,18 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+
+import main.Main;
+
 import java.awt.*;
 
 public class ToolInfoScreen extends JFrame {
 
     private JFrame frame;
+    private Main player;
 
-    public ToolInfoScreen() {
+    public ToolInfoScreen(Main player) {
+        this.player = player;
         initialize();
     }
 
@@ -22,8 +27,7 @@ public class ToolInfoScreen extends JFrame {
         JScrollPane scrollPane = new JScrollPane(scrollPanel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-
+    
         String[][] infoString = {
             {"Plow", "Converts an unplowed tile to a plowed tile. Can only be performed on an unplowed tile.", "0", "0.5"},
             {"Watering Can", "Adds to the total number of tiles times a crop has been watered. Can only be performed on a plowed tile with a crop.", "0", "0.5"},

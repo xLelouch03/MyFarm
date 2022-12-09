@@ -5,6 +5,9 @@ package main;
 
 import seeds.*;
 import tools.*;
+
+import java.io.IOException;
+
 import gui.*;
 
 public class Main {
@@ -68,8 +71,8 @@ public class Main {
      * Prepares the farm land with 50 tiles in total
      */
     public void prepareTiles() {
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 10; j++) {
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
                 farm.addTile(i,j);
             }
         }
@@ -117,8 +120,8 @@ public class Main {
         return type;
     }
 
-    public void getSeedInfo(String crop){
-        
+    public void importFile() throws IOException{
+        //File
 
     }
 

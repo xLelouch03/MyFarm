@@ -57,3 +57,4 @@ Bugs:.
 [/]-Whenever game ends and multiple tilescreen is opened, only the last tilescreen opened will be closed.
     -Fixed by disabling mainscreen whenever a tilescreen is opened to avoid multiple opened tilescreen at once.
 [/]-Register Farmer can register multiple times lol
+[/] - Fruit tree can no longer be planted on the corners/edges of the farm

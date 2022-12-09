@@ -212,7 +212,7 @@ public class MainScreen{
             @Override 
             public void actionPerformed(ActionEvent e) {
 				
-				ToolInfoScreen toolInfo = new ToolInfoScreen();
+				ToolInfoScreen toolInfo = new ToolInfoScreen(player);
 				
             }
         });
@@ -244,20 +244,22 @@ public class MainScreen{
         rightPanel.setBounds(375,100,1135,670);
         rightPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 
-		rightPanel.setLayout(new GridLayout(5,10));
+		rightPanel.setLayout(new GridLayout(10,5));
 		mainFrame.getContentPane().add(rightPanel);
 		int tileNum = 0;
-		tileButtons = new JButton[5][10];
+		tileButtons = new JButton[10][5];
 
-		for(i = 0; i < 5; i++) {
-			for(j = 0; j < 10; j++) {
+		for(i = 0; i < 10; i++) {
+			for(j = 0; j < 5; j++) {
 				int row = i;
 				int col = j;
 				int num = tileNum;
 				
 				if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true) {
-					ImageIcon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile with rock.png");
-					tileButtons[i][j] = new JButton(icon);
+					ImageIcon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\rock.png");
+					tileButtons[i][j] = new JButton(""+(num+1),icon);
+					tileButtons[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+					tileButtons[i][j].setBackground(new Color(255,222,173));
 				}
 				else {
 					tileButtons[i][j] = new JButton(""+(num+1));
@@ -324,10 +326,11 @@ public class MainScreen{
 		objectCoinLabel.setText("Objectcoins: "+ player.getFarm().getFarmer().getCoins());
 		availableSpaceLabel.setText("Number of available tiles: " + player.getFarm().getAvailableSpace());
 
-		for(int i = 0; i < 5; i++) {
-			for(int j = 0; j < 10; j++) {
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 5; j++) {
 				if(player.getFarm().getFarmLot(i, j).getWitherStatus() == true) {
-					tileButtons[i][j].setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\withered tile.png"));
+					tileButtons[i][j].setIcon(null);
+					tileButtons[i][j].setBackground(new Color(0,0,0));
 				}
 			}
 		}
