@@ -33,6 +33,8 @@ public class SeedInfoScreen extends JFrame {
             {"Mango", "Fruit Tree", "10", "7(7)", "4(4)", "5-15", "100", "8", "25"},
             {"Apple", "Fruit Tree", "10", "7(7)", "5(5)", "10-15", "200", "5", "25"}
         };
+
+        //or(int i = 0; i < )
         
         String[] infoCols = {"Seed Name", "Crop Type", "Harvest Time in Days", "Water Needs (bonus limit)", "Fertilizer Needs (bonus limit)", "Products Produced", 
                                 "Seed Cost", "Base Selling Price per Piece", "Experience Yield"};

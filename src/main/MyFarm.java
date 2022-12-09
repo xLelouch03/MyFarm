@@ -20,7 +20,7 @@ public class MyFarm {
      * setting the day to 1 and a farmer.
      */
     public MyFarm() {
-        this.farmLot = new FarmLot[5][10];
+        this.farmLot = new FarmLot[10][5];
         this.seed = new ArrayList<Seed>();
         this.tool = new ArrayList<Tool>();
         this.day = 1;
@@ -231,8 +231,8 @@ public class MyFarm {
             if(f.getSeed() != null)
                 occupiedTile++;*/
 
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 10; j++) {
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
                 if(this.farmLot[i][j].getSeed() != null)
                     occupiedTile++;
             }
@@ -248,8 +248,8 @@ public class MyFarm {
         advanceDay();
         
         nextDayPrompt += "<html>You advanced to the next day...<br>";
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 10; j++) {
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
                 if(this.farmLot[i][j].getSeed() != null) {
                     if(this.farmLot[i][j].getWitherStatus() == false) {
                         this.farmLot[i][j].getSeed().grow();
@@ -294,8 +294,8 @@ public class MyFarm {
     public boolean isRunning() {
         witherCount = 0;
 
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 10; j++) {
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 5; j++) {
                 if(this.farmLot[i][j].getWitherStatus() == true)
                     witherCount++;
             }
@@ -425,18 +425,16 @@ public class MyFarm {
 
         ArrayList<FarmLot> lot = new ArrayList<FarmLot>();
 
-        for (int dx = (row > 0 ? -1 : 0); dx <= (row < n ? 1 : 0);
-         ++dx) {
+        for (int dx = (row > 0 ? -1 : 0); dx <= (row < n ? 1 : 0); ++dx) {
  
         // Deviation of the column that
         // gets adjusted according to
         // the provided position
-        for (int dy = (col > 0 ? -1 : 0);
-            dy <= (col < m ? 1 : 0); ++dy) {
-            if (dx != 0 || dy != 0) {
-            lot.add(farmLot[row + dx][col + dy]);
+            for (int dy = (col > 0 ? -1 : 0); dy <= (col < m ? 1 : 0); ++dy) {
+                if (dx != 0 || dy != 0) {
+                    lot.add(farmLot[row + dx][col + dy]);
+                }
             }
-        }
         }
     
         // Returning the vector array
@@ -495,7 +493,10 @@ public class MyFarm {
                             
                             if(farmer.getCoins() >= s.getCost()){
                                 if(s.getType().equals("Fruit tree")) {
-                                    if(getAdjacentCount(row, col) != 0) {
+                                    if( (row <= 9 && (col == 0 || col == 4)) || ( (row == 0 || row == 9) && col < 5)  ) {
+                                        plantPrompt += "You can't plant " + s.getName() + " on the corner/ far sides of the farm";
+                                    }
+                                    else if(getAdjacentCount(row, col) != 0) {
                                         plantPrompt += "You can't plant " + s.getName() + " because adjacent tiles are occupied";
                                     }
                                     else {

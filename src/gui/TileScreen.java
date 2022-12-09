@@ -66,6 +66,8 @@ public class TileScreen {
 
                 JOptionPane.showMessageDialog(tileFrame, player.getFarm().plantSeed(cropName, row, col));
                 mainFrame.setFarmStatus();
+                if(player.getFarm().getFarmLot(row, col).getSeed() != null)
+                    checkPlantOnTile();
                 checkGameCondition();
             }
         });
@@ -93,7 +95,12 @@ public class TileScreen {
 		harvestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(tileFrame, player.getFarm().harvestTile(player.getFarm().getFarmLot(row, col)));
+                if(player.getFarm().getFarmLot(row, col).getHarvestStatus() == true) {
+                    JOptionPane.showMessageDialog(tileFrame, player.getFarm().harvestTile(player.getFarm().getFarmLot(row, col)));
+                    mainFrame.getTileButton(row, col).setIcon(null);
+                    mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
+                    mainFrame.getTileButton(row, col).setText(""+(num+1));
+                }
 				mainFrame.setFarmStatus();
                 checkGameCondition();
             }
@@ -138,8 +145,12 @@ public class TileScreen {
     public void useTool() {
         delay();
         if(toolName.equals("Pickaxe")) {
-            if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true)
-                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
+            if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true) {
+                mainFrame.getTileButton(row, col).setIcon(null);
+                mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
+                mainFrame.getTileButton(row, col).setText(""+(num+1));
+            }
+                //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
 
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePickaxe(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
@@ -147,8 +158,12 @@ public class TileScreen {
         }
 
         else if(toolName.equals("Shovel")) {
-            if(player.getFarm().getFarmLot(row, col).getSeed() != null)
-                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
+            if(player.getFarm().getFarmLot(row, col).getSeed() != null) {
+                mainFrame.getTileButton(row, col).setIcon(null);
+                mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
+                mainFrame.getTileButton(row, col).setText(""+(num+1));
+            }
+                //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().useShovel(player.getFarm().getFarmLot(row, col), 
                                                         player.getFarm().getTool(toolName)));
         }
@@ -158,14 +173,19 @@ public class TileScreen {
             player.getFarm().getTool(toolName)));
             if(player.getFarm().getFarmLot(row, col).getRockedStatus() == false && 
                 player.getFarm().getFarmLot(row, col).getOccupied() == false) {
-                    mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\plowedTile.png"));
+                    mainFrame.getTileButton(row, col).setIcon(null);
+                    mainFrame.getTileButton(row, col).setBackground(new Color(205,133,63));
+                    mainFrame.getTileButton(row, col).setText(""+(num+1));
+                    //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\plowedTile.png"));
                 }
-
         }
 
         else if(toolName.equals("Watering can")) {
-            if(player.getFarm().getFarmLot(row, col).getSeed() != null)
-                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\wateredTile.png"));
+            if(player.getFarm().getFarmLot(row, col).getSeed() != null) {
+                mainFrame.getTileButton(row, col).setBackground(new Color(160,82,45));
+                mainFrame.getTileButton(row, col).setText(""+(num+1));
+            }
+                //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\wateredTile.png"));
 
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().useWaterCan(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
@@ -174,6 +194,35 @@ public class TileScreen {
         else if(toolName.equals("Fertilizer")) {
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().useFertilizer(player.getFarm().getFarmLot(row, col), 
             player.getFarm().getTool(toolName)));
+        }
+    }
+
+    public void checkPlantOnTile() {
+        if(player.getFarm().getFarmLot(row, col).getSeed() != null) {
+            if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Turnip")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted turnip.png"));
+            }
+            else if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Carrot")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted carrot.png"));
+            }
+            else if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Potato")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted potato.png"));
+            }
+            else if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Rose")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted rose.png"));
+            }
+            else if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Tulips")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted tulips.png"));
+            }
+            else if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Sunflower")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted sunflower.png"));
+            }
+            else if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Mango")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted mango.png"));
+            }
+            else if(player.getFarm().getFarmLot(row, col).getSeed().getName().equals("Apple")) {
+                mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\planted apple.png"));
+            }
         }
     }
 
