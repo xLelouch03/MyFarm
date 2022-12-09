@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 
 public class ToolInfoScreen extends JFrame {
