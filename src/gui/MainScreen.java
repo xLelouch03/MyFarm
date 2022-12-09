@@ -1,5 +1,8 @@
 package gui;
 
+import java.util.*;
+import main.Seed;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -132,11 +135,59 @@ public class MainScreen{
 		//replace with View All Seeds
 		JButton viewPlantButton = new JButton("View all Seeds");
 		viewPlantButton.addActionListener(new ActionListener() {
+
+			private ArrayList<Seed> allSeeds = player.getFarm().getAllSeed();
+			int index = 0;
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
-				SeedInfoScreen seedInfo = new SeedInfoScreen();
+				JFrame frame = new JFrame("Seed Encyclopedia");
 				
+				JPanel rightPanel = new JPanel();
+
+				JButton backButton = new JButton("Back");
+				backButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e){
+
+						if (index != 0){ 
+							index = index - 1;
+						} else {
+							index = 0;
+						}
+
+					}
+				});
+				backButton.setBounds(100, 100, 100, 50);
+				frame.add(backButton); // Back Button
+
+				JButton nextButton = new JButton("Next");
+				nextButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e){
+
+						if (index != 0){
+							index = index + 1;
+						} else if (index > 7) { // 7 is the number of seeds to be displayed (7th is the last index)
+							index = 7;
+						} else if (index == 0) { // 0th index is the first seed
+							index = 0;
+						}
+
+					}
+				});
+				nextButton.setBounds(500, 500, 100, 50);
+				frame.add(nextButton);
+
+				JLabel seedNameLabel = new JLabel(allSeeds.get(index).getName());
+				seedNameLabel.setBounds(10, 40, 347, 24);
+				
+
+
+				frame.setSize(1900,190);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
             }
         });
 		viewPlantButton.setBounds(35, 90, 268, 50);
