@@ -2,6 +2,7 @@ package gui;
 
 import java.util.*;
 import main.Seed;
+import main.Tool;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -134,7 +135,7 @@ public class MainScreen{
 		viewPlantButton.addActionListener(new ActionListener() {
 
 			private ArrayList<Seed> allSeeds = player.getFarm().getAllSeed();
-			int index = 0;
+			private int index = 0;
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,36 +145,22 @@ public class MainScreen{
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
 
-				JPanel rightPanel = new JPanel();
-				rightPanel.setSize(100, 500);
-				rightPanel.setLocation(50, 250);
-				frame.add(rightPanel);
+				JPanel panel = new JPanel();
 
-				JPanel midPanel = new JPanel();
-				midPanel.setSize(300, 500);
-				midPanel.setLocation(250, 250);
-				frame.add(midPanel);
+				// JPanel leftPanel = new JPanel();
+				// leftPanel.setSize(100, 500);
+				// leftPanel.setLocation(50, 250);
+				// frame.add(leftPanel);
 
-				JPanel leftPanel = new JPanel();
-				leftPanel.setSize(300, 500);
-				leftPanel.setLocation(400, 250);
-				frame.add(leftPanel);
+				// JPanel rightPanel = new JPanel();
+				// rightPanel.setSize(100, 500);
+				// rightPanel.setLocation(250, 250);
+				// frame.add(rightPanel);
 
-				JButton backButton = new JButton("Back");
-				backButton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e){
-
-						if (index != 0){ 
-							index = index - 1;
-						} else {
-							index = 0;
-						}
-
-					}
-				});
-				backButton.setBounds(100, 80, 100, 50);
-				leftPanel.add(backButton); // Back Button
+				// JPanel midPanel = new JPanel();
+				// midPanel.setSize(300, 500);
+				// midPanel.setLocation(400, 250);
+				// frame.add(midPanel);
 
 				JButton nextButton = new JButton("Next");
 				nextButton.addActionListener(new ActionListener() {
@@ -190,13 +177,64 @@ public class MainScreen{
 
 					}
 				});
-				nextButton.setBounds(100, 220, 100, 50);
-				rightPanel.add(nextButton);
+				nextButton.setBounds(450, 400, 100, 50);
+				panel.add(nextButton);
+
+				JButton backButton = new JButton("Back");
+				backButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e){
+
+						if (index != 0){ 
+							index = index - 1;
+						} else {
+							index = 0;
+						}
+
+					}
+				});
+				backButton.setBounds(450, 400, 100, 50);
+				panel.add(backButton); // Back Button
 
 				JLabel seedNameLabel = new JLabel(allSeeds.get(index).getName());
-				seedNameLabel.setBounds(10, 40, 347, 24);
-				midPanel.add(seedNameLabel);
+				// seedNameLabel.setBounds(250, 20, 200, 25);
+				panel.add(seedNameLabel);
 			
+				JLabel seedTypeLabel = new JLabel("Crop Type: " + allSeeds.get(index).getType());
+				// seedTypeLabel.setBounds(250, 40, 200, 25);
+				panel.add(seedTypeLabel);
+
+				JLabel harvestTimeLabel = new JLabel("Harvest Time (in days): " + allSeeds.get(index).getHarvestTime());
+				harvestTimeLabel.setBounds(250, 80, 200, 25);
+				panel.add(harvestTimeLabel);
+
+				JLabel dayGrowthLabel = new JLabel("Day Growth: " + allSeeds.get(index).getDayGrowth());
+				dayGrowthLabel.setBounds(250, 100, 200, 25);
+				panel.add(dayGrowthLabel);
+
+				JLabel waterLimitLabel = new JLabel("Water Limit: " + allSeeds.get(index).getWaterLimit());
+				waterLimitLabel.setBounds(250, 120, 200, 25);
+				panel.add(waterLimitLabel);
+
+				JLabel fertilizerLimitLabel = new JLabel("Fertilizer Limit: " + allSeeds.get(index).getFertilizerLimit());
+				fertilizerLimitLabel.setBounds(250, 140, 200, 25);
+				panel.add(seedNameLabel);
+
+				JLabel productProducedLabel = new JLabel("Product Produced: " + allSeeds.get(index).getProductProduced());
+				productProducedLabel.setBounds(250, 160, 200, 25);
+				panel.add(productProducedLabel);
+
+				JLabel costLabel = new JLabel("Cost: " + allSeeds.get(index).getCost());
+				costLabel.setBounds(250, 100, 180, 25);
+				panel.add(costLabel);
+
+				JLabel basePriceLabel = new JLabel("Base Price: " + allSeeds.get(index).getBasePrice());
+				basePriceLabel.setBounds(250, 200, 200, 25);
+				panel.add(basePriceLabel);
+
+				JLabel xpLabel = new JLabel("Experience Yield: " + allSeeds.get(index).getExperienceYield());
+				xpLabel.setBounds(250, 220, 200, 25);
+				panel.add(xpLabel);			
             }
         });
 		viewPlantButton.setBounds(35, 90, 268, 50);
@@ -206,10 +244,73 @@ public class MainScreen{
 		//replace with View All Tools
 		JButton viewToolButton = new JButton("View all Tools");
 		viewToolButton.addActionListener(new ActionListener() { 
-            @Override 
-            public void actionPerformed(ActionEvent e) {
 				
-				ToolInfoScreen toolInfo = new ToolInfoScreen(player);
+			private ArrayList<Tool> allTools = player.getFarm().getAllTool();
+			private int index = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+				JFrame frame = new JFrame("Tool Encyclopedia");
+				frame.setSize(500, 350);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
+
+				JPanel leftPanel = new JPanel();
+				leftPanel.setSize(100, 500);
+				leftPanel.setLocation(50, 250);
+				frame.add(leftPanel);
+
+				JPanel rightPanel = new JPanel();
+				rightPanel.setSize(100, 500);
+				rightPanel.setLocation(250, 250);
+				frame.add(rightPanel);
+
+				JPanel midPanel = new JPanel();
+				midPanel.setSize(300, 500);
+				midPanel.setLocation(400, 250);
+				frame.add(midPanel);
+
+				JButton nextButton = new JButton("Next");
+				nextButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e){
+
+						if (index != 0){
+							index = index + 1;
+						} else if (index > 7) { // 7 is the number of seeds to be displayed (7th is the last index)
+							index = 7;
+						} else if (index == 0) { // 0th index is the first seed
+							index = 0;
+						}
+
+					}
+				});
+				nextButton.setBounds(100, 80, 100, 50);
+				rightPanel.add(nextButton);
+
+				JButton backButton = new JButton("Back");
+				backButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e){
+
+						if (index != 0){ 
+							index = index - 1;
+						} else {
+							index = 0;
+						}
+
+					}
+				});
+				
+				JLabel nameLabel = new JLabel(allTools.get(index).getName());
+				midPanel.add(nameLabel);
+
+				JLabel costLabel = new JLabel("Cost: " + allTools.get(index).getCost());
+				midPanel.add(costLabel);
+
+				JLabel xpLabel = new JLabel("Expierience Yield: " + allTools.get(index).getXP());
+				midPanel.add(xpLabel);
 				
             }
         });
