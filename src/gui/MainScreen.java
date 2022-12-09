@@ -226,11 +226,13 @@ public class MainScreen{
             public void actionPerformed(ActionEvent e) {
 				Object type = JOptionPane.showInputDialog(null, "Register Farmer", "Farmer Type Selection", 
 				JOptionPane.QUESTION_MESSAGE,null, player.getTypes(), "Registered Farmer");
+				
+				if(type != null) {
+					String farmerType = (String) type;
 
-				String farmerType = (String) type;
-
-				JOptionPane.showMessageDialog(mainFrame,  player.getFarm().registerFarmer(farmerType));
-				setFarmStatus();
+					JOptionPane.showMessageDialog(mainFrame,  player.getFarm().registerFarmer(farmerType));
+					setFarmStatus();
+				}
             }
         });
 		registerButton.setBounds(35, 255, 268, 50);
@@ -256,8 +258,9 @@ public class MainScreen{
 				int num = tileNum;
 				
 				if(player.getFarm().getFarmLot(row, col).getRockedStatus() == true) {
-					ImageIcon icon = new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\rock.png");
-					tileButtons[i][j] = new JButton(""+(num+1),icon);
+					ImageIcon rock = new ImageIcon(this.getClass().getResource("/assets/rock.png"));
+					rock.getImage();
+					tileButtons[i][j] = new JButton(""+(num+1),rock);
 					tileButtons[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 					tileButtons[i][j].setBackground(new Color(255,222,173));
 				}
