@@ -3,7 +3,20 @@
  */
 package main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 import gui.*;
 
@@ -24,7 +37,13 @@ public class Main {
             farm.prepareSeeds();
             farm.prepareTools();
             prepareTiles();
-
+            try {
+                importFile();
+                //exportFile();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             closeSetupScreen(setup);
         }
     }
@@ -124,7 +143,38 @@ public class Main {
      * @throws IOException if file does not exist
      */
     public void importFile() throws IOException{
-        //File
+        int row, col;
+        URL loc = this.getClass().getResource("/main/rock.txt");
+        File f = new File(loc.getPath());
+        
+        Scanner read = new Scanner(f);
+        while(read.hasNext()) {
+            row = read.nextInt();
+            col = read.nextInt();
+            farm.getFarmLot(row, col).isRocked(true);
+        }
+        read.close();
+    }
+
+    public void exportFile() {
+        try {
+            FileWriter file = new FileWriter("rocks2.txt");
+
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 5; j++) {
+                    if(i == 9 && j == 4)
+                        file.write(i + " " + j);
+                    else
+                        file.write(i + " " + j + "\n");
+                }
+            }
+            file.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        
 
     }
 
