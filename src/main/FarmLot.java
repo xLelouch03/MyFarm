@@ -26,7 +26,7 @@ public class FarmLot {
         this.harvestable = false;
         this.seed = null;
         this.occupied = false;
-        this.rocked = true;
+        this.rocked = false;
     }
   
     /** 
@@ -125,8 +125,8 @@ public class FarmLot {
     public boolean isHarvestable() { 
         //Checks if the crop meets the minimum requirements to be harvested
         if (this.seed.getDayGrowth() == this.seed.getHarvestTime() &&
-            this.seed.getWaterNeed() - 1 <= getWaterCount() &&
-            this.seed.getFertilizerNeed() - 1 <= getFertilizerCount()) {
+            this.seed.getWaterLimit() - 1 <= getWaterCount() &&
+            this.seed.getFertilizerLimit() - 1 <= getFertilizerCount()) {
             this.harvestable = true;
         }
         else {

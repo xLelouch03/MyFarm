@@ -50,35 +50,44 @@ public class MyFarm {
         if(	(farmer.getLevel() < 5 && farmerType.equals("Registered Farmer")) || 
 					(farmer.getLevel() < 10 && farmerType.equals("Distinguished Farmer")) ||
 					(farmer.getLevel() < 15 && farmerType.equals("Legendary Farmer"))) {
-					registerPrompt += "You have not reached the minimum level to register.";
+			registerPrompt += "You have not reached the minimum level to register.";
 		}
 		
         else if((farmer.getLevel() >= 5 && farmer.getCoins() < 200 && farmerType.equals("Registered Farmer")) || 
 						(farmer.getLevel() >= 10 && farmer.getCoins() < 300 && farmerType.equals("Distinguished Farmer")) ||
 						(farmer.getLevel() >= 15 && farmer.getCoins() < 400 && farmerType.equals("Legendary Farmer"))) {
-					registerPrompt += "You have not reached the minimum objectCoins to register.";
+			registerPrompt += "You have not reached the minimum objectCoins to register.";
 		}
 
-	    else if(farmerType.equals("Distinguished Farmer") && !farmer.getType().equals("Registered Farmer")) {
-					registerPrompt += "You must register as Registered Farmer first.";
+        else if(farmerType.equals("Registered Farmer") && (farmer.getType().equals("Distinguished Farmer") || 
+        farmer.getType().equals("Legendary Farmer"))) {
+            registerPrompt += "You have already registered as " + farmer.getType();
+        }
+
+        else if(farmerType.equals("Distinguished Farmer") && farmer.getType().equals("Legendary Farmer")) {
+            registerPrompt += "You have already registered as " + farmer.getType();
+        }
+        
+        else if(farmerType.equals("Distinguished Farmer") && !farmer.getType().equals("Registered Farmer")) {
+			registerPrompt += "You must register as Registered Farmer first.";
 		}
 
 		else if(farmerType.equals("Legendary Farmer") && !farmer.getType().equals("Distinguished Farmer")) {
-					registerPrompt += "You must register as Distinguished Farmer first.";
+			registerPrompt += "You must register as Distinguished Farmer first.";
 		}
         
         else {
             switch(farmerType){ 
                 case "Registered Farmer":
                     if(farmer.getType().equals(farmerType)) {
-                        registerPrompt += "You have already registered as " + farmerType;
+                        registerPrompt += "You have already registered as " + farmer.getType();
                     }
                     else if (farmer.getLevel() >= 5 && farmer.getCoins() >= 200){
                         farmer.setFarmerType(farmerType); 
                         farmer.updateObjectCoins(farmer.getCoins() - 200);
                         for(Seed s: seed) {
-                            s.setBasePrice(1);
-                            s.setCost(1);
+                            s.updateBasePrice(1);
+                            s.updateCost(1);
                         }
                         registerPrompt += "You have used 200 objectCoins to register\n" + "You are now a " + farmerType + "\nBonuses:\n" +
                                             "Seed cost is reduced with 1 objectCoin\n" + 
@@ -88,35 +97,39 @@ public class MyFarm {
                 
                 case "Distinguished Farmer":
                     if(farmer.getType().equals(farmerType)) {
-                        registerPrompt += "You have already registered as " + farmerType;
+                        registerPrompt += "You have already registered as " + farmer.getType();
                     }
                     else if (farmer.getLevel() >= 10 && farmer.getCoins() >= 300){
                         farmer.setFarmerType(farmerType); 
                         farmer.updateObjectCoins(farmer.getCoins() - 300);
                         for(Seed s: seed) {
-                            s.setBasePrice(2);
-                            s.setCost(2);
+                            s.updateBasePrice(2);
+                            s.updateCost(2);
+                            s.updateWaterLimit(1);
                         }
                         registerPrompt += "You have used 300 objectCoins to register\n" + "You are now a " + farmerType + "\nBonuses:\n" +
                                             "Seed cost is reduced with 2 objectCoins\n" + 
-                                            "2 bonus earnings per produce";
+                                            "2 bonus earnings per produce\n" + "Increased water limit by 1";
                     } 
                     break;
     
                 case "Legendary Farmer":
                     if(farmer.getType().equals(farmerType)) {
-                        registerPrompt += "You have already registered as " + farmerType;
+                        registerPrompt += "You have already registered as " + farmer.getType();
                     }
+
                     else if (farmer.getLevel() >= 15 && farmer.getCoins() >= 400){
                         farmer.setFarmerType(farmerType); 
                         farmer.updateObjectCoins(farmer.getCoins() - 400);
                         for(Seed s: seed) {
-                            s.setBasePrice(4);
-                            s.setCost(3);
+                            s.updateBasePrice(4);
+                            s.updateCost(3);
+                            s.updateFertilizerLimit(1);
+                            s.updateWaterLimit(2);
                         }
                         registerPrompt += "You have used 400 objectCoins to register\n" + "You are now a " + farmerType + "\nBonuses:\n" +
                                             "Seed cost is reduced with 4 objectCoins\n" + 
-                                            "3 bonus earnings per produce";
+                                            "3 bonus earnings per produce" + "\nIncreased water limit by 1" + "\nIncreased fertilizer limit by 2";
                     } 
                     break;
             }

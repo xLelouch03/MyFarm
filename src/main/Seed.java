@@ -8,8 +8,8 @@ public class Seed {
     private String type;
     private int harvestTime;
     private int dayGrowth = 0;
-    private int waterNeed;
-    private int fertilizerNeed;
+    private int waterLimit;
+    private int fertilizerLimit;
     private int productProduced = 0;
     private int cost;
     private int basePrice;
@@ -29,12 +29,12 @@ public class Seed {
      * @param basePrice the base selling price of the seed 
      * @param xp the experience gained after harvesting the seed
      */
-    public Seed(String name, String type, int harvestTime, int waterNeed, int fertilizerNeed, int cost, int basePrice, double xp) {
+    public Seed(String name, String type, int harvestTime, int waterLimit, int fertilizerLimit, int cost, int basePrice, double xp) {
         this.name = name;
         this.type = type;
         this.harvestTime = harvestTime;
-        this.waterNeed = waterNeed;
-        this.fertilizerNeed = fertilizerNeed;
+        this.waterLimit = waterLimit;
+        this.fertilizerLimit = fertilizerLimit;
         this.cost = cost;
         this.basePrice = basePrice;
         this.xp = xp;
@@ -44,8 +44,8 @@ public class Seed {
         name = seed.getName();
         type = seed.getType();
         harvestTime = seed.getHarvestTime();
-        waterNeed = seed.getWaterNeed();
-        fertilizerNeed = seed.getFertilizerNeed();
+        waterLimit = seed.getWaterLimit();
+        fertilizerLimit = seed.getFertilizerLimit();
         cost = seed.getCost();
         basePrice = seed.getBasePrice();
         xp = seed.getXP();
@@ -94,23 +94,31 @@ public class Seed {
      * Gets the number of times the crop needs to be watered to be ready for harvest
      * @return the number of times the crop needs to watered
      */
-    public int getWaterNeed() {
-        return waterNeed;
+    public int getWaterLimit() {
+        return waterLimit;
+    }
+
+    public void updateWaterLimit(int num) {
+        waterLimit += num;
     }
 
     /** 
      * Gets the number of times the crop needs to fertilized to be ready for harvest
      * @return the number of times the crop needs to fertilized
      */
-    public int getFertilizerNeed() {
-        return fertilizerNeed;
+    public int getFertilizerLimit() {
+        return fertilizerLimit;
+    }
+
+    public void updateFertilizerLimit(int num) {
+        fertilizerLimit += num;
     }
 
     public int getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(int bonusEarning) {
+    public void updateBasePrice(int bonusEarning) {
         basePrice += bonusEarning;
     }
 
@@ -126,7 +134,7 @@ public class Seed {
         return cost;
     }
     
-    public void setCost(int reduction) {
+    public void updateCost(int reduction) {
         cost -= reduction;
     }
     /** 
