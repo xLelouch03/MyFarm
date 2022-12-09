@@ -144,16 +144,55 @@ public class Main {
      */
     public void importFile() throws IOException{
         int row, col;
-        URL loc = this.getClass().getResource("/main/rock.txt");
+        URL loc = this.getClass().getResource("/main/rocks2.txt");
         File f = new File(loc.getPath());
+
+        BufferedReader br = null;
+        int totalLines = 0;
+
+        for(int i = 1; i <= 15; i++) {
+            try {
+                br = new BufferedReader(new FileReader(f));
+    
+                while ((br.readLine()) != null) {
+                    totalLines++;
+                }
+                br.close();
+
+                br = new BufferedReader(new FileReader(f));
+                Random random = new Random();
+                int randomInt = random.nextInt(totalLines);
+                int count=0;
+                String coordinate;
+                while ( (coordinate = br.readLine()) != null) {               
+                    if (count == randomInt) {
+                        String[] split = coordinate.split(" ");
+                        row = Integer.parseInt(split[0]);
+                        col = Integer.parseInt(split[1]);
+                        if(farm.getFarmLot(row, col).getRockedStatus() == false)
+                            farm.getFarmLot(row, col).isRocked(true);
+                        else
+                            i--;
+                        split[0] = null;
+                        split[1] = null;
+                    }
+                    count++;
+                }
+                totalLines = 0;
+                br.close();
+    
+            } catch (IOException e) {
+                  e.printStackTrace();      
+            } 
+        }
         
-        Scanner read = new Scanner(f);
+        /*Scanner read = new Scanner(f);
         while(read.hasNext()) {
             row = read.nextInt();
             col = read.nextInt();
             farm.getFarmLot(row, col).isRocked(true);
         }
-        read.close();
+        read.close();*/
     }
 
     public void exportFile() {
@@ -173,8 +212,6 @@ public class Main {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        
 
     }
 
