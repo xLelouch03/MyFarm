@@ -6,10 +6,7 @@ import main.Seed;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Insets;
 
-// import java.awt.event.*;
-// import java.awt.*;
 import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

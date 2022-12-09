@@ -1,10 +1,7 @@
 /**
- * This shit is shit
+ * This class is the driver/controller for the model and view of the project
  */
 package main;
-
-import seeds.*;
-import tools.*;
 
 import java.io.IOException;
 
@@ -14,61 +11,58 @@ public class Main {
     private MyFarm farm;
     private SetupScreen setup;
 
+    /**
+     * Setups the game after pressing the Start button
+     * @param farmerName the name to be used in creating a farmer object
+     */
     public void setupGame(String farmerName) {
-        if(farmerName.length() == 0) 
+        if(farmerName.length() == 0) //displays a warning text if player did not enter a name
             setup.warningText("You have not entered a name.");
         else {
             farm = new MyFarm();
             farm.addFarmer(farmerName);
-            setupSeeds();
-            setupTools();
+            farm.prepareSeeds();
+            farm.prepareTools();
             prepareTiles();
 
             closeSetupScreen(setup);
         }
     }
 
+    /**
+     * Launches the setup screen
+     */
     public void openSetupScreen() {
         setup = new SetupScreen(this);
     }
 
+    /**
+     * Closes the setup screen and opens the main screen
+     * @param setup the setup screen
+     */
     public void closeSetupScreen(SetupScreen setup) {
         setup.close();
         openMainScreen();
     }
 
+    /**
+     * Opens the main screen by creating an instance
+     */
     public void openMainScreen() {
         new MainScreen(this);
     }
 
+    /**
+     * Closes the main screen
+     * @param m the main screen
+     */
     public void closeMainScreen(MainScreen m) {
         m.closeFrame();
     }
-
-    public void setupTools() {
-        farm.addTools(new Plow());
-        farm.addTools(new WateringCan());
-        farm.addTools(new Fertilizer());
-        farm.addTools(new Pickaxe());
-        farm.addTools(new Shovel());
-    }
-
-    /**  
-     * Adds and defines the seeds in the seed array list
-     */
-    public void setupSeeds() {
-        farm.addSeeds(new Turnip());
-        farm.addSeeds(new Carrot());
-        farm.addSeeds(new Potato());
-        farm.addSeeds(new Rose());
-        farm.addSeeds(new Tulips());
-        farm.addSeeds(new Sunflower());
-        farm.addSeeds(new Mango());
-        farm.addSeeds(new Apple());
-    }
     
     /**
-     * Prepares the farm land with 50 tiles in total
+     * Creates the 10x5 farm lots and adding
+     * them to the farm
      */
     public void prepareTiles() {
         for(int i = 0; i < 10; i++) {
@@ -78,39 +72,44 @@ public class Main {
         }
     }
 
+    /**
+     * Gets the farm instance
+     * @return the farm
+     */
     public MyFarm getFarm() {
         return this.farm;
     }
 
-    public void nextDay() {
-        farm.advanceNextDay();
-    }
-
+    /**
+     * Creates and returns an array of seed names
+     * @return the array of seed names
+     */
     public String[] getSeedNames() {
         String[] seedName = new String[farm.getAllSeed().size()];
-        seedName[0] = "Turnip";
-        seedName[1] = "Carrot";
-        seedName[2] = "Potato";
-        seedName[3] = "Rose";
-        seedName[4] = "Tulips";
-        seedName[5] = "Sunflower";
-        seedName[6] = "Mango";
-        seedName[7] = "Apple";
 
+        for(int i = 0; i < farm.getAllSeed().size(); i++) {
+            seedName[i] = farm.getAllSeed().get(i).getName();
+        }
         return seedName;
     }
 
+    /**
+     * Creates and returns the array of tool names
+     * @return the array of tool names
+     */
     public String[] getToolNames() {
         String[] toolName = new String[farm.getAllTool().size()];
-        toolName[0] = "Plow";
-        toolName[1] = "Watering can";
-        toolName[2] = "Fertilizer";
-        toolName[3] = "Pickaxe";
-        toolName[4] = "Shovel";
 
+        for(int i = 0; i < farm.getAllTool().size(); i++) {
+            toolName[i] = farm.getAllTool().get(i).getName();
+        }
         return toolName;
     }
 
+    /**
+     * Creates and returns the array of farmer types;
+     * @return the array of farmer types
+     */
     public String[] getTypes() {
         String[] type = new String[3];
         type[0] = "Registered Farmer";
@@ -120,6 +119,10 @@ public class Main {
         return type;
     }
 
+    /**
+     * Reads a file for the scattering of rocks to the farm
+     * @throws IOException if file does not exist
+     */
     public void importFile() throws IOException{
         //File
 

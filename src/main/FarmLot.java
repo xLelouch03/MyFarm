@@ -1,8 +1,9 @@
-package main;
-
 /**
  * This class contains the constructor and methods in managing a farm lot
  */
+
+package main;
+
 public class FarmLot {
     private boolean plowed;
     private int waterCount;
@@ -39,7 +40,7 @@ public class FarmLot {
     
     /** 
      * Sets the seed to the farmlot
-     * @param temp seed object passed to the method
+     * @param temp the seed to be planted
      */
     public void setSeed(Seed temp) {
         this.seed = temp;
@@ -62,35 +63,57 @@ public class FarmLot {
     }
     
     /** 
-     * Gets the water count of the tile / how many times the tile has been watered
-     * @return the water count of the tile / how many times the tile has been watered
+     * Gets the water count of how many times the tile has been watered
+     * @return the water count of the tile 
      */
-    public int getWaterCount() {
-        return waterCount;
+    public int getTotalWaterCount() {
+        return this.waterCount;
+    }
+
+    /**
+     * Gets the water count needed for computing water bonus
+     * @return the water count of the tile
+     */
+    public int getWaterNeed() {
+        if(waterCount > this.seed.getWaterLimit()) {
+            return this.seed.getWaterLimit();
+        }
+        else
+            return this.waterCount;
     }
   
     /**
      *  Increments the water count for the tile
      */
     public void increaseWater() {
-        // if (this.seed.getWaterNeed() != waterCount)
-            waterCount += 1;
+        this.waterCount += 1;
     }
     
     /** 
-     * Gets the fertillizer count of the tile / how many times the tile has been fertilized
-     * @return the fertilizer count of the tile / how many times the tile has been fertilized
+     * Gets the fertillizer count of how many times the tile has been fertilized
+     * @return the fertilizer count of the tile
      */
-    public int getFertilizerCount() {
-        return fertilizeCount;
+    public int getTotalFertilizerCount() {
+        return this.fertilizeCount;
     }
-  
+    
+    /**
+     * Gets the fertilizer count needed for computing water bonus
+     * @return the fertilizer count of the tile
+     */
+    public int getFertilizerNeed() {
+        if(fertilizeCount > this.seed.getFertilizerLimit()) {
+            return this.seed.getFertilizerLimit();
+        }
+        else
+            return this.fertilizeCount;
+    }
+
     /**
      *  Increments the fertilizer count for the tile
      */
     public void increaseFertilizer() {
-        // if (this.seed.getFertilizerNeed() != fertilizeCount)
-          fertilizeCount += 1;
+        this.fertilizeCount += 1;
     }
     
     /** 
@@ -115,7 +138,7 @@ public class FarmLot {
      * @return the harvest status of the crop on the tile
      */
     public boolean getHarvestStatus() {
-        return harvestable;
+        return this.harvestable;
     }
     
     /** 
@@ -125,14 +148,14 @@ public class FarmLot {
     public boolean isHarvestable() { 
         //Checks if the crop meets the minimum requirements to be harvested
         if (this.seed.getDayGrowth() == this.seed.getHarvestTime() &&
-            this.seed.getWaterLimit() - 1 <= getWaterCount() &&
-            this.seed.getFertilizerLimit() - 1 <= getFertilizerCount()) {
+            this.seed.getWaterLimit() - 1 <= getTotalWaterCount() &&
+            this.seed.getFertilizerLimit() - 1 <= getTotalFertilizerCount()) {
             this.harvestable = true;
         }
         else {
             this.harvestable = false;
         }
-        return harvestable;
+        return this.harvestable;
     }
     
     /** 
@@ -150,10 +173,18 @@ public class FarmLot {
         this.occupied = occ;
     }
 
+    /**
+     * Gets the boolean value whether the tile has rock or not
+     * @return the boolean value 
+     */
     public boolean getRockedStatus() {
         return this.rocked;
     }
 
+    /**
+     * Sets the tile's rock and occupation status to the input boolean value
+     * @param rock the boolean value to be assigned to rocked and occupied
+     */
     public void isRocked(boolean rock) {
         this.rocked = rock;
         this.occupied = rock;
@@ -172,6 +203,5 @@ public class FarmLot {
         this.occupied = false;
         this.rocked = false;
     }
-    
   }
   

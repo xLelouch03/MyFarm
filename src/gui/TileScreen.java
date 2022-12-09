@@ -3,13 +3,9 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -115,7 +111,7 @@ public class TileScreen extends JFrame{
                     mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
                     mainFrame.getTileButton(row, col).setText(""+(num+1));
                 }
-                JOptionPane.showMessageDialog(tileFrame, player.getFarm().harvestTile(player.getFarm().getFarmLot(row, col)));
+                JOptionPane.showMessageDialog(tileFrame, player.getFarm().harvestTile(row,col));
 				mainFrame.setFarmStatus();
                 checkGameCondition();
             }
@@ -128,7 +124,7 @@ public class TileScreen extends JFrame{
         tileInfoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(tileFrame, player.getFarm().displayTileInfo(player.getFarm().getFarmLot(row, col)));
+                JOptionPane.showMessageDialog(tileFrame, player.getFarm().displayTileInfo(row,col));
             }
         });
         tileInfoButton.setBounds(60, 230, 268, 50);
@@ -165,10 +161,8 @@ public class TileScreen extends JFrame{
                 mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
                 mainFrame.getTileButton(row, col).setText(""+(num+1));
             }
-                //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
 
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePickaxe(player.getFarm().getFarmLot(row, col), 
-            player.getFarm().getTool(toolName)));
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePickaxe(row,col,toolName));
              
         }
 
@@ -178,37 +172,30 @@ public class TileScreen extends JFrame{
                 mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
                 mainFrame.getTileButton(row, col).setText(""+(num+1));
             }
-                //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\tile.png"));
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useShovel(player.getFarm().getFarmLot(row, col), 
-                                                        player.getFarm().getTool(toolName)));
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useShovel(row,col,toolName));
         }
 
         else if(toolName.equals("Plow")){
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePlow(player.getFarm().getFarmLot(row, col), 
-            player.getFarm().getTool(toolName)));
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePlow(row,col,toolName));
             if(player.getFarm().getFarmLot(row, col).getRockedStatus() == false && 
                 player.getFarm().getFarmLot(row, col).getOccupied() == false) {
                     mainFrame.getTileButton(row, col).setIcon(null);
                     mainFrame.getTileButton(row, col).setBackground(new Color(205,133,63));
                     mainFrame.getTileButton(row, col).setText(""+(num+1));
-                    //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\plowedTile.png"));
                 }
         }
 
-        else if(toolName.equals("Watering can")) {
+        else if(toolName.equals("Watering Can")) {
             if(player.getFarm().getFarmLot(row, col).getSeed() != null) {
                 mainFrame.getTileButton(row, col).setBackground(new Color(160,82,45));
                 mainFrame.getTileButton(row, col).setText(""+(num+1));
             }
-                //mainFrame.getTileButton(row, col).setIcon(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\wateredTile.png"));
 
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useWaterCan(player.getFarm().getFarmLot(row, col), 
-            player.getFarm().getTool(toolName)));
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useWaterCan(row,col,toolName));
         }
 
         else if(toolName.equals("Fertilizer")) {
-            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useFertilizer(player.getFarm().getFarmLot(row, col), 
-            player.getFarm().getTool(toolName)));
+            JOptionPane.showMessageDialog(tileFrame, player.getFarm().useFertilizer(row,col,toolName));
         }
     }
 

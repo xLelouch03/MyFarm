@@ -1,8 +1,8 @@
-package main;
-
 /**
  * This class contains the information and methods about seeds
  */
+
+package main;
 public class Seed {
     private String name;
     private String type;
@@ -40,6 +40,10 @@ public class Seed {
         this.xp = xp;
     }
     
+    /**
+     * Another constructor that will be used in planting a seed
+     * @param seed
+     */
     public Seed(Seed seed) {
         name = seed.getName();
         type = seed.getType();
@@ -48,7 +52,7 @@ public class Seed {
         fertilizerLimit = seed.getFertilizerLimit();
         cost = seed.getCost();
         basePrice = seed.getBasePrice();
-        xp = seed.getXP();
+        xp = seed.getExperienceYield();
     }
 
     /** 
@@ -56,7 +60,7 @@ public class Seed {
      * @return the name of the seed
      */
     public String getName() {
-        return name;
+        return this.name;
     }
     
     /** 
@@ -64,7 +68,7 @@ public class Seed {
      * @return the type of the crop
      */
     public String getType() {
-        return type;
+        return this.type;
     }
     
     /** 
@@ -72,7 +76,7 @@ public class Seed {
      * @return the number of days the crop growed
      */
     public int getDayGrowth() {
-        return dayGrowth;
+        return this.dayGrowth;
     }
     
     /** 
@@ -80,14 +84,14 @@ public class Seed {
      * @return the harvest time
      */
     public int getHarvestTime() {
-        return harvestTime;
+        return this.harvestTime;
     }
 
     /**
      *  Increments the number of days the seed has growed
      */
     public void grow() {
-        dayGrowth++;
+        this.dayGrowth++;
     }
     
     /** 
@@ -95,11 +99,15 @@ public class Seed {
      * @return the number of times the crop needs to watered
      */
     public int getWaterLimit() {
-        return waterLimit;
+        return this.waterLimit;
     }
 
+    /**
+     * Updates the water limit once the farmer registers to higher type
+     * @param num the bonus water limit
+     */
     public void updateWaterLimit(int num) {
-        waterLimit += num;
+        this.waterLimit += num;
     }
 
     /** 
@@ -107,23 +115,31 @@ public class Seed {
      * @return the number of times the crop needs to fertilized
      */
     public int getFertilizerLimit() {
-        return fertilizerLimit;
+        return this.fertilizerLimit;
     }
 
+    /**
+     * Updates the water limit once the farmer register to higher type
+     * @param num the bonus fertilizer limit
+     */
     public void updateFertilizerLimit(int num) {
-        fertilizerLimit += num;
+        this.fertilizerLimit += num;
     }
 
+    /**
+     * Gets the base price of the seed
+     * @return the base price
+     */
     public int getBasePrice() {
-        return basePrice;
+        return this.basePrice;
     }
 
+    /**
+     * Updates the bonus earnings once the farmer registers to a higher type
+     * @param bonusEarning the bonus earning per produce
+     */
     public void updateBasePrice(int bonusEarning) {
-        basePrice += bonusEarning;
-    }
-
-    public double getXP() {
-        return xp;
+        this.basePrice += bonusEarning;
     }
 
     /** 
@@ -131,19 +147,24 @@ public class Seed {
      * @return the cost of the seed
      */
     public int getCost() {
-        return cost;
+        return this.cost;
     }
     
+    /**
+     * Updates the cost of the seed after the farmer registers to a higher type
+     * @param reduction the reduction to the cost
+     */
     public void updateCost(int reduction) {
-        cost -= reduction;
+        this.cost -= reduction;
     }
+
     /** 
      * Gets the computed harvest total from the seed
      * 
      * @return the harvest total
      */
     public int getHarvestTotal() {
-        return harvestTotal;
+        return this.harvestTotal;
     }
     
     /** 
@@ -184,7 +205,7 @@ public class Seed {
             }
         }
 
-        harvestTotal = basePrice * productProduced;
+        harvestTotal = this.basePrice * productProduced;
 
         return productProduced;
     }
@@ -201,8 +222,8 @@ public class Seed {
      * Resets the number of days a seed growed and the number of product produced
      */
     public void resetSeed() {
-        dayGrowth = 0;
-        productProduced = 0;
+        this.dayGrowth = 0;
+        this.productProduced = 0;
     }
 
 }

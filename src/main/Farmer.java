@@ -1,9 +1,10 @@
-package main;
 /**
  * This class contains the constructor and methods about the farmer
  */
-public class Farmer {
 
+package main;
+
+public class Farmer {
     private double objectCoins;
     private int level;
     private double experience;
@@ -28,7 +29,7 @@ public class Farmer {
      * @return String name  Get the player name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /** 
@@ -36,105 +37,74 @@ public class Farmer {
      * @return double objectCoins   Get number of objectCoins
      */
     public double getCoins() {
-        return objectCoins;
+        return this.objectCoins;
     }
 
+    /**
+     * Gets the registered type of the farmer
+     * @return the farmer type
+     */
     public String getType() {
-        return type;
+        return this.type;
     }
 
-    /** Update the number of objectCoins */
+    /**
+     * Updates the objectCoin by assigning the input coin as the new
+     * value of objectCoins
+     * 
+     * @param coin the updated total value of objectCoins
+     */
     public void updateObjectCoins(double coin){
         this.objectCoins = coin;
     }
 
     /** 
-     * Get player's level
-    `* The player will level up for every 100 XPs 
-     * @return int level    Get level number
+     * Get farmer's level
+     * @return the farmer level
      */
     public int getLevel() {
-        /*int tempLevel = level;
-        level = (int) getXP() / 100;
-
-        if(tempLevel < level)
-            System.out.println("\nYou have leveled up!\n");*/
-
-        return level;
+        return this.level;
     } 
 
+    /**
+     * Updates the farmer level
+     * @param level the new level of the farmer
+     */
     public void setLevel(int level) {
         this.level = level;
     }
 
     /** 
-     * Get XP count 
-     * @return double experience    Get XP count
+     * Gets the farmer XP 
+     * @return the experience of the farmer
     */
     public double getXP() {
-        return experience;
+        return this.experience;
     }
 
     /** 
-     * Update XP count 
-     * @param XP XP count dependent on the action/tool type
+     * Updates farmer experience 
+     * @param XP the updated farmer experience
     */
     public void updateXP(double xp) {
         this.experience = xp;
     } 
 
     /**
-     * Allow farmer to register to higher farmerTypes 
+     * Updates the farmer type after registering to higher types
+     * @param farmerType the updated farmer type
      */
-
     public void setFarmerType(String farmerType){
         this.type = farmerType;
-        /*switch(farmerType){ 
-
-            case "Registered Farmer":
-                if (this.getLevel() <= 5 && this.getCoins() <= 200){
-                    this.type = "Registered Farmer";
-                    this.objectCoins -= - 200;
-                } 
-                break;
-            
-            case "Distinguished Farmer":
-                if (this.getLevel() <= 10 && this.getCoins() <= 300){
-                    this.type = "Registered Farmer";
-                    this.objectCoins -= 300;
-                } 
-                break;
-
-            case "Legendary Farmer":
-                if (this.getLevel() <= 15 && this.getCoins() <= 400){
-                    this.type = "Registered Farmer";
-                    this.objectCoins -= 400;
-                } 
-                break;
-
-            default:
-                this.type = this.getType();
-
-        }*/
-
     }
 
-    /* Display the game statistics/summary */
-    public void displayStats() {
-        System.out.println("\n[DISPLAYING FARMER INFORMATION]");
-        System.out.println("Farmer Name: " + getName());
-        System.out.println("Farmer Type: " + getType());
-        System.out.println("You are level: " + getLevel());
-        System.out.println("You have " + (float) getCoins() + " objectcoins");
-        System.out.println("You have " + getXP() + " experience.");
-    }
-
-    /* Resets the farmer/player statistics */
+    /**
+     * Resets the stats of the farmer
+     */
     public void resetFarmer(){
         this.name = null;
         this.objectCoins = 100;
         this.level = 0;
         this.experience = 0;
     }
-
 }

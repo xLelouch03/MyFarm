@@ -1,3 +1,6 @@
+/**
+ * This contains the constructor for the seed Mango inherting the Seed class
+ */
 package seeds;
 
 import main.Seed;
