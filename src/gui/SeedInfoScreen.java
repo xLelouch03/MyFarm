@@ -27,14 +27,13 @@ public class SeedInfoScreen extends JFrame {
     private JLabel seedCostLabel;
     private JLabel baseSellingPriceLabel;
     private JLabel xpYieldLabel;
+    private int index = 0;
 
     public SeedInfoScreen() {
         initialize();
     }
 
     public void initialize(){
-
-        int index = 0;
 
         frame = new JFrame("Seed Encyclopedia");
         frame.setLayout(new BorderLayout(10, 5));
@@ -43,14 +42,14 @@ public class SeedInfoScreen extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        bottomPanel = new JPanel(); // panel for the buttons
-        frame.add(bottomPanel, BorderLayout.CENTER);
+        //bottomPanel = new JPanel(); // panel for the buttons
+        //frame.add(bottomPanel, BorderLayout.CENTER);
 
-        backButton = new JButton("Back");
+        backButton = new JButton("<");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-
+                
                 if (index != 0){ 
                     index = index - 1;
                 } else {
@@ -59,16 +58,18 @@ public class SeedInfoScreen extends JFrame {
 
             }
         });
-        bottomPanel.add(backButton, BorderLayout.WEST); // Back Button
+        backButton.setBounds(10,150,50,50);
+        backButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+        frame.add(backButton); // Back Button
 
-        nextButton = new JButton("Next");
+        nextButton = new JButton(">");
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
 
                 if (index != 0){
                     index = index + 1;
-                } else if (index > 7) { // 7 is the number of seeds to be displayed (7th is the last index)
+                } else if (index > 7) { // 8 is the number of seeds to be displayed (7th is the last index)
                     index = 7;
                 } else if (index == 0) { // 0th index is the first seed
                     index = 0;
@@ -76,7 +77,9 @@ public class SeedInfoScreen extends JFrame {
 
             }
         });
-        bottomPanel.add(nextButton, BorderLayout.EAST); // Back Button
+        nextButton.setBounds(420,150,50,50);
+        nextButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+        frame.add(nextButton); // Back Button
 
         // Displaying the text/info
 
@@ -91,31 +94,32 @@ public class SeedInfoScreen extends JFrame {
 
                 seedNameLabel = new JLabel("Turnip");
                 seedNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-                topPanel.add(seedNameLabel, BorderLayout.CENTER);
+                seedNameLabel.setBounds(10,10,20,20);
+                frame.add(seedNameLabel, BorderLayout.CENTER);
 
                 cropTypeLabel = new JLabel("Crop Type: Root crop\n");
-                midPanel.add(cropTypeLabel);
+                frame.add(cropTypeLabel);
 
                 harvestTimeLabel = new JLabel("Harvest Time: 2 Days\n");
-                midPanel.add(harvestTimeLabel);
+                frame.add(harvestTimeLabel);
 
                 waterNeedsLabel = new JLabel("Water Needs: 1(2)");
-                midPanel.add(waterNeedsLabel);
+                frame.add(waterNeedsLabel);
 
                 fertilizerNeedsLabel = new JLabel("Fertilizer Needs: 0(1)");
-                midPanel.add(fertilizerNeedsLabel);
+                frame.add(fertilizerNeedsLabel);
 
                 productsProducedLabel = new JLabel("Products Produced: 1-2");
-                midPanel.add(productsProducedLabel);
+                frame.add(productsProducedLabel);
 
                 seedCostLabel = new JLabel("Seed Cost: 5");
-                midPanel.add(seedCostLabel);
+                frame.add(seedCostLabel);
 
                 baseSellingPriceLabel = new JLabel("Base Selling Price: 6");
-                midPanel.add(baseSellingPriceLabel);
+                frame.add(baseSellingPriceLabel);
 
                 xpYieldLabel = new JLabel("Experience Yield: 5");
-                midPanel.add(xpYieldLabel);
+                frame.add(xpYieldLabel);
             
                 break;
             
