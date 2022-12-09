@@ -143,8 +143,24 @@ public class MainScreen{
             public void actionPerformed(ActionEvent e) {
 
 				JFrame frame = new JFrame("Seed Encyclopedia");
-				
+				frame.setSize(500, 500);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
+
 				JPanel rightPanel = new JPanel();
+				rightPanel.setSize(100, 500);
+				rightPanel.setLocation(50, 250);
+				frame.add(rightPanel);
+
+				JPanel midPanel = new JPanel();
+				midPanel.setSize(300, 500);
+				midPanel.setLocation(250, 250);
+				frame.add(midPanel);
+
+				JPanel leftPanel = new JPanel();
+				leftPanel.setSize(300, 500);
+				leftPanel.setLocation(400, 250);
+				frame.add(leftPanel);
 
 				JButton backButton = new JButton("Back");
 				backButton.addActionListener(new ActionListener() {
@@ -159,8 +175,8 @@ public class MainScreen{
 
 					}
 				});
-				backButton.setBounds(100, 100, 100, 50);
-				frame.add(backButton); // Back Button
+				backButton.setBounds(100, 80, 100, 50);
+				leftPanel.add(backButton); // Back Button
 
 				JButton nextButton = new JButton("Next");
 				nextButton.addActionListener(new ActionListener() {
@@ -177,17 +193,13 @@ public class MainScreen{
 
 					}
 				});
-				nextButton.setBounds(500, 500, 100, 50);
-				frame.add(nextButton);
+				nextButton.setBounds(100, 220, 100, 50);
+				rightPanel.add(nextButton);
 
 				JLabel seedNameLabel = new JLabel(allSeeds.get(index).getName());
 				seedNameLabel.setBounds(10, 40, 347, 24);
-				
-
-
-				frame.setSize(1900,190);
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setVisible(true);
+				midPanel.add(seedNameLabel);
+			
             }
         });
 		viewPlantButton.setBounds(35, 90, 268, 50);
