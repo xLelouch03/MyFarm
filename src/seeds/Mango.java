@@ -13,6 +13,6 @@ public class Mango extends Seed {
      * Constructs a mango instance through the super keyword
      */
     public Mango() {
-        super("Mango", "Fruit tree", 10, 7, 4, 100,8,25);
+        super("Mango", "Fruit tree", 10, 7,7,4, 4, 100,8,25);
     }
 }

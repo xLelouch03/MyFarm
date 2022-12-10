@@ -140,7 +140,7 @@ public class MyFarm {
                         }
                         registerPrompt += "You have used 400 objectCoins to register\n" + "You are now a " + farmerType + "\nBonuses:\n" +
                                             "Seed cost is reduced with 4 objectCoins\n" + 
-                                            "3 bonus earnings per produce" + "\nIncreased water limit by 1" + "\nIncreased fertilizer limit by 2";
+                                            "3 bonus earnings per produce" + "\nIncreased water limit by 2" + "\nIncreased fertilizer limit by 1";
                     } 
                     break;
             }
@@ -681,6 +681,7 @@ public class MyFarm {
             if(farmer.getCoins() >= pickaxe.getCost()){
                 // remove rock
                 lot.isRocked(false);
+                pickaxePrompt += "\nRock has been removed in " + "FarmLot(" + row + "," + col +" )"; 
                 // update player stats
                 double currXP = farmer.getXP();
                 double tempXP = farmer.getXP() + pickaxe.getXP();

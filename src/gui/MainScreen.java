@@ -55,7 +55,7 @@ public class MainScreen{
 	 */
     public void initialize() {
         mainFrame = new JFrame("My Farm - Main Screen"); //instantiates a frame
-        mainFrame.setBounds(0, 0, 1540, 823); 
+        mainFrame.setBounds(0, 0, 1540, 823);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		mainFrame.getContentPane().setLayout(null);
 

@@ -13,6 +13,6 @@ public class Rose extends Seed {
      * Constructs a rose instance through the super keyword
      */
     public Rose() {
-        super("Rose", "Flower", 1, 2, 1, 5,5,2.5);
+        super("Rose", "Flower", 1, 1,2,0, 1, 5,5,2.5);
     }
 }

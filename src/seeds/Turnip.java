@@ -13,6 +13,6 @@ public class Turnip extends Seed {
      * Constructs a turnip instance through the super keyword
      */
     public Turnip() {
-        super("Turnip", "Root crop", 2, 2, 1, 5,6,5);
+        super("Turnip", "Root crop", 2, 1, 2, 0, 1, 5,6,5);
     }
 }

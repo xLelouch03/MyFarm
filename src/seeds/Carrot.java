@@ -13,6 +13,6 @@ public class Carrot extends Seed {
      * Constructs a carrot instance through the super keyword
      */
     public Carrot() {
-        super("Carrot", "Root crop", 3, 2, 1, 10,9,7.5);
+        super("Carrot", "Root crop", 3, 1, 2,0,1, 10,9,7.5);
     }
 }

@@ -13,6 +13,6 @@ public class Sunflower extends Seed  {
      * Constructs a sunflower instance through the super keyword
      */
     public Sunflower() {
-        super("Sunflower", "Flower", 3, 3, 2, 20,19,7.5);
+        super("Sunflower", "Flower", 3, 2,3,1, 2, 20,19,7.5);
     }
 }

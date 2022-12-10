@@ -12,7 +12,9 @@ public class Seed {
     private String type;
     private int harvestTime;
     private int dayGrowth = 0;
+    private int waterNeed;
     private int waterLimit;
+    private int fertilizerNeed;
     private int fertilizerLimit;
     private int productProduced = 0;
     private int cost;
@@ -32,17 +34,22 @@ public class Seed {
      * @param name  the name of the seed
      * @param type  the type of the seed
      * @param harvestTime  the number of days it needs to grow
-     * @param waterLimit  the number of times it needs to be watered
-     * @param fertilizerLimit  the number of times it needs to be fertilized
+     * @param waterNeed  the number of times it needs to be watered
+     * @param waterLimit  the maximum for the water bonus
+     * @param fertilizerNeed the number of times it needs to be fertilized
+     * @param fertilizerLimit  the maximum for fertilizer bonus
      * @param cost  the cost of the seed
      * @param basePrice  the base selling price of the seed 
      * @param xp  the experience gained after harvesting the seed
      */
-    public Seed(String name, String type, int harvestTime, int waterLimit, int fertilizerLimit, int cost, int basePrice, double xp) {
+    public Seed(String name, String type, int harvestTime, int waterNeed, int waterLimit, 
+                int fertilizerNeed, int fertilizerLimit, int cost, int basePrice, double xp) {
         this.name = name;
         this.type = type;
         this.harvestTime = harvestTime;
+        this.waterNeed = waterNeed;
         this.waterLimit = waterLimit;
+        this.fertilizerNeed = fertilizerNeed;
         this.fertilizerLimit = fertilizerLimit;
         this.cost = cost;
         this.updatedCost = cost;
@@ -115,6 +122,14 @@ public class Seed {
     }
 
     /**
+     * Gets the water need of the seed
+     * @return the water need
+     */
+    public int getWaterNeed() {
+        return this.waterNeed;
+    }
+
+    /**
      * Updates the water limit once the farmer registers to higher type
      * @param num the bonus water limit
      */
@@ -122,6 +137,14 @@ public class Seed {
         updatedWaterLimit = this.waterLimit + num;
     }
 
+    /**
+     * Gets the fertilizer need of the seed
+     * @return the fertilizer need
+     */
+    public int getFertilizerNeed() {
+        return this.fertilizerNeed;
+    }
+    
     /** 
      * Gets the number of times the crop needs to fertilized to be ready for harvest
      * @return the number of times the crop needs to fertilized
@@ -223,7 +246,10 @@ public class Seed {
             }
         }
 
-        harvestTotal = this.basePrice * productProduced;
+        if(basePrice < updatedSellingPrice)
+            harvestTotal = updatedSellingPrice * productProduced;
+        else
+            harvestTotal = this.basePrice * productProduced;
 
         return productProduced;
     }

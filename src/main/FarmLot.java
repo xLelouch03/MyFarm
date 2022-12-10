@@ -152,8 +152,8 @@ public class FarmLot {
     public boolean isHarvestable() { 
         //Checks if the crop meets the minimum requirements to be harvested
         if (this.seed.getDayGrowth() == this.seed.getHarvestTime() &&
-            this.seed.getWaterLimit() - 1 <= getTotalWaterCount() &&
-            this.seed.getFertilizerLimit() - 1 <= getTotalFertilizerCount()) {
+            this.seed.getWaterNeed() <= getTotalWaterCount() &&
+            this.seed.getFertilizerNeed() <= getTotalFertilizerCount()) {
             this.harvestable = true;
         }
         else {

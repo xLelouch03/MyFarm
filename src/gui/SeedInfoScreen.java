@@ -31,8 +31,8 @@ public class SeedInfoScreen {
     private JLabel plantTypeLabel;
     private JLabel plantHarvestTimeLabel;
     private JLabel plantDayGrowthLabel;
-    private JLabel plantWaterLimitLabel;
-    private JLabel plantFertilizerLimitLabel;
+    private JLabel plantWaterNeedLabel;
+    private JLabel plantFertilizerNeedLabel;
     private JLabel plantProductProducedLabel;
     private JLabel plantCostLabel;
     private JLabel plantBasePriceLabel;
@@ -135,17 +135,19 @@ public class SeedInfoScreen {
         plantDayGrowthLabel.setBounds(55, 145, 200, 44);
         seedPanel.add(plantDayGrowthLabel);
 
-        plantWaterLimitLabel = new JLabel("Water Limit: " + player.getFarm().getAllSeed().get(index).getWaterLimit());
-        plantWaterLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        plantWaterLimitLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantWaterLimitLabel.setBounds(55, 165, 200, 44);
-        seedPanel.add(plantWaterLimitLabel);
+        plantWaterNeedLabel = new JLabel("Water Need: " + player.getFarm().getAllSeed().get(index).getWaterNeed() + 
+        "(" + player.getFarm().getAllSeed().get(index).getWaterLimit() + ")");
+        plantWaterNeedLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        plantWaterNeedLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+        plantWaterNeedLabel.setBounds(55, 165, 200, 44);
+        seedPanel.add(plantWaterNeedLabel);
 
-        plantFertilizerLimitLabel = new JLabel("Fertilizer Limit: " + player.getFarm().getAllSeed().get(index).getFertilizerLimit());
-        plantFertilizerLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        plantFertilizerLimitLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantFertilizerLimitLabel.setBounds(55, 185, 200, 44);
-        seedPanel.add(plantFertilizerLimitLabel);
+        plantFertilizerNeedLabel = new JLabel("Fertilizer Need: " + player.getFarm().getAllSeed().get(index).getFertilizerNeed() + 
+        "(" + player.getFarm().getAllSeed().get(index).getFertilizerLimit() +")");
+        plantFertilizerNeedLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        plantFertilizerNeedLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+        plantFertilizerNeedLabel.setBounds(55, 185, 200, 44);
+        seedPanel.add(plantFertilizerNeedLabel);
 
         plantProductProducedLabel = new JLabel("Product Produced: " + player.getFarm().getAllSeed().get(index).getProductProducedMinToMax());
         plantProductProducedLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -200,8 +202,10 @@ public class SeedInfoScreen {
         plantTypeLabel.setText("Crop Type: " + player.getFarm().getAllSeed().get(index).getType());
         plantHarvestTimeLabel.setText("Harvest Time (in days): " + player.getFarm().getAllSeed().get(index).getHarvestTime());
         plantDayGrowthLabel.setText("Day Growth: " + player.getFarm().getAllSeed().get(index).getDayGrowth());
-        plantWaterLimitLabel.setText("Water Limit: " + player.getFarm().getAllSeed().get(index).getWaterLimit());
-        plantFertilizerLimitLabel.setText("Fertilizer Limit: " + player.getFarm().getAllSeed().get(index).getFertilizerLimit());
+        plantWaterNeedLabel.setText("Water Need: " + player.getFarm().getAllSeed().get(index).getWaterNeed() + 
+        "(" + player.getFarm().getAllSeed().get(index).getWaterLimit() + ")");
+        plantFertilizerNeedLabel.setText("Fertilizer Need: " + player.getFarm().getAllSeed().get(index).getFertilizerNeed() + 
+        "(" + player.getFarm().getAllSeed().get(index).getFertilizerLimit() +")");
         plantProductProducedLabel.setText("Product Produced: " + player.getFarm().getAllSeed().get(index).getProductProducedMinToMax());
         plantCostLabel.setText("Cost: " + player.getFarm().getAllSeed().get(index).getCost());
         plantBasePriceLabel.setText("Base Price: " + player.getFarm().getAllSeed().get(index).getBasePrice());

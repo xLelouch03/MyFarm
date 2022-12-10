@@ -13,6 +13,6 @@ public class Apple extends Seed {
      * Constructs an apple instance through the super keyword
      */
     public Apple() {
-        super("Apple", "Fruit tree", 10, 7, 5, 200,5,25);
+        super("Apple", "Fruit tree", 10, 7,7, 5,5, 200,5,25);
     }
 }
