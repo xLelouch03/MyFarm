@@ -1,5 +1,5 @@
 /**
- * This class contains the GUI implementation of the Main Screen to be used for the game
+ * Belongs to package gui and imports java.awt and java swing, and Main.java
  */
 
 package gui;
@@ -23,6 +23,10 @@ import main.Main;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class contains the GUI implementation of the Main Screen to be used for the game
+ * after pressing the Start button
+ */
 public class MainScreen{
     private JFrame mainFrame;
     private Main player;

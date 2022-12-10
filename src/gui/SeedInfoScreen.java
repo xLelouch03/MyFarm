@@ -1,5 +1,5 @@
 /**
- * This class contains the seed information to be displayed inside the JButton for "View All Seeds"
+ * Belongs to package gui and imports Main.java, java.awt and java.swing
  */
 
 package gui;
@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 
 
 /**
- * This is the constructor for SeedInfoScreen. This is where the main variables are initialized.
+ * This class contains the seed information to be displayed upon pressing View All Seeds button
  */
 public class SeedInfoScreen {
 
@@ -40,6 +40,10 @@ public class SeedInfoScreen {
     private JLabel plantIconLabel;
     private ImageIcon image;
 
+    /**
+     * Constructs the seed information screen given controller input
+     * @param player the controller 
+     */
     public SeedInfoScreen(Main player) {
         this.player = player;
         initFrame();

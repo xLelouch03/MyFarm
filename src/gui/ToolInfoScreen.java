@@ -1,3 +1,6 @@
+/**
+ * Belongs to package gui and imports Main.java, java.awt, and java.swing
+ */
 package gui;
 import main.Main;
 
@@ -16,7 +19,7 @@ import javax.swing.ImageIcon;
 
 
 /**
- * This is the constructor for SeedInfoScreen. This is where the main variables are initialized.
+ * This class displays each tool information through a frame
  */
 public class ToolInfoScreen {
 
@@ -30,6 +33,10 @@ public class ToolInfoScreen {
     private JLabel toolIconLabel;
     private ImageIcon image;
 
+    /**
+     * Constructs the tool information screen given controller upon pressing View All tools button
+     * @param player the controller
+     */
     public ToolInfoScreen(Main player) {
         this.player = player;
         initFrame();
