@@ -90,7 +90,7 @@ public class ToolInfoScreen {
         toolFrame.getContentPane().add(toolPanel);
         toolPanel.setLayout(null);
 
-        // image = new ImageIcon(this.getClass().getResource("/assets/plow.png"));
+        image = new ImageIcon(this.getClass().getResource("/assets/tool plow.png"));
 
         // toolIconLabel = new JLabel(image);
         // toolIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -122,15 +122,15 @@ public class ToolInfoScreen {
      */
     public void updateToolPanel() {
         if (index == 1){
-            image = new ImageIcon(this.getClass().getResource("/assets/plow.png"));
+            image = new ImageIcon(this.getClass().getResource("/assets/tool plow.png"));
         } else if (index == 2){
-            image = new ImageIcon(this.getClass().getResource("/assets/watering can.png"));
+            image = new ImageIcon(this.getClass().getResource("/assets/tool watering can.png"));
         } else if (index == 3){
-            image = new ImageIcon(this.getClass().getResource("/assets/fertilizer.png"));
+            image = new ImageIcon(this.getClass().getResource("/assets/tool fertilizer.png"));
         } else if (index == 4){
-            image = new ImageIcon(this.getClass().getResource("/assets/shovel.png"));
+            image = new ImageIcon(this.getClass().getResource("/assets/tool shovel.png"));
         } else if (index == 5){
-            image = new ImageIcon(this.getClass().getResource("/assets/pickaxe.png"));
+            image = new ImageIcon(this.getClass().getResource("/assets/tool pickaxe.png"));
         }
 
         toolNameLabel.setText("Tool name: " + player.getFarm().getAllTool().get(index).getName());
