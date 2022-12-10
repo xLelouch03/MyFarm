@@ -142,7 +142,7 @@ public class Main {
      */
     public void importFile(int rocks) throws IOException{
         int row, col;
-        URL loc = this.getClass().getResource("/main/rocks2.txt");
+        URL loc = this.getClass().getResource("/main/rock.txt");
         File f = new File(loc.getPath());
 
         BufferedReader br = null;
