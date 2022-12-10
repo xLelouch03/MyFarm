@@ -24,6 +24,10 @@ public class SetupScreen {
     private JTextField rockNumberTF;
     int rockNumber = 0;
 
+    /**
+     * Constructs the setup screen given the main object as input
+     * @param player the controller
+     */
     public SetupScreen(Main player) {
         this.player = player;
         initialize();
@@ -111,5 +115,4 @@ public class SetupScreen {
         else if(rockNumber == 0 || rockNumber != 0)
             warningLabel.setText(warningMessage);
     }
-
 }

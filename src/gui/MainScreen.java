@@ -36,8 +36,6 @@ public class MainScreen{
 	private JLabel availableSpaceLabel;
 	private JLabel farmerNameLabel;
 	private JLabel objectCoinLabel;	
-	private int rowIndex, colIndex;	
-
 	/**
 	 * Constructs the main screen given the controller
 	 * @param player the controller
@@ -133,7 +131,6 @@ public class MainScreen{
 		nextDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //player.nextDay();
 				nextDayLabel.setText(player.getFarm().advanceNextDay());
 				
 				dayLabel.setText("Day: " + player.getFarm().getDay()); //changes what is displayed on the mainFrame
@@ -144,7 +141,6 @@ public class MainScreen{
 		leftPanel.add(nextDayButton);
 		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-		//replace with View All Seeds
 		JButton viewPlantButton = new JButton("View all Seeds");
 		viewPlantButton.addActionListener(new ActionListener() {
 
@@ -158,7 +154,6 @@ public class MainScreen{
 		leftPanel.add(viewPlantButton);
 		viewPlantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-		//replace with View All Tools
 		JButton viewToolButton = new JButton("View all Tools");
 		viewToolButton.addActionListener(new ActionListener() { 
 
@@ -227,8 +222,6 @@ public class MainScreen{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						tileScreenOpened = new TileScreen(getMain(), player, row, col, num);
-						rowIndex = row;
-						colIndex = col;
 					}
 				});
 				rightPanel.add(tileButtons[i][j]);
