@@ -1,3 +1,8 @@
+/*
+ * This class contains the GUI implementation of the Tile Screen to be used for the game
+ * These are what pop up when the tile buttons are clicked.
+ */
+
 package gui;
 
 import java.awt.Color;
@@ -16,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import main.Main;
+
 
 public class TileScreen extends JFrame{
     private MainScreen mainFrame;

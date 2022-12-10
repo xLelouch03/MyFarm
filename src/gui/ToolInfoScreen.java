@@ -1,52 +1,104 @@
 package gui;
 
-import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTable;
+import java.util.*;
+import main.Tool;
 
 import main.Main;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class ToolInfoScreen extends JFrame {
 
-    private JFrame frame;
+    // Index to track the current information panel
+    private int index = 0;
     private Main player;
 
-    public ToolInfoScreen(Main player) {
-        this.player = player;
-        initialize();
+    private ArrayList<Tool> allTools = player.getFarm().getAllTool();
+
+    // Array of information panels to be displayed
+    private InformationPanel[] panels = new InformationPanel[] {
+        new InformationPanel(allTools.get(index).getName()),
+        new InformationPanel("Cost: " + allTools.get(index).getCost()),
+        new InformationPanel("Experience Yield: " + allTools.get(index).getXP()),
+    };
+
+    public ToolInfoScreen() {
+        // Set the title and size of the frame
+        setTitle("Tool Encyclopedia");
+        setSize(400, 200);
+        setVisible(true);
+        setLocationRelativeTo(null);
+
+        // Create the Previous and Next buttons
+        JButton previousBtn = new JButton("Previous");
+        JButton nextBtn = new JButton("Next");
+
+        // Add action listeners to the buttons
+        previousBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Decrement the index and update the information panel
+                index--;
+                updateInformationPanel();
+            }
+        });
+
+        nextBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Increment the index and update the information panel
+                index++;
+                updateInformationPanel();
+            }
+        });
+
+        // Create a panel to hold the buttons
+        JPanel btnPanel = new JPanel();
+        btnPanel.add(previousBtn);
+        btnPanel.add(nextBtn);
+
+        // Add the buttons panel and initial information panel to the frame
+        add(btnPanel, BorderLayout.NORTH);
+        add(panels[index], BorderLayout.CENTER);
     }
 
-    public void initialize(){
+    // Method to update the information panel based on the current index
+    private void updateInformationPanel() {
+        // Check if the index is within the bounds of the panels array
+        if (index < 0) {
+            index = 0;
+        } else if (index >= panels.length) {
+            index = panels.length - 1;
+        }
 
-        frame = new JFrame("Tool Menu");
+        // Remove the current information panel from the frame
+        remove(panels[index]);
 
-        JPanel scrollPanel = new JPanel();   
-        JScrollPane scrollPane = new JScrollPane(scrollPanel);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        // Add the new information panel to the frame
+        add(panels[index], BorderLayout.CENTER);
+
+        // Update the frame to display the new panel
+        revalidate();
+        repaint();
+    }
+
+    class InformationPanel extends JPanel {
+
+        private JLabel label;
     
-        String[][] infoString = {
-            {"Plow", "Converts an unplowed tile to a plowed tile. Can only be performed on an unplowed tile.", "0", "0.5"},
-            {"Watering Can", "Adds to the total number of tiles times a crop has been watered. Can only be performed on a plowed tile with a crop.", "0", "0.5"},
-            {"Fertilizer", "Adds to the total number of tiles times a crop has been applied with fertilizer. Can only be performed on a plowed tile with a crop.", "10", "4"},
-            {"Pickaxe", "Removes a rock from a tile. Can only be applied to tiles with a rock.", "50", "15"},
-            {"Shovel", "Removes a withered plant from a tile. Can be used on any tile/crop with varying effects, as described above.", "7", "2"}
-        };
-        
-        String[] infoCols = {"Tool", "Function", "Cost of Usage", "Experienced Gain from Use"};
-            
-        JTable infoTable = new JTable(infoString, infoCols);
-        infoTable.setPreferredScrollableViewportSize(new Dimension(500, 50));
-        infoTable.setFillsViewportHeight(true);
-
-        frame.add(new JScrollPane(infoTable));
-        frame.setSize(1300,140);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
-        
+        public InformationPanel(String text) {
+            // Create a label with the given text and add it to the panel
+            label = new JLabel(text);
+            add(label);
+        }
+    
     }
 
+    
 }

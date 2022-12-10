@@ -1,3 +1,7 @@
+/*
+ * This class contains the GUI implementation of the Starting Screen to be used for the game
+ */
+
 package gui;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
