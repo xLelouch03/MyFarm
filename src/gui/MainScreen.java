@@ -168,11 +168,11 @@ public class MainScreen{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-				toolInfo = new ToolInfoScreen(player.getFarm());
-				toolInfo.setTitle("Tool Encyclopedia");
-				toolInfo.setSize(400, 200);
-				toolInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				toolInfo.setVisible(true);
+				toolInfo = new ToolInfoScreen(player);
+				// toolInfo.setTitle("Tool Encyclopedia");
+				// toolInfo.setSize(400, 200);
+				// toolInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// toolInfo.setVisible(true);
 				
             }
         });
