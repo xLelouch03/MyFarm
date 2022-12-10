@@ -34,7 +34,7 @@ public class ToolInfoScreen {
     public void initFrame() {
         toolFrame = new JFrame();
         toolFrame.setTitle("tool Encyclopedia");
-        toolFrame.setSize(400, 400);
+        toolFrame.setSize(350, 250);
         toolFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         toolFrame.setVisible(true);
 
@@ -83,19 +83,19 @@ public class ToolInfoScreen {
         toolNameLabel = new JLabel("Tool name: " + player.getFarm().getAllTool().get(index).getName());
         toolNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         toolNameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        toolNameLabel.setBounds(55, 55, 200, 44);
+        toolNameLabel.setBounds(55, 40, 200, 44);
         toolPanel.add(toolNameLabel);
 
         toolCostLabel = new JLabel("Tool name: " + player.getFarm().getAllTool().get(index).getCost());
         toolCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
         toolCostLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        toolCostLabel.setBounds(55, 75, 200, 44);
+        toolCostLabel.setBounds(55, 65, 200, 44);
         toolPanel.add(toolCostLabel);
 
         toolXPLabel = new JLabel("Experience Yield: " + player.getFarm().getAllTool().get(index).getXP());
         toolXPLabel.setHorizontalAlignment(SwingConstants.CENTER);
         toolXPLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        toolXPLabel.setBounds(55, 95, 200, 44);
+        toolXPLabel.setBounds(55, 85, 200, 44);
         toolPanel.add(toolXPLabel);
 
     }

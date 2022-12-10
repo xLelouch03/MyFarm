@@ -44,7 +44,7 @@ public class SeedInfoScreen {
     public void initFrame() {
         seedFrame = new JFrame();
         seedFrame.setTitle("Seed Encyclopedia");
-        seedFrame.setSize(400, 400);
+        seedFrame.setSize(350, 400);
         seedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         seedFrame.setVisible(true);
 
