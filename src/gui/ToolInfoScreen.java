@@ -56,7 +56,7 @@ public class ToolInfoScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Increment the index and update the information panel
-                if(index < 2)
+                if(index < 4)
                     index++;
                 updateToolPanel();
             }

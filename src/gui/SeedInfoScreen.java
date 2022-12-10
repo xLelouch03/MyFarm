@@ -18,6 +18,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
+
+/**
+ * This is the constructor for SeedInfoScreen. This is where the main variables are initialized.
+ */
 public class SeedInfoScreen {
 
     private int index = 0;
@@ -99,7 +103,7 @@ public class SeedInfoScreen {
 
         plantIconLabel = new JLabel(image);
         plantIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        plantIconLabel.setBounds(55, 20, 40, 40);
+        plantIconLabel.setBounds(140, 20, 40, 40);
         seedPanel.add(plantIconLabel);
 
         plantNameLabel = new JLabel("Crop name: " + player.getFarm().getAllSeed().get(index).getName());
