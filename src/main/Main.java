@@ -28,9 +28,13 @@ public class Main {
      * Setups the game after pressing the Start button
      * @param farmerName the name to be used in creating a farmer object
      */
-    public void setupGame(String farmerName) {
+    public void setupGame(String farmerName, int rockNumber) {
+        int rocks;
         if(farmerName.length() == 0) //displays a warning text if player did not enter a name
             setup.warningText("You have not entered a name.");
+        else if(rockNumber < 10 || rockNumber > 30) { 
+            setup.warningText("Please enter a number between 10 to 30");
+        }
         else {
             farm = new MyFarm();
             farm.addFarmer(farmerName);
@@ -38,8 +42,7 @@ public class Main {
             farm.prepareTools();
             prepareTiles();
             try {
-                importFile();
-                //exportFile();
+                importFile(rockNumber);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -142,7 +145,7 @@ public class Main {
      * Reads a file for the scattering of rocks to the farm
      * @throws IOException if file does not exist
      */
-    public void importFile() throws IOException{
+    public void importFile(int rocks) throws IOException{
         int row, col;
         URL loc = this.getClass().getResource("/main/rocks2.txt");
         File f = new File(loc.getPath());
@@ -150,7 +153,7 @@ public class Main {
         BufferedReader br = null;
         int totalLines = 0;
 
-        for(int i = 1; i <= 15; i++) {
+        for(int i = 1; i <= rocks; i++) {
             try {
                 br = new BufferedReader(new FileReader(f));
     
@@ -185,34 +188,6 @@ public class Main {
                   e.printStackTrace();      
             } 
         }
-        
-        /*Scanner read = new Scanner(f);
-        while(read.hasNext()) {
-            row = read.nextInt();
-            col = read.nextInt();
-            farm.getFarmLot(row, col).isRocked(true);
-        }
-        read.close();*/
-    }
-
-    public void exportFile() {
-        try {
-            FileWriter file = new FileWriter("rocks2.txt");
-
-            for(int i = 0; i < 10; i++) {
-                for(int j = 0; j < 5; j++) {
-                    if(i == 9 && j == 4)
-                        file.write(i + " " + j);
-                    else
-                        file.write(i + " " + j + "\n");
-                }
-            }
-            file.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
     }
 
     public static void main(String[] args) {

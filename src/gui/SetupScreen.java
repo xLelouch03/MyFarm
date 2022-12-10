@@ -20,6 +20,9 @@ public class SetupScreen {
     private Main player;
     private JFrame setupFrame;
     private JLabel warningLabel;
+    private JTextField farmerNameTextField;
+    private JTextField rockNumberTF;
+    int rockNumber = 0;
 
     public SetupScreen(Main player) {
         this.player = player;
@@ -46,32 +49,46 @@ public class SetupScreen {
         JLabel farmerNameLabel = new JLabel("What is your name?");
 		farmerNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		farmerNameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		farmerNameLabel.setBounds(35, 90, 575, 44);
+		farmerNameLabel.setBounds(35, 80, 575, 44);
 		setupFrame.getContentPane().add(farmerNameLabel);
 
         warningLabel = new JLabel();
         warningLabel.setHorizontalAlignment(SwingConstants.CENTER);
         warningLabel.setForeground(Color.RED);
-        warningLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        warningLabel.setBounds(35, 135, 500, 27);
+        warningLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        warningLabel.setBounds(35, 160, 500, 27);
 		setupFrame.getContentPane().add(warningLabel);
 
-        JTextField farmerNameTextField = new JTextField();
+        farmerNameTextField = new JTextField();
 		farmerNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		farmerNameTextField.setBounds(235, 95, 300, 39);
+		farmerNameTextField.setBounds(235, 85, 300, 39);
 		setupFrame.getContentPane().add(farmerNameTextField);
 
+        JLabel rockNumberLabel = new JLabel("How many rocks do you want for the farm?");
+        rockNumberLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		rockNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		rockNumberLabel.setBounds(35, 120, 575, 44);
+		setupFrame.getContentPane().add(rockNumberLabel);
+
+        rockNumberTF = new JTextField();
+		rockNumberTF.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rockNumberTF.setBounds(356, 127, 50, 30);
+		setupFrame.getContentPane().add(rockNumberTF);
+    
+        
         JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-                player.setupGame(farmerNameTextField.getText());
+                if(rockNumberTF.getText().length() > 0)
+                    rockNumber = Integer.valueOf(rockNumberTF.getText());
+                player.setupGame(farmerNameTextField.getText(), rockNumber);
 			}
 		});
 
         startButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		startButton.setBounds(215, 170, 160, 45);
+		startButton.setBounds(215, 190, 160, 45);
 		setupFrame.getContentPane().add(startButton);
     }
 
@@ -89,8 +106,10 @@ public class SetupScreen {
     public void warningText(String warningMessage) {
         if(warningMessage == "")
             warningLabel.setText("");
-        else
-            warningLabel.setText(warningMessage + " Please enter a name to proceed.");
+        else if(farmerNameTextField.getText().length() == 0)
+            warningLabel.setText(warningMessage);
+        else if(rockNumber == 0 || rockNumber != 0)
+            warningLabel.setText(warningMessage);
     }
 
 }
