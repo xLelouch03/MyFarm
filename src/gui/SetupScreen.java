@@ -37,7 +37,7 @@ public class SetupScreen {
         setupFrame = new JFrame("My Farm - Farming Simulation Game");
         setupFrame.setBounds(500, 100, 600, 280);
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setupFrame.setContentPane(new JLabel(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farm.jpg")));
+        setupFrame.setContentPane(new JLabel(new ImageIcon(this.getClass().getResource("/assets/farm.jpg"))));
 		setupFrame.getContentPane().setLayout(null);
 
         JLabel welcomeLabel = new JLabel("Welcome to your farm!");
@@ -100,7 +100,7 @@ public class SetupScreen {
     }
 
     /**
-     * shows a warning message when a name input is not found
+     * shows a warning message when a name and number of rocks input is erroneous
      * @param warningMessage
      */
     public void warningText(String warningMessage) {

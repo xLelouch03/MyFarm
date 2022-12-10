@@ -43,7 +43,7 @@ public class TileScreen extends JFrame{
     public void initialize() {
         tileFrame = new JFrame("FarmLot #" + (num+1) + " Screen");
         tileFrame.setBounds(680, 280, 500, 400);
-        tileFrame.setContentPane(new JLabel(new ImageIcon("D:\\User\\Documents\\GitHub\\MyFarm\\src\\assets\\farm lot pic.jpg")));
+        tileFrame.setContentPane(new JLabel(new ImageIcon(this.getClass().getResource("/assets/farm lot pic.jpg"))));
 		tileFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		tileFrame.getContentPane().setLayout(null);
         mainFrame.mainSetEnabled(false);

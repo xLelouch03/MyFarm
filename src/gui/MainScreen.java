@@ -29,7 +29,6 @@ public class MainScreen{
 	private JButton[][] tileButtons;
 	private TileScreen tileScreenOpened;
 	private ToolInfoScreen toolInfo;
-	private SeedInfoScreen seedInfo;
 	private JLabel nextDayLabel;
 	private JLabel expLabel;
 	private JLabel dayLabel;
@@ -154,11 +153,7 @@ public class MainScreen{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				seedInfo = new SeedInfoScreen(player);
-				// seedInfo.setTitle("Seed Encyclopedia");
-				// seedInfo.setSize(400, 200);
-				// seedInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				// seedInfo.setVisible(true);
+				new SeedInfoScreen(player);
 			}
 			});
 
