@@ -14,6 +14,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
+
+/**
+ * This is the constructor for SeedInfoScreen. This is where the main variables are initialized.
+ */
 public class ToolInfoScreen {
 
     // Index to track the current information panel
