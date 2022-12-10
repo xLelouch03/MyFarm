@@ -4,10 +4,6 @@
 
 package gui;
 
-import java.util.*;
-import main.Seed;
-import main.Tool;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -42,12 +38,19 @@ public class MainScreen{
 	private JLabel objectCoinLabel;	
 	private int rowIndex, colIndex;	
 
+	/**
+	 * 
+	 * @param player the Main class
+	 */
     public MainScreen(Main player) {
         this.player = player;
 		initialize();
 		mainFrame.setVisible(true);
     }
 
+	/**
+	 * Initializes the Main Screen
+	 */
     public void initialize() {
         mainFrame = new JFrame("My Farm - Main Screen"); //instantiates a frame
         mainFrame.setBounds(0, 0, 1540, 823); 
@@ -60,6 +63,10 @@ public class MainScreen{
 		initRightPanel();
     }
 
+	/**
+	 * Initializes and sets up the top panel containing the Farm Status, Farmer Name, Farmer XP,
+	 * Farmer Type, Number of Available Tiles, Farmer Level, Objectcoin count, and day number
+	 */
 	public void initTopPanel() {
 		JPanel topPanel = new JPanel();
         topPanel.setBounds(10,11,1500,80);
@@ -111,6 +118,10 @@ public class MainScreen{
 		topPanel.add(dayLabel);
 	}
 
+	/**
+	 * Initializes and sets up the upper left panel, which contains the next day button, seed encyclopedia,
+	 * tool encyclopedia, and farmer registration buttons
+	 */
 	public void initUpperLeftPanel() {
 		JPanel leftPanel = new JPanel();
         leftPanel.setBounds(10,100,350,320);
@@ -192,6 +203,10 @@ public class MainScreen{
 		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 	}
 
+	/**
+	 * Initializes and sets up the right panel, which contains the overall
+	 * farm grid and tile buttons used for the main game.
+	 */
 	public void initRightPanel() {
 		int i,j;
 		JPanel rightPanel = new JPanel();
@@ -234,6 +249,9 @@ public class MainScreen{
 		}
 	}
 
+	/**
+	 * Initializes the lower left panel, which displays the text prompts and handlers.
+	 */
 	public void initLowerLeftPanel() {
 		JPanel lowerLeftPanel = new JPanel();
         lowerLeftPanel.setBounds(10,430,350,340);
@@ -251,18 +269,38 @@ public class MainScreen{
 
 
 	}
+
+	/**
+	 * Gets the indices of the tile button
+	 * @param row row the tile button is on
+	 * @param col column the tile button is on
+	 * @return JButton returns a JButton called tileButtons
+	 */
 	public JButton getTileButton(int row, int col) {
 		return tileButtons[row][col];
 	}
 
+	/**
+	 * closes the tile frame
+	 * @param rowIndex row index of the tile 
+	 * @param colIndex col index of the tile
+	 */
 	public void closeTileScreen(int rowIndex, int colIndex) {
 		tileScreenOpened.closeTileFrame();		
 	}
 
+	/**
+	 * sets the mainFrame as enabled
+	 * @param b
+	 */
 	public void mainSetEnabled(boolean b) {
 		mainFrame.setEnabled(b);
 	}
 	
+	/*
+	 * Checks the level of the farmer/pkayer
+	 * Shows a prompt when the player levels up
+	 */
 	public void checkLevel() {
         int tempLevel = player.getFarm().getFarmer().getLevel();
         
@@ -272,7 +310,9 @@ public class MainScreen{
             JOptionPane.showMessageDialog(mainFrame, "You have leveled up!");
     }
 
-	//updates what is being displayed on the mainFrame Farm Status top panel
+	/**
+	 * updates what is being displayed on the mainFrame Farm Status top panel
+	*/ 
 	public void setFarmStatus() {
 		checkLevel();
 		typeLabel.setText("Farmer Type: " + player.getFarm().getFarmer().getType());
@@ -306,30 +346,48 @@ public class MainScreen{
         } 
 	}
 
-	//closes the frame
+	/*
+	 * Closes the main frame
+	 */
     public void closeFrame() {
         mainFrame.dispose();
     }
 
-	//returns this instance of MainScreen
+	/**
+	 * Returns this instance of MainScreen
+	 */
 	public MainScreen getMain() {
 		return this;
 	}
 
+	/**
+	 * Stores and returns the number of available spaces in a JLabel
+	 * @return availableSpaceLabel is the JLabel that contains the number of available spaces
+	 */
 	public JLabel getAvailSpace() {
 		return availableSpaceLabel;
 	}
-	//returns the exp label
+	
+	/**
+	 * Stores and returns the farmer's current XP status
+	 * @return expLabel farmer's current XP status
+	 */
 	public JLabel getExpLabel() {
 		return expLabel;
 	}
 
-	//returns the level label
+	/**
+	 * Stores and returns the current level of the farmer
+	 * @return levelLabel stores the farmer's current label
+	 */
 	public JLabel getLevelLabel() {
 		return levelLabel;
 	}
 
-	//returns the objectcoin label
+	/**
+	 * Stores and returs the current number of objectcoins the farmer possesses
+	 * @return objectCoinLabel number of objectccoins the farmer has
+	 */
 	public JLabel getCoinLabel() {
 		return objectCoinLabel;
 	}

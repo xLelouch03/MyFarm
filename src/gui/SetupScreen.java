@@ -27,6 +27,9 @@ public class SetupScreen {
         setupFrame.setVisible(true);
     }
 
+    /**
+     * Initializes the Setup Frame, welcome label, and farmer name label, warning label, text fields, and start buttons.
+     */
     public void initialize() {
         setupFrame = new JFrame("My Farm - Farming Simulation Game");
         setupFrame.setBounds(500, 100, 600, 280);
@@ -72,10 +75,17 @@ public class SetupScreen {
 		setupFrame.getContentPane().add(startButton);
     }
 
+    /**
+     * Closes the setup/welcoming frame
+     */
     public void close() {
         setupFrame.dispose();
     }
 
+    /**
+     * shows a warning message when a name input is not found
+     * @param warningMessage
+     */
     public void warningText(String warningMessage) {
         if(warningMessage == "")
             warningLabel.setText("");
