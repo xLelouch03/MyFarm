@@ -17,6 +17,10 @@ public class Seed {
     private int productProduced = 0;
     private int cost;
     private int basePrice;
+    private int updatedSellingPrice;
+    private int updatedCost;
+    private int updatedWaterLimit;
+    private int updatedFertilizerLimit;
     private int harvestTotal;
     private double xp;
     private String MinToMax;
@@ -104,6 +108,8 @@ public class Seed {
      * @return the number of times the crop needs to watered
      */
     public int getWaterLimit() {
+        if(this.waterLimit < updatedWaterLimit)
+            return updatedWaterLimit;
         return this.waterLimit;
     }
 
@@ -112,7 +118,7 @@ public class Seed {
      * @param num the bonus water limit
      */
     public void updateWaterLimit(int num) {
-        this.waterLimit += num;
+        updatedWaterLimit = this.waterLimit + num;
     }
 
     /** 
@@ -120,6 +126,8 @@ public class Seed {
      * @return the number of times the crop needs to fertilized
      */
     public int getFertilizerLimit() {
+        if(this.fertilizerLimit < updatedFertilizerLimit)
+            return updatedFertilizerLimit;
         return this.fertilizerLimit;
     }
 
@@ -128,7 +136,7 @@ public class Seed {
      * @param num the bonus fertilizer limit
      */
     public void updateFertilizerLimit(int num) {
-        this.fertilizerLimit += num;
+        updatedFertilizerLimit = this.fertilizerLimit + num;
     }
 
     /**
@@ -136,6 +144,8 @@ public class Seed {
      * @return the base price
      */
     public int getBasePrice() {
+        if(basePrice < updatedSellingPrice)
+            return updatedSellingPrice;
         return this.basePrice;
     }
 
@@ -144,7 +154,7 @@ public class Seed {
      * @param bonusEarning the bonus earning per produce
      */
     public void updateBasePrice(int bonusEarning) {
-        this.basePrice += bonusEarning;
+        updatedSellingPrice = basePrice + bonusEarning;
     }
 
     /** 
@@ -152,6 +162,8 @@ public class Seed {
      * @return the cost of the seed
      */
     public int getCost() {
+        if(this.cost > updatedCost)
+            return updatedCost;
         return this.cost;
     }
     
@@ -160,7 +172,7 @@ public class Seed {
      * @param reduction the reduction to the cost
      */
     public void updateCost(int reduction) {
-        this.cost -= reduction;
+        updatedCost = this.cost - reduction;
     }
 
     /** 

@@ -13,6 +13,6 @@ public class Plow extends Tool {
      * Constructs a plow instance through the super keyword
      */
     public Plow() {
-        super("Plow", 0, 0.5);
+        super("Plow", 0, 1500);
     }
 }
