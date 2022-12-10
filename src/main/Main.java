@@ -1,5 +1,5 @@
 /**
- * This class is the driver/controller for the model and view of the project
+ * Belongs to package main and imports java.io, and gui
  */
 package main;
 
@@ -12,13 +12,17 @@ import java.util.Random;
 
 import gui.*;
 
+/**
+ * This class is the driver/controller for the model and view of the project
+ */
 public class Main {
     private MyFarm farm;
     private SetupScreen setup;
 
     /**
      * Setups the game after pressing the Start button
-     * @param farmerName the name to be used in creating a farmer object
+     * @param farmerName  the name to be used in creating a farmer object
+     * @param rockNumber  the number of rocks to be loaded in the farm
      */
     public void setupGame(String farmerName, int rockNumber) {
         if(farmerName.length() == 0) //displays a warning text if player did not enter a name
@@ -133,6 +137,7 @@ public class Main {
 
     /**
      * Reads a file for the scattering of rocks to the farm
+     * @param rocks the number of rocks to be loaded
      * @throws IOException if file does not exist
      */
     public void importFile(int rocks) throws IOException{
@@ -180,6 +185,10 @@ public class Main {
         }
     }
 
+    /**
+     * The main class
+     * @param args arguments
+     */
     public static void main(String[] args) {
         Main game = new Main();
 

@@ -1,9 +1,11 @@
 /**
- * This class contains the constructor and methods about the farmer
+ * Belongs to package main
  */
-
 package main;
 
+/**
+ * This class contains the constructor and methods about the farmer
+ */
 public class Farmer {
     private double objectCoins;
     private int level;
@@ -84,7 +86,7 @@ public class Farmer {
 
     /** 
      * Updates farmer experience 
-     * @param XP the updated farmer experience
+     * @param xp the updated farmer experience
     */
     public void updateXP(double xp) {
         this.experience = xp;

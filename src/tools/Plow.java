@@ -1,10 +1,13 @@
 /**
- * This contains the constructor for the tool PLow inherting the Tool class
+ * This file contains the constructor for the Plow tool
  */
-
 package tools;
+
 import main.Tool;
 
+/**
+ * This class inherits the Tool class
+ */
 public class Plow extends Tool {
     /**
      * Constructs a plow instance through the super keyword

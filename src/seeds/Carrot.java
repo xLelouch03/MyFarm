@@ -1,10 +1,13 @@
 /**
- * This contains the constructor for the seed Carrot inherting the Seed class
+ * This file contains the constructor for the Carrot plant
  */
 package seeds;
 
 import main.Seed;
 
+/**
+ * This class inherits the Seed class
+ */
 public class Carrot extends Seed {
     /**
      * Constructs a carrot instance through the super keyword

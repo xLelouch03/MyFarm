@@ -1,5 +1,6 @@
-/*
- * This class contains the GUI implementation of the Starting Screen to be used for the game
+/**
+ * Belongs to package gui and imports javax.swing and java.awt library
+ * as well as Main.java
  */
 
 package gui;
@@ -16,6 +17,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class contains the GUI implementation of the Starting Screen to be used for the game
+ */
 public class SetupScreen {
     private Main player;
     private JFrame setupFrame;
@@ -105,7 +109,7 @@ public class SetupScreen {
 
     /**
      * shows a warning message when a name and number of rocks input is erroneous
-     * @param warningMessage
+     * @param warningMessage the message to display
      */
     public void warningText(String warningMessage) {
         if(warningMessage == "")

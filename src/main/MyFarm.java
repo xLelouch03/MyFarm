@@ -1,6 +1,5 @@
 /**
- * This class contains the constructor and different methods that will
- * be used in managing the farm.
+ * Belongs to package main, and imports java.util, seeds and tools.
  */
 
 package main;
@@ -9,6 +8,10 @@ import java.util.ArrayList;
 import seeds.*;
 import tools.*;
 
+/**
+ * This class contains the constructor and different methods that will
+ * be used in managing the farm.
+ */
 public class MyFarm {
     private Farmer farmer;
     private FarmLot[][] farmLot;
@@ -49,7 +52,7 @@ public class MyFarm {
 
     /**
      * Registers a farmer to a higher farmer type
-     * @param farmerType
+     * @param farmerType the farmer type chosen
      * @return the string prompt to be displayed in the GUI
      */
     public String registerFarmer(String farmerType) {
@@ -250,7 +253,7 @@ public class MyFarm {
 
     /**
      * Gets the total space of the farm
-     * @return
+     * @return the total space of the farm
      */
     public int getTotalSpace() {
         return this.totalSpace;
@@ -258,7 +261,7 @@ public class MyFarm {
 
     /**
      * Gets the available space of the farm
-     * @return
+     * @return the available space
      */
     public int getAvailableSpace() {
         int occupiedTile = 0;

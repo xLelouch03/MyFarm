@@ -10,9 +10,9 @@ public abstract class Tool {
     /**
      * Constructs a tool with the given name, cost, and its experience
      * 
-     * @param name
-     * @param toolCost
-     * @param experience
+     * @param name  the name of the tool
+     * @param toolCost  the cost of the tool
+     * @param experience  the experience after using the tool
      */
     public Tool(String name, int toolCost, double experience) {
         this.name = name;

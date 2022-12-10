@@ -1,8 +1,12 @@
 /**
- * This class contains the information and methods about seeds
+ * Belongs to package main
  */
 
 package main;
+
+/**
+ * This class contains the information and methods about seeds
+ */
 public class Seed {
     private String name;
     private String type;
@@ -21,14 +25,14 @@ public class Seed {
      * Constructs the seed with the given name, type, harvest time, 
      * number of water and fertilizer needs, cost, base price, and experience
      * 
-     * @param name the name of the seed
-     * @param type the type of the seed
-     * @param harvestTime the number of days it needs to grow
-     * @param waterNeed the number of times it needs to be watered
-     * @param fertilizerNeed the number of times it needs to be fertilized
-     * @param cost the cost of the seed
-     * @param basePrice the base selling price of the seed 
-     * @param xp the experience gained after harvesting the seed
+     * @param name  the name of the seed
+     * @param type  the type of the seed
+     * @param harvestTime  the number of days it needs to grow
+     * @param waterLimit  the number of times it needs to be watered
+     * @param fertilizerLimit  the number of times it needs to be fertilized
+     * @param cost  the cost of the seed
+     * @param basePrice  the base selling price of the seed 
+     * @param xp  the experience gained after harvesting the seed
      */
     public Seed(String name, String type, int harvestTime, int waterLimit, int fertilizerLimit, int cost, int basePrice, double xp) {
         this.name = name;
@@ -43,7 +47,7 @@ public class Seed {
     
     /**
      * Another constructor that will be used in planting a seed
-     * @param seed
+     * @param seed the seed object
      */
     public Seed(Seed seed) {
         name = seed.getName();

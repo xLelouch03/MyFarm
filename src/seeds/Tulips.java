@@ -1,11 +1,13 @@
 /**
- * This contains the constructor for the seed Tulip inherting the Seed class
+ * This file contains the constructor for the Tulips plant
  */
-
 package seeds;
 
 import main.Seed;
 
+/**
+ * This class inherits the Seed class
+ */
 public class Tulips extends Seed {
     /**
      * Constructs a tulip instance through the super keyword

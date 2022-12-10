@@ -1,9 +1,12 @@
 /**
- * This class contains the constructor and methods in managing a farm lot
+ * Belongs to package main
  */
 
 package main;
 
+/**
+ * This class contains the constructor and methods in managing a farm lot
+ */
 public class FarmLot {
     private boolean plowed;
     private int waterCount;
@@ -127,6 +130,7 @@ public class FarmLot {
     /** 
      * Sets a boolean value if the crop on the tile is withered
      * @param withered a boolean value passed to the method
+     * @return the string prompt to display in GUI
      */
     public String isWithered(boolean withered) {
         this.wither = withered;
@@ -168,6 +172,7 @@ public class FarmLot {
   
     /**
      *  Checks if the tile already has a crop planted on it/is already occupied 
+     *  @param occ the boolean value
      */
     public void isOccupied(boolean occ) {
         this.occupied = occ;

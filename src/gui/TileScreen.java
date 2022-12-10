@@ -22,8 +22,10 @@ import javax.swing.border.LineBorder;
 
 import main.Main;
 
-
-public class TileScreen extends JFrame{
+/**
+ * This class contains the attributes and methods in handling a tile screen
+ */
+public class TileScreen {
     private MainScreen mainFrame;
     private Main player;
     private JFrame tileFrame;

@@ -1,4 +1,4 @@
-/*
+/**
  * This class contains the GUI implementation of the Main Screen to be used for the game
  */
 
@@ -274,7 +274,7 @@ public class MainScreen{
 		mainFrame.setEnabled(b);
 	}
 	
-	/*
+	/**
 	 * Checks the level of the farmer/pkayer
 	 * Shows a prompt when the player levels up
 	 */
@@ -323,7 +323,7 @@ public class MainScreen{
         } 
 	}
 
-	/*
+	/**
 	 * Closes the main frame
 	 */
     public void closeFrame() {
@@ -332,6 +332,7 @@ public class MainScreen{
 
 	/**
 	 * Returns this instance of MainScreen
+	 * @return the instance of main screen
 	 */
 	public MainScreen getMain() {
 		return this;

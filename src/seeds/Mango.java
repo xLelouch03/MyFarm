@@ -1,10 +1,13 @@
 /**
- * This contains the constructor for the seed Mango inherting the Seed class
+ * This file contains the constructor for the Mango plant
  */
 package seeds;
 
 import main.Seed;
 
+/**
+ * This class inherits the Seed class
+ */
 public class Mango extends Seed {
     /**
      * Constructs a mango instance through the super keyword

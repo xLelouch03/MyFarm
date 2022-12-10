@@ -1,10 +1,13 @@
 /**
- * This contains the constructor for the seed Potato inherting the Seed class
+ * This file contains the constructor for the Potato plant
  */
 package seeds;
 
 import main.Seed;
 
+/**
+ * This class inherits the Seed class
+ */
 public class Potato extends Seed {
     /**
      * Constructs a potato instance through the super keyword
