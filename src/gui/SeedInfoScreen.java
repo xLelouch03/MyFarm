@@ -34,11 +34,7 @@ public class SeedInfoScreen {
     private JLabel plantBasePriceLabel;
     private JLabel plantXPLabel;
     private JLabel plantIconLabel;
-
-    /**
-     * This is the constructor for the SeedInfoScreen 
-     * @param player is used to access the Main class.
-     */
+    private ImageIcon image;
     public SeedInfoScreen(Main player) {
         this.player = player;
         initFrame();
@@ -99,29 +95,11 @@ public class SeedInfoScreen {
         seedFrame.getContentPane().add(seedPanel);
         seedPanel.setLayout(null);
 
-        ImageIcon image = null;
-
-        if (index == 0){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted turnip.png"));
-        } else if (index == 1){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted carrot.png"));
-        } else if (index == 2){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted potato.png"));
-        } else if (index == 3){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted rose.png"));
-        } else if (index == 4){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted tulips.png"));
-        } else if (index == 5){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted sunflower.png"));
-        } else if (index == 6){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted mango.png"));
-        } else if (index == 7){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted apple.png"));
-        }
+        image = new ImageIcon(this.getClass().getResource("/assets/planted turnip.png"));
 
         plantIconLabel = new JLabel(image);
         plantIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        plantNameLabel.setBounds(55, 20, 40, 40);
+        plantIconLabel.setBounds(55, 20, 40, 40);
         seedPanel.add(plantIconLabel);
 
         plantNameLabel = new JLabel("Crop name: " + player.getFarm().getAllSeed().get(index).getName());
@@ -187,6 +165,23 @@ public class SeedInfoScreen {
     }
 
     public void updateSeedPanel() {
+        if (index == 1){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted carrot.png"));
+        } else if (index == 2){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted potato.png"));
+        } else if (index == 3){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted rose.png"));
+        } else if (index == 4){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted tulips.png"));
+        } else if (index == 5){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted sunflower.png"));
+        } else if (index == 6){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted mango.png"));
+        } else if (index == 7){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted apple.png"));
+        }
+
+        plantIconLabel.setIcon(image);
         plantNameLabel.setText("Crop name: " + player.getFarm().getAllSeed().get(index).getName());
         plantTypeLabel.setText("Crop Type: " + player.getFarm().getAllSeed().get(index).getType());
         plantHarvestTimeLabel.setText("Harvest Time (in days): " + player.getFarm().getAllSeed().get(index).getHarvestTime());
