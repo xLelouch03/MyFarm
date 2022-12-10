@@ -1,10 +1,7 @@
 package gui;
 
-import java.util.*;
-import main.Seed;
 
 import main.Main;
-import main.MyFarm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class SeedInfoScreen {
 
@@ -34,6 +32,8 @@ public class SeedInfoScreen {
     private JLabel plantCostLabel;
     private JLabel plantBasePriceLabel;
     private JLabel plantXPLabel;
+    private JLabel plantIconLabel;
+    private ImageIcon image;
 
     public SeedInfoScreen(Main player) {
         this.player = player;
@@ -88,6 +88,31 @@ public class SeedInfoScreen {
         seedPanel.setBackground(null);
         seedFrame.getContentPane().add(seedPanel);
         seedPanel.setLayout(null);
+
+        ImageIcon image = null;
+
+        if (index == 0){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted turnip.png"));
+        } else if (index == 1){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted carrot.png"));
+        } else if (index == 2){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted potato.png"));
+        } else if (index == 3){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted rose.png"));
+        } else if (index == 4){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted tulips.png"));
+        } else if (index == 5){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted sunflower.png"));
+        } else if (index == 6){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted mango.png"));
+        } else if (index == 7){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted apple.png"));
+        }
+
+        plantIconLabel = new JLabel(image);
+        plantIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        plantNameLabel.setBounds(55, 20, 40, 40);
+        seedPanel.add(plantIconLabel);
 
         plantNameLabel = new JLabel("Crop name: " + player.getFarm().getAllSeed().get(index).getName());
         plantNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
