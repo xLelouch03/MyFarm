@@ -32,6 +32,14 @@ public class TileScreen {
     private int row, col, num;
     private String toolName;
 
+    /**
+     * This initializess the Tile Screen 
+     * @param frame main fram that displays the farm lot tile
+     * @param player to access the main class
+     * @param row row index of the tile 
+     * @param col column index of the tile
+     * @param num counter
+     */
     public TileScreen(MainScreen frame, Main player, int row, int col, int num) {
         this.mainFrame = frame;
         this.player = player;
@@ -42,6 +50,9 @@ public class TileScreen {
 		tileFrame.setVisible(true);
     }
 
+    /**
+     * This initialized the tile frame (per farm lot)
+     */
     public void initialize() {
         tileFrame = new JFrame("FarmLot #" + (num+1) + " Screen");
         tileFrame.setBounds(680, 280, 500, 400);
@@ -52,6 +63,10 @@ public class TileScreen {
         initPanel();
     }
 
+    /**
+     * This initializes the panel as well as displays the welcome label, plant buttons, tool buttons,
+     * harvest button, tile button, and close button.
+     */
     public void initPanel() {
         JPanel tilePanel = new JPanel();
         tilePanel.setBounds(40,15,400,330);
@@ -149,6 +164,9 @@ public class TileScreen {
         closeButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
 	}
 
+    /**
+     * This causes the current thread to pause for a specified amount of time.
+     */
     public void delay() {
         try {
             Thread.sleep(200);
@@ -157,6 +175,9 @@ public class TileScreen {
         }
     }
     
+    /**
+     * This changes the display of the tile based on what object tool is being used.
+     */
     public void useTool() {
         delay();
         if(toolName.equals("Pickaxe")) {
@@ -203,6 +224,11 @@ public class TileScreen {
         }
     }
 
+    /**
+     * This changes the image being displayed on the tile depending on what plant is on the tile.
+     * This shows the image of the plant on the tile
+     * @throws IOException allows us to use input/output. This was used to access the images.
+     */
     public void checkPlantOnTile() throws IOException {
         ImageIcon image = null;
 
@@ -236,6 +262,9 @@ public class TileScreen {
         }
     }
 
+    /**
+     * This checks the level of the player and shows a message dialog indicating when the player has leveled up.
+     */
     public void checkLevel() {
         int tempLevel = player.getFarm().getFarmer().getLevel();
         player.getFarm().getFarmer().setLevel((int) player.getFarm().getFarmer().getLevel() / 100);
@@ -244,6 +273,9 @@ public class TileScreen {
             JOptionPane.showMessageDialog(tileFrame, "You have leveled up!");
     }
 
+    /**
+     * This closes the tile frame.
+     */
     public void closeTileFrame() {
         tileFrame.dispose();
     }
