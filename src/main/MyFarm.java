@@ -19,6 +19,7 @@ public class MyFarm {
     private ArrayList<Tool> tool;
     private int day;
     private int totalSpace;
+    private int activeCropCount = 0;
     private int witherCount;
 
     /**
@@ -295,6 +296,7 @@ public class MyFarm {
                         if(this.farmLot[i][j].getSeed().getDayGrowth() > this.farmLot[i][j].getSeed().getHarvestTime()) {
                             nextDayPrompt += "<br>Because you did not harvest the " + this.farmLot[i][j].getSeed().getName() + " <br>in FarmLot (" + i + "," + j + "), ";
                             nextDayPrompt += this.farmLot[i][j].isWithered(true);
+                            activeCropCount--;
                         }
 
                         //checks if crop reach the harvest time and meet the minimum requirements to be harvested
@@ -305,6 +307,7 @@ public class MyFarm {
                                 nextDayPrompt += "<br>" + this.farmLot[i][j].getSeed().getName() + " in FarmLot (" + i + "," + j + 
                                     ") growed but did not get <br>taken care of properly. ";
                                 nextDayPrompt += this.farmLot[i][j].isWithered(true);
+                                activeCropCount--;
                             }
 
                             //crop meets the minimum requirements
@@ -345,7 +348,7 @@ public class MyFarm {
         }
 
         //checks if farmer can no longer buy a seed with no active crop OR the farm tiles contain withered plant
-        if((farmer.getCoins() < 5 && getAvailableSpace() == 50) || witherCount == 50)
+        if((farmer.getCoins() < 5 && activeCropCount == 0) || witherCount == 50)
             return false;
         
         return true;
@@ -363,7 +366,7 @@ public class MyFarm {
                 gameEndedPrompt += "All of your tiles contain a withered plant";
             }
     
-            else if(getAvailableSpace() == 50 && farmer.getCoins() < 5){
+            else if(activeCropCount == 0 && farmer.getCoins() < 5){
                 gameEndedPrompt += "You don't have enough objectCoins to buy a seed" +
                 "\nYou also don't have any active crops";
             }
@@ -532,6 +535,7 @@ public class MyFarm {
                                     }
                                     else {
                                         lot.setSeed(new Seed(s));
+                                        activeCropCount++;
                                         cost = s.getCost();
                                         result = true;
                                         plantPrompt += s.getName() + " has been planted.";
@@ -543,6 +547,7 @@ public class MyFarm {
                                 else {
                                     lot.setSeed(new Seed(s));
                                     cost = s.getCost();
+                                    activeCropCount++;
                                     result = true;
                                     plantPrompt += s.getName() + " has been planted.";
 
@@ -721,6 +726,7 @@ public class MyFarm {
                                 shovelPrompt += lot.getSeed().getName() + " has been removed.";
                                 lot.getSeed().resetSeed();
                                 lot.setSeed(null);
+                                activeCropCount--;
                             }
                             //reverts the farmLot to its default
                             lot.isPlowed(false);
@@ -803,6 +809,7 @@ public class MyFarm {
 
                     lot.getSeed().resetSeed();
                     lot.resetFarmLot();
+                    activeCropCount--;
                 }
                 else
                     harvestPrompt += "The crop is not yet harvestable\n";
