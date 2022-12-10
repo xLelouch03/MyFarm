@@ -75,6 +75,9 @@ public class ToolInfoScreen {
         toolFrame.add(btnPanel, BorderLayout.NORTH);
     }
 
+    /**
+     * These initialize the toolPanel, where the text are to be stored and displayed.
+     */
     public void initToolPanel() {
         JPanel toolPanel = new JPanel();
         toolPanel.setBounds(50, 50, 190, 140);
@@ -110,6 +113,9 @@ public class ToolInfoScreen {
 
     }
 
+    /**
+     * This updates the text and images on the frame based on the index
+     */
     public void updateToolPanel() {
         if (index == 1){
             image = new ImageIcon(this.getClass().getResource("/assets/plow.png"));
