@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.lang.model.util.ElementScanner14;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -101,11 +100,8 @@ public class ToolInfoScreen {
     }
 
     public void updateToolPanel() {
-
-        System.out.println(player.getFarm().getAllTool().get(index).getName());
         toolNameLabel.setText("Tool name: " + player.getFarm().getAllTool().get(index).getName());
         toolCostLabel.setText("Cost: " + player.getFarm().getAllTool().get(index).getCost());
         toolXPLabel.setText("Experience Yield " + player.getFarm().getAllTool().get(index).getXP());
-        
     }
 }

@@ -1,11 +1,6 @@
 package gui;
 
-import java.util.*;
-import main.Seed;
-
 import main.Main;
-import main.MyFarm;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -152,8 +147,6 @@ public class SeedInfoScreen {
     }
 
     public void updateSeedPanel() {
-
-        System.out.println(player.getFarm().getAllSeed().get(index).getName());
         plantNameLabel.setText("Crop name: " + player.getFarm().getAllSeed().get(index).getName());
         plantTypeLabel.setText("Crop Type: " + player.getFarm().getAllSeed().get(index).getType());
         plantHarvestTimeLabel.setText("Harvest Time (in days): " + player.getFarm().getAllSeed().get(index).getHarvestTime());
@@ -164,6 +157,5 @@ public class SeedInfoScreen {
         plantCostLabel.setText("Cost: " + player.getFarm().getAllSeed().get(index).getCost());
         plantBasePriceLabel.setText("Base Price: " + player.getFarm().getAllSeed().get(index).getBasePrice());
         plantXPLabel.setText("Experience Yield: " + player.getFarm().getAllSeed().get(index).getExperienceYield());
-        
     }
 }
