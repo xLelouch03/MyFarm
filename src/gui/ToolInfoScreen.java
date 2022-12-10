@@ -1,38 +1,43 @@
 package gui;
-
-import java.util.*;
-import main.Tool;
-
 import main.Main;
-import main.MyFarm;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.lang.model.util.ElementScanner14;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 
-public class ToolInfoScreen extends JFrame {
+public class ToolInfoScreen {
 
+    // Index to track the current information panel
     private int index = 0;
+    private JFrame toolFrame;
     private Main player;
-    private MyFarm farm;
+    private JLabel toolNameLabel;
+    private JLabel toolCostLabel;
+    private JLabel toolXPLabel;
 
-    private ArrayList<Tool> allTools;
+    public ToolInfoScreen(Main player) {
+        this.player = player;
+        initFrame();
+        initToolPanel();
+    }  
 
-    public ToolInfoScreen(MyFarm farm) {
-        this.farm = farm;
-        //allTools = player.getFarm().getAllTool();
+    public void initFrame() {
+        toolFrame = new JFrame();
+        toolFrame.setTitle("tool Encyclopedia");
+        toolFrame.setSize(400, 400);
+        toolFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        toolFrame.setVisible(true);
 
-        // Set the title and size of the frame
-        setTitle("Tool Encyclopedia");
-        setSize(400, 200);
-        setVisible(true);
-        setLocationRelativeTo(null);
-
-        // Create the Previous and Next buttons
         JButton previousBtn = new JButton("Previous");
         JButton nextBtn = new JButton("Next");
 
@@ -41,8 +46,10 @@ public class ToolInfoScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Decrement the index and update the information panel
-                index--;
-                updateToolInfoPanel();
+                if(index > 0)
+                    index--;
+                updateToolPanel();
+
             }
         });
 
@@ -50,8 +57,9 @@ public class ToolInfoScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Increment the index and update the information panel
-                index++;
-                updateToolInfoPanel();
+                if(index < 2)
+                    index++;
+                updateToolPanel();
             }
         });
 
@@ -61,50 +69,43 @@ public class ToolInfoScreen extends JFrame {
         btnPanel.add(nextBtn);
 
         // Add the buttons panel and initial information panel to the frame
-        add(btnPanel, BorderLayout.NORTH);
-        add(panels[index], BorderLayout.CENTER);
+        toolFrame.add(btnPanel, BorderLayout.NORTH);
     }
 
-    /**
-     * Array of info panels for tools
-     */
-    private toolInfoPanel[] panels = new toolInfoPanel[] {
-        new toolInfoPanel(farm.getAllTool().get(index).getName()),
-        new toolInfoPanel("Cost: " + farm.getAllTool().get(index).getCost()),
-        new toolInfoPanel("Experience Yield: " + farm.getAllTool().get(index).getXP()),
-    };
+    public void initToolPanel() {
+        JPanel toolPanel = new JPanel();
+        toolPanel.setBounds(50, 50, 190, 140);
+        toolPanel.setBorder(new LineBorder(new Color(0,0,0)));
+        toolPanel.setBackground(null);
+        toolFrame.getContentPane().add(toolPanel);
+        toolPanel.setLayout(null);
 
-    // Method to update the information panel based on the current index
-    private void updateToolInfoPanel() {
-        // Check if the index is within the bounds of the panels array
-        if (index < 0) {
-            index = 0;
-        } else if (index >= panels.length) {
-            index = panels.length - 1;
-        }
+        toolNameLabel = new JLabel("Tool name: " + player.getFarm().getAllTool().get(index).getName());
+        toolNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        toolNameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+        toolNameLabel.setBounds(55, 55, 200, 44);
+        toolPanel.add(toolNameLabel);
 
-        // Remove the current information panel from the frame
-        remove(panels[index]);
+        toolCostLabel = new JLabel("Tool name: " + player.getFarm().getAllTool().get(index).getCost());
+        toolCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        toolCostLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+        toolCostLabel.setBounds(55, 75, 200, 44);
+        toolPanel.add(toolCostLabel);
 
-        // Add the new information panel to the frame
-        add(panels[index], BorderLayout.CENTER);
+        toolXPLabel = new JLabel("Experience Yield: " + player.getFarm().getAllTool().get(index).getXP());
+        toolXPLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        toolXPLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+        toolXPLabel.setBounds(55, 95, 200, 44);
+        toolPanel.add(toolXPLabel);
 
-        // Update the frame to display the new panel
-        revalidate();
-        repaint();
     }
 
-    class toolInfoPanel extends JPanel {
+    public void updateToolPanel() {
 
-        private JLabel label;
-    
-        public toolInfoPanel(String text) {
-            // Create a label with the given text and add it to the panel
-            label = new JLabel(text);
-            add(label);
-        }
-    
+        System.out.println(player.getFarm().getAllTool().get(index).getName());
+        toolNameLabel.setText("Tool name: " + player.getFarm().getAllTool().get(index).getName());
+        toolCostLabel.setText("Cost: " + player.getFarm().getAllTool().get(index).getCost());
+        toolXPLabel.setText("Experience Yield " + player.getFarm().getAllTool().get(index).getXP());
+        
     }
-
-    
 }

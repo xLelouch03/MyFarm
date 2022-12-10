@@ -45,7 +45,7 @@ public class SeedInfoScreen {
         seedFrame = new JFrame();
         seedFrame.setTitle("Seed Encyclopedia");
         seedFrame.setSize(400, 400);
-        seedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        seedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         seedFrame.setVisible(true);
 
         JButton previousBtn = new JButton("Previous");
@@ -56,7 +56,7 @@ public class SeedInfoScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Decrement the index and update the information panel
-                if(index > 1)
+                if(index > 0)
                     index--;
                 updateSeedPanel();
             }
@@ -152,6 +152,7 @@ public class SeedInfoScreen {
     }
 
     public void updateSeedPanel() {
+
         System.out.println(player.getFarm().getAllSeed().get(index).getName());
         plantNameLabel.setText("Crop name: " + player.getFarm().getAllSeed().get(index).getName());
         plantTypeLabel.setText("Crop Type: " + player.getFarm().getAllSeed().get(index).getType());
@@ -159,7 +160,7 @@ public class SeedInfoScreen {
         plantDayGrowthLabel.setText("Day Growth: " + player.getFarm().getAllSeed().get(index).getDayGrowth());
         plantWaterLimitLabel.setText("Water Limit: " + player.getFarm().getAllSeed().get(index).getWaterLimit());
         plantFertilizerLimitLabel.setText("Fertilizer Limit: " + player.getFarm().getAllSeed().get(index).getFertilizerLimit());
-        plantProductProducedLabel.setText("Product Produced: " + player.getFarm().getAllSeed().get(index).getProductProduced());
+        plantProductProducedLabel.setText("Product Produced: " + player.getFarm().getAllSeed().get(index).getProductProducedMinToMax());
         plantCostLabel.setText("Cost: " + player.getFarm().getAllSeed().get(index).getCost());
         plantBasePriceLabel.setText("Base Price: " + player.getFarm().getAllSeed().get(index).getBasePrice());
         plantXPLabel.setText("Experience Yield: " + player.getFarm().getAllSeed().get(index).getExperienceYield());

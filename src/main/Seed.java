@@ -15,6 +15,7 @@ public class Seed {
     private int basePrice;
     private int harvestTotal;
     private double xp;
+    private String MinToMax;
 
     /**
      * Constructs the seed with the given name, type, harvest time, 
@@ -208,6 +209,48 @@ public class Seed {
         harvestTotal = this.basePrice * productProduced;
 
         return productProduced;
+    }
+
+    /** 
+     * Gets the number of products produced by the seed as well as computing for the
+     * harvest total.
+     * @return the number of product produced
+     */
+    public String getProductProducedMinToMax() {
+        int min, max;
+
+        if(this.type.equalsIgnoreCase("root crop")) {
+            min = 1;
+            if( this.name.equalsIgnoreCase("turnip") || 
+                this.name.equalsIgnoreCase("carrot")) {
+                max = 2;
+                MinToMax = "1-2";
+            }
+            
+            else if(this.name.equalsIgnoreCase("potato")) {
+                max = 10;
+                MinToMax = "1-10";
+            }
+        }
+        
+        else if(this.type.equalsIgnoreCase("flower")) 
+                MinToMax = "1";
+        
+        else if(this.type.equalsIgnoreCase("fruit tree")) {
+            max = 15;
+            if(this.name.equalsIgnoreCase("mango")) {
+                min = 5;
+                MinToMax = "5-15";
+            }
+            
+            else if(this.name.equalsIgnoreCase("apple")) {
+                min = 10;
+                max = 15;
+                MinToMax = "10-15";
+            }
+        }
+
+        return MinToMax;
     }
  
     /** 
