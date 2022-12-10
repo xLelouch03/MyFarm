@@ -50,7 +50,7 @@ public class ToolInfoScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Decrement the index and update the information panel
-                if(index > 1)
+                if(index > 0)
                     index--;
                 updateToolPanel();
             }
@@ -60,7 +60,7 @@ public class ToolInfoScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Increment the index and update the information panel
-                if(index < 5)
+                if(index < 4)
                     index++;
                 updateToolPanel();
             }
@@ -88,27 +88,27 @@ public class ToolInfoScreen {
 
         image = new ImageIcon(this.getClass().getResource("/assets/tool plow.png"));
 
-        // toolIconLabel = new JLabel(image);
-        // toolIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        // toolIconLabel.setBounds(140, 20, 40, 40);
-        // toolPanel.add(toolIconLabel);
+        toolIconLabel = new JLabel(image);
+        toolIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        toolIconLabel.setBounds(60, -27, 200,160);
+        toolPanel.add(toolIconLabel);
 
         toolNameLabel = new JLabel("Tool name: " + player.getFarm().getAllTool().get(index).getName());
         toolNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         toolNameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        toolNameLabel.setBounds(55, 60, 200, 44);
+        toolNameLabel.setBounds(55, 90, 200, 44);
         toolPanel.add(toolNameLabel);
 
         toolCostLabel = new JLabel("Tool name: " + player.getFarm().getAllTool().get(index).getCost());
         toolCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
         toolCostLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        toolCostLabel.setBounds(55, 85, 200, 44);
+        toolCostLabel.setBounds(55, 110, 200, 44);
         toolPanel.add(toolCostLabel);
 
         toolXPLabel = new JLabel("Experience Yield: " + player.getFarm().getAllTool().get(index).getXP());
         toolXPLabel.setHorizontalAlignment(SwingConstants.CENTER);
         toolXPLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        toolXPLabel.setBounds(55, 110, 200, 44);
+        toolXPLabel.setBounds(55, 130, 200, 44);
         toolPanel.add(toolXPLabel);
 
     }
@@ -117,18 +117,18 @@ public class ToolInfoScreen {
      * This updates the text and images on the frame based on the index
      */
     public void updateToolPanel() {
-        if (index == 1){
+        if (index == 0){
             image = new ImageIcon(this.getClass().getResource("/assets/tool plow.png"));
-        } else if (index == 2){
+        } else if (index == 1){
             image = new ImageIcon(this.getClass().getResource("/assets/tool watering can.png"));
-        } else if (index == 3){
+        } else if (index == 2){
             image = new ImageIcon(this.getClass().getResource("/assets/tool fertilizer.png"));
+        } else if (index == 3){
+            image = new ImageIcon(this.getClass().getResource("/assets/tool pickaxe.png"));
         } else if (index == 4){
             image = new ImageIcon(this.getClass().getResource("/assets/tool shovel.png"));
-        } else if (index == 5){
-            image = new ImageIcon(this.getClass().getResource("/assets/tool pickaxe.png"));
         }
-
+        toolIconLabel.setIcon(image);
         toolNameLabel.setText("Tool name: " + player.getFarm().getAllTool().get(index).getName());
         toolCostLabel.setText("Cost: " + player.getFarm().getAllTool().get(index).getCost());
         toolXPLabel.setText("Experience Yield " + player.getFarm().getAllTool().get(index).getXP());
