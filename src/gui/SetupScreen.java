@@ -26,7 +26,7 @@ public class SetupScreen {
     private JLabel warningLabel;
     private JTextField farmerNameTextField;
     private JTextField rockNumberTF;
-    int rockNumber = 0;
+    private int rockNumber = 0;
 
     /**
      * Constructs the setup screen given the main object as input
