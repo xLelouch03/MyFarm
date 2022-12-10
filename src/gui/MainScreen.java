@@ -28,6 +28,8 @@ public class MainScreen{
     private Main player;
 	private JButton[][] tileButtons;
 	private TileScreen tileScreenOpened;
+	private ToolInfoScreen toolInfo;
+	private SeedInfoScreen seedInfo;
 	private JLabel nextDayLabel;
 	private JLabel expLabel;
 	private JLabel dayLabel;
@@ -39,8 +41,8 @@ public class MainScreen{
 	private int rowIndex, colIndex;	
 
 	/**
-	 * 
-	 * @param player the Main class
+	 * Constructs the main screen given the controller
+	 * @param player the controller
 	 */
     public MainScreen(Main player) {
         this.player = player;
@@ -152,12 +154,11 @@ public class MainScreen{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				SeedInfoScreen seedInfo = new SeedInfoScreen();
-				seedInfo.setTitle("Seed Encyclopedia");
-				seedInfo.setSize(400, 200);
-				seedInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				seedInfo.setVisible(true);
-
+				seedInfo = new SeedInfoScreen(player);
+				// seedInfo.setTitle("Seed Encyclopedia");
+				// seedInfo.setSize(400, 200);
+				// seedInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// seedInfo.setVisible(true);
 			}
 			});
 
@@ -172,7 +173,7 @@ public class MainScreen{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-				ToolInfoScreen toolInfo = new ToolInfoScreen();
+				toolInfo = new ToolInfoScreen(player.getFarm());
 				toolInfo.setTitle("Tool Encyclopedia");
 				toolInfo.setSize(400, 200);
 				toolInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

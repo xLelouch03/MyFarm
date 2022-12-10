@@ -4,6 +4,7 @@ import java.util.*;
 import main.Tool;
 
 import main.Main;
+import main.MyFarm;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -17,19 +18,14 @@ public class ToolInfoScreen extends JFrame {
 
     private int index = 0;
     private Main player;
+    private MyFarm farm;
 
-    private ArrayList<Tool> allTools = player.getFarm().getAllTool();
+    private ArrayList<Tool> allTools;
 
-    /**
-     * Array of info panels for tools
-     */
-    private toolInfoPanel[] panels = new toolInfoPanel[] {
-        new toolInfoPanel(allTools.get(index).getName()),
-        new toolInfoPanel("Cost: " + allTools.get(index).getCost()),
-        new toolInfoPanel("Experience Yield: " + allTools.get(index).getXP()),
-    };
+    public ToolInfoScreen(MyFarm farm) {
+        this.farm = farm;
+        //allTools = player.getFarm().getAllTool();
 
-    public ToolInfoScreen() {
         // Set the title and size of the frame
         setTitle("Tool Encyclopedia");
         setSize(400, 200);
@@ -68,6 +64,15 @@ public class ToolInfoScreen extends JFrame {
         add(btnPanel, BorderLayout.NORTH);
         add(panels[index], BorderLayout.CENTER);
     }
+
+    /**
+     * Array of info panels for tools
+     */
+    private toolInfoPanel[] panels = new toolInfoPanel[] {
+        new toolInfoPanel(farm.getAllTool().get(index).getName()),
+        new toolInfoPanel("Cost: " + farm.getAllTool().get(index).getCost()),
+        new toolInfoPanel("Experience Yield: " + farm.getAllTool().get(index).getXP()),
+    };
 
     // Method to update the information panel based on the current index
     private void updateToolInfoPanel() {
