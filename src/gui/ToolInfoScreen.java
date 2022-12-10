@@ -100,11 +100,8 @@ public class ToolInfoScreen {
     }
 
     public void updateToolPanel() {
-
-        System.out.println(player.getFarm().getAllTool().get(index).getName());
         toolNameLabel.setText("Tool name: " + player.getFarm().getAllTool().get(index).getName());
         toolCostLabel.setText("Cost: " + player.getFarm().getAllTool().get(index).getCost());
         toolXPLabel.setText("Experience Yield " + player.getFarm().getAllTool().get(index).getXP());
-        
     }
 }

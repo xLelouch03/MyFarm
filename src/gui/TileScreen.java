@@ -79,10 +79,8 @@ public class TileScreen extends JFrame{
                         try {
                             checkPlantOnTile();
                         } catch (IOException e1) {
-                            // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
-                    checkGameCondition();
                 }
             }
         });
@@ -100,8 +98,8 @@ public class TileScreen extends JFrame{
                     toolName = (String) tool;
 
                     useTool();
-                    mainFrame.setFarmStatus();
-                    checkGameCondition();                } 
+                    mainFrame.setFarmStatus();         
+                } 
             }
         });
 		toolButton.setBounds(60, 65, 268, 50);
@@ -119,7 +117,6 @@ public class TileScreen extends JFrame{
                 }
                 JOptionPane.showMessageDialog(tileFrame, player.getFarm().harvestTile(row,col));
 				mainFrame.setFarmStatus();
-                checkGameCondition();
             }
         });
 		harvestButton.setBounds(60, 175, 268, 50);
@@ -154,7 +151,6 @@ public class TileScreen extends JFrame{
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -167,13 +163,13 @@ public class TileScreen extends JFrame{
                 mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
                 mainFrame.getTileButton(row, col).setText(""+(num+1));
             }
-
             JOptionPane.showMessageDialog(tileFrame, player.getFarm().usePickaxe(row,col,toolName));
              
         }
 
         else if(toolName.equals("Shovel")) {
-            if(player.getFarm().getFarmLot(row, col).getSeed() != null) {
+            if(player.getFarm().getFarmLot(row, col).getSeed() != null ||
+                player.getFarm().getFarmLot(row, col).getPlowStatus() == true) {
                 mainFrame.getTileButton(row, col).setIcon(null);
                 mainFrame.getTileButton(row, col).setBackground(new Color(255,222,173));
                 mainFrame.getTileButton(row, col).setText(""+(num+1));
@@ -250,20 +246,4 @@ public class TileScreen extends JFrame{
         tileFrame.dispose();
     }
 
-    public void checkGameCondition() {      
-        if(!player.getFarm().isRunning()) {
-			JOptionPane.showMessageDialog(tileFrame, player.getFarm().gameEnded());
-
-            if(JOptionPane.showConfirmDialog(tileFrame, "Do you want to play again?", 
-				"Game has ended", JOptionPane.YES_NO_OPTION) == 1) {
-                    tileFrame.dispose();
-                    mainFrame.closeFrame();
-            }
-            else {
-                tileFrame.dispose();
-                mainFrame.closeFrame();
-                player.openSetupScreen();
-            }
-        } 
-	}    
 }

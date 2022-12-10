@@ -28,7 +28,6 @@ public class MainScreen{
     private Main player;
 	private JButton[][] tileButtons;
 	private TileScreen tileScreenOpened;
-	private ToolInfoScreen toolInfo;
 	private JLabel nextDayLabel;
 	private JLabel expLabel;
 	private JLabel dayLabel;
@@ -37,8 +36,6 @@ public class MainScreen{
 	private JLabel availableSpaceLabel;
 	private JLabel farmerNameLabel;
 	private JLabel objectCoinLabel;	
-	private int rowIndex, colIndex;	
-
 	/**
 	 * Constructs the main screen given the controller
 	 * @param player the controller
@@ -134,11 +131,9 @@ public class MainScreen{
 		nextDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //player.nextDay();
 				nextDayLabel.setText(player.getFarm().advanceNextDay());
 				
 				dayLabel.setText("Day: " + player.getFarm().getDay()); //changes what is displayed on the mainFrame
-				//nextDayLabel.setText(player.getFarm().advanceNextDay());
 				setFarmStatus();
             }
         });
@@ -146,13 +141,11 @@ public class MainScreen{
 		leftPanel.add(nextDayButton);
 		nextDayButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-		//replace with View All Seeds
 		JButton viewPlantButton = new JButton("View all Seeds");
 		viewPlantButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				new SeedInfoScreen(player);
 			}
 			});
@@ -161,15 +154,12 @@ public class MainScreen{
 		leftPanel.add(viewPlantButton);
 		viewPlantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-		//replace with View All Tools
 		JButton viewToolButton = new JButton("View all Tools");
 		viewToolButton.addActionListener(new ActionListener() { 
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
-				toolInfo = new ToolInfoScreen(player);
-				
+				new ToolInfoScreen(player);
             }
         });
 		viewToolButton.setBounds(35, 175, 268, 50);
@@ -232,8 +222,6 @@ public class MainScreen{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						tileScreenOpened = new TileScreen(getMain(), player, row, col, num);
-						rowIndex = row;
-						colIndex = col;
 					}
 				});
 				rightPanel.add(tileButtons[i][j]);
@@ -259,8 +247,6 @@ public class MainScreen{
 		JScrollPane nextDayScroll = new JScrollPane(nextDayLabel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		nextDayScroll.setBounds(5, 5, 340, 330);
 		lowerLeftPanel.add(nextDayScroll);
-
-
 	}
 
 	/**
@@ -274,17 +260,15 @@ public class MainScreen{
 	}
 
 	/**
-	 * closes the tile frame
-	 * @param rowIndex row index of the tile 
-	 * @param colIndex col index of the tile
+	 * Closes the opened tile screen
 	 */
-	public void closeTileScreen(int rowIndex, int colIndex) {
+	public void closeTileScreen() {
 		tileScreenOpened.closeTileFrame();		
 	}
 
 	/**
 	 * sets the mainFrame as enabled
-	 * @param b
+	 * @param b the boolean value to enable/disable to main frame
 	 */
 	public void mainSetEnabled(boolean b) {
 		mainFrame.setEnabled(b);
@@ -327,12 +311,12 @@ public class MainScreen{
 			JOptionPane.showMessageDialog(mainFrame, player.getFarm().gameEnded());
             if(JOptionPane.showConfirmDialog(mainFrame, "Do you want to play again?", 
 				"Game has ended", JOptionPane.YES_NO_OPTION) == 1) {
-				closeTileScreen(rowIndex, colIndex);
+				closeTileScreen();
                 closeFrame();
 				
             }
             else {
-				closeTileScreen(rowIndex,colIndex);
+				closeTileScreen();
                 closeFrame();
                 player.openSetupScreen();
             }
