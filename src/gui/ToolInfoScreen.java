@@ -81,7 +81,7 @@ public class ToolInfoScreen {
         toolFrame.getContentPane().add(toolPanel);
         toolPanel.setLayout(null);
 
-        image = new ImageIcon(this.getClass().getResource("/assets/planted plow.png"));
+        image = new ImageIcon(this.getClass().getResource("/assets/tool plow.png"));
 
         toolIconLabel = new JLabel(image);
         toolIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,14 +110,12 @@ public class ToolInfoScreen {
 
     public void updateToolPanel() {
         if (index == 1){
-            image = new ImageIcon(this.getClass().getResource("/assets/planted plow.png"));
-        } else if (index == 2){
             image = new ImageIcon(this.getClass().getResource("/assets/planted watering can.png"));
-        } else if (index == 3){
+        } else if (index == 2){
             image = new ImageIcon(this.getClass().getResource("/assets/planted fertilizer.png"));
-        } else if (index == 4){
+        } else if (index == 3){
             image = new ImageIcon(this.getClass().getResource("/assets/planted shovel.png"));
-        } else if (index == 5){
+        } else if (index == 4){
             image = new ImageIcon(this.getClass().getResource("/assets/planted pickaxe.png"));
         }
 

@@ -103,73 +103,75 @@ public class SeedInfoScreen {
 
         plantIconLabel = new JLabel(image);
         plantIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        plantIconLabel.setBounds(140, 20, 40, 40);
+        plantIconLabel.setBounds(50, -20, 200, 160);
         seedPanel.add(plantIconLabel);
 
         plantNameLabel = new JLabel("Crop name: " + player.getFarm().getAllSeed().get(index).getName());
         plantNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantNameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantNameLabel.setBounds(55, 55, 200, 44);
+        plantNameLabel.setBounds(55, 85, 200, 44);
         seedPanel.add(plantNameLabel);
 
         plantTypeLabel = new JLabel("Crop Type: " + player.getFarm().getAllSeed().get(index).getType());
         plantTypeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantTypeLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantTypeLabel.setBounds(55, 75, 200, 44);
+        plantTypeLabel.setBounds(55, 105, 200, 44);
         seedPanel.add(plantTypeLabel);
 
         plantHarvestTimeLabel = new JLabel("Harvest Time (in days): " + player.getFarm().getAllSeed().get(index).getHarvestTime());
         plantHarvestTimeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantHarvestTimeLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantHarvestTimeLabel.setBounds(55, 95, 200, 44);
+        plantHarvestTimeLabel.setBounds(55, 125, 200, 44);
         seedPanel.add(plantHarvestTimeLabel);
 
         plantDayGrowthLabel = new JLabel("Day Growth: " + player.getFarm().getAllSeed().get(index).getDayGrowth());
         plantDayGrowthLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantDayGrowthLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantDayGrowthLabel.setBounds(55, 115, 200, 44);
+        plantDayGrowthLabel.setBounds(55, 145, 200, 44);
         seedPanel.add(plantDayGrowthLabel);
 
         plantWaterLimitLabel = new JLabel("Water Limit: " + player.getFarm().getAllSeed().get(index).getWaterLimit());
         plantWaterLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantWaterLimitLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantWaterLimitLabel.setBounds(55, 135, 200, 44);
+        plantWaterLimitLabel.setBounds(55, 165, 200, 44);
         seedPanel.add(plantWaterLimitLabel);
 
         plantFertilizerLimitLabel = new JLabel("Fertilizer Limit: " + player.getFarm().getAllSeed().get(index).getFertilizerLimit());
         plantFertilizerLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantFertilizerLimitLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantFertilizerLimitLabel.setBounds(55, 155, 200, 44);
+        plantFertilizerLimitLabel.setBounds(55, 185, 200, 44);
         seedPanel.add(plantFertilizerLimitLabel);
 
-        plantProductProducedLabel = new JLabel("Product Produced: " + player.getFarm().getAllSeed().get(index).getProductProduced());
+        plantProductProducedLabel = new JLabel("Product Produced: " + player.getFarm().getAllSeed().get(index).getProductProducedMinToMax());
         plantProductProducedLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantProductProducedLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantProductProducedLabel.setBounds(55, 175, 200, 44);
+        plantProductProducedLabel.setBounds(55, 205, 200, 44);
         seedPanel.add(plantProductProducedLabel);
 
         plantCostLabel = new JLabel("Cost: " + player.getFarm().getAllSeed().get(index).getCost());
         plantCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantCostLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantCostLabel.setBounds(55, 195, 200, 44);
+        plantCostLabel.setBounds(55, 225, 200, 44);
         seedPanel.add(plantCostLabel);
 
         plantBasePriceLabel = new JLabel("Base Price: " + player.getFarm().getAllSeed().get(index).getBasePrice());
         plantBasePriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantBasePriceLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantBasePriceLabel.setBounds(55, 215, 200, 44);
+        plantBasePriceLabel.setBounds(55, 245, 200, 44);
         seedPanel.add(plantBasePriceLabel);
 
         plantXPLabel = new JLabel("Experience Yield: " + player.getFarm().getAllSeed().get(index).getExperienceYield());
         plantXPLabel.setHorizontalAlignment(SwingConstants.CENTER);
         plantXPLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-        plantXPLabel.setBounds(55, 235, 200, 44);
+        plantXPLabel.setBounds(55, 265, 200, 44);
         seedPanel.add(plantXPLabel);
 
     }
 
     public void updateSeedPanel() {
-        if (index == 1){
+        if(index == 0){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted turnip.png"));
+        } else if (index == 1){
             image = new ImageIcon(this.getClass().getResource("/assets/planted carrot.png"));
         } else if (index == 2){
             image = new ImageIcon(this.getClass().getResource("/assets/planted potato.png"));
