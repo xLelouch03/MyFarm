@@ -45,6 +45,7 @@ public class Seed {
         this.waterLimit = waterLimit;
         this.fertilizerLimit = fertilizerLimit;
         this.cost = cost;
+        this.updatedCost = cost;
         this.basePrice = basePrice;
         this.xp = xp;
     }
@@ -162,9 +163,9 @@ public class Seed {
      * @return the cost of the seed
      */
     public int getCost() {
-        if(this.cost > updatedCost)
-            return updatedCost;
-        return this.cost;
+        if(this.cost < updatedCost)
+            return this.cost;
+        return updatedCost;
     }
     
     /**
