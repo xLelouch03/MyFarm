@@ -15,17 +15,18 @@ import javax.swing.JLabel;
 
 public class ToolInfoScreen extends JFrame {
 
-    // Index to track the current information panel
     private int index = 0;
     private Main player;
 
     private ArrayList<Tool> allTools = player.getFarm().getAllTool();
 
-    // Array of information panels to be displayed
-    private InformationPanel[] panels = new InformationPanel[] {
-        new InformationPanel(allTools.get(index).getName()),
-        new InformationPanel("Cost: " + allTools.get(index).getCost()),
-        new InformationPanel("Experience Yield: " + allTools.get(index).getXP()),
+    /**
+     * Array of info panels for tools
+     */
+    private toolInfoPanel[] panels = new toolInfoPanel[] {
+        new toolInfoPanel(allTools.get(index).getName()),
+        new toolInfoPanel("Cost: " + allTools.get(index).getCost()),
+        new toolInfoPanel("Experience Yield: " + allTools.get(index).getXP()),
     };
 
     public ToolInfoScreen() {
@@ -45,7 +46,7 @@ public class ToolInfoScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Decrement the index and update the information panel
                 index--;
-                updateInformationPanel();
+                updateToolInfoPanel();
             }
         });
 
@@ -54,7 +55,7 @@ public class ToolInfoScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Increment the index and update the information panel
                 index++;
-                updateInformationPanel();
+                updateToolInfoPanel();
             }
         });
 
@@ -69,7 +70,7 @@ public class ToolInfoScreen extends JFrame {
     }
 
     // Method to update the information panel based on the current index
-    private void updateInformationPanel() {
+    private void updateToolInfoPanel() {
         // Check if the index is within the bounds of the panels array
         if (index < 0) {
             index = 0;
@@ -88,11 +89,11 @@ public class ToolInfoScreen extends JFrame {
         repaint();
     }
 
-    class InformationPanel extends JPanel {
+    class toolInfoPanel extends JPanel {
 
         private JLabel label;
     
-        public InformationPanel(String text) {
+        public toolInfoPanel(String text) {
             // Create a label with the given text and add it to the panel
             label = new JLabel(text);
             add(label);

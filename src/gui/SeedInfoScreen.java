@@ -22,25 +22,25 @@ public class SeedInfoScreen extends JFrame {
     private ArrayList<Seed> allSeeds = player.getFarm().getAllSeed();
 
     // Array of information panels to be displayed
-    private InformationPanel[] panels = new InformationPanel[] {
-        new InformationPanel(allSeeds.get(index).getName()),
-        new InformationPanel("Crop Type: " + allSeeds.get(index).getType()),
-        new InformationPanel("Harvest Time (in days): " + allSeeds.get(index).getHarvestTime()),
-        new InformationPanel("Day Growth: " + allSeeds.get(index).getDayGrowth()),
-        new InformationPanel("Water Limit: " + allSeeds.get(index).getWaterLimit()),
-        new InformationPanel("Fertilizer Limit: " + allSeeds.get(index).getFertilizerLimit()),
-        new InformationPanel("Product Produced: " + allSeeds.get(index).getProductProduced()),
-        new InformationPanel("Cost: " + allSeeds.get(index).getCost()),
-        new InformationPanel("Base Price: " + allSeeds.get(index).getBasePrice()),
-        new InformationPanel("Experience Yield: " + allSeeds.get(index).getExperienceYield())
+    private seedInfoPanel[] panels = new seedInfoPanel[] {
+        new seedInfoPanel(allSeeds.get(index).getName()),
+        new seedInfoPanel("Crop Type: " + allSeeds.get(index).getType()),
+        new seedInfoPanel("Harvest Time (in days): " + allSeeds.get(index).getHarvestTime()),
+        new seedInfoPanel("Day Growth: " + allSeeds.get(index).getDayGrowth()),
+        new seedInfoPanel("Water Limit: " + allSeeds.get(index).getWaterLimit()),
+        new seedInfoPanel("Fertilizer Limit: " + allSeeds.get(index).getFertilizerLimit()),
+        new seedInfoPanel("Product Produced: " + allSeeds.get(index).getProductProduced()),
+        new seedInfoPanel("Cost: " + allSeeds.get(index).getCost()),
+        new seedInfoPanel("Base Price: " + allSeeds.get(index).getBasePrice()),
+        new seedInfoPanel("Experience Yield: " + allSeeds.get(index).getExperienceYield())
     };
 
     public SeedInfoScreen() {
         // Set the title and size of the frame
-        setTitle("Seed Encyclopedia");
-        setSize(400, 200);
-        setVisible(true);
-        setLocationRelativeTo(null);
+        // setTitle("Seed Encyclopedia");
+        // setSize(400, 200);
+        // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // setVisible(true);
 
         // Create the Previous and Next buttons
         JButton previousBtn = new JButton("Previous");
@@ -52,7 +52,7 @@ public class SeedInfoScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Decrement the index and update the information panel
                 index--;
-                updateInformationPanel();
+                updateSeedInfoPanel();
             }
         });
 
@@ -61,7 +61,7 @@ public class SeedInfoScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Increment the index and update the information panel
                 index++;
-                updateInformationPanel();
+                updateSeedInfoPanel();
             }
         });
 
@@ -76,7 +76,7 @@ public class SeedInfoScreen extends JFrame {
     }
 
     // Method to update the information panel based on the current index
-    private void updateInformationPanel() {
+    private void updateSeedInfoPanel() {
         // Check if the index is within the bounds of the panels array
         if (index < 0) {
             index = 0;
@@ -95,11 +95,11 @@ public class SeedInfoScreen extends JFrame {
         repaint();
     }
 
-    class InformationPanel extends JPanel {
+    class seedInfoPanel extends JPanel {
 
         private JLabel label;
     
-        public InformationPanel(String text) {
+        public seedInfoPanel(String text) {
             // Create a label with the given text and add it to the panel
             label = new JLabel(text);
             add(label);

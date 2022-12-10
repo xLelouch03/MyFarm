@@ -160,6 +160,7 @@ public class MainScreen{
 
 			}
 			});
+
 		viewPlantButton.setBounds(35, 90, 268, 50);
 		leftPanel.add(viewPlantButton);
 		viewPlantButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
