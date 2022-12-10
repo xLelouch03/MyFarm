@@ -1,4 +1,4 @@
-/*
+/**
  * This class contains the GUI implementation of the Tile Screen to be used for the game
  * These are what pop up when the tile buttons are clicked.
  */

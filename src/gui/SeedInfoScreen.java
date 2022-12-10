@@ -1,3 +1,7 @@
+/**
+ * This class contains the seed information to be displayed inside the JButton for "View All Seeds"
+ */
+
 package gui;
 
 import main.Main;
@@ -16,7 +20,6 @@ import javax.swing.ImageIcon;
 
 public class SeedInfoScreen {
 
-    // Index to track the current information panel
     private int index = 0;
     private JFrame seedFrame;
     private Main player;
@@ -32,12 +35,19 @@ public class SeedInfoScreen {
     private JLabel plantXPLabel;
     private JLabel plantIconLabel;
 
+    /**
+     * This is the constructor for the SeedInfoScreen 
+     * @param player is used to access the Main class.
+     */
     public SeedInfoScreen(Main player) {
         this.player = player;
         initFrame();
         initSeedPanel();
     }  
 
+    /**
+     * Tbis initializes the overall frame, as well as the previous and next buttons. 
+     */
     public void initFrame() {
         seedFrame = new JFrame();
         seedFrame.setTitle("Seed Encyclopedia");
@@ -78,6 +88,9 @@ public class SeedInfoScreen {
         seedFrame.add(btnPanel, BorderLayout.NORTH);
     }
 
+    /**
+     * These initialize the seedPanel, where the text are to be stored and displayed.
+     */
     public void initSeedPanel() {
         JPanel seedPanel = new JPanel();
         seedPanel.setBounds(50, 50, 190, 140);
