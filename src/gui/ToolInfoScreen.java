@@ -6,13 +6,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class ToolInfoScreen {
 
@@ -23,6 +23,8 @@ public class ToolInfoScreen {
     private JLabel toolNameLabel;
     private JLabel toolCostLabel;
     private JLabel toolXPLabel;
+    private JLabel toolIconLabel;
+    private ImageIcon image;
 
     public ToolInfoScreen(Main player) {
         this.player = player;
@@ -32,7 +34,7 @@ public class ToolInfoScreen {
 
     public void initFrame() {
         toolFrame = new JFrame();
-        toolFrame.setTitle("tool Encyclopedia");
+        toolFrame.setTitle("Tool Encyclopedia");
         toolFrame.setSize(350, 250);
         toolFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         toolFrame.setVisible(true);
@@ -79,6 +81,13 @@ public class ToolInfoScreen {
         toolFrame.getContentPane().add(toolPanel);
         toolPanel.setLayout(null);
 
+        image = new ImageIcon(this.getClass().getResource("/assets/planted plow.png"));
+
+        toolIconLabel = new JLabel(image);
+        toolIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        toolIconLabel.setBounds(140, 20, 40, 40);
+        toolPanel.add(toolIconLabel);
+
         toolNameLabel = new JLabel("Tool name: " + player.getFarm().getAllTool().get(index).getName());
         toolNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         toolNameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -100,6 +109,18 @@ public class ToolInfoScreen {
     }
 
     public void updateToolPanel() {
+        if (index == 1){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted plow.png"));
+        } else if (index == 2){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted watering can.png"));
+        } else if (index == 3){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted fertilizer.png"));
+        } else if (index == 4){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted shovel.png"));
+        } else if (index == 5){
+            image = new ImageIcon(this.getClass().getResource("/assets/planted pickaxe.png"));
+        }
+
         toolNameLabel.setText("Tool name: " + player.getFarm().getAllTool().get(index).getName());
         toolCostLabel.setText("Cost: " + player.getFarm().getAllTool().get(index).getCost());
         toolXPLabel.setText("Experience Yield " + player.getFarm().getAllTool().get(index).getXP());
