@@ -39,6 +39,7 @@ public class SeedInfoScreen {
     private JLabel plantXPLabel;
     private JLabel plantIconLabel;
     private ImageIcon image;
+
     public SeedInfoScreen(Main player) {
         this.player = player;
         initFrame();
@@ -168,6 +169,9 @@ public class SeedInfoScreen {
 
     }
 
+    /**
+     * This updates the text and images on the frame based on the index
+     */
     public void updateSeedPanel() {
         if(index == 0){
             image = new ImageIcon(this.getClass().getResource("/assets/planted turnip.png"));
