@@ -6,17 +6,9 @@ package main;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 import gui.*;
 
@@ -29,7 +21,6 @@ public class Main {
      * @param farmerName the name to be used in creating a farmer object
      */
     public void setupGame(String farmerName, int rockNumber) {
-        int rocks;
         if(farmerName.length() == 0) //displays a warning text if player did not enter a name
             setup.warningText("You have not entered a name.");
         else if(rockNumber < 10 || rockNumber > 30) { 
@@ -44,7 +35,6 @@ public class Main {
             try {
                 importFile(rockNumber);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             closeSetupScreen(setup);

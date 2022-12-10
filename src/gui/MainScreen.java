@@ -28,7 +28,6 @@ public class MainScreen{
     private Main player;
 	private JButton[][] tileButtons;
 	private TileScreen tileScreenOpened;
-	private ToolInfoScreen toolInfo;
 	private JLabel nextDayLabel;
 	private JLabel expLabel;
 	private JLabel dayLabel;
