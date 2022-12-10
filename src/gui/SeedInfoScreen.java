@@ -31,7 +31,6 @@ public class SeedInfoScreen {
     private JLabel plantBasePriceLabel;
     private JLabel plantXPLabel;
     private JLabel plantIconLabel;
-    private ImageIcon image;
 
     public SeedInfoScreen(Main player) {
         this.player = player;
